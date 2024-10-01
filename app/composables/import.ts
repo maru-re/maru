@@ -2,7 +2,7 @@ import { type MaruSongData, validate } from '@marure/schema'
 import { parseSongData } from '~~/packages/parser/src'
 import YAML from 'yaml'
 
-export const SUPPORTED_IMPORT_EXT = ['json', 'yml', 'yaml']
+export const SUPPORTED_IMPORT_EXT = ['json', 'yml', 'yaml', 'zip']
 
 async function * traverseFileList(files?: FileList | FileSystemEntry[]): AsyncGenerator<File> {
   for (const item of files || []) {
@@ -22,10 +22,22 @@ async function * traverseFileList(files?: FileList | FileSystemEntry[]): AsyncGe
       }
       else {
         if (item.isFile) {
-          const file = item as FileSystemFileEntry
-          yield await new Promise<File>((resolve, reject) => {
-            file.file(resolve, reject)
+          const file = await new Promise<File>((resolve, reject) => {
+            (item as FileSystemFileEntry).file(resolve, reject)
           })
+
+          if (file.name.match(/\.zip$/i)) {
+            const zip = await import('jszip').then(r => r.loadAsync(file))
+            for (const entry of Object.values(zip.files)) {
+              if (entry.dir)
+                continue
+              const blob = await entry.async('blob')
+              yield new File([blob], entry.name, { type: blob.type })
+            }
+          }
+          else {
+            yield file
+          }
         }
       }
     }
@@ -55,7 +67,6 @@ export async function parseFiles(files?: FileList | FileSystemEntry[]): Promise<
           json = YAML.parse(await file.text())
           break
         }
-        // TODO: suport zip
         default:
           throw new Error(`Unsupported file extension: ${ext}`)
       }

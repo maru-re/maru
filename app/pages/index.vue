@@ -104,7 +104,7 @@ async function onFileChange(e: Event) {
           <span>匯入歌詞檔案</span>
           <input
             type="file"
-            accept=".json"
+            :accept="SUPPORTED_IMPORT_EXT.map(ext => `.${ext}`).join(', ')"
             multiple
             absolute inset-0 h-full w-full cursor-pointer opacity-0
             @change="onFileChange"
