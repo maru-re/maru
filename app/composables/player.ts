@@ -1,9 +1,9 @@
-import type { LyricLine, MaruSongData } from '@marure/schema'
+import type { LyricLine, MaruSongDataParsed } from '@marure/schema'
 import type { YouTube, YouTubePlayer } from '~/types/player'
 
 export type PlayerControls = ReturnType<typeof usePlayer>
 
-export function usePlayer(data: MaruSongData) {
+export function usePlayer(data: MaruSongDataParsed) {
   const player = shallowRef<YouTubePlayer | undefined>(undefined)
   const current = ref(0)
   const duration = ref(0)

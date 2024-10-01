@@ -1,7 +1,7 @@
 import type { InferInput } from 'valibot'
 import { array, description, isoDate, number, object, optional, pipe, record, regex, string, tuple, union } from 'valibot'
 
-export const LyricWordRichSchema = object({
+export const LyricWordSchema = object({
   t: optional(
     pipe(
       number(),
@@ -20,12 +20,6 @@ export const LyricWordRichSchema = object({
   ),
 })
 
-export const LyricWordSchema = union([
-  string(),
-  tuple([string(), string()]),
-  LyricWordRichSchema,
-])
-
 export const LyricTranslationSchema = pipe(
   record(string(), string()),
   description('Translation of the line. Key should be the language code, e.g. `zh-Hant`, `zh-Hans`, `en`'),
@@ -41,10 +35,10 @@ export const LyricLineSchema = object({
 })
 
 export const MaruSongSchama = object({
-  version: pipe(
+  schema: pipe(
     string(),
-    regex(/^1$/, 'Currently only supports schema v1'),
-    description('Schema version, currently only supports "1"'),
+    regex(/^(v1)$/, 'Currently supported schema version: v1'),
+    description('Schema version'),
   ),
   youtube: pipe(
     string(),
@@ -60,7 +54,7 @@ export const MaruSongSchama = object({
     number(),
     description('Offset in seconds'),
   )),
-  lyrics: array(LyricLineSchema),
+  lrc: string(),
   notes: optional(array(string())),
   credits: optional(object({
     song: optional(string()),
@@ -72,11 +66,14 @@ export const MaruSongSchama = object({
 
 export type LyricLine = InferInput<typeof LyricLineSchema>
 export type LyricWord = InferInput<typeof LyricWordSchema>
-export type LyricWordRich = InferInput<typeof LyricWordRichSchema>
 export type LyricTranslation = InferInput<typeof LyricTranslationSchema>
 export type MaruSongData = InferInput<typeof MaruSongSchama>
 
+export type MaruSongDataParsed = MaruSongData & {
+  lyrics: LyricLine[]
+}
+
 export type MaruSongGist = Pick<
   MaruSongData,
-  'version' | 'youtube' | 'title' | 'artists' | 'tags' | 'dateSongReleased' | 'dateLyricsUpdated'
+  'schema' | 'youtube' | 'title' | 'artists' | 'tags' | 'dateSongReleased' | 'dateLyricsUpdated'
 >

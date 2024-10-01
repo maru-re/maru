@@ -1,4 +1,8 @@
 import { type MaruSongData, validate } from '@marure/schema'
+import { parseSongData } from '~~/packages/parser/src'
+import YAML from 'yaml'
+
+export const SUPPORTED_IMPORT_EXT = ['json', 'yml', 'yaml']
 
 async function * traverseFileList(files?: FileList | FileSystemEntry[]): AsyncGenerator<File> {
   for (const item of files || []) {
@@ -39,13 +43,28 @@ export async function parseFiles(files?: FileList | FileSystemEntry[]): Promise<
 
   for await (const file of traverseFileList(files)) {
     try {
-      // TODO: suport zip
-      const text = await file.text()
-      const raw = JSON.parse(text)
-      const data = validate(raw)
+      const ext = file.name.split('.').pop()?.toLowerCase()
+      let json: any
+      switch (ext) {
+        case 'json': {
+          json = JSON.parse(await file.text())
+          break
+        }
+        case 'yml':
+        case 'yaml': {
+          json = YAML.parse(await file.text())
+          break
+        }
+        // TODO: suport zip
+        default:
+          throw new Error(`Unsupported file extension: ${ext}`)
+      }
+      const data = validate(json)
+      parseSongData(data)
       result.push({ file, data })
     }
     catch (err) {
+      console.error('Failed to import file:', file, err)
       result.push({ file, error: err })
     }
   }
@@ -82,11 +101,13 @@ export async function importFromFiles(files?: FileList | FileSystemEntry[] | nul
     // eslint-disable-next-line no-alert
     if (confirm(messages.join('\n'))) {
       saveSongsToLocal(success.map(r => r.data!))
-      // TODO: proper dialog
-      // eslint-disable-next-line no-alert
-      if (confirm('是否轉跳到導入的歌曲？')) {
+      if (location.pathname === '/')
         location.pathname = `/songs/${success[0]!.data!.youtube}`
-      }
     }
+  }
+  else if (errors.length) {
+    // TODO: proper dialog
+    // eslint-disable-next-line no-alert
+    alert(messages.join('\n'))
   }
 }

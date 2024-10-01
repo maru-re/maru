@@ -1,5 +1,6 @@
 {
   "type": "module",
+  "version": "0.0.0",
   "private": true,
   "packageManager": "pnpm@9.11.0",
   "scripts": {
@@ -17,6 +18,8 @@
     "@antfu/eslint-config": "^3.7.3",
     "@antfu/ni": "^0.23.0",
     "@iconify-json/carbon": "^1.2.1",
+      "@types/js-yaml": "^4.0.9",
+    "js-yaml": "^4.1.0",
     "@iconify-json/mdi": "^1.2.0",
     "@iconify-json/ph": "^1.2.0",
     "@iconify-json/ri": "^1.2.0",

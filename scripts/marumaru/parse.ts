@@ -1,11 +1,12 @@
 import type { LyricLine, LyricWord, MaruSongData } from '@marure/schema'
+import { serializedToLrc } from '~~/packages/parser/src'
 import * as cheerio from 'cheerio'
 
 export function parse(html: string, sourceUrl: string) {
   const $ = cheerio.load(html)
 
   const site: MaruSongData = {
-    version: '1',
+    schema: 'v1',
     youtube: $('#VideoID').text().trim(),
     title: $('#SongName').text().trim(),
     credits: {
@@ -13,7 +14,7 @@ export function parse(html: string, sourceUrl: string) {
     },
     artists: $('#Singer').text().split(/[,;、]/g).map(s => s.trim()).filter(Boolean),
     tags: $('#SongType').text().split(/[,;、]/g).map(s => s.trim()).filter(Boolean),
-    lyrics: [],
+    lrc: '',
   }
 
   const snapshotTime = html.match(/https:\/\/web\.archive\.org\/web\/(\d+)\//)?.[1]
@@ -48,9 +49,9 @@ export function parse(html: string, sourceUrl: string) {
       const rt = word.find('rt').text()
       const text = word.text()
       if (rt)
-        words.push([rb || text, rt])
+        words.push({ r: rb, w: rt })
       else
-        words.push(rb || text)
+        words.push({ w: rb || text })
     })
 
     const translations: Record<string, string> = {}
@@ -69,10 +70,7 @@ export function parse(html: string, sourceUrl: string) {
     }
   })
 
-  site.lyrics = lyrics.map((i) => {
-    delete i.pk
-    return i
-  })
+  site.lrc = serializedToLrc({ meta: {}, lyrics })
 
   return site
 }

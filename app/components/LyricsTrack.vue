@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { LyricLine, MaruSongData } from '@marure/schema'
+import type { LyricLine, MaruSongData, MaruSongDataParsed } from '@marure/schema'
 import type { PlayerControls } from '~/composables/player'
 
 const props = defineProps<{
   controls: PlayerControls
-  data: MaruSongData
+  data: MaruSongDataParsed
 }>()
 
 const {

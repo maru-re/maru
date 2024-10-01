@@ -1,11 +1,11 @@
-import type { LyricLine, LyricWordRich } from '@marure/schema'
-import { timestampToSeconds } from './timestamp'
+import type { LyricLine, LyricWord } from '@marure/schema'
+import { secondsToTimestamp, timestampToSeconds } from './timestamp'
 
 const reTimeStamp = /<([\d:.]+)>\s*/g
 const reRuby = /\{((?:\\\}|[^}])+)\}\(((?:\\\)|[^)])+)\)/g
 
-export function parseLrcLine(line: string): LyricWordRich[] {
-  const items: LyricWordRich[] = []
+export function parseLrcLine(line: string): LyricWord[] {
+  const items: LyricWord[] = []
 
   let i = 0
   let buffer = ''
@@ -33,8 +33,9 @@ export function parseLrcLine(line: string): LyricWordRich[] {
           pushText()
           ts = match[1]
           i = reTimeStamp.lastIndex
+          continue
         }
-        continue
+        break
       }
       case '{': {
         reRuby.lastIndex = i
@@ -44,8 +45,9 @@ export function parseLrcLine(line: string): LyricWordRich[] {
           buffer = match[1] || ''
           pushText(match[2])
           i = reRuby.lastIndex
+          continue
         }
-        continue
+        break
       }
     }
     buffer += char
@@ -65,7 +67,7 @@ export interface ParsedLrc {
 const reLrcTag = /(\[[^:]+:.+\])/g
 const reLrcTagFull = /^\[([^:]+):(.+)\]$/
 
-export function parseLrc(lrc: string): ParsedLrc {
+export function parseLrc(lrc: string = ''): ParsedLrc {
   const parts = lrc.split(reLrcTag)
     .map(i => i.trim())
     .filter(Boolean)
@@ -102,4 +104,35 @@ export function parseLrc(lrc: string): ParsedLrc {
     meta,
     lyrics: lines,
   }
+}
+
+export function serializedToLrc(lrc: ParsedLrc): string {
+  const lines: string[] = []
+
+  for (const [key, value] of Object.entries(lrc.meta)) {
+    lines.push(`[${key}:${value}]`)
+  }
+  if (lines.length)
+    lines.push('')
+
+  for (const line of lrc.lyrics) {
+    const time = line.t
+    const text = line
+      .words
+      .map((i) => {
+        let str = ''
+        if (i.t)
+          str += `<${i.t}> `
+        if (i.r)
+          str += `{${i.r}}(${i.w})`
+        else
+          str += i.w
+        return str
+      })
+      .join('')
+
+    lines.push(`[${secondsToTimestamp(time)}] ${text}`.trimEnd())
+  }
+
+  return lines.join('\n')
 }

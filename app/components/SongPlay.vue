@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { MaruSongData } from '@marure/schema'
+import type { MaruSongDataParsed } from '@marure/schema'
 import { Dropdown } from 'floating-vue'
 import { removeSong } from '~/composables/store'
 
 const props = defineProps<{
-  data: MaruSongData
+  data: MaruSongDataParsed
 }>()
 const emit = defineEmits<{
   afterRemove: [id: string]
@@ -130,7 +130,8 @@ function remove() {
       <div lt-md="hidden" mt--4 min-h-80px flex rounded p2>
         <LyricsLine
           v-if="active"
-          ma :line="data.lyrics[active.index]!"
+          ma
+          :line="data.lyrics[active.index]!"
         />
       </div>
       <!-- <QRCode :data="data" /> -->

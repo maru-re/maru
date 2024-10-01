@@ -4,16 +4,16 @@ import { validate } from '../src/validate'
 describe('parsed', () => {
   it('works', () => {
     expect(validate({
-      version: '1',
+      schema: 'v1',
       youtube: 'QX4j2cV6LW0',
       title: 'Maru - 你好',
-      lyrics: [],
+      lyrics: '',
     }))
       .toMatchInlineSnapshot(`
         {
           "lyrics": [],
           "title": "Maru - 你好",
-          "version": "1",
+          "version": "2",
           "youtube": "QX4j2cV6LW0",
         }
       `)
@@ -28,10 +28,10 @@ describe('should throw error when schema is invalid', () => {
 
   it('basic', () => {
     expect(() => validate({
-      version: '2',
+      schema: 'v100',
       youtube: 'QX4j2cV6LW0',
       title: 'Maru - 你好',
-      lyrics: [],
+      lyrics: '',
     }))
       .toThrowErrorMatchingInlineSnapshot(`[ValiError: Currently only supports schema v1]`)
   })

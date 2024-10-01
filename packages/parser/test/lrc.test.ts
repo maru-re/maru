@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseLrc, parseLrcLine } from '../src'
+import { parseLrc, parseLrcLine, serializedToLrc } from '../src'
 
 describe('lrc', () => {
   it('case 1', () => {
@@ -49,8 +49,8 @@ describe('lrc', () => {
   })
 
   it('case 2', () => {
-    expect(parseLrc(`
-  [ar: Camila Cabello, Young Thug]
+    const result = parseLrc(`
+[ar: Camila Cabello, Young Thug]
 [ti: Havana]
 [al: Havana (Single)]
 [length: 03:36]
@@ -68,128 +68,154 @@ describe('lrc', () => {
 
 (uh huh)
 [00:26.04]Havana ooh na-na
-`)).toMatchInlineSnapshot(`
-  {
-    "lyrics": [
-      {
-        "t": 0,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "Song: Havana",
-          },
-        ],
-      },
-      {
-        "t": 2,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "Singer: Camila Cabello, Young Thug",
-          },
-        ],
-      },
-      {
-        "t": 4,
-        "words": [],
-      },
-      {
-        "t": 8.86,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "Havana ooh na-na (ayy)",
-          },
-        ],
-      },
-      {
-        "t": 11.56,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "Half of my heart is in Havana",
-          },
-        ],
-      },
-      {
-        "t": 14.11,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "Ooh-na-na (ayy ayy)",
-          },
-        ],
-      },
-      {
-        "t": 16.03,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "He took me back",
-          },
-        ],
-      },
-      {
-        "t": 17.25,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "To East Atlanta na-na-na",
-          },
-        ],
-      },
-      {
-        "t": 19.95,
-        "words": [],
-      },
-      {
-        "t": 20.6,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "All of my heart is in Havana (ayy)",
-          },
-        ],
-      },
-      {
-        "t": 23.51,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "There's somethin' 'bout his manners 
-
-  (uh huh)",
-          },
-        ],
-      },
-      {
-        "t": 26.04,
-        "words": [
-          {
-            "r": undefined,
-            "t": undefined,
-            "w": "Havana ooh na-na",
-          },
-        ],
-      },
-    ],
-    "meta": {
-      "al": "Havana (Single)",
-      "ar": "Camila Cabello, Young Thug",
-      "length": "03:36",
-      "ti": "Havana",
-    },
-  }
 `)
+
+    expect(result)
+      .toMatchInlineSnapshot(`
+        {
+          "lyrics": [
+            {
+              "t": 0,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "Song: Havana",
+                },
+              ],
+            },
+            {
+              "t": 2,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "Singer: Camila Cabello, Young Thug",
+                },
+              ],
+            },
+            {
+              "t": 4,
+              "words": [],
+            },
+            {
+              "t": 8.86,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "Havana ooh na-na (ayy)",
+                },
+              ],
+            },
+            {
+              "t": 11.56,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "Half of my heart is in Havana",
+                },
+              ],
+            },
+            {
+              "t": 14.11,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "Ooh-na-na (ayy ayy)",
+                },
+              ],
+            },
+            {
+              "t": 16.03,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "He took me back",
+                },
+              ],
+            },
+            {
+              "t": 17.25,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "To East Atlanta na-na-na",
+                },
+              ],
+            },
+            {
+              "t": 19.95,
+              "words": [],
+            },
+            {
+              "t": 20.6,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "All of my heart is in Havana (ayy)",
+                },
+              ],
+            },
+            {
+              "t": 23.51,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "There's somethin' 'bout his manners 
+
+        (uh huh)",
+                },
+              ],
+            },
+            {
+              "t": 26.04,
+              "words": [
+                {
+                  "r": undefined,
+                  "t": undefined,
+                  "w": "Havana ooh na-na",
+                },
+              ],
+            },
+          ],
+          "meta": {
+            "al": "Havana (Single)",
+            "ar": "Camila Cabello, Young Thug",
+            "length": "03:36",
+            "ti": "Havana",
+          },
+        }
+      `)
+
+    expect(serializedToLrc(result))
+      .toMatchInlineSnapshot(`
+        "[ar:Camila Cabello, Young Thug]
+        [ti:Havana]
+        [al:Havana (Single)]
+        [length:03:36]
+
+        [00:00.00] Song: Havana
+        [00:02.00] Singer: Camila Cabello, Young Thug
+        [00:04.00]
+        [00:08.86] Havana ooh na-na (ayy)
+        [00:11.56] Half of my heart is in Havana
+        [00:14.11] Ooh-na-na (ayy ayy)
+        [00:16.03] He took me back
+        [00:17.25] To East Atlanta na-na-na
+        [00:19.95]
+        [00:20.60] All of my heart is in Havana (ayy)
+        [00:23.51] There's somethin' 'bout his manners 
+
+        (uh huh)
+        [00:26.04] Havana ooh na-na"
+      `)
   })
 })
 

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { type MaruSongData, validate } from '@marure/schema'
+import type { MaruSongDataParsed } from '@marure/schema'
+import { parseSongData } from '@marure/parser'
+import { validate } from '@marure/schema'
 import { appName } from '~/constants'
 
 const route = useRoute()
@@ -7,12 +9,12 @@ const { addRecent } = useCollections()
 const id = (route.params as any).id as string
 
 const raw = localStorage.getItem(`maru-song-${id}`)
-const data = ref<MaruSongData | null>(null)
+const data = ref<MaruSongDataParsed | null>(null)
 const error = ref<unknown | null>(null)
 
 try {
   data.value = raw
-    ? validate(JSON.parse(raw))
+    ? parseSongData(validate(JSON.parse(raw)))
     : null
 }
 catch (err) {

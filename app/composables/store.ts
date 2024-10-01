@@ -1,10 +1,25 @@
 import { extractGist, type MaruSongData, type MaruSongGist } from '@marure/schema'
+import { version } from '../../package.json'
 
 const RECENT_MAX = 10
 
+const lastVersion = useLocalStorage<string>('maru-version', 'null')
 const recentIds = useLocalStorage<string[]>('maru-recent', [])
 const favoriteIds = useLocalStorage<string[]>('maru-favorite', [])
 const collections = useLocalStorage<MaruSongGist[]>('maru-collections', [])
+
+export function checkVersion() {
+  if (lastVersion.value !== version) {
+    // Clear all data if the version is not stored (too old)
+    if (lastVersion.value === 'null') {
+      removeAllData()
+    }
+    // Migrations, if needed
+    // if (lastVersion.value === '0.0.0') {
+    // }
+    lastVersion.value = version
+  }
+}
 
 export function removeAllData() {
   Object.keys(localStorage)
@@ -12,6 +27,9 @@ export function removeAllData() {
       if (i.startsWith('maru-'))
         localStorage.removeItem(i)
     })
+  collections.value = []
+  favoriteIds.value = []
+  recentIds.value = []
 }
 
 export function saveSongsToLocal(songs: MaruSongData[]) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { LyricLine, LyricWord, LyricWordRich } from '@marure/schema'
+import type { LyricLine } from '@marure/schema'
 
 const props = defineProps<{
   line: LyricLine
@@ -8,19 +8,8 @@ const props = defineProps<{
 
 const settings = useSettings()
 
-function normalizeWord(word: LyricWord): LyricWordRich {
-  if (typeof word === 'string') {
-    return { w: word }
-  }
-  if (Array.isArray(word)) {
-    return { w: word[0], r: word[1] }
-  }
-  return word
-}
-
-const words = computed(() => props.line.words.map(normalizeWord))
 const romaji = computed(() => {
-  const text = words.value.map(w => w.r || w.w).join(' ')
+  const text = props.line.words.map(w => w.r || w.w).join(' ')
   return hiraganaToRomaji(text).filter(Boolean).join(' ')
 })
 </script>
@@ -33,7 +22,7 @@ const romaji = computed(() => {
     class="lyric-line group"
   >
     <div class="lyric-line-source" lang="jp">
-      <template v-for="word, i of words" :key="i">
+      <template v-for="word, i of line.words" :key="i">
         <template v-if="word.r">
           <ruby v-if="settings.kanji && settings.furigana" :st="word.t">
             {{ word.w }}
