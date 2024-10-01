@@ -48,7 +48,7 @@ function onPointerUp(e: PointerEvent, line: LyricLine) {
     return
   }
   e.preventDefault()
-  go(line.t)
+  go(line)
 }
 
 function getClassLine(no: number) {

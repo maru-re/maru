@@ -1,9 +1,29 @@
 import type { InferInput } from 'valibot'
 import { array, description, isoDate, number, object, optional, pipe, record, regex, string, tuple, union } from 'valibot'
 
+export const LyricWordRichSchema = object({
+  t: optional(
+    pipe(
+      number(),
+      description('Start time in seconds'),
+    ),
+  ),
+  w: pipe(
+    string(),
+    description('Word text'),
+  ),
+  r: optional(
+    pipe(
+      string(),
+      description('Ruby text'),
+    ),
+  ),
+})
+
 export const LyricWordSchema = union([
   string(),
   tuple([string(), string()]),
+  LyricWordRichSchema,
 ])
 
 export const LyricTranslationSchema = pipe(
@@ -16,10 +36,6 @@ export const LyricLineSchema = object({
     number(),
     description('Start time in seconds'),
   ),
-  e: optional(pipe(
-    number(),
-    description('End time in seconds, if not provided, the end time is the start time of the next line'),
-  )),
   words: array(LyricWordSchema),
   trans: optional(LyricTranslationSchema),
 })
@@ -40,6 +56,10 @@ export const MaruSongSchama = object({
   dateSongReleased: optional(pipe(string(), isoDate())),
   dateLyricsUpdated: optional(pipe(string(), isoDate())),
 
+  offset: optional(pipe(
+    number(),
+    description('Offset in seconds'),
+  )),
   lyrics: array(LyricLineSchema),
   notes: optional(array(string())),
   credits: optional(object({
@@ -52,6 +72,7 @@ export const MaruSongSchama = object({
 
 export type LyricLine = InferInput<typeof LyricLineSchema>
 export type LyricWord = InferInput<typeof LyricWordSchema>
+export type LyricWordRich = InferInput<typeof LyricWordRichSchema>
 export type LyricTranslation = InferInput<typeof LyricTranslationSchema>
 export type MaruSongData = InferInput<typeof MaruSongSchama>
 

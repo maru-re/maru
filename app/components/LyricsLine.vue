@@ -1,22 +1,28 @@
 <script setup lang="ts">
-import type { LyricLine } from '@marure/schema'
+import type { LyricLine, LyricWord, LyricWordRich } from '@marure/schema'
 
-defineProps<{
+const props = defineProps<{
   line: LyricLine
   index?: number
 }>()
 
 const settings = useSettings()
 
-function lineToRomaji(line: LyricLine) {
-  const str = line.words.map((word) => {
-    if (typeof word === 'string') {
-      return word
-    }
-    return word[1]
-  }).join(' ')
-  return hiraganaToRomaji(str).filter(Boolean).join(' ')
+function normalizeWord(word: LyricWord): LyricWordRich {
+  if (typeof word === 'string') {
+    return { w: word }
+  }
+  if (Array.isArray(word)) {
+    return { w: word[0], r: word[1] }
+  }
+  return word
 }
+
+const words = computed(() => props.line.words.map(normalizeWord))
+const romaji = computed(() => {
+  const text = words.value.map(w => w.r || w.w).join(' ')
+  return hiraganaToRomaji(text).filter(Boolean).join(' ')
+})
 </script>
 
 <template>
@@ -27,23 +33,26 @@ function lineToRomaji(line: LyricLine) {
     class="lyric-line group"
   >
     <div class="lyric-line-source" lang="jp">
-      <template v-for="word, i of line.words" :key="i">
-        <template v-if="typeof word === 'string'">
-          {{ word }}
+      <template v-for="word, i of words" :key="i">
+        <template v-if="word.r">
+          <ruby v-if="settings.kanji && settings.furigana" :st="word.t">
+            {{ word.w }}
+            <rt mb-2px>{{ word.r }}</rt>
+          </ruby>
+          <span v-else-if="!settings.kanji" :st="word.t">
+            {{ word.r }}
+          </span>
+          <span v-else :st="word.t">
+            {{ word.w }}
+          </span>
         </template>
-        <template v-else-if="settings.kanji">
-          <ruby v-if="settings.furigana">{{ word[0] }}<rt mb-2px>{{ word[1] }}</rt></ruby>
-          <template v-else>
-            {{ word[0] }}
-          </template>
-        </template>
-        <template v-else>
-          {{ word[1] }}
-        </template>
+        <span v-else :st="word.t">
+          {{ word.w }}
+        </span>
       </template>
     </div>
     <div v-if="settings.romaji" class="lyric-line-romaji" lang="en">
-      {{ lineToRomaji(line) }}
+      {{ romaji }}
     </div>
     <div
       v-if="settings.translation && line.trans?.['zh-Hant']"

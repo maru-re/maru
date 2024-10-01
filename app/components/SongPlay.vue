@@ -24,7 +24,7 @@ const favorited = computed({
   },
 })
 
-const controls = usePlayer(props.data.youtube, props.data.lyrics)
+const controls = usePlayer(props.data)
 const { active, go, toggle, error } = controls
 
 onMounted(() => {

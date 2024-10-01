@@ -1,15 +1,17 @@
-import type { LyricLine } from '@marure/schema'
+import type { LyricLine, MaruSongData } from '@marure/schema'
 import type { YouTube, YouTubePlayer } from '~/types/player'
 
 export type PlayerControls = ReturnType<typeof usePlayer>
 
-export function usePlayer(videoId: string, lyrics: LyricLine[]) {
+export function usePlayer(data: MaruSongData) {
   const player = shallowRef<YouTubePlayer | undefined>(undefined)
   const current = ref(0)
   const duration = ref(0)
   const status = ref<'playing' | 'paused' | 'ended'>('paused')
   const settings = useSettings()
   const error = ref<any>(null)
+  const localOffset = ref(0)
+  const offset = computed(() => (data.offset || 0) + localOffset.value)
 
   let YT: YouTube | undefined
 
@@ -51,7 +53,7 @@ export function usePlayer(videoId: string, lyrics: LyricLine[]) {
     player.value = markRaw(new YT.Player('player', {
       width,
       height: width * 9 / 16,
-      videoId,
+      videoId: data.youtube,
       playerVars: {
         autoplay: 1,
         cc_lang_pref: 0,
@@ -86,8 +88,8 @@ export function usePlayer(videoId: string, lyrics: LyricLine[]) {
 
   function updateActive() {
     let n: number | null = null
-    for (let i = 0; i < lyrics.length; i++) {
-      if (current.value < lyrics[i]!.t) {
+    for (let i = 0; i < data.lyrics.length; i++) {
+      if (current.value < data.lyrics[i]!.t + offset.value) {
         break
       }
       n = i
@@ -101,11 +103,11 @@ export function usePlayer(videoId: string, lyrics: LyricLine[]) {
     if (active.value?.index === n)
       return
 
-    const next = lyrics[n + 1]
+    const next = data.lyrics[n + 1]
     active.value = {
       index: n,
-      start: lyrics[n]!.t,
-      end: next ? next.t : duration.value,
+      start: data.lyrics[n]!.t + offset.value,
+      end: next ? (next.t + offset.value) : duration.value,
     }
   }
 
@@ -150,7 +152,7 @@ export function usePlayer(videoId: string, lyrics: LyricLine[]) {
       return
     const st = typeof input === 'number'
       ? input
-      : input.t
+      : input.t + offset.value
     player.value?.seekTo(st, true)
     player.value?.playVideo()
     current.value = st

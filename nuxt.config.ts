@@ -98,6 +98,7 @@ export default defineNuxtConfig({
 
   alias: {
     '@marure/schema': fileURLToPath(new URL('./packages/schema/src/index.ts', import.meta.url)),
+    '@marure/parser': fileURLToPath(new URL('./packages/parser/src/index.ts', import.meta.url)),
   },
 
   typescript: {
