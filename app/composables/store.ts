@@ -41,3 +41,10 @@ export function useCollections() {
     toggleFavorite,
   }
 }
+
+export function removeSong(id: string) {
+  localStorage.removeItem(`maru-song-${id}`)
+  collections.value = collections.value.filter(g => g.youtube !== id)
+  favoriteIds.value = favoriteIds.value.filter(i => i !== id)
+  recentIds.value = recentIds.value.filter(i => i !== id)
+}

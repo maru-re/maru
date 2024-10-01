@@ -33,7 +33,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <SongPlay v-if="data && typeof data.title === 'string'" :data="data" />
+  <SongPlay v-if="data && typeof data.title === 'string'" :data="data" @after-remove="$router.replace('/')" />
   <div v-else h-screen w-screen flex="~ col items-center justify-center" p5>
     <BasicNav />
     <template v-if="error">
