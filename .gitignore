@@ -1,0 +1,13 @@
+node_modules
+*.log
+dist
+.output
+.nuxt
+.env
+.eslintcache
+.DS_Store
+.idea/
+public/assets/
+public/songs/
+scripts/marumaru/data
+scripts/marumaru/downloads

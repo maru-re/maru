@@ -1,0 +1,50 @@
+{
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@9.11.0",
+  "scripts": {
+    "build": "nuxi build",
+    "dev": "nuxi dev",
+    "generate": "nuxi generate",
+    "prepare": "nuxi prepare",
+    "start": "node .output/server/index.mjs",
+    "start:generate": "npx serve .output/public",
+    "lint": "eslint --cache .",
+    "test": "vitest",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.7.3",
+    "@antfu/ni": "^0.23.0",
+    "@iconify-json/carbon": "^1.2.1",
+    "@iconify-json/mdi": "^1.2.0",
+    "@iconify-json/ph": "^1.2.0",
+    "@iconify-json/ri": "^1.2.0",
+    "@iconify-json/twemoji": "^1.2.0",
+    "@iconify-json/uil": "^1.2.0",
+    "@nuxt/devtools": "^1.5.1",
+    "@nuxt/eslint": "^0.5.7",
+    "@nuxtjs/color-mode": "^3.5.1",
+    "@pinia/nuxt": "^0.5.4",
+    "@unocss/eslint-config": "^0.63.1",
+    "@unocss/nuxt": "^0.63.1",
+    "@vueuse/nuxt": "^11.1.0",
+    "cheerio": "^1.0.0",
+    "consola": "^3.2.3",
+    "eslint": "^9.11.1",
+    "eslint-plugin-format": "^0.1.2",
+    "esno": "^4.8.0",
+    "fast-glob": "^3.3.2",
+    "floating-vue": "^5.2.2",
+    "fuse.js": "^7.0.0",
+    "nuxt": "^3.13.2",
+    "pinia": "^2.2.2",
+    "typescript": "^5.6.2",
+    "unbuild": "^2.0.0",
+    "vitest": "^2.1.1",
+    "vue-tsc": "^2.1.6"
+  },
+  "resolutions": {
+    "@typescript-eslint/utils": "^8.7.0"
+  }
+}
