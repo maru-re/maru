@@ -25,9 +25,6 @@
 </template>
 
 <style scoped>
-li {
-  margin: 1rem 0;
-}
 a {
   --uno: 'op75 hover:op100 hover:underline';
 }

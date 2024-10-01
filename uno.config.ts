@@ -11,16 +11,26 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  shortcuts: {
-    'bg-base': 'bg-white dark:bg-black',
-    'bg-hover': 'bg-[#8882]',
-    'color-base': 'text-#222 dark:text-#ddd',
-    'border-base': 'border-gray:20',
-    'floating-glass': 'bg-white:70 shadow-lg backdrop-blur-4 dark:bg-black:70 z-floating border border-base rounded-full',
+  shortcuts: [
+    {
+      'bg-base': 'bg-white dark:bg-black',
+      'bg-hover': 'bg-[#8882]',
+      'color-base': 'text-#222 dark:text-#ddd',
+      'border-base': 'border-gray:20',
+      'floating-glass': 'bg-white:70 shadow-lg backdrop-blur-4 dark:bg-black:70 z-floating border border-base rounded-full',
 
-    'z-floating': 'z-100',
-    'z-tooltip': 'z-200',
-  },
+      'z-floating': 'z-100',
+      'z-tooltip': 'z-200',
+    },
+    [/^btn-simple-(.*)$/, ([,color]) => {
+      return [
+        `hover:border-${color}/50 hover:color-${color}`,
+        `active="bg-${color}/10"`,
+        `border border-base border-rounded-lg`,
+        `flex gap-1 items-center justify-center"`,
+      ].join(' ')
+    }],
+  ],
   theme: {
     colors: {
       primary: '#0a9cae',
