@@ -7,13 +7,13 @@ describe('parsed', () => {
       schema: 'v1',
       youtube: 'QX4j2cV6LW0',
       title: 'Maru - 你好',
-      lyrics: '',
+      lrc: '',
     }))
       .toMatchInlineSnapshot(`
         {
-          "lyrics": [],
+          "lrc": "",
+          "schema": "v1",
           "title": "Maru - 你好",
-          "version": "2",
           "youtube": "QX4j2cV6LW0",
         }
       `)
@@ -23,7 +23,7 @@ describe('parsed', () => {
 describe('should throw error when schema is invalid', () => {
   it('empty', () => {
     expect(() => validate({}))
-      .toThrowErrorMatchingInlineSnapshot(`[ValiError: Invalid type: Expected string but received undefined]`)
+      .toThrowErrorMatchingInlineSnapshot(`[Error: Invalid data format: Missing schema version]`)
   })
 
   it('basic', () => {
@@ -33,6 +33,6 @@ describe('should throw error when schema is invalid', () => {
       title: 'Maru - 你好',
       lyrics: '',
     }))
-      .toThrowErrorMatchingInlineSnapshot(`[ValiError: Currently only supports schema v1]`)
+      .toThrowErrorMatchingInlineSnapshot(`[Error: Unsupported schema version: v100, currently supported versions: v1]`)
   })
 })

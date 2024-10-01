@@ -122,7 +122,7 @@ onMounted(() => {
       <SettingsNav mxa />
     </div>
     <div
-      flex="~ col gap-1em" class="lyrics-track"
+      flex="~ col gap-1.5em" class="lyrics-track"
       of-hidden py-1000px text-center
     >
       <div pb10 font-jp-serif>
@@ -146,8 +146,13 @@ onMounted(() => {
 </template>
 
 <style>
+.lyric-line {
+  --uno: 'text-center';
+  text-wrap: balance;
+}
+
 .lyric-line.active {
-  --uno: op100 scale-120;
+  --uno: op100 scale-115;
 }
 .lyric-line.inactive {
   --uno: op30 filter-saturate-0;
@@ -157,13 +162,13 @@ onMounted(() => {
 }
 
 .lyric-line-source {
-  --uno: 'text-1.125em font-jp-serif mb-0.5';
+  --uno: 'text-1.125em font-jp-serif mb--0.2em';
 }
 .lyric-line-romaji {
   --uno: 'text-0.875em text-rose7:75 dark:text-rose3:75';
 }
 
 .lyric-line-translate {
-  --uno: 'text-0.875em text-orange7:75 dark:text-orange3:75 mt--0.2';
+  --uno: 'text-0.875em op50';
 }
 </style>

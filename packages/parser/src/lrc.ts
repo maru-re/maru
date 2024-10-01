@@ -79,7 +79,7 @@ export function parseLrc(lrc: string = ''): ParsedLrc {
     const part = parts[i]!
     const match = reLrcTagFull.exec(part)
     if (!match) {
-      throw new Error(`Expected part "${part}"`)
+      throw new Error(`Unexpected part "${part}" on parsing LRC`)
     }
     const key = match[1]!
     const value = match[2]!
@@ -94,6 +94,19 @@ export function parseLrc(lrc: string = ''): ParsedLrc {
         t: timestampToSeconds(time),
         words: parseLrcLine(text),
       })
+    }
+    // Custom tags
+    else if (key === 'trans') {
+      const lastLine = lines[lines.length - 1]
+      let text = parts[i + 1] || ''
+      if (reLrcTagFull.test(text))
+        text = ''
+      else
+        i += 1
+      if (lastLine) {
+        lastLine.trans ||= {}
+        lastLine.trans[value] = text
+      }
     }
     else {
       meta[key] = value?.trim()
@@ -132,6 +145,10 @@ export function serializedToLrc(lrc: ParsedLrc): string {
       .join('')
 
     lines.push(`[${secondsToTimestamp(time)}] ${text}`.trimEnd())
+
+    for (const [key, value] of Object.entries(line.trans || {})) {
+      lines.push(`[trans:${key}] ${value}`)
+    }
   }
 
   return lines.join('\n')

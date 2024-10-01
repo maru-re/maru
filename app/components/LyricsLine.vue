@@ -18,7 +18,7 @@ const romaji = computed(() => {
   <div
     role="button" :line="index"
     flex="~ col items-center"
-    px-1.5em transition duration-500
+    px-2em transition duration-500
     class="lyric-line group"
   >
     <div class="lyric-line-source" lang="jp">

@@ -217,6 +217,107 @@ describe('lrc', () => {
         [00:26.04] Havana ooh na-na"
       `)
   })
+
+  it('with translations', () => {
+    const input = `
+[00:06.80] あたま{テカテカ}(てかてか) さえて{ピカピカ}(ぴかぴか)
+[trans:zh-Hant] 光溜溜的大頭 又閃又亮晶晶
+[00:11.25] それがどうした ぼく{ドラ}(どら)えもん
+[trans:zh-Hant] 那又怎麼樣呢 我是哆啦A夢
+[00:15.65] みらいのせかいの {ネコ}(ねこ)がた{ロボット}(ろぼっと)
+  `
+    const result = parseLrc(input)
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "lyrics": [
+          {
+            "t": 6.8,
+            "trans": {
+              "zh-Hant": "光溜溜的大頭 又閃又亮晶晶",
+            },
+            "words": [
+              {
+                "r": undefined,
+                "t": undefined,
+                "w": "あたま",
+              },
+              {
+                "r": "てかてか",
+                "t": undefined,
+                "w": "テカテカ",
+              },
+              {
+                "r": undefined,
+                "t": undefined,
+                "w": " さえて",
+              },
+              {
+                "r": "ぴかぴか",
+                "t": undefined,
+                "w": "ピカピカ",
+              },
+            ],
+          },
+          {
+            "t": 11.25,
+            "trans": {
+              "zh-Hant": "那又怎麼樣呢 我是哆啦A夢",
+            },
+            "words": [
+              {
+                "r": undefined,
+                "t": undefined,
+                "w": "それがどうした ぼく",
+              },
+              {
+                "r": "どら",
+                "t": undefined,
+                "w": "ドラ",
+              },
+              {
+                "r": undefined,
+                "t": undefined,
+                "w": "えもん",
+              },
+            ],
+          },
+          {
+            "t": 15.65,
+            "words": [
+              {
+                "r": undefined,
+                "t": undefined,
+                "w": "みらいのせかいの ",
+              },
+              {
+                "r": "ねこ",
+                "t": undefined,
+                "w": "ネコ",
+              },
+              {
+                "r": undefined,
+                "t": undefined,
+                "w": "がた",
+              },
+              {
+                "r": "ろぼっと",
+                "t": undefined,
+                "w": "ロボット",
+              },
+            ],
+          },
+        ],
+        "meta": {},
+      }
+    `)
+    expect(serializedToLrc(result)).toMatchInlineSnapshot(`
+      "[00:06.80] あたま{てかてか}(テカテカ) さえて{ぴかぴか}(ピカピカ)
+      [trans:zh-Hant] 光溜溜的大頭 又閃又亮晶晶
+      [00:11.25] それがどうした ぼく{どら}(ドラ)えもん
+      [trans:zh-Hant] 那又怎麼樣呢 我是哆啦A夢
+      [00:15.65] みらいのせかいの {ねこ}(ネコ)がた{ろぼっと}(ロボット)"
+    `)
+  })
 })
 
 describe('lrc-line', () => {
