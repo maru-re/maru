@@ -122,6 +122,14 @@ const hiraganaToRomajiMap = ([
   ['んを', 'n\'wo'],
   ['んん', 'n\'n'],
   ['っ', 't'],
+  ['ぁ', 'a'],
+  ['ぃ', 'i'],
+  ['ぅ', 'u'],
+  ['ぇ', 'e'],
+  ['ぉ', 'o'],
+  ['ゃ', 'ya'],
+  ['ゅ', 'yu'],
+  ['ょ', 'yo'],
 ] as [string, string][])
   .sort((a, b) => b[0].length - a[0].length)
   .map(([kana, romaji]) => [new RegExp(kana, 'g'), romaji] as [RegExp, string])
