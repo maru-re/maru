@@ -13,7 +13,7 @@ defineProps<{
       border="rounded-xl"
       absolute inset-0 block of-hidden transition-all duration-500 bg-base
       class="aspect-5/2"
-      group-hover="aspect-16/9 z-100 translate-y--16.25% shadow-2xl scale-115"
+      group-hover="aspect-16/9 z-hover translate-y--16.25% shadow-2xl scale-115"
     >
       <img
         :src="`https://img.youtube.com/vi/${song.youtube}/mqdefault.jpg`"

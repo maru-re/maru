@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div mxa max-w-150 p15 lt-md="p6">
+  <div mxa max-w-150 p15 lt-lg="p6">
     <BasicNav />
     <h3 mb5 text-lg font-bold>
       歌曲版權、著作權說明

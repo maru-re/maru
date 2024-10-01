@@ -7,20 +7,19 @@ const settings = useSettings()
 const route = useRoute()
 
 const bp = useBreakpoints(breakpointsTailwind)
+const ltMd = bp.isSmaller('md')
 
 const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.startsWith('/demo'))
 </script>
 
 <template>
   <div
-    flex="~ col gap-2 items-center"
-    fixed right-3 top-3 w-max p2 floating-glass
-    lt-md="top-unset bottom-3 right-3 flex-row-reverse"
+    flex="~ gap-2 items-center"
+    w-max p2 floating-glass
   >
-    <DarkToggle />
     <template v-if="isPlayer">
-      <div border="t base" h-1px w-20px flex-none lt-md="border-t-0 border-r h-20px w-1px" />
-      <Tooltip placement="left">
+      <div />
+      <Tooltip placement="top">
         <IconToggle v-model="settings.furigana" icon="i-uil-letter-japanese-a" />
         <template #popper>
           <div>
@@ -38,7 +37,7 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
           </div>
         </template>
       </Tooltip>
-      <Tooltip placement="left">
+      <Tooltip placement="top">
         <IconToggle v-model="settings.kanji" icon="i-uil-letter-chinese-a" />
         <template #popper>
           <div>
@@ -53,7 +52,7 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
           </div>
         </template>
       </Tooltip>
-      <Tooltip placement="left">
+      <Tooltip placement="top">
         <IconToggle v-model="settings.romaji" icon="i-uil-letter-english-a" />
         <template #popper>
           <div>
@@ -68,7 +67,7 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
           </div>
         </template>
       </Tooltip>
-      <Tooltip placement="left">
+      <Tooltip placement="top">
         <IconToggle v-model="settings.translation" icon="i-uil-english-to-chinese" />
         <template #popper>
           <div>
@@ -76,7 +75,7 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
           </div>
         </template>
       </Tooltip>
-      <Menu placement="left">
+      <Menu placement="top">
         <IconButton icon="i-uil-text-size" />
         <template #popper>
           <div px4 py2>
@@ -89,8 +88,8 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
           </div>
         </template>
       </Menu>
-      <div border="t base" h-1px w-20px flex-none lt-md="border-t-0 border-r h-20px w-1px" />
-      <Tooltip placement="left">
+      <div class="setting-nav-divider" />
+      <Tooltip placement="top">
         <IconToggle v-model="settings.follow" icon="i-uil-right-indent-alt" />
         <template #popper>
           <div>
@@ -98,7 +97,7 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
           </div>
         </template>
       </Tooltip>
-      <Tooltip placement="left">
+      <Tooltip placement="top">
         <IconToggle v-model="settings.autoPause" icon="i-uil-pause-circle" />
         <template #popper>
           <div>
@@ -107,9 +106,9 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
         </template>
       </Tooltip>
     </template>
-    <template v-if="route.path !== '/' && bp.isSmaller('md')">
-      <div border="t base" h-1px w-20px flex-none lt-md="border-t-0 border-r h-20px w-1px" />
-      <Tooltip placement="left">
+    <template v-if="route.path !== '/' && ltMd">
+      <div class="setting-nav-divider" />
+      <Tooltip placement="top">
         <IconButton to="/" icon="i-uil-angle-left-b" />
         <template #popper>
           <div>
@@ -120,3 +119,9 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
     </template>
   </div>
 </template>
+
+<style>
+.setting-nav-divider {
+  --uno: 'border-t-0 border-r h-20px w-1px flex-none';
+}
+</style>

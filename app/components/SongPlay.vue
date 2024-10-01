@@ -24,6 +24,7 @@ const favorited = computed({
   },
 })
 
+const settings = useSettings()
 const controls = usePlayer(props.data)
 const { active, go, toggle, error } = controls
 
@@ -65,13 +66,25 @@ function remove() {
 </script>
 
 <template>
-  <div h-screen w-screen grid="~ cols-2" of-hidden lt-md="flex flex-col">
-    <div flex="~ col gap-4" flex-none of-auto p4 px6 lt-md="p0 gap-0">
-      <div flex="~ gap-3 items-center" lt-md="px3 py2 hidden">
+  <div
+    grid="~ cols-[1fr_1fr]"
+    h-screen w-screen of-hidden
+    lt-lg="flex flex-col"
+  >
+    <div
+      flex="~ col gap-4" flex-none of-auto p4 px6
+      lt-sm="p0 gap-0"
+    >
+      <!-- Title Bar -->
+      <div
+        flex="~ gap-3 items-center"
+        lt-sm="hidden"
+        lt-lg=""
+      >
         <NuxtLink to="/" hover="bg-hover op100" ml--0.5 rounded-full op50 transition>
           <div i-mdi-circle-double text-2xl />
         </NuxtLink>
-        <div flex="~ col" font-jp-serif>
+        <div flex="~ col" lt-lg="flex-row items-end" font-jp-serif>
           <h1 text-xl>
             {{ data.title }}
           </h1>
@@ -81,18 +94,18 @@ function remove() {
         <Dropdown>
           <IconButton
             flex-none
-            icon="i-ph-trash-duotone op40 text-red"
+            icon="i-ph-trash-duotone op40 hover:op100 hover:text-red"
           />
           <template #popper="{ hide }">
-            <div flex flex-col gap-4 p-4>
+            <div flex flex-col gap-2 p4>
               <h3>
-                刪除此歌曲?
+                確認要刪除此歌曲？
               </h3>
-              <div flex gap-4>
-                <SimpleButton text-red @click="remove">
-                  删除
+              <div flex gap-2>
+                <SimpleButton color="btn-simple-red" bg-red:10 px5 text-red:80 @click="remove">
+                  刪除
                 </SimpleButton>
-                <SimpleButton @click="hide()">
+                <SimpleButton px5 @click="hide()">
                   取消
                 </SimpleButton>
               </div>
@@ -107,7 +120,8 @@ function remove() {
       </div>
       <div
         border-rounded-1.5em
-        lt-md="rounded-0 border-0 border-b border-base"
+        lt-sm="rounded-0 border-0 border-b border-base"
+        lt-lg="max-w-680px w-full mxa"
         class="aspect-16/9 flex-none of-hidden shadow-lg"
       >
         <div id="player" flex bg-hover text-center>
@@ -127,17 +141,20 @@ function remove() {
           </div>
         </div>
       </div>
-      <div lt-md="hidden" mt--4 min-h-80px flex rounded p2>
+      <div lt-lg="hidden" min-h-80px flex rounded p2>
         <LyricsLine
           v-if="active"
           ma
+          :style="{
+            fontSize: `${settings.fontSize}rem`,
+          }"
           :line="data.lyrics[active.index]!"
         />
       </div>
       <!-- <QRCode :data="data" /> -->
       <div
         flex="~ col gap-2 justify-end auto"
-        lt-md="p4 border-b border-base hidden"
+        lt-lg="p4 border-b border-base hidden"
         of-auto p1 text-xs text-hex-888
       >
         <div border="t base" my1 h-1px w-30px />
@@ -157,8 +174,7 @@ function remove() {
         </p> -->
       </div>
     </div>
-
-    <LyricsTrack :data="data" :controls="controls" md="pr-50px" />
+    <LyricsTrack :data="data" :controls="controls" />
   </div>
 </template>
 

@@ -12,6 +12,8 @@ const {
   go,
 } = props.controls
 
+const SCROLL_PERCENTAGE = 0.30
+
 const settings = useSettings()
 
 const lyricsOverflow = templateRef<HTMLDivElement>('lyricsOverflow')
@@ -95,7 +97,7 @@ onMounted(() => {
       nextTick(() => {
         const container = lyricsOverflow.value!
         const rectContainer = container.getBoundingClientRect()
-        const targetClientTop = rectContainer.top + rectContainer.height * 0.25
+        const targetClientTop = rectContainer.top + rectContainer.height * SCROLL_PERCENTAGE
         const rectLine = line.getBoundingClientRect()
         const currentClientTop = rectLine.top
         container.scrollTo({
@@ -111,12 +113,18 @@ onMounted(() => {
 <template>
   <div
     ref="lyricsOverflow"
-    of-x-hidden of-y-auto
+    relative of-x-hidden of-y-auto
     :style="{
       fontSize: `${settings.fontSize}rem`,
     }"
   >
-    <div flex="~ col gap-1em" class="lyrics-track" data-allow-mismatch of-hidden py-1000px text-center>
+    <div lt-lg="absolute" pointer-events-auto sticky left-3 right-3 top-3 z-floating flex>
+      <SettingsNav mxa />
+    </div>
+    <div
+      flex="~ col gap-1em" class="lyrics-track"
+      of-hidden py-1000px text-center
+    >
       <div pb10 font-jp-serif>
         <h1 text-2em>
           {{ data.title }}

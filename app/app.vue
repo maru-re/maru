@@ -12,8 +12,8 @@ useHead({
 <template>
   <div class="texture-overlay" />
   <NuxtPage />
-  <ClientOnly>
-    <SettingsNav />
-    <DropZone />
-  </ClientOnly>
+  <DropZone />
+  <div fixed right-3 top-3 p2 floating-glass>
+    <DarkToggle />
+  </div>
 </template>

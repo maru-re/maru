@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div mxa max-w-150 p15 lt-md="p6" text-sm line-height-1.5em>
+  <div mxa max-w-150 p15 lt-lg="p6" text-sm line-height-1.5em>
     <BasicNav />
     <h3 mb5 text-lg font-bold>
       關於 maru.re

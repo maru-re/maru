@@ -101,7 +101,7 @@ export async function importFromFiles(files?: FileList | FileSystemEntry[] | nul
     // eslint-disable-next-line no-alert
     if (confirm(messages.join('\n'))) {
       saveSongsToLocal(success.map(r => r.data!))
-      if (location.pathname === '/')
+      if (location.pathname === '/' && success.length === 1)
         location.pathname = `/songs/${success[0]!.data!.youtube}`
     }
   }
