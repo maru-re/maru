@@ -1,7 +1,8 @@
-<!-- eslint-disable vue/no-v-text-v-html-on-component -->
-
-<!-- From https://web.archive.org/web/20230104064123/https://www.jpmarumaru.com/tw/JPSongCertify.asp -->
 <script setup lang="ts">
+function removeAll() {
+  removeAllData()
+  location.pathname = '/'
+}
 </script>
 
 <template>
@@ -11,7 +12,7 @@
       設定
     </h3>
     <div py2>
-      <SimpleButton icon="i-uil-trash" color="btn-simple-red">
+      <SimpleButton icon="i-uil-trash" color="btn-simple-red" @click="removeAll()">
         <div translate-y-0.5px>
           清除所有資料
         </div>

@@ -6,6 +6,14 @@ const recentIds = useLocalStorage<string[]>('maru-recent', [])
 const favoriteIds = useLocalStorage<string[]>('maru-favorite', [])
 const collections = useLocalStorage<MaruSongGist[]>('maru-collections', [])
 
+export function removeAllData() {
+  Object.keys(localStorage)
+    .forEach((i) => {
+      if (i.startsWith('maru-'))
+        localStorage.removeItem(i)
+    })
+}
+
 export function saveSongsToLocal(songs: MaruSongData[]) {
   const append: MaruSongGist[] = []
   for (const song of songs) {
