@@ -19,8 +19,8 @@ export default defineConfig({
       'border-base': 'border-gray:20',
       'floating-glass': 'bg-white:70 shadow-lg backdrop-blur-4 dark:bg-black:70 z-floating border border-base rounded-full',
 
+      'z-hover': 'z-50',
       'z-floating': 'z-100',
-      'z-hover': 'z-150',
       'z-tooltip': 'z-200',
       'z-dropzone': 'z-1000',
     },

@@ -133,6 +133,10 @@ async function onFileChange(e: Event) {
         Demo
       </NuxtLink>
       <span mx2 op50> · </span>
+      <NuxtLink to="/settings" op50 hover="op100 underline">
+        設定
+      </NuxtLink>
+      <span mx2 op50> · </span>
       <NuxtLink to="/about" op50 hover="op100 underline">
         關於我們
       </NuxtLink>
