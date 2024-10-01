@@ -9,30 +9,30 @@ const {
   collections,
 } = useCollections()
 
-const search = ref(String(route.query.s || ''))
+const rawSearch = ref(String(route.query.s || ''))
+const search = useDebounce(rawSearch, 300)
+
 const fuse = computed(() => new Fuse(collections.value, {
   keys: ['title', 'artists', 'tags'],
   includeScore: true,
   threshold: 0.4,
 }))
 
-const debounced = useDebounce(search, 300)
-
 const { ignoreUpdates } = watchIgnorable(
   () => route.query.s,
   () => {
     const str = String(route.query.s || '')
-    if (str !== debounced.value && str !== search.value)
-      search.value = str
+    if (str !== search.value && str !== rawSearch.value)
+      rawSearch.value = str
   },
   { flush: 'sync' },
 )
 
 watch(
-  debounced,
+  search,
   () => {
     ignoreUpdates(() => {
-      router.replace({ query: { s: debounced.value.trim() || undefined } })
+      router.replace({ query: { s: search.value.trim() || undefined } })
     })
   },
   { immediate: true },
@@ -48,10 +48,10 @@ const tagsSum = computed(() => {
 })
 
 const result = computed(() => {
-  if (!debounced.value.trim()) {
+  if (!search.value.trim()) {
     return collections.value
   }
-  return fuse.value.search(debounced.value).map(r => r.item)
+  return fuse.value.search(search.value).map(r => r.item)
 })
 
 const recent = computed(() => {
@@ -65,11 +65,17 @@ const favorited = computed(() => {
     ?.map(id => collections.value.find(s => s.youtube === id))
     .filter(x => !!x) || []
 })
+
+async function onFileChange(e: Event) {
+  const input = e.target as HTMLInputElement
+  const files = input.files
+  await importFromFiles(files)
+}
 </script>
 
 <template>
   <div>
-    <div py20 flex="~ col gap-2 items-center">
+    <div pb-10 pt-25 flex="~ col gap-2 items-center">
       <div i-mdi-circle-double text-5xl op75 />
       <div text-4xl font-jp-serif>
         <ruby>
@@ -83,6 +89,24 @@ const favorited = computed(() => {
       <div text-center op50>
         基於 YouTube 的歌曲歌詞展示閱讀器
       </div>
+      <div p5>
+        <div
+          border="~ dashed #888 rounded-2"
+          flex="~ gap-2 items-center"
+          relative px4 py2 op50
+          hover="border-primary text-primary bg-primary/5 op100"
+        >
+          <div i-uil-file-plus-alt />
+          <span>開啟歌詞檔案</span>
+          <input
+            type="file"
+            accept=".json"
+            multiple
+            absolute inset-0 h-full w-full cursor-pointer opacity-0
+            @change="onFileChange"
+          >
+        </div>
+      </div>
     </div>
     <div sticky left-0 right-0 top-0 z-1000 flex p3>
       <div
@@ -91,13 +115,17 @@ const favorited = computed(() => {
       >
         <div i-uil-search text-lg op25 />
         <input
-          v-model="search"
+          v-model="rawSearch"
           type="text"
           placeholder="搜尋"
           absolute inset-0 w-auto bg-transparent p5 px10 outline-none
         >
         <div flex-auto />
-        <IconButton v-if="search" icon="i-uil-times" @click="search = ''" />
+        <IconButton
+          v-if="rawSearch"
+          icon="i-uil-times"
+          @click="rawSearch = ''"
+        />
       </div>
     </div>
     <div flex="~ justify-center">
@@ -162,7 +190,7 @@ const favorited = computed(() => {
         </div>
       </template>
 
-      <div v-else text-center op50>
+      <div v-else-if="search" text-center op50>
         沒找到符合的歌曲。
       </div>
     </div>

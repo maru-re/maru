@@ -21,6 +21,11 @@ export default defineConfig({
     'z-floating': 'z-100',
     'z-tooltip': 'z-200',
   },
+  theme: {
+    colors: {
+      primary: '#0a9cae',
+    },
+  },
   presets: [
     presetUno(),
     presetAttributify(),
