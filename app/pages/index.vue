@@ -87,7 +87,11 @@ async function onFileChange(e: Event) {
         「唱歌學日文」
       </div>
       <div text-center op50>
-        基於 YouTube 的歌曲歌詞展示閱讀器
+        基於 YouTube 的歌曲歌詞閱讀器
+      </div>
+      <div mt4 flex="~ gap-1 items-center" rounded bg-orange:10 px2 py1 text-sm text-orange>
+        <div i-uil-flask flex-none />
+        高強度開發中、許多功能尚未完善。歡迎回報問題
       </div>
       <div p5>
         <div
@@ -97,7 +101,7 @@ async function onFileChange(e: Event) {
           hover="border-primary text-primary bg-primary/5 op100"
         >
           <div i-uil-file-plus-alt />
-          <span>開啟歌詞檔案</span>
+          <span>匯入歌詞檔案</span>
           <input
             type="file"
             accept=".json"
@@ -117,7 +121,7 @@ async function onFileChange(e: Event) {
         <input
           v-model="rawSearch"
           type="text"
-          placeholder="搜尋"
+          :placeholder="`搜尋已匯入的歌曲 (${collections.length})`"
           absolute inset-0 w-auto bg-transparent p5 px10 outline-none
         >
         <div flex-auto />
@@ -128,7 +132,7 @@ async function onFileChange(e: Event) {
         />
       </div>
     </div>
-    <div flex="~ justify-center">
+    <div flex="~ justify-center wrap">
       <NuxtLink to="/demo" op50 hover="op100 underline">
         Demo
       </NuxtLink>
@@ -139,10 +143,6 @@ async function onFileChange(e: Event) {
       <span mx2 op50> · </span>
       <NuxtLink to="/about" op50 hover="op100 underline">
         關於我們
-      </NuxtLink>
-      <span mx2 op50> · </span>
-      <NuxtLink to="/copyright" op50 hover="op100 underline">
-        版權說明
       </NuxtLink>
       <span mx2 op50> · </span>
       <a href="https://github.com/maru-re/maru" target="_blank" op50 hover="op100 underline">

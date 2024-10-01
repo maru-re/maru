@@ -27,9 +27,9 @@ export default defineConfig({
     [/^btn-simple-(.*)$/, ([,color]) => {
       return [
         `hover:border-${color}/50 hover:color-${color}`,
-        `active="bg-${color}/10"`,
+        `active:bg-${color}/10"`,
         `border border-base border-rounded-lg`,
-        `flex gap-1 items-center justify-center"`,
+        `flex gap-1 items-center justify-center`,
       ].join(' ')
     }],
   ],

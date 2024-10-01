@@ -95,7 +95,7 @@ export async function importFromFiles(files?: FileList | FileSystemEntry[] | nul
   }
 
   if (success.length) {
-    messages.push('是否導入成功的檔案？')
+    messages.push('是否匯入成功的檔案？')
 
     // TODO: proper dialog
     // eslint-disable-next-line no-alert
