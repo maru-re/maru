@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import type { MaruSongData } from '@marure/schema'
+import { Dropdown } from 'floating-vue'
+import { removeSong } from '~/composables/store'
 
 const props = defineProps<{
   data: MaruSongData
+}>()
+const emit = defineEmits<{
+  afterRemove: [id: string]
 }>()
 
 const {
@@ -52,6 +57,11 @@ onMounted(() => {
     }
   })
 })
+
+function remove() {
+  removeSong(props.data.youtube)
+  emit('afterRemove', props.data.youtube)
+}
 </script>
 
 <template>
@@ -68,6 +78,27 @@ onMounted(() => {
           <ArtistsList :artists="data.artists" mt--1 />
         </div>
         <div flex-auto />
+        <Dropdown>
+          <IconButton
+            flex-none
+            icon="i-ph-trash-duotone op40 text-red"
+          />
+          <template #popper="{ hide }">
+            <div flex flex-col gap-4 p-4>
+              <h3>
+                刪除此歌曲?
+              </h3>
+              <div flex gap-4>
+                <SimpleButton text-red @click="remove">
+                  删除
+                </SimpleButton>
+                <SimpleButton @click="hide()">
+                  取消
+                </SimpleButton>
+              </div>
+            </div>
+          </template>
+        </Dropdown>
         <IconToggle
           v-model="favorited"
           flex-none
