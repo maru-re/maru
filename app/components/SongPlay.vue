@@ -133,6 +133,7 @@ function remove() {
           ma :line="data.lyrics[active.index]!"
         />
       </div>
+      <!-- <QRCode :data="data" /> -->
       <div
         flex="~ col gap-2 justify-end auto"
         lt-md="p4 border-b border-base hidden"
