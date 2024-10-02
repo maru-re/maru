@@ -164,7 +164,7 @@ async function onFileChange(e: Event) {
         </template>
       </SongsGrid>
 
-      <SongsGrid v-if="result?.length" :link="true" :songs="result">
+      <SongsGrid v-if="result?.length" :link="true" :songs="result" :manage="true">
         <template #title>
           <template v-if="search.trim()">
             <span>搜尋結果</span>
@@ -175,7 +175,8 @@ async function onFileChange(e: Event) {
             <span text-sm op50>{{ collections.length }}</span>
           </template>
         </template>
-        <template #title-action>
+        <!-- Tag Filter -->
+        <!-- <template #title-action>
           <div flex="~ gap-2 wrap justify-end">
             <button
               v-for="value, tag of tagsSum"
@@ -187,7 +188,7 @@ async function onFileChange(e: Event) {
               {{ tag }} <span text-0.9em op50>{{ value }}</span>
             </button>
           </div>
-        </template>
+        </template> -->
       </SongsGrid>
 
       <div v-else-if="search" text-center op50>

@@ -29,6 +29,7 @@ export default defineConfig({
       return [
         `hover:border-${color}/50 hover:color-${color}`,
         `active:bg-${color}/10`,
+        'disabled:opacity-50',
         `border border-base border-rounded-lg`,
         `flex gap-1 items-center justify-center`,
       ].join(' ')
