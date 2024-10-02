@@ -11,7 +11,7 @@ export function katakanaToHiragana(katakana: string): string {
   })
 }
 
-interface HiraganaToRomajiOptions {
+export interface HiraganaToRomajiOptions {
   mode?: 'split' | 'merge'
 }
 
