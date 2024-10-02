@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maru-re/maru.git",
-    "directory": "packages/parser"
+    "directory": "packages/romaji"
   },
   "bugs": "https://github.com/maru-re/maru/issues",
   "sideEffects": false,
