@@ -65,14 +65,36 @@ function getClassLine(no: number) {
   return 'inactive'
 }
 
-function isElementInViewport(el: Element) {
+function getLineElementByIndex(index: number | undefined): HTMLElement | null {
+  if (index === undefined)
+    return null
+  return document.querySelector(`.lyric-line[line="${index}"]`) as HTMLElement | null
+}
+
+function isElementInViewportY(el: Element) {
   const rect = el.getBoundingClientRect()
   return (
     rect.top >= 0
-    && rect.left >= 0
     && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   )
+}
+
+const activeLineEl = ref<HTMLElement | null>(null)
+
+function scrollToActiveLine(behavior: ScrollBehavior) {
+  const line = activeLineEl.value
+  if (!line)
+    return
+
+  const container = lyricsOverflow.value!
+  const rectContainer = container.getBoundingClientRect()
+  const targetClientTop = rectContainer.top + rectContainer.height * SCROLL_PERCENTAGE
+  const rectLine = line.getBoundingClientRect()
+  const currentClientTop = rectLine.top
+  container.scrollTo({
+    top: container.scrollTop + currentClientTop - targetClientTop,
+    behavior,
+  })
 }
 
 onMounted(() => {
@@ -102,19 +124,20 @@ onMounted(() => {
         isLayoutChange = true
     }
 
-    const line = document.querySelector(`.lyric-line[line="${active.value?.index}"]`)
-    if (line && (isLayoutChange || isElementInViewport(line))) {
-      nextTick(() => {
-        const container = lyricsOverflow.value!
-        const rectContainer = container.getBoundingClientRect()
-        const targetClientTop = rectContainer.top + rectContainer.height * SCROLL_PERCENTAGE
-        const rectLine = line.getBoundingClientRect()
-        const currentClientTop = rectLine.top
-        container.scrollTo({
-          top: container.scrollTop + currentClientTop - targetClientTop,
-          behavior: isLayoutChange ? 'instant' : 'smooth',
+    const line = getLineElementByIndex(active.value?.index)
+    activeLineEl.value = line
+    if (line) {
+      const isLineVisible = isElementInViewportY(line)
+
+      // When seeking in player, the new active line may not be in view so check the old one
+      const oldLine = getLineElementByIndex(o[0] as number | undefined)
+      const isOldLineVisible = !!oldLine && isElementInViewportY(oldLine)
+
+      if (isLayoutChange || isLineVisible || isOldLineVisible) {
+        nextTick(() => {
+          scrollToActiveLine(isLayoutChange ? 'instant' : 'smooth')
         })
-      })
+      }
     }
   })
 })
