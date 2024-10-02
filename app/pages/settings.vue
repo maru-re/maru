@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { validate } from '@marure/schema'
 import YAML from 'js-yaml'
 
 const {

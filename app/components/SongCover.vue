@@ -1,14 +1,21 @@
 <script setup lang="ts">
 import type { MaruSongGist } from '@marure/schema'
 
-defineProps<{
-  song: MaruSongGist
-}>()
+withDefaults(
+  defineProps<{
+    song: MaruSongGist
+    link?: boolean
+  }>(),
+  {
+    link: true,
+  },
+)
 </script>
 
 <template>
-  <div class="group aspect-5/2" relative>
+  <div class="relative aspect-5/2" :class="link ? 'group' : ''">
     <NuxtLink
+      :class="link ? '' : 'pointer-events-none'"
       :to="`/songs/${song.youtube}`"
       border="rounded-xl"
       absolute inset-0 block of-hidden transition-all duration-500 bg-base
