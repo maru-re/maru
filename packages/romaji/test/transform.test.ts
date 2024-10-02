@@ -108,4 +108,24 @@ describe('transformSokuon', () => {
       ]
     `)
   })
+
+  it('before c*', () => {
+    const tokens = createTokens('っち')
+    transformSokuon(tokens)
+    expect(tokens).toMatchInlineSnapshot(`
+      [
+        {
+          "index": 0,
+          "source": "っ",
+          "value": "t",
+        },
+        {
+          "index": 1,
+          "mergeForwards": true,
+          "source": "ち",
+          "value": "chi",
+        },
+      ]
+    `)
+  })
 })

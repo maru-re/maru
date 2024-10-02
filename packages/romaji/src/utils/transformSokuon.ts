@@ -12,7 +12,8 @@ export function transformSokuon(tokens: RomajiToken[]) {
       continue
     }
 
-    token.value = next.value.at(0)!
+    const char = next.value.at(0)!
+    token.value = char === 'c' ? 't' : char
     next.mergeForwards = true
   }
 }
