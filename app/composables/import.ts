@@ -5,12 +5,24 @@ import { _importingState, type FailedResult, type SucceededResult } from '~/stat
 
 export const SUPPORTED_IMPORT_EXT = ['json', 'yml', 'yaml', 'zip']
 
-async function * traverseFileList(files?: FileList | FileSystemEntry[]): AsyncGenerator<File> {
+async function * traverseFileList(files?: FileList | File[] | FileSystemEntry[]): AsyncGenerator<File> {
   for (const item of files || []) {
     if (item == null)
       continue
     if (item instanceof File) {
-      yield item
+      // Expand zip files
+      if (item.name.match(/\.zip$/i)) {
+        const zip = await import('jszip').then(r => r.loadAsync(item))
+        for (const entry of Object.values(zip.files)) {
+          if (entry.dir)
+            continue
+          const blob = await entry.async('blob')
+          yield new File([blob], entry.name, { type: blob.type })
+        }
+      }
+      else {
+        yield item
+      }
     }
     else {
       if (item.isDirectory) {
@@ -26,19 +38,7 @@ async function * traverseFileList(files?: FileList | FileSystemEntry[]): AsyncGe
           const file = await new Promise<File>((resolve, reject) => {
             (item as FileSystemFileEntry).file(resolve, reject)
           })
-
-          if (file.name.match(/\.zip$/i)) {
-            const zip = await import('jszip').then(r => r.loadAsync(file))
-            for (const entry of Object.values(zip.files)) {
-              if (entry.dir)
-                continue
-              const blob = await entry.async('blob')
-              yield new File([blob], entry.name, { type: blob.type })
-            }
-          }
-          else {
-            yield file
-          }
+          yield * traverseFileList([file])
         }
       }
     }
