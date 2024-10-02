@@ -122,6 +122,6 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
 
 <style>
 .setting-nav-divider {
-  --uno: 'border-t-0 border-r h-20px w-1px flex-none';
+  --uno: 'border-t-0 border-base border-r h-20px w-1px flex-none';
 }
 </style>

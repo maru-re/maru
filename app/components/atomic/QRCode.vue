@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MaruSongData } from '@marure/schema'
 import { compressToEncodedURIComponent } from 'lz-string'
-import { encode, renderSVG } from 'uqr'
+import { renderSVG } from 'uqr'
 
 const props = defineProps<{
   data: MaruSongData

@@ -1,4 +1,4 @@
-import { type MaruSongData, validate } from '@marure/schema'
+import { validate } from '@marure/schema'
 import { parseSongData } from '~~/packages/parser/src'
 import YAML from 'yaml'
 import { _importingState, type FailedResult, type SucceededResult } from '~/state/import'

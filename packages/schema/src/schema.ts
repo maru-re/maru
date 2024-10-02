@@ -1,5 +1,5 @@
 import type { InferInput } from 'valibot'
-import { array, description, isoDate, number, object, optional, pipe, record, regex, string, tuple, union } from 'valibot'
+import { array, description, isoDate, number, object, optional, pipe, record, regex, string } from 'valibot'
 
 export const LyricWordSchema = object({
   t: optional(

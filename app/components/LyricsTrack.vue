@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { LyricLine, MaruSongData, MaruSongDataParsed } from '@marure/schema'
+import type { LyricLine, MaruSongDataParsed } from '@marure/schema'
 import { Tooltip } from 'floating-vue'
 import type { PlayerControls } from '~/composables/player'
 
@@ -156,10 +156,7 @@ onMounted(() => {
   <div
     ref="lyricsOverflow"
     relative of-x-hidden of-y-auto
-    :style="{
-      fontSize: `${settings.fontSize}rem`,
-    }"
-  >
+>
     <div lt-lg="absolute" pointer-events-auto sticky left-3 right-3 top-3 z-floating flex>
       <div
         v-if="activeLineEl && !targetIsVisible"
@@ -182,6 +179,9 @@ onMounted(() => {
     <div
       flex="~ col gap-1.5em" class="lyrics-track"
       of-hidden py-1000px text-center
+      :style="{
+        fontSize: `${settings.fontSize}rem`,
+      }"
     >
       <div pb10 font-jp-serif>
         <h1 text-2em>
