@@ -80,6 +80,14 @@ function isElementInViewportY(el: Element) {
 }
 
 const activeLineEl = ref<HTMLElement | null>(null)
+const targetIsVisible = ref(false)
+
+useIntersectionObserver(activeLineEl, (entries) => {
+  if (!entries || !entries.length)
+    return
+  const { isIntersecting } = entries[0]!
+  targetIsVisible.value = isIntersecting
+})
 
 function scrollToActiveLine(behavior: ScrollBehavior) {
   const line = activeLineEl.value
@@ -128,6 +136,7 @@ onMounted(() => {
     activeLineEl.value = line
     if (line) {
       const isLineVisible = isElementInViewportY(line)
+      targetIsVisible.value = isLineVisible
 
       // When seeking in player, the new active line may not be in view so check the old one
       const oldLine = getLineElementByIndex(o[0] as number | undefined)
@@ -152,6 +161,13 @@ onMounted(() => {
     }"
   >
     <div lt-lg="absolute" pointer-events-auto sticky left-3 right-3 top-3 z-floating flex>
+      <button
+        v-if="activeLineEl && !targetIsVisible"
+        fixed bottom-8 right-8 p-4 floating-glass
+        @click="() => scrollToActiveLine('smooth')"
+      >
+        <div i-mdi-focus-field-horizontal />
+      </button>
       <SettingsNav mxa />
     </div>
     <div
