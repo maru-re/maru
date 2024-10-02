@@ -6,8 +6,10 @@ import { urls } from './sources'
 
 const cwd = fileURLToPath(new URL('.', import.meta.url))
 
+await fs.mkdir(join(cwd, `out/html`), { recursive: true })
+
 for (const { url, id } of urls) {
-  const filename = join(cwd, `downloads/${id}.html`)
+  const filename = join(cwd, `out/html/${id}.html`)
   if (existsSync(filename)) {
     console.log(`Skipping ${id}`)
     continue

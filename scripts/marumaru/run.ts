@@ -8,9 +8,9 @@ import { normalizeFilename, parse } from './parse'
 import { urls } from './sources'
 
 const cwd = fileURLToPath(new URL('.', import.meta.url))
-const files = await fg('downloads/*.html', { cwd, absolute: true })
+const files = await fg('out/html/*.html', { cwd, absolute: true })
 
-await fs.rm(join(cwd, 'data'), { recursive: true, force: true })
+await fs.rm(join(cwd, 'out/data'), { recursive: true, force: true })
 
 for (const file of files) {
   const content = await fs.readFile(file, 'utf-8')
@@ -25,9 +25,9 @@ for (const file of files) {
     console.log(`Failed to parse ${url}`, parsed)
     continue
   }
-  await fs.mkdir(join(cwd, 'data'), { recursive: true })
+  await fs.mkdir(join(cwd, 'out/data'), { recursive: true })
   await fs.writeFile(
-    join(cwd, 'data', `[${parsed.youtube}]-${normalizeFilename(parsed.title)}.yaml`),
+    join(cwd, 'out/data', `[${parsed.youtube}]-${normalizeFilename(parsed.title)}-${normalizeFilename((parsed.artists || []).join('-'))}.yaml`),
     YAML.dump(parsed),
   )
 }

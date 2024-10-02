@@ -12,7 +12,7 @@ export function parse(html: string, sourceUrl: string) {
     credits: {
       lyrics: sourceUrl,
     },
-    artists: $('#Singer').text().split(/[,;、]/g).map(s => s.trim()).filter(Boolean),
+    artists: $('#Singer').text().split(/[,;、×]|\bfeat\.?|\bft\s*\.?|\bwith\b/gi).map(s => s.trim()).filter(Boolean),
     tags: $('#SongType').text().split(/[,;、]/g).map(s => s.trim()).filter(Boolean),
     lrc: '',
   }
