@@ -13,14 +13,14 @@ withDefaults(
 </script>
 
 <template>
-  <div class="song-entry relative aspect-5/2" :class="link ? 'group' : ''">
+  <div class="song-entry relative aspect-5/2" hover:z-hover ma-5px :class="link ? 'group' : ''">
     <NuxtLink
       class="song-entry-cover aspect-5/2"
       :class="link ? '' : 'pointer-events-none'"
       :to="`/songs/${song.youtube}`"
-      border="2 transparent rounded-xl"
+      border="transparent rounded-xl"
       absolute inset-0 block of-hidden transition-all duration-500 bg-base
-      group-hover="aspect-16/9 z-hover translate-y--16.25% shadow-2xl scale-115"
+      group-hover="aspect-16/9 translate-y--16.25% shadow-2xl scale-115"
     >
       <img
         :src="`https://img.youtube.com/vi/${song.youtube}/mqdefault.jpg`"

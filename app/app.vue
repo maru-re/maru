@@ -2,6 +2,7 @@
 import { appName } from '~/constants'
 
 import 'floating-vue/dist/style.css'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import './app.css'
 
 useHead({

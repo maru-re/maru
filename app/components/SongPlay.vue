@@ -59,8 +59,8 @@ onMounted(() => {
   })
 })
 
-function remove() {
-  removeSongs(props.data.youtube)
+async function remove() {
+  await removeSongs([props.data.youtube])
   emit('afterRemove', props.data.youtube)
 }
 </script>

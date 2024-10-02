@@ -39,14 +39,14 @@ watch(
   { immediate: true },
 )
 
-const tagsSum = computed(() => {
-  const tags = collections.value.flatMap(s => s.tags)
-  return tags.reduce((acc, tag) => {
-    if (tag)
-      acc[tag] = (acc[tag] || 0) + 1
-    return acc
-  }, {} as Record<string, number>)
-})
+// const tagsSum = computed(() => {
+//   const tags = collections.value.flatMap(s => s.tags)
+//   return tags.reduce((acc, tag) => {
+//     if (tag)
+//       acc[tag] = (acc[tag] || 0) + 1
+//     return acc
+//   }, {} as Record<string, number>)
+// })
 
 const result = computed(() => {
   if (!search.value.trim()) {
