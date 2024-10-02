@@ -197,7 +197,6 @@ const hiraganaToRomajiMap = ([
   ['んわ', 'n\'wa'],
   ['んを', 'n\'wo'],
   ['んん', 'n\'n'],
-  ['っ', 't'],
   ['ぁ', 'a'],
   ['ぃ', 'i'],
   ['ぅ', 'u'],
@@ -217,5 +216,12 @@ export function hiraganaToRomaji(hiragana: string): string[] {
     chars = chars.replace(kana, ` ${romaji} `)
   }
 
+  chars = transformSokuon(chars);
+
   return chars.split(/\s+/g).filter(Boolean)
+}
+
+function transformSokuon(chars: string) {
+  return chars
+    .replace(/っ\s+([a-z])/g, (...args) => ` ${args[1] + args[1]}`)
 }
