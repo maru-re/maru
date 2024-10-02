@@ -10,7 +10,7 @@ const settings = useSettings()
 
 const romaji = computed(() => {
   const text = props.line.words.map(w => w.r || w.w).join(' ')
-  return hiraganaToRomaji(text).filter(Boolean).join(' ')
+  return hiraganaToRomaji(text)
 })
 </script>
 
