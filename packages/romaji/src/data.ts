@@ -1,11 +1,4 @@
-export function katakanaToHiragana(katakana: string): string {
-  return katakana.replace(/[\u30A1-\u30F6]/g, (match) => {
-    const chr = match.charCodeAt(0) - 0x60
-    return String.fromCharCode(chr)
-  })
-}
-
-const hiraganaToRomajiMap = ([
+export const hiraganaToRomajiMap = ([
   ['あ', 'a'],
   ['い', 'i'],
   ['う', 'u'],
@@ -77,6 +70,14 @@ const hiraganaToRomajiMap = ([
   ['ぷ', 'pu'],
   ['ぺ', 'pe'],
   ['ぽ', 'po'],
+  ['いぃ', 'yi'],
+  ['いぇ', 'ye'],
+  ['うぁ', 'wa'],
+  ['うぃ', 'wi'],
+  ['うぅ', 'wu'],
+  ['うぇ', 'we'],
+  ['うぉ', 'wo'],
+  ['うゅ', 'wyu'],
   ['きゃ', 'kya'],
   ['きぃ', 'kyi'],
   ['きゅ', 'kyu'],
@@ -146,6 +147,14 @@ const hiraganaToRomajiMap = ([
   ['りゅ', 'ryu'],
   ['りぇ', 'rye'],
   ['りょ', 'ryo'],
+  ['ゔぁ', 'va'],
+  ['ゔぃ', 'vi'],
+  ['ゔ', 'vu'],
+  ['ゔぇ', 've'],
+  ['ゔぉ', 'vo'],
+  ['ゔゃ', 'vya'],
+  ['ゔゅ', 'vyu'],
+  ['ゔょ', 'vyo'],
   ['ぎゃ', 'gya'],
   ['ぎぃ', 'gyi'],
   ['ぎゅ', 'gyu'],
@@ -186,17 +195,6 @@ const hiraganaToRomajiMap = ([
   ['ぴゅ', 'pyu'],
   ['ぴぇ', 'pye'],
   ['ぴょ', 'pyo'],
-  ['んあ', 'n\'a'],
-  ['んい', 'n\'i'],
-  ['んう', 'n\'u'],
-  ['んえ', 'n\'e'],
-  ['んお', 'n\'o'],
-  ['んや', 'n\'ya'],
-  ['んゆ', 'n\'yu'],
-  ['んよ', 'n\'yo'],
-  ['んわ', 'n\'wa'],
-  ['んを', 'n\'wo'],
-  ['んん', 'n\'n'],
   ['ぁ', 'a'],
   ['ぃ', 'i'],
   ['ぅ', 'u'],
@@ -208,94 +206,3 @@ const hiraganaToRomajiMap = ([
 ] as [string, string][])
   .sort((a, b) => b[0].length - a[0].length)
   .map(([kana, romaji]) => [new RegExp(kana, 'g'), romaji] as [RegExp, string])
-
-interface RomajiToken {
-  index: number
-  source: string
-  value: string
-  mergeForwards?: boolean
-}
-
-interface HiraganaToRomajiOptions {
-  mode?: 'split' | 'merge'
-}
-
-export function hiraganaToRomaji(hiragana: string, options: HiraganaToRomajiOptions = {}) {
-  const {
-    mode = 'merge',
-  } = options
-
-  const text = katakanaToHiragana(hiragana)
-  const tokens = createTokens(text)
-
-  transformOnbiki(tokens)
-  transformSokuon(tokens)
-
-  return tokens
-    .filter(({ value }) => value)
-    .map(token => mode === 'merge' && token.mergeForwards ? token.value : ` ${token.value}`)
-    .join('')
-    .trimStart()
-}
-
-function createTokens(text: string) {
-  const tokens: RomajiToken[] = []
-  let chars = text
-
-  for (const [kana, value] of hiraganaToRomajiMap) {
-    chars = chars.replace(kana, (match, index) => {
-      tokens.push({
-        index,
-        source: match,
-        value,
-      })
-      return ' '.repeat(match.length)
-    })
-  }
-
-  [...chars].forEach((char, i) => {
-    if (char !== ' ') {
-      tokens.push({
-        index: i,
-        source: char,
-        value: '',
-      })
-    }
-  })
-
-  return tokens.sort((a, b) => a.index - b.index)
-}
-
-function transformOnbiki(tokens: RomajiToken[]) {
-  for (let i = 0; i < tokens.length; i++) {
-    const token = tokens[i]
-    const prev = tokens[i - 1]
-    if (
-      token?.source !== 'ー'
-      || !prev
-      || !/[aeiou]$/.test(prev?.value)
-    ) {
-      continue
-    }
-
-    token.value = prev.value.at(-1)!
-    token.mergeForwards = true
-  }
-}
-
-function transformSokuon(tokens: RomajiToken[]) {
-  for (let i = 0; i < tokens.length; i++) {
-    const token = tokens[i]
-    const next = tokens[i + 1]
-    if (
-      token?.source !== 'っ'
-      || !next
-      || !/^[^aeiou]/.test(next?.value)
-    ) {
-      continue
-    }
-
-    token.value = next.value.at(0)!
-    next.mergeForwards = true
-  }
-}

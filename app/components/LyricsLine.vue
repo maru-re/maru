@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { LyricLine } from '@marure/schema'
+import { hiraganaToRomaji } from '@marure/romaji'
 
 const props = defineProps<{
   line: LyricLine
