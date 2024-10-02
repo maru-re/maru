@@ -141,8 +141,32 @@ function revertSelection() {
   --uno: scale-95 saturate-0;
 }
 
-.vue-recycle-scroller__item-view:hover {
+.vue-recycle-scroller__item-view.hover {
   --uno: z-hover;
+  animation: z-zoom-in 0.5s forwards;
+}
+
+.vue-recycle-scroller__item-view {
+  --uno: z-0;
+  animation: z-zoom-out 0.5s forwards;
+}
+
+@keyframes z-zoom-in {
+  from {
+    --uno: z-0;
+  }
+  to {
+    --uno: z-hover;
+  }
+}
+
+@keyframes z-zoom-out {
+  from {
+    --uno: z-hover;
+  }
+  to {
+    --uno: z-0;
+  }
 }
 
 .vue-recycle-scroller {
