@@ -216,9 +216,15 @@ export function hiraganaToRomaji(hiragana: string): string[] {
     chars = chars.replace(kana, ` ${romaji} `)
   }
 
+  chars = transformOnbiki(chars);
   chars = transformSokuon(chars);
 
   return chars.split(/\s+/g).filter(Boolean)
+}
+
+function transformOnbiki(chars: string) {
+  return chars
+    .replace(/([aeiou])\s+ー/g, (...args) => `${args[1] + args[1]} `)
 }
 
 function transformSokuon(chars: string) {
