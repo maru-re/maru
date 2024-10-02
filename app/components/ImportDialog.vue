@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useImportingState } from '~/composables/import'
 import SongCover from './SongCover.vue'
 import SongsGrid from './SongsGrid.vue'
 

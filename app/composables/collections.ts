@@ -1,17 +1,22 @@
 import type { MaruSongData } from '@marure/schema'
+import { _songsStorage } from '~/state/indexdb'
 
-export function saveSongToStorage(song: MaruSongData) {
-  // TODO: move to IndexedDB
-  localStorage.setItem(`maru-song-${song.youtube}`, JSON.stringify(song))
+export async function saveSongToStorage(song: MaruSongData): Promise<void> {
+  localStorage.removeItem(`maru-song-${song.youtube}`)
+  await _songsStorage.set(song.youtube, song)
 }
 
-export function loadSongFromStorage(id: string): MaruSongData | undefined {
+export async function loadSongFromStorage(id: string): Promise<MaruSongData | undefined> {
   const data = localStorage.getItem(`maru-song-${id}`)
-  if (!data)
-    return
-  return JSON.parse(data)
+  if (data) {
+    const song = JSON.parse(data)
+    await _songsStorage.set(id, song)
+    return song
+  }
+  return _songsStorage.get(id) as Promise<MaruSongData | undefined>
 }
 
-export function removeSongFromStorage(id: string) {
+export async function removeSongFromStorage(id: string) {
   localStorage.removeItem(`maru-song-${id}`)
+  await _songsStorage.remove(id)
 }

@@ -8,7 +8,7 @@ const route = useRoute()
 const { addRecent } = useCollections()
 const id = (route.params as any).id as string
 
-const raw = loadSongFromStorage(id)
+const raw = await loadSongFromStorage(id)
 const data = ref<MaruSongDataParsed | null>(null)
 const error = ref<unknown | null>(null)
 

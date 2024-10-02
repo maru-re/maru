@@ -16,8 +16,7 @@ function onDragOver(e: DragEvent) {
   isDragging.value = true
 }
 
-function onDragExit(e: DragEvent) {
-  e.preventDefault()
+function onDragExit() {
   isDragging.value = false
 }
 
@@ -25,6 +24,7 @@ onMounted(() => {
   useEventListener('drop', onDrop)
   useEventListener('dragover', onDragOver)
   useEventListener('dragend', onDragExit)
+  useEventListener('pointerleave', onDragExit)
   // useEventListener('dragleave', onDragExit)
 })
 </script>

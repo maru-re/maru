@@ -1,14 +1,16 @@
 import { extractGist, type MaruSongData, type MaruSongGist } from '@marure/schema'
+import { _songsStorage } from '~/state/indexdb'
 import { _collections, _favoriteIds, _lastVersion, _recentIds } from '~/state/local-storage'
 import { version } from '../../package.json'
+import { removeSongFromStorage, saveSongToStorage } from './collections'
 
 const RECENT_MAX = 10
 
-export function checkVersion() {
+export async function checkVersion() {
   if (_lastVersion.value !== version) {
     // Clear all data if the version is not stored (too old)
     if (_lastVersion.value === 'null') {
-      removeAllData()
+      await removeAllData()
     }
     // Migrations, if needed
     // if (lastVersion.value === '0.0.0') {
@@ -17,21 +19,25 @@ export function checkVersion() {
   }
 }
 
-export function removeAllData() {
+export async function removeAllData() {
   Object.keys(localStorage)
     .forEach((i) => {
       if (i.startsWith('maru-'))
         localStorage.removeItem(i)
     })
+  const keys = await _songsStorage.getKeys()
+  for (const key of keys) {
+    _songsStorage.remove(key)
+  }
   _collections.value = []
   _favoriteIds.value = []
   _recentIds.value = []
 }
 
-export function saveSongsToLocal(songs: MaruSongData[]) {
+export async function saveSongsToLocal(songs: MaruSongData[]) {
   const append: MaruSongGist[] = []
   for (const song of songs) {
-    saveSongToStorage(song)
+    await saveSongToStorage(song)
     const gist = markRaw(extractGist(song))
     append.unshift(gist)
   }
@@ -64,8 +70,8 @@ export function useCollections() {
   }
 }
 
-export function removeSong(id: string) {
-  removeSongFromStorage(id)
+export async function removeSong(id: string) {
+  await removeSongFromStorage(id)
   _collections.value = _collections.value.filter(g => g.youtube !== id)
   _favoriteIds.value = _favoriteIds.value.filter(i => i !== id)
   _recentIds.value = _recentIds.value.filter(i => i !== id)
