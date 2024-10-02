@@ -138,7 +138,7 @@ onMounted(() => {
       targetIsVisible.value = isLineVisible
 
       // When seeking in player, the new active line may not be in view so check the old one
-      const oldLine = getLineElementByIndex(o[0] as number | undefined)
+      const oldLine = getLineElementByIndex((o[0] as number | undefined) || 0)
       const isOldLineVisible = !!oldLine && isElementInViewportY(oldLine)
 
       if (isLayoutChange || isLineVisible || isOldLineVisible) {
