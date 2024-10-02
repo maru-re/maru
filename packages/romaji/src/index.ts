@@ -23,8 +23,8 @@ export function hiraganaToRomaji(hiragana: string, options: HiraganaToRomajiOpti
   const text = katakanaToHiragana(hiragana)
   const tokens = createTokens(text)
 
-  transformOshimai(tokens)
   transformOnbiki(tokens)
+  transformOshimai(tokens)
   transformSokuon(tokens)
 
   return tokens
@@ -34,7 +34,7 @@ export function hiraganaToRomaji(hiragana: string, options: HiraganaToRomajiOpti
     .trimStart()
 }
 
-function createTokens(text: string) {
+export function createTokens(text: string) {
   const tokens: RomajiToken[] = []
   let chars = text
 
