@@ -65,6 +65,16 @@ function getClassLine(no: number) {
   return 'inactive'
 }
 
+function isElementInViewport(el: Element) {
+  const rect = el.getBoundingClientRect()
+  return (
+    rect.top >= 0
+    && rect.left >= 0
+    && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  )
+}
+
 onMounted(() => {
   lyricsOverflow.value!.scrollTo({
     top: 900,
@@ -93,7 +103,7 @@ onMounted(() => {
     }
 
     const line = document.querySelector(`.lyric-line[line="${active.value?.index}"]`)
-    if (line) {
+    if (line && isElementInViewport(line)) {
       nextTick(() => {
         const container = lyricsOverflow.value!
         const rectContainer = container.getBoundingClientRect()
