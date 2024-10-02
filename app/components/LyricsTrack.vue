@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { LyricLine, MaruSongData, MaruSongDataParsed } from '@marure/schema'
+import { Tooltip } from 'floating-vue'
 import type { PlayerControls } from '~/composables/player'
 
 const props = defineProps<{
@@ -160,13 +161,22 @@ onMounted(() => {
     }"
   >
     <div lt-lg="absolute" pointer-events-auto sticky left-3 right-3 top-3 z-floating flex>
-      <button
+      <div
         v-if="activeLineEl && !targetIsVisible"
-        fixed bottom-8 right-8 p-4 floating-glass
+        fixed bottom-8 right-8 floating-glass
+        flex="~ gap-2 items-center"
         @click="() => scrollToActiveLine('smooth')"
       >
-        <div i-mdi-focus-field-horizontal />
-      </button>
+        <Tooltip placement="left" distance="8">
+          <IconButton icon="i-mdi-focus-field-horizontal" class="!p4" />
+          <template #popper>
+            <div>
+              滾動至目前歌詞
+            </div>
+          </template>
+        </Tooltip>
+      </div>
+
       <SettingsNav mxa />
     </div>
     <div
