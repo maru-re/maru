@@ -51,7 +51,8 @@
     "unstorage": "^1.12.0",
     "uqr": "^0.1.2",
     "vitest": "^2.1.1",
-    "vue-tsc": "^2.1.6"
+    "vue-tsc": "^2.1.6",
+    "vue-virtual-scroller": "2.0.0-beta.8"
   },
   "resolutions": {
     "@typescript-eslint/utils": "^8.8.0"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
 import { Dropdown } from 'floating-vue'
-import { removeSong } from '~/composables/store'
+import { removeSongs } from '~/composables/store'
 
 const props = defineProps<{
   data: MaruSongDataParsed
@@ -59,8 +59,8 @@ onMounted(() => {
   })
 })
 
-function remove() {
-  removeSong(props.data.youtube)
+async function remove() {
+  await removeSongs([props.data.youtube])
   emit('afterRemove', props.data.youtube)
 }
 </script>

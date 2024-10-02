@@ -1,4 +1,5 @@
 import { extractGist, type MaruSongData, type MaruSongGist } from '@marure/schema'
+import YAML from 'js-yaml'
 import { _songsStorage } from '~/state/indexdb'
 import { _collections, _favoriteIds, _lastVersion, _recentIds } from '~/state/local-storage'
 import { version } from '../../package.json'
@@ -44,6 +45,28 @@ export async function saveSongsToLocal(songs: MaruSongData[]) {
   _collections.value = [...append, ..._collections.value.filter(g => !append.some(a => a.youtube === g.youtube))]
 }
 
+export async function exportSongs(ids?: string[]) {
+  ids = ids || _collections.value.map(g => g.youtube)
+
+  try {
+    const zip = await import('jszip').then(r => r.default())
+
+    await Promise.all(ids.map(async (id) => {
+      zip.file(`[${id}].yml`, YAML.dump(await loadSongFromStorage(id)))
+    }))
+
+    const content = await zip.generateAsync({ type: 'blob' })
+    const url = URL.createObjectURL(content)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'maru-songs.zip'
+    a.click()
+  }
+  catch (e) {
+    console.error(e)
+  }
+}
+
 export function useCollections() {
   function addRecent(id: string) {
     _recentIds.value = [id, ..._recentIds.value.filter(i => i !== id)].slice(0, RECENT_MAX)
@@ -70,9 +93,11 @@ export function useCollections() {
   }
 }
 
-export async function removeSong(id: string) {
-  await removeSongFromStorage(id)
-  _collections.value = _collections.value.filter(g => g.youtube !== id)
-  _favoriteIds.value = _favoriteIds.value.filter(i => i !== id)
-  _recentIds.value = _recentIds.value.filter(i => i !== id)
+export async function removeSongs(ids: string[]) {
+  for (const id of ids) {
+    await removeSongFromStorage(id)
+  }
+  _collections.value = _collections.value.filter(g => !ids.includes(g.youtube))
+  _favoriteIds.value = _favoriteIds.value.filter(i => !ids.includes(i))
+  _recentIds.value = _recentIds.value.filter(i => !ids.includes(i))
 }
