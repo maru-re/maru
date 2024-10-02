@@ -5,7 +5,7 @@ export function katakanaToHiragana(katakana: string): string {
   })
 }
 
-const hiraganaToRomajiMap = Object.fromEntries(([
+const hiraganaToRomajiMap = ([
   ['あ', 'a'],
   ['い', 'i'],
   ['う', 'u'],
@@ -206,12 +206,14 @@ const hiraganaToRomajiMap = Object.fromEntries(([
   ['ゅ', 'yu'],
   ['ょ', 'yo'],
 ] as [string, string][])
-  .sort((a, b) => b[0].length - a[0].length))
+  .sort((a, b) => b[0].length - a[0].length)
+  .map(([kana, romaji]) => [new RegExp(kana, 'g'), romaji] as [RegExp, string])
 
 interface RomajiToken {
-  source: string;
-  value: string;
-  mergeForwards?: boolean;
+  index: number
+  source: string
+  value: string
+  mergeForwards?: boolean
 }
 
 interface HiraganaToRomajiOptions {
@@ -220,23 +222,48 @@ interface HiraganaToRomajiOptions {
 
 export function hiraganaToRomaji(hiragana: string, options: HiraganaToRomajiOptions = {}) {
   const {
-    mode = 'merge'
+    mode = 'merge',
   } = options
 
-  const chars = katakanaToHiragana(hiragana)
-  const tokens: RomajiToken[] = chars.split('').map((char) => ({
-    source: char,
-    value: hiraganaToRomajiMap[char] ?? ''
-  }))
+  const text = katakanaToHiragana(hiragana)
+  const tokens = createTokens(text)
 
   transformOnbiki(tokens)
   transformSokuon(tokens)
 
   return tokens
     .filter(({ value }) => value)
-    .map((token) => mode === 'merge' && token.mergeForwards ? token.value : ` ${token.value}`)
+    .map(token => mode === 'merge' && token.mergeForwards ? token.value : ` ${token.value}`)
     .join('')
     .trimStart()
+}
+
+function createTokens(text: string) {
+  const tokens: RomajiToken[] = []
+  let chars = text
+
+  for (const [kana, value] of hiraganaToRomajiMap) {
+    chars = chars.replace(kana, (match, index) => {
+      tokens.push({
+        index,
+        source: match,
+        value,
+      })
+      return ' '.repeat(match.length)
+    })
+  }
+
+  [...chars].forEach((char, i) => {
+    if (char !== ' ') {
+      tokens.push({
+        index: i,
+        source: char,
+        value: '',
+      })
+    }
+  })
+
+  return tokens.sort((a, b) => a.index - b.index)
 }
 
 function transformOnbiki(tokens: RomajiToken[]) {
@@ -247,8 +274,9 @@ function transformOnbiki(tokens: RomajiToken[]) {
       token?.source !== 'ー'
       || !prev
       || !/[aeiou]$/.test(prev?.value)
-    )
+    ) {
       continue
+    }
 
     token.value = prev.value.at(-1)!
     token.mergeForwards = true
@@ -263,8 +291,9 @@ function transformSokuon(tokens: RomajiToken[]) {
       token?.source !== 'っ'
       || !next
       || !/^[^aeiou]/.test(next?.value)
-    )
+    ) {
       continue
+    }
 
     token.value = next.value.at(0)!
     next.mergeForwards = true
