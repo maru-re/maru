@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { LyricLine, MaruSongData, MaruSongDataParsed } from '@marure/schema'
+import { Tooltip } from 'floating-vue'
 import type { PlayerControls } from '~/composables/player'
 
 const props = defineProps<{
@@ -65,14 +66,44 @@ function getClassLine(no: number) {
   return 'inactive'
 }
 
-function isElementInViewport(el: Element) {
+function getLineElementByIndex(index: number | undefined): HTMLElement | null {
+  if (index === undefined)
+    return null
+  return document.querySelector(`.lyric-line[line="${index}"]`) as HTMLElement | null
+}
+
+function isElementInViewportY(el: Element) {
   const rect = el.getBoundingClientRect()
   return (
     rect.top >= 0
-    && rect.left >= 0
     && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   )
+}
+
+const activeLineEl = computed(() => getLineElementByIndex(active.value?.index))
+const targetIsVisible = ref(false)
+
+useIntersectionObserver(activeLineEl, (entries) => {
+  if (!entries || !entries.length)
+    return
+  const { isIntersecting } = entries[0]!
+  targetIsVisible.value = isIntersecting
+})
+
+function scrollToActiveLine(behavior: ScrollBehavior) {
+  const line = activeLineEl.value
+  if (!line)
+    return
+
+  const container = lyricsOverflow.value!
+  const rectContainer = container.getBoundingClientRect()
+  const targetClientTop = rectContainer.top + rectContainer.height * SCROLL_PERCENTAGE
+  const rectLine = line.getBoundingClientRect()
+  const currentClientTop = rectLine.top
+  container.scrollTo({
+    top: container.scrollTop + currentClientTop - targetClientTop,
+    behavior,
+  })
 }
 
 onMounted(() => {
@@ -102,19 +133,20 @@ onMounted(() => {
         isLayoutChange = true
     }
 
-    const line = document.querySelector(`.lyric-line[line="${active.value?.index}"]`)
-    if (line && (isLayoutChange || isElementInViewport(line))) {
-      nextTick(() => {
-        const container = lyricsOverflow.value!
-        const rectContainer = container.getBoundingClientRect()
-        const targetClientTop = rectContainer.top + rectContainer.height * SCROLL_PERCENTAGE
-        const rectLine = line.getBoundingClientRect()
-        const currentClientTop = rectLine.top
-        container.scrollTo({
-          top: container.scrollTop + currentClientTop - targetClientTop,
-          behavior: isLayoutChange ? 'instant' : 'smooth',
+    const line = activeLineEl.value
+    if (line) {
+      const isLineVisible = isElementInViewportY(line)
+      targetIsVisible.value = isLineVisible
+
+      // When seeking in player, the new active line may not be in view so check the old one
+      const oldLine = getLineElementByIndex((o[0] as number | undefined) || 0)
+      const isOldLineVisible = !!oldLine && isElementInViewportY(oldLine)
+
+      if (isLayoutChange || isLineVisible || isOldLineVisible) {
+        nextTick(() => {
+          scrollToActiveLine(isLayoutChange ? 'instant' : 'smooth')
         })
-      })
+      }
     }
   })
 })
@@ -129,6 +161,22 @@ onMounted(() => {
     }"
   >
     <div lt-lg="absolute" pointer-events-auto sticky left-3 right-3 top-3 z-floating flex>
+      <div
+        v-if="activeLineEl && !targetIsVisible"
+        fixed bottom-3 right-3 floating-glass
+        flex="~ gap-2 items-center"
+        @click="() => scrollToActiveLine('smooth')"
+      >
+        <Tooltip placement="left" distance="8">
+          <IconButton icon="i-uil-right-indent-alt" class="!p4" />
+          <template #popper>
+            <div>
+              滾動至目前歌詞
+            </div>
+          </template>
+        </Tooltip>
+      </div>
+
       <SettingsNav mxa />
     </div>
     <div
