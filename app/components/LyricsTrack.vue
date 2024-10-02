@@ -168,7 +168,7 @@ onMounted(() => {
         @click="() => scrollToActiveLine('smooth')"
       >
         <Tooltip placement="left" distance="8">
-          <IconButton icon="i-mdi-focus-field-horizontal" class="!p4" />
+          <IconButton icon="i-uil-right-indent-alt" class="!p4" />
           <template #popper>
             <div>
               滾動至目前歌詞
