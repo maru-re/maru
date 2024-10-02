@@ -163,7 +163,7 @@ onMounted(() => {
     <div lt-lg="absolute" pointer-events-auto sticky left-3 right-3 top-3 z-floating flex>
       <div
         v-if="activeLineEl && !targetIsVisible"
-        fixed bottom-8 right-8 floating-glass
+        fixed bottom-3 right-3 floating-glass
         flex="~ gap-2 items-center"
         @click="() => scrollToActiveLine('smooth')"
       >
