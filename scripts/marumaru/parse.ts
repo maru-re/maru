@@ -79,3 +79,7 @@ export function st2sec(st: string) {
   const [h, m, s] = st.split(':').map(Number) as [number, number, number]
   return h * 3600 + m * 60 + s
 }
+
+export function normalizeFilename(str: string) {
+  return str.replace(/[^\w\-\p{Script=Han}\p{Script=Katakana}\p{Script=Hiragana}]+/gu, '_')
+}

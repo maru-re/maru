@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import YAML from 'js-yaml'
 import { validate } from '../../packages/schema/src'
-import { parse } from './parse'
+import { normalizeFilename, parse } from './parse'
 import { urls } from './sources'
 
 const cwd = fileURLToPath(new URL('.', import.meta.url))
@@ -25,14 +25,9 @@ for (const file of files) {
     console.log(`Failed to parse ${url}`, parsed)
     continue
   }
-  const tag = normalizeFilename(parsed.tags?.join(' ') || 'none')
-  await fs.mkdir(join(cwd, 'data', tag), { recursive: true })
+  await fs.mkdir(join(cwd, 'data'), { recursive: true })
   await fs.writeFile(
-    join(cwd, 'data', tag, `[${parsed.youtube}]-${normalizeFilename(parsed.title)}.yaml`),
+    join(cwd, 'data', `[${parsed.youtube}]-${normalizeFilename(parsed.title)}.yaml`),
     YAML.dump(parsed),
   )
-}
-
-function normalizeFilename(str: string) {
-  return str.replace(/[\s/\\:*?!()[\]{}%#&^]+/g, '-')
 }
