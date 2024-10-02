@@ -22,6 +22,7 @@ export default defineConfig({
       'z-hover': 'z-50',
       'z-floating': 'z-100',
       'z-tooltip': 'z-200',
+      'z-dialog': 'z-500',
       'z-dropzone': 'z-1000',
     },
     [/^btn-simple-(.*)$/, ([,color]) => {

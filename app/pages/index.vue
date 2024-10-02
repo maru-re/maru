@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Fuse from 'fuse.js'
+import SongsGrid from '~/components/SongsGrid.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -150,23 +151,21 @@ async function onFileChange(e: Event) {
       </a>
     </div>
 
-    <div p10 flex="~ col gap-4">
-      <template v-if="!search.trimEnd() && favorited.length">
-        <div>收藏歌曲</div>
-        <div grid="~ cols-minmax-250px gap-2" mb-10>
-          <SongCover v-for="song of favorited" :key="song.youtube" :song="song" />
-        </div>
-      </template>
+    <div p10 flex="~ col gap-8">
+      <SongsGrid v-if="!search.trimEnd() && favorited.length" :link="true" :songs="favorited">
+        <template #title>
+          <div>收藏歌曲</div>
+        </template>
+      </SongsGrid>
 
-      <template v-if="!search.trimEnd() && recent.length">
-        <div>最近看過</div>
-        <div grid="~ cols-minmax-250px gap-2" mb-10>
-          <SongCover v-for="song of recent" :key="song.youtube" :song="song" />
-        </div>
-      </template>
+      <SongsGrid v-if="!search.trimEnd() && recent.length" :link="true" :songs="recent">
+        <template #title>
+          <div>最近看過</div>
+        </template>
+      </SongsGrid>
 
-      <template v-if="result?.length">
-        <div flex="~ gap-2 items-center">
+      <SongsGrid v-if="result?.length" :link="true" :songs="result">
+        <template #title>
           <template v-if="search.trim()">
             <span>搜尋結果</span>
             <span text-sm op50>{{ result.length }} 之 {{ collections.length }}</span>
@@ -175,7 +174,8 @@ async function onFileChange(e: Event) {
             <span>所有歌曲</span>
             <span text-sm op50>{{ collections.length }}</span>
           </template>
-          <div flex-auto />
+        </template>
+        <template #title-action>
           <div flex="~ gap-2 wrap justify-end">
             <button
               v-for="value, tag of tagsSum"
@@ -187,12 +187,8 @@ async function onFileChange(e: Event) {
               {{ tag }} <span text-0.9em op50>{{ value }}</span>
             </button>
           </div>
-        </div>
-
-        <div grid="~ cols-minmax-250px gap-2">
-          <SongCover v-for="song of result" :key="song.youtube" :song="song" />
-        </div>
-      </template>
+        </template>
+      </SongsGrid>
 
       <div v-else-if="search" text-center op50>
         沒找到符合的歌曲。

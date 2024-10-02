@@ -21,6 +21,7 @@
     "@iconify-json/mdi": "^1.2.0",
     "@iconify-json/ph": "^1.2.0",
     "@iconify-json/ri": "^1.2.0",
+    "@iconify-json/svg-spinners": "^1.2.0",
     "@iconify-json/twemoji": "^1.2.0",
     "@iconify-json/uil": "^1.2.0",
     "@nuxt/devtools": "^1.5.1",

@@ -1,23 +1,19 @@
 import { extractGist, type MaruSongData, type MaruSongGist } from '@marure/schema'
+import { _collections, _favoriteIds, _lastVersion, _recentIds } from '~/state/local-storage'
 import { version } from '../../package.json'
 
 const RECENT_MAX = 10
 
-const lastVersion = useLocalStorage<string>('maru-version', 'null')
-const recentIds = useLocalStorage<string[]>('maru-recent', [])
-const favoriteIds = useLocalStorage<string[]>('maru-favorite', [])
-const collections = useLocalStorage<MaruSongGist[]>('maru-collections', [])
-
 export function checkVersion() {
-  if (lastVersion.value !== version) {
+  if (_lastVersion.value !== version) {
     // Clear all data if the version is not stored (too old)
-    if (lastVersion.value === 'null') {
+    if (_lastVersion.value === 'null') {
       removeAllData()
     }
     // Migrations, if needed
     // if (lastVersion.value === '0.0.0') {
     // }
-    lastVersion.value = version
+    _lastVersion.value = version
   }
 }
 
@@ -27,41 +23,41 @@ export function removeAllData() {
       if (i.startsWith('maru-'))
         localStorage.removeItem(i)
     })
-  collections.value = []
-  favoriteIds.value = []
-  recentIds.value = []
+  _collections.value = []
+  _favoriteIds.value = []
+  _recentIds.value = []
 }
 
 export function saveSongsToLocal(songs: MaruSongData[]) {
   const append: MaruSongGist[] = []
   for (const song of songs) {
-    localStorage.setItem(`maru-song-${song.youtube}`, JSON.stringify(song))
+    saveSongToStorage(song)
     const gist = markRaw(extractGist(song))
     append.unshift(gist)
   }
-  collections.value = [...append, ...collections.value.filter(g => !append.some(a => a.youtube === g.youtube))]
+  _collections.value = [...append, ..._collections.value.filter(g => !append.some(a => a.youtube === g.youtube))]
 }
 
 export function useCollections() {
   function addRecent(id: string) {
-    recentIds.value = [id, ...recentIds.value.filter(i => i !== id)].slice(0, RECENT_MAX)
+    _recentIds.value = [id, ..._recentIds.value.filter(i => i !== id)].slice(0, RECENT_MAX)
   }
   function isFavorite(id: string) {
-    return favoriteIds.value.includes(id)
+    return _favoriteIds.value.includes(id)
   }
   function toggleFavorite(id: string, value = !isFavorite(id)) {
     if (value) {
-      favoriteIds.value = [id, ...favoriteIds.value.filter(i => i !== id)]
+      _favoriteIds.value = [id, ..._favoriteIds.value.filter(i => i !== id)]
     }
     else {
-      favoriteIds.value = favoriteIds.value.filter(i => i !== id)
+      _favoriteIds.value = _favoriteIds.value.filter(i => i !== id)
     }
   }
 
   return {
-    recentIds,
-    favoriteIds,
-    collections,
+    recentIds: _recentIds,
+    favoriteIds: _favoriteIds,
+    collections: _collections,
     addRecent,
     isFavorite,
     toggleFavorite,
@@ -69,8 +65,8 @@ export function useCollections() {
 }
 
 export function removeSong(id: string) {
-  localStorage.removeItem(`maru-song-${id}`)
-  collections.value = collections.value.filter(g => g.youtube !== id)
-  favoriteIds.value = favoriteIds.value.filter(i => i !== id)
-  recentIds.value = recentIds.value.filter(i => i !== id)
+  removeSongFromStorage(id)
+  _collections.value = _collections.value.filter(g => g.youtube !== id)
+  _favoriteIds.value = _favoriteIds.value.filter(i => i !== id)
+  _recentIds.value = _recentIds.value.filter(i => i !== id)
 }

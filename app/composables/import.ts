@@ -1,6 +1,7 @@
 import { type MaruSongData, validate } from '@marure/schema'
 import { parseSongData } from '~~/packages/parser/src'
 import YAML from 'yaml'
+import { _importingState, type FailedResult, type SucceededResult } from '~/state/import'
 
 export const SUPPORTED_IMPORT_EXT = ['json', 'yml', 'yaml', 'zip']
 
@@ -44,15 +45,7 @@ async function * traverseFileList(files?: FileList | FileSystemEntry[]): AsyncGe
   }
 }
 
-export interface FileParseResult {
-  file: File
-  data?: MaruSongData
-  error?: unknown
-}
-
-export async function parseFiles(files?: FileList | FileSystemEntry[]): Promise<FileParseResult[]> {
-  const result: FileParseResult[] = []
-
+export async function *parseFiles(files?: FileList | FileSystemEntry[]): AsyncGenerator<SucceededResult | FailedResult> {
   for await (const file of traverseFileList(files)) {
     try {
       const ext = file.name.split('.').pop()?.toLowerCase()
@@ -72,53 +65,48 @@ export async function parseFiles(files?: FileList | FileSystemEntry[]): Promise<
       }
       const data = validate(json)
       parseSongData(data)
-      result.push({ file, data })
+      yield { filename: file.name, data }
     }
     catch (err) {
       console.error('Failed to import file:', file, err)
-      result.push({ file, error: err })
+      yield { filename: file.name, error: err }
     }
   }
-
-  return result
 }
+
+export function useImportingState() {
+  return _importingState
+}
+
 export async function importFromFiles(files?: FileList | FileSystemEntry[] | null) {
   if (!files) {
     return
   }
 
-  const result = await parseFiles(files)
-
-  const errors = result.filter(r => r.error)
-  const success = result.filter(r => !r.error && r.data)
-
-  const messages: string[] = []
-  if (success.length) {
-    messages.push(`成功解析 ${success.length} 個檔案:`)
-    messages.push(...success.map(r => r.file.name))
-    messages.push('')
-  }
-
-  if (errors.length) {
-    messages.push(`解析失敗 ${errors.length} 個檔案:`)
-    messages.push(...errors.map(r => `${r.file.name} (${r.error})`))
-    messages.push('')
-  }
-
-  if (success.length) {
-    messages.push('是否匯入成功的檔案？')
-
-    // TODO: proper dialog
+  if (_importingState.value.isImporting && !_importingState.value.isFinished) {
     // eslint-disable-next-line no-alert
-    if (confirm(messages.join('\n'))) {
-      saveSongsToLocal(success.map(r => r.data!))
-      if (location.pathname === '/' && success.length === 1)
-        location.pathname = `/songs/${success[0]!.data!.youtube}`
+    alert('另一個匯入作業正在進行中，請等待完成後再試。')
+    return
+  }
+
+  _importingState.value = {
+    isImporting: true,
+    isFinished: false,
+    count: 0,
+    succeeded: [],
+    failed: [],
+  }
+
+  for await (const result of parseFiles(files)) {
+    _importingState.value.count++
+    if ('data' in result) {
+      _importingState.value.succeeded.unshift(result)
+      saveSongsToLocal([result.data])
+    }
+    else {
+      _importingState.value.failed.unshift(result)
     }
   }
-  else if (errors.length) {
-    // TODO: proper dialog
-    // eslint-disable-next-line no-alert
-    alert(messages.join('\n'))
-  }
+
+  _importingState.value.isFinished = true
 }

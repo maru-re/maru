@@ -8,13 +8,13 @@ const route = useRoute()
 const { addRecent } = useCollections()
 const id = (route.params as any).id as string
 
-const raw = localStorage.getItem(`maru-song-${id}`)
+const raw = loadSongFromStorage(id)
 const data = ref<MaruSongDataParsed | null>(null)
 const error = ref<unknown | null>(null)
 
 try {
   data.value = raw
-    ? parseSongData(validate(JSON.parse(raw)))
+    ? parseSongData(validate(raw))
     : null
 }
 catch (err) {

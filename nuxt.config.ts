@@ -72,6 +72,15 @@ export default defineNuxtConfig({
     inlineStyles: false,
   },
 
+  components: {
+    dirs: [
+      {
+        path: '~/components',
+        pathPrefix: false,
+      },
+    ],
+  },
+
   eslint: {
     config: {
       standalone: false,

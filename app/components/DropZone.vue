@@ -32,7 +32,7 @@ onMounted(() => {
 <template>
   <div
     v-if="isDragging"
-    z-dropzone pointer-events-auto fixed inset-0 p10 backdrop-blur-5
+    pointer-events-auto fixed inset-0 z-dropzone p10 backdrop-blur-5
   >
     <div
       border="3 dashed base rounded-2xl"
