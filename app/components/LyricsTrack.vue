@@ -103,7 +103,7 @@ onMounted(() => {
     }
 
     const line = document.querySelector(`.lyric-line[line="${active.value?.index}"]`)
-    if (line && isElementInViewport(line)) {
+    if (line && (isLayoutChange || isElementInViewport(line))) {
       nextTick(() => {
         const container = lyricsOverflow.value!
         const rectContainer = container.getBoundingClientRect()
