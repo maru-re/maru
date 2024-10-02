@@ -132,6 +132,8 @@ importers:
         specifier: workspace:*
         version: link:../schema
 
+  packages/romaji: {}
+
   packages/schema:
     dependencies:
       valibot:
