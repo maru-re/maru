@@ -79,7 +79,7 @@ function isElementInViewportY(el: Element) {
   )
 }
 
-const activeLineEl = ref<HTMLElement | null>(null)
+const activeLineEl = computed(() => getLineElementByIndex(active.value?.index))
 const targetIsVisible = ref(false)
 
 useIntersectionObserver(activeLineEl, (entries) => {
@@ -132,8 +132,7 @@ onMounted(() => {
         isLayoutChange = true
     }
 
-    const line = getLineElementByIndex(active.value?.index)
-    activeLineEl.value = line
+    const line = activeLineEl.value
     if (line) {
       const isLineVisible = isElementInViewportY(line)
       targetIsVisible.value = isLineVisible
