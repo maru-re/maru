@@ -5,7 +5,7 @@ export function transformOnbiki(tokens: RomajiToken[]) {
     const token = tokens[i]!
     const prev = tokens[i - 1]
     if (
-      'ぁぃぅぇぉー'.includes(token.source)
+      !'ぁぃぅぇぉー'.includes(token.source)
       || !prev
       || !/[aeiou]$/.test(prev?.value)
     ) {
