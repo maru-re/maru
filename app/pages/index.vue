@@ -135,7 +135,7 @@ async function onFileChange(e: Event) {
       </div>
     </div>
     <div flex="~ justify-center wrap">
-      <NuxtLink to="/demo" op50 hover="op100 underline">
+      <NuxtLink to="/play?demo=1" op50 hover="op100 underline">
         Demo
       </NuxtLink>
       <span mx2 op50> · </span>

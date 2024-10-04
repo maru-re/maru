@@ -45,6 +45,7 @@ export const MaruSongSchama = object({
     description('The YouTube video ID, also used as the song ID'),
   ),
   title: string(),
+  cover: optional(string()),
   artists: optional(array(string())),
   tags: optional(array(string())),
   dateSongReleased: optional(pipe(string(), isoDate())),
@@ -75,5 +76,5 @@ export type MaruSongDataParsed = MaruSongData & {
 
 export type MaruSongGist = Pick<
   MaruSongData,
-  'schema' | 'youtube' | 'title' | 'artists' | 'tags' | 'dateSongReleased' | 'dateLyricsUpdated'
+  'schema' | 'youtube' | 'title' | 'cover' | 'artists' | 'tags' | 'dateSongReleased' | 'dateLyricsUpdated'
 >

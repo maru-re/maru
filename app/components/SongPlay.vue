@@ -12,6 +12,8 @@ const emit = defineEmits<{
   afterRemove: [id: string]
 }>()
 
+const router = useRouter()
+
 const {
   isFavorite,
   toggleFavorite,
@@ -28,7 +30,7 @@ const favorited = computed({
 
 const shareUrl = computed(() => {
   try {
-    return `${location.origin}/share?d=${compressToEncodedURIComponent(JSON.stringify(props.data))}`
+    return `${location.origin}/play?share=${compressToEncodedURIComponent(JSON.stringify(props.data))}`
   }
   catch (e) {
     console.error(e)
@@ -40,9 +42,9 @@ function copyShareLink() {
   navigator.clipboard.writeText(shareUrl.value)
 }
 
-function saveSong() {
-  saveSongsToLocal([props.data])
-  // TODO: navigate URL (while retain client state)
+async function saveSong() {
+  await saveSongsToLocal([props.data])
+  router.replace(`/play?id=${props.data.youtube}`)
 }
 
 const settings = useSettings()
@@ -153,7 +155,7 @@ async function remove() {
           <template #popper="{ hide }">
             <div p5 flex="~ col gap-2">
               <div>
-                <pre max-h-50 max-w-100 of-auto ws-pre-wrap break-all rounded bg-gray:20 p2>{{ shareUrl }}</pre>
+                <pre max-h-50 max-w-100 of-auto ws-pre-wrap break-all rounded bg-gray:15 p2>{{ shareUrl }}</pre>
               </div>
               <SimpleButton icon="i-uil-copy" @click="copyShareLink(), hide()">
                 複製連結

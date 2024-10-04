@@ -8,8 +8,6 @@ const route = useRoute()
 
 const bp = useBreakpoints(breakpointsTailwind)
 const ltMd = bp.isSmaller('md')
-
-const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.startsWith('/demo'))
 </script>
 
 <template>
@@ -17,95 +15,92 @@ const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.st
     flex="~ gap-2 items-center"
     w-max p2 floating-glass
   >
-    <template v-if="isPlayer">
-      <div />
-      <Tooltip placement="top">
-        <IconToggle v-model="settings.furigana" icon="i-uil-letter-japanese-a" />
-        <template #popper>
+    <Tooltip placement="top">
+      <IconToggle v-model="settings.furigana" icon="i-uil-letter-japanese-a" />
+      <template #popper>
+        <div>
+          <div mb1>
+            是否顯示振假名
+          </div>
+          <div font-jp-serif>
+            <span>漢字</span>
+            <span i-uil-arrow-right mx1>-></span>
+            <ruby>
+              <rb>漢字</rb>
+              <rt text-orange>かんじ</rt>
+            </ruby>
+          </div>
+        </div>
+      </template>
+    </Tooltip>
+    <Tooltip placement="top">
+      <IconToggle v-model="settings.kanji" icon="i-uil-letter-chinese-a" />
+      <template #popper>
+        <div>
+          <div mb1>
+            是否顯示漢字
+          </div>
+          <div font-jp-serif>
+            <span>かんじ</span>
+            <span i-uil-arrow-right mx1>-></span>
+            <span>漢字</span>
+          </div>
+        </div>
+      </template>
+    </Tooltip>
+    <Tooltip placement="top">
+      <IconToggle v-model="settings.romaji" icon="i-uil-letter-english-a" />
+      <template #popper>
+        <div>
+          <div mb1>
+            是否顯示羅馬字
+          </div>
           <div>
-            <div mb1>
-              是否顯示振假名
-            </div>
-            <div font-jp-serif>
-              <span>漢字</span>
-              <span i-uil-arrow-right mx1>-></span>
-              <ruby>
-                <rb>漢字</rb>
-                <rt text-orange>かんじ</rt>
-              </ruby>
-            </div>
+            <span font-jp-serif>面白い</span>
+            <span i-uil-arrow-right mx1>-></span>
+            <span>o mo shi ro i</span>
           </div>
-        </template>
-      </Tooltip>
-      <Tooltip placement="top">
-        <IconToggle v-model="settings.kanji" icon="i-uil-letter-chinese-a" />
-        <template #popper>
+        </div>
+      </template>
+    </Tooltip>
+    <Tooltip placement="top">
+      <IconToggle v-model="settings.translation" icon="i-uil-english-to-chinese" />
+      <template #popper>
+        <div>
+          是否顯示翻譯
+        </div>
+      </template>
+    </Tooltip>
+    <Menu placement="top">
+      <IconButton icon="i-uil-text-size" />
+      <template #popper>
+        <div px4 py2>
           <div>
-            <div mb1>
-              是否顯示漢字
-            </div>
-            <div font-jp-serif>
-              <span>かんじ</span>
-              <span i-uil-arrow-right mx1>-></span>
-              <span>漢字</span>
-            </div>
+            歌詞字號
           </div>
-        </template>
-      </Tooltip>
-      <Tooltip placement="top">
-        <IconToggle v-model="settings.romaji" icon="i-uil-letter-english-a" />
-        <template #popper>
           <div>
-            <div mb1>
-              是否顯示羅馬字
-            </div>
-            <div>
-              <span font-jp-serif>面白い</span>
-              <span i-uil-arrow-right mx1>-></span>
-              <span>o mo shi ro i</span>
-            </div>
+            <input v-model="settings.fontSize" type="range" min="0.6" max="2" step="0.2">
           </div>
-        </template>
-      </Tooltip>
-      <Tooltip placement="top">
-        <IconToggle v-model="settings.translation" icon="i-uil-english-to-chinese" />
-        <template #popper>
-          <div>
-            是否顯示翻譯
-          </div>
-        </template>
-      </Tooltip>
-      <Menu placement="top">
-        <IconButton icon="i-uil-text-size" />
-        <template #popper>
-          <div px4 py2>
-            <div>
-              歌詞字號
-            </div>
-            <div>
-              <input v-model="settings.fontSize" type="range" min="0.6" max="2" step="0.2">
-            </div>
-          </div>
-        </template>
-      </Menu>
-      <div class="setting-nav-divider" />
-      <Tooltip placement="top">
-        <IconToggle v-model="settings.follow" icon="i-uil-right-indent-alt" />
-        <template #popper>
-          <div>
-            跟隨歌詞滾動
-          </div>
-        </template>
-      </Tooltip>
-      <Tooltip placement="top">
-        <IconToggle v-model="settings.autoPause" icon="i-uil-pause-circle" />
-        <template #popper>
-          <div>
-            每句歌詞自動暫停
-          </div>
-        </template>
-      </Tooltip>
-    </template>
+        </div>
+      </template>
+    </Menu>
+    <div class="setting-nav-divider" />
+    <Tooltip placement="top">
+      <IconToggle v-model="settings.follow" icon="i-uil-right-indent-alt" />
+      <template #popper>
+        <div>
+          跟隨歌詞滾動
+        </div>
+      </template>
+    </Tooltip>
+    <Tooltip placement="top">
+      <IconToggle v-model="settings.autoPause" icon="i-uil-pause-circle" />
+      <template #popper>
+        <div>
+          每句歌詞自動暫停
+        </div>
+      </template>
+    </Tooltip>
     <template v-if="route.path !== '/' && ltMd">
       <div class="setting-nav-divider" />
       <Tooltip placement="top">

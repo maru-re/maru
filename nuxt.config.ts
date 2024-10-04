@@ -122,7 +122,11 @@ export default defineNuxtConfig({
   },
 
   typescript: {
-    includeWorkspace: true,
+    tsConfig: {
+      compilerOptions: {
+        moduleResolution: 'bundler',
+      }
+    },
   },
 
   compatibilityDate: '2024-08-14',
