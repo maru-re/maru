@@ -49,6 +49,7 @@ export function usePlayer(data: MaruSongDataParsed) {
   let timer: ReturnType<typeof setTimeout> | undefined
 
   function run(YT: YouTube) {
+    player.value?.destroy()
     const width = document.getElementById('player')!.clientWidth
     player.value = markRaw(new YT.Player('player', {
       width,
@@ -109,6 +110,11 @@ export function usePlayer(data: MaruSongDataParsed) {
       start: data.lyrics[n]!.t + offset.value,
       end: next ? (next.t + offset.value) : duration.value,
     }
+  }
+
+  function reload() {
+    if (YT)
+      run(YT)
   }
 
   function play() {
@@ -173,6 +179,7 @@ export function usePlayer(data: MaruSongDataParsed) {
     play,
     toggle,
     error,
+    reload,
   }
 
   provide('player', controls)

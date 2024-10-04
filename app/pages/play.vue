@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { appName } from '~/constants'
 
-const { data, status, source, error } = useSongData()
+const route = useRoute()
+const { data, status, source, error } = useSongData(() => route.query)
 const { addRecent } = useCollections()
 
 useSeoMeta({
@@ -50,7 +51,7 @@ watchEffect(() => {
       </h1>
       <p>
         歌曲不存在。
-        <!-- TODO: make show a editer -->
+        <!-- TODO: make show a editor -->
       </p>
     </template>
     <NuxtLink to="/" mt-10 hover="underline">

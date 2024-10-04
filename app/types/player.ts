@@ -22,6 +22,7 @@ export declare class YouTubePlayer {
 
   playVideoAt(index: number): void
   getPlayerState(): number
+  destroy(): void
 }
 
 export interface YouTube {
