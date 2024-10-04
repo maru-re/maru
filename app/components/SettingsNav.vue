@@ -9,7 +9,7 @@ const route = useRoute()
 const bp = useBreakpoints(breakpointsTailwind)
 const ltMd = bp.isSmaller('md')
 
-const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.startsWith('/demo'))
+const isPlayer = computed(() => route.path.startsWith('/songs') || route.path.startsWith('/demo') || route.path.startsWith('/share'))
 </script>
 
 <template>
