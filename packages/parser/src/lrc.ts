@@ -137,7 +137,7 @@ export function serializedToLrc(lrc: ParsedLrc): string {
         if (i.t)
           str += `<${i.t}> `
         if (i.r)
-          str += `{${i.r}}(${i.w})`
+          str += `{${i.w}}(${i.r})`
         else
           str += i.w
         return str
