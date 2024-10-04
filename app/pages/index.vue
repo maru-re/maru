@@ -90,11 +90,8 @@ async function onFileChange(e: Event) {
       <div text-center op50>
         基於 YouTube 的歌曲歌詞閱讀器
       </div>
-      <div mt4 flex="~ gap-1 items-center" rounded bg-orange:10 px2 py1 text-sm text-orange>
-        <div i-uil-flask flex-none />
-        高強度開發中、許多功能尚未完善。歡迎回報問題
-      </div>
-      <div p5>
+
+      <div p5 flex="~ gap-2 items-center justify-center">
         <div
           border="~ dashed #888 rounded-2"
           flex="~ gap-2 items-center"
@@ -112,6 +109,10 @@ async function onFileChange(e: Event) {
           >
         </div>
       </div>
+    </div>
+    <div flex="~ gap-1 items-center" mxa mb2 w-max rounded-full bg-orange:10 px3 py1 text-sm text-orange>
+      <div i-uil-flask flex-none text-base />
+      網站開發中、許多功能尚未完善。歡迎透過 Discord 回報問題
     </div>
     <div v-if="collections.length > 0" sticky left-0 right-0 top-0 z-floating flex p3>
       <div
@@ -138,13 +139,17 @@ async function onFileChange(e: Event) {
         Demo
       </NuxtLink>
       <span mx2 op50> · </span>
-      <NuxtLink to="/settings" op50 hover="op100 underline">
-        設定
+      <NuxtLink to="/format" op50 hover="op100 underline">
+        檔案格式
       </NuxtLink>
       <span mx2 op50> · </span>
       <NuxtLink to="/about" op50 hover="op100 underline">
         關於我們
       </NuxtLink>
+      <span mx2 op50> · </span>
+      <a href="https://chat.maru.re" target="_blank" op50 hover="op100 underline">
+        Discord
+      </a>
       <span mx2 op50> · </span>
       <a href="https://github.com/maru-re/maru" target="_blank" op50 hover="op100 underline">
         GitHub

@@ -17,7 +17,15 @@
   --uno: font-bold text-2xl mb5;
 }
 
+.markdown-content h2 {
+  --uno: text-xl mb5 op75 border-b border-base py2;
+}
+
 .markdown-content p {
+  --uno: mb5;
+}
+
+.markdown-content pre {
   --uno: mb5;
 }
 

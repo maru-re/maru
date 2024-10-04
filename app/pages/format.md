@@ -3,9 +3,17 @@ meta:
   layout: content
 ---
 
-# 資料格式說明
+# 匯入資料格式說明
 
-二重丸的歌曲檔案使用 YAML 格式，以下是一個範例：
+## 面向使用者
+
+二重丸的歌詞檔案以 `.maru` 為副檔名，你可以通過拖拽的或分享連結的方式將其匯入到 App 中。也支持匯入含有歌詞檔案的 ZIP 壓縮包。
+
+歌詞創作與編輯的功能還在開發中，目前只能由工程師整理歌詞檔案進行分享。
+
+## 面向工程師
+
+歌詞檔案使用 YAML 格式，以下是一個範例：
 
 ```yaml
 # Schema version, currently has to be v1
@@ -44,3 +52,5 @@ notes:
 credits:
   lyrics: https://www.uta-net.com/song/248573/
 ```
+
+詳細的欄位請參照 TypeScript 定義文件。
