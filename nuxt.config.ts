@@ -8,10 +8,19 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/eslint',
+    'nuxt-compile-markdown',
   ],
 
-  // TODO: enable back
   ssr: false,
+
+  markdown: {
+    shiki: {
+      themes: {
+        light: 'vitesse-light',
+        dark: 'vitesse-dark',
+      },
+    },
+  },
 
   experimental: {
     // when using generate, payload js assets included in sw precache manifest
@@ -19,6 +28,7 @@ export default defineNuxtConfig({
     payloadExtraction: false,
     renderJsonPayloads: true,
     typedPages: true,
+    scanPageMeta: false,
   },
 
   css: [

@@ -12,7 +12,9 @@ useHead({
 
 <template>
   <div class="texture-overlay" />
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
   <div fixed right-3 top-3 p2 floating-glass lt-lg="hidden">
     <DarkToggle />
   </div>
