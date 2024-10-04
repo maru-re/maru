@@ -164,7 +164,7 @@ export function usePlayer(data: MaruSongDataParsed) {
       clearInterval(timer)
   })
 
-  return {
+  const controls = {
     player,
     current,
     duration,
@@ -173,6 +173,13 @@ export function usePlayer(data: MaruSongDataParsed) {
     play,
     toggle,
     error,
-    getYT: () => YT!,
   }
+
+  provide('player', controls)
+
+  return controls
+}
+
+export function getPlayer() {
+  return inject<PlayerControls>('player')
 }

@@ -49,7 +49,7 @@ async function saveSong() {
 
 const settings = useSettings()
 const controls = usePlayer(props.data)
-const { active, go, toggle, error } = controls
+const { active, go, toggle } = controls
 
 onMounted(() => {
   useEventListener('keydown', (e) => {
@@ -169,29 +169,11 @@ async function remove() {
           :icon="favorited ? 'i-ph-star-fill text-yellow6 dark:text-yellow2' : 'i-ph-star-duotone'"
         />
       </div>
-      <div
+      <YouTubePlayer
         border-rounded-1.5em
         lt-sm="rounded-0 border-0 border-b border-base"
         lt-lg="max-w-680px w-full mxa"
-        class="aspect-16/9 flex-none of-hidden shadow-lg"
-      >
-        <div id="player" flex bg-hover text-center>
-          <div v-if="!error" ma text-sm op50>
-            YouTube 連接中...
-          </div>
-          <div v-else ma text-sm>
-            <div text-red font-bold>
-              YouTube 連接失敗
-            </div>
-            <div mb2 text-red>
-              {{ error }}
-            </div>
-            <div op50>
-              請嘗試重新整理頁面
-            </div>
-          </div>
-        </div>
-      </div>
+      />
       <div lt-lg="hidden" min-h-80px flex rounded p2>
         <LyricsLine
           v-if="active"
