@@ -3,7 +3,7 @@ import { parseSongData } from '~~/packages/parser/src'
 import YAML from 'yaml'
 import { _importingState, type FailedResult, type SucceededResult } from '~/state/import'
 
-export const SUPPORTED_IMPORT_EXT = ['json', 'yml', 'yaml', 'zip']
+export const SUPPORTED_IMPORT_EXT = ['json', 'yml', 'yaml', 'maru', 'zip']
 
 async function * traverseFileList(files?: FileList | File[] | FileSystemEntry[]): AsyncGenerator<File> {
   for (const item of files || []) {
@@ -55,6 +55,7 @@ export async function *parseFiles(files?: FileList | FileSystemEntry[]): AsyncGe
           json = JSON.parse(await file.text())
           break
         }
+        case 'maru':
         case 'yml':
         case 'yaml': {
           json = YAML.parse(await file.text())
