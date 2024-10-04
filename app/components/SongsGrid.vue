@@ -2,14 +2,20 @@
 import type { MaruSongGist } from '@marure/schema'
 import { Dropdown } from 'floating-vue'
 
-const props = defineProps<{
-  songs: MaruSongGist[]
-  link?: boolean
-  manage?: boolean
-}>()
+const props = withDefaults(
+  defineProps<{
+    songs: MaruSongGist[]
+    link?: boolean
+    manage?: boolean
+    showFavorite?: boolean | 'hover'
+  }>(),
+  {
+    showFavorite: true,
+  },
+)
 
 const ASPECT_RATIO = 5 / 2
-const min = 200
+const min = 220
 const padding = 10
 const scroller = templateRef<HTMLElement>('scroller')
 const size = useElementSize(scroller)
@@ -112,6 +118,7 @@ function revertSelection() {
         <SongEntry
           :song="item"
           :link="selecting ? false : link"
+          :show-favorite="showFavorite"
           :class="selecting ? (selectedId.includes(item.youtube) ? 'selected' : 'unselected') : ''"
           @click="selecting ? toggleSelect(item) : undefined"
         >
