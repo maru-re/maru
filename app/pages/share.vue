@@ -1,26 +1,28 @@
 <script setup lang="ts">
-import type { MaruSongDataParsed } from '@marure/schema'
 import { parseSongData } from '@marure/parser'
 import { validate } from '@marure/schema'
+import { decompressFromEncodedURIComponent } from 'lz-string'
 import { appName } from '~/constants'
 
 const route = useRoute()
-const { addRecent } = useCollections()
-const id = (route.params as any).id as string
-
-const raw = await loadSongFromStorage(id)
-const data = ref<MaruSongDataParsed | null>(null)
-const error = ref<unknown | null>(null)
-
-try {
-  data.value = raw
-    ? parseSongData(validate(raw))
-    : null
-}
-catch (err) {
-  error.value = err
-  console.error(err)
-}
+const error = shallowRef<any>()
+const data = computed(() => {
+  // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+  error.value = undefined
+  try {
+    return parseSongData(validate(JSON.parse(
+      decompressFromEncodedURIComponent(
+        route.query.d as string,
+      ),
+    )))
+  }
+  catch (e) {
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+    error.value = e
+    console.error(e)
+    return undefined
+  }
+})
 
 useSeoMeta({
   title: () => data.value
@@ -28,17 +30,14 @@ useSeoMeta({
     : appName,
 })
 
-watchEffect(() => {
-  if (data.value?.youtube)
-    addRecent(data.value.youtube)
-})
+// TODO: prompt to save when navigating away
 </script>
 
 <template>
   <SongPlay
     v-if="data && typeof data.title === 'string'"
     :data="data"
-    source="local"
+    source="share"
     @after-remove="$router.replace('/')"
   />
   <div v-else h-screen w-screen flex="~ col items-center justify-center" p5>
@@ -49,14 +48,6 @@ watchEffect(() => {
       </h1>
       <p>
         {{ error }}
-      </p>
-    </template>
-    <template v-else-if="!raw">
-      <h1 text-4xl text-red>
-        404
-      </h1>
-      <p>
-        歌曲不存在。
       </p>
     </template>
     <NuxtLink to="/" mt-10 hover="underline">

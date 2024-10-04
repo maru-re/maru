@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
-import { Dropdown } from 'floating-vue'
+import { Dropdown, Tooltip } from 'floating-vue'
+import { compressToEncodedURIComponent } from 'lz-string'
 import { removeSongs } from '~/composables/store'
 
 const props = defineProps<{
   data: MaruSongDataParsed
+  source: 'share' | 'local' | 'demo'
 }>()
 const emit = defineEmits<{
   afterRemove: [id: string]
@@ -23,6 +25,25 @@ const favorited = computed({
     toggleFavorite(props.data.youtube, value)
   },
 })
+
+const shareUrl = computed(() => {
+  try {
+    return `${location.origin}/share?d=${compressToEncodedURIComponent(JSON.stringify(props.data))}`
+  }
+  catch (e) {
+    console.error(e)
+    return ''
+  }
+})
+
+function copyShareLink() {
+  navigator.clipboard.writeText(shareUrl.value)
+}
+
+function saveSong() {
+  saveSongsToLocal([props.data])
+  // TODO: navigate URL (while retain client state)
+}
 
 const settings = useSettings()
 const controls = usePlayer(props.data)
@@ -91,7 +112,7 @@ async function remove() {
           <ArtistsList :artists="data.artists" mt--1 />
         </div>
         <div flex-auto />
-        <Dropdown>
+        <Dropdown v-if="source === 'local'">
           <IconButton
             flex-none
             icon="i-ph-trash-duotone op40 hover:op100 hover:text-red"
@@ -109,6 +130,34 @@ async function remove() {
                   取消
                 </SimpleButton>
               </div>
+            </div>
+          </template>
+        </Dropdown>
+        <Tooltip v-if="source === 'share'">
+          <IconButton
+            flex-none
+            icon="i-uil-save"
+            @click="saveSong()"
+          />
+          <template #popper>
+            <div>
+              儲存歌曲
+            </div>
+          </template>
+        </Tooltip>
+        <Dropdown>
+          <IconButton
+            flex-none
+            icon="i-uil-share-alt"
+          />
+          <template #popper="{ hide }">
+            <div p5 flex="~ col gap-2">
+              <div>
+                <pre max-h-50 max-w-100 of-auto ws-pre-wrap break-all rounded bg-gray:20 p2>{{ shareUrl }}</pre>
+              </div>
+              <SimpleButton icon="i-uil-copy" @click="copyShareLink(), hide()">
+                複製連結
+              </SimpleButton>
             </div>
           </template>
         </Dropdown>

@@ -8,5 +8,8 @@ useSeoMeta({
 </script>
 
 <template>
-  <SongPlay :data="data" />
+  <SongPlay
+    :data="data"
+    source="demo"
+  />
 </template>
