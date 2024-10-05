@@ -150,7 +150,8 @@ export function serializeToLrc(lrc: ParsedLrc): string {
     lines.push(`[${secondsToTimestamp(time)}] ${text}`.trimEnd())
 
     for (const [key, value] of Object.entries(line.trans || {})) {
-      lines.push(`[trans:${key}] ${value}`)
+      if (value.trim())
+        lines.push(`[trans:${key}] ${value.trim()}`)
     }
   }
 

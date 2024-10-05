@@ -8,6 +8,12 @@ export const LyricWordSchema = object({
       description('Start time in seconds'),
     ),
   ),
+  e: optional(
+    pipe(
+      number(),
+      description('End time in seconds'),
+    ),
+  ),
   w: pipe(
     string(),
     description('Word text'),

@@ -6,17 +6,18 @@ const props = defineProps<{
   data?: MaruSongDataParsed
 }>()
 
-const state = reactive<MaruSongDataParsed>(props.data
-  ? structuredClone(toRaw(props.data))
-  : {
-      schema: 'v1',
-      title: '',
-      youtube: '',
-      artists: [],
-      lyrics: [],
-      lrc: '',
-      tags: [],
-    },
+const state = reactive<MaruSongDataParsed>(
+  props.data
+    ? structuredClone(toRaw(props.data))
+    : {
+        schema: 'v1',
+        title: '',
+        youtube: '',
+        artists: [],
+        lyrics: [],
+        lrc: '',
+        tags: [],
+      },
 )
 
 const dirty = ref(false)
@@ -166,7 +167,9 @@ const notesString = computed({
         :key="idx"
         v-model:line="state.lyrics[idx]!"
         :index="idx"
+        :next="state.lyrics[idx + 1]"
         :translations="translations"
+        :controls="controls"
       />
     </div>
     <div v-show="showTab === 'lrc'">
