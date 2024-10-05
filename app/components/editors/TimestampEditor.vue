@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { secondsToTimestamp, timestampToSeconds } from '@marure/parser'
 
+defineProps<{
+  inputClass?: string
+}>()
+
 const modelValue = defineModel('modelValue', {
   type: Number,
   default: 0,
@@ -39,12 +43,15 @@ function onKeydown(e: KeyboardEvent) {
 </script>
 
 <template>
-  <input
-    ref="input"
-    v-model="data"
-    placeholder="00:00.00"
-    w-25 text-right font-mono box-input
-    :class="invalid ? 'border-red text-red' : ''"
-    @keydown="onKeydown"
-  >
+  <div relative>
+    <input
+      ref="input"
+      v-model="data"
+      placeholder="00:00.00"
+      w-full text-right font-mono box-input
+      :class="[invalid ? 'border-red text-red' : '', inputClass]"
+      @keydown="onKeydown"
+    >
+    <slot />
+  </div>
 </template>

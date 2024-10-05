@@ -45,8 +45,16 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
       <div flex="~ col gap-1">
         <TimestampEditor
           v-model="line.t"
-          :class="isActive ? 'border-primary ring-2 ring-primary:20' : ''"
-        />
+          w-25
+          :input-class="isActive ? 'border-primary ring-2 ring-primary:20' : ''"
+        >
+          <div v-if="isActive && duration && controls" pointer-events-none absolute inset-0 of-hidden rounded-lg mix-blend-darken dark:mix-blend-lighten>
+            <div
+              left-0 h-full bg-primary:20 dark:bg-primary:40
+              :style="{ width: `${(controls.current.value - line.t) / duration * 100}%` }"
+            />
+          </div>
+        </TimestampEditor>
         <div v-if="duration != null" text-right text-sm font-mono op35>
           {{ duration.toFixed(2) }}s
         </div>
