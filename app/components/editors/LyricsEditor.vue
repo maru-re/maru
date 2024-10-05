@@ -5,7 +5,7 @@ defineProps<{
 
 const modelValue = defineModel<string>('modelValue')
 
-const inputClass = 'h-400 box-input'
+const inputClass = 'min-h-400 box-input'
 const editorEl = useTemplateRef('editor')
 
 const isSupported = getSupported()
