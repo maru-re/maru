@@ -226,11 +226,10 @@ useEventListener('keydown', (e) => {
         v-model="lrc"
         label="LRC 歌詞"
         type="textarea"
+        font-mono
         input-class="h-400"
       />
     </div>
-
-    <!-- <pre v-text="JSON.stringify(state, null, 2)" /> -->
 
     <div border="~ base rounded-xl" fixed bottom-5 right-5 p2 shadow-xl bg-base>
       <SimpleButton
