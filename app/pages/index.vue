@@ -157,7 +157,7 @@ async function onFileChange(e: Event) {
     </div>
 
     <div p10 flex="~ col gap-8">
-      <SongsGrid v-if="!search.trimEnd() && favorited.length" :link="true" :songs="favorited">
+      <SongsGrid v-if="!search.trimEnd() && favorited.length" :link="true" :songs="favorited" show-favorite="hover">
         <template #title>
           <div>收藏歌曲</div>
         </template>

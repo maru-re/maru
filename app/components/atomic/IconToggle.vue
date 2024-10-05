@@ -9,6 +9,6 @@ const value = defineModel('modelValue', { default: true })
 <template>
   <IconButton
     :icon="[icon, value ? '' : 'op20'].join(' ')"
-    @click="value = !value"
+    @click.prevent="value = !value"
   />
 </template>
