@@ -19,7 +19,7 @@ export default defineConfig({
       'border-base': 'border-gray:20',
       'floating-glass': 'bg-white:70 shadow-lg backdrop-blur-4 dark:bg-black:70 z-floating border border-base rounded-full',
 
-      'box-input': 'bg-base color-base border-base border rounded-lg p-2',
+      'box-input': 'bg-base color-base border-base border rounded-lg px2 py1 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary:20 disabled:bg-gray:10 disabled:color-gray:50',
 
       'z-hover': 'z-50',
       'z-floating': 'z-100',
@@ -31,7 +31,7 @@ export default defineConfig({
       return [
         `hover:border-${color}/50 hover:color-${color}`,
         `active:bg-${color}/10`,
-        'disabled:opacity-50',
+        'disabled:opacity-50 disabled:pointer-events-none',
         `border border-base border-rounded-lg`,
         `flex gap-1 items-center justify-center`,
       ].join(' ')

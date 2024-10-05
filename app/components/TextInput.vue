@@ -10,7 +10,7 @@ const modelValue = defineModel<string>('modelValue')
 
 <template>
   <label flex="~ col gap-1">
-    <span op75>{{ props.label }}</span>
+    <span v-if="props.label" op75>{{ props.label }}</span>
     <textarea
       v-if="props.type === 'textarea'"
       v-model="modelValue"

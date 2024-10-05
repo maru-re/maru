@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
+import { serializeToLrc } from '~~/packages/parser/src'
 
 const props = defineProps<{
   data?: MaruSongDataParsed
 }>()
 
 const state = reactive<MaruSongDataParsed>(props.data
-  ? { ...props.data }
+  ? structuredClone(toRaw(props.data))
   : {
       schema: 'v1',
       title: '',
@@ -17,6 +18,35 @@ const state = reactive<MaruSongDataParsed>(props.data
       tags: [],
     },
 )
+
+const dirty = ref(false)
+watch(
+  state,
+  () => {
+    dirty.value = true
+  },
+  { deep: true },
+)
+
+// Prevent unsaved changes
+useEventListener('beforeunload', (e) => {
+  if (dirty.value) {
+    e.preventDefault()
+    e.returnValue = ''
+  }
+})
+
+async function save() {
+  if (!state.youtube) {
+    // eslint-disable-next-line no-alert
+    alert('YouTube ID is required')
+    return
+  }
+  state.lrc = serializeToLrc({ lyrics: state.lyrics, meta: {} })
+  const copy = { ...toRaw(state), lyrics: undefined }
+  await saveSongToStorage(copy)
+  dirty.value = false
+}
 
 const controls = usePlayer(state)
 
@@ -74,21 +104,19 @@ const notesString = computed({
       <TextInput v-model="tagsString" label="標籤" />
     </div>
     <div>
-      <div>
-        <LyricsLineEditor
-          v-for="line, idx of state.lyrics"
-          :key="idx"
-          v-model:line="state.lyrics[idx]!"
-          :index="idx"
-        />
-      </div>
-      <TextInput
-        v-model="state.lrc"
-        label="LRC 歌詞"
-        type="textarea"
-        input-class="h-400"
+      <LyricsLineEditor
+        v-for="line, idx of state.lyrics"
+        :key="idx"
+        v-model:line="state.lyrics[idx]!"
+        :index="idx"
       />
     </div>
+    <TextInput
+      v-model="state.lrc"
+      label="LRC 歌詞"
+      type="textarea"
+      input-class="h-400"
+    />
 
     <TextInput
       v-model="notesString"
@@ -96,6 +124,16 @@ const notesString = computed({
       type="textarea"
       input-class="h-100"
     />
-    <pre v-text="JSON.stringify(state, null, 2)" />
+    <!-- <pre v-text="JSON.stringify(state, null, 2)" /> -->
+
+    <div border="~ base rounded-xl" fixed bottom-5 right-5 p2 shadow-xl bg-base>
+      <SimpleButton
+        :disabled="!dirty"
+        icon="i-uil-save"
+        @click="save()"
+      >
+        儲存
+      </SimpleButton>
+    </div>
   </div>
 </template>

@@ -20,13 +20,16 @@ const input = computed({
 
 <template>
   <LyricsLine
-    ml30 p2 text-primary font-jp-serif
+    ml32 p2 text-primary font-jp-serif
     role="" flex="~ col items-start"
     :line="line"
     :index="index"
     :settings="{ furigana: true, kanji: true, romaji: false, translation: false }"
   />
-  <div border="~ base rounded" p2 flex="~ gap-2 items-center" class="group/line-editor">
+  <div border="~ base rounded-lg" flex="~ gap-2 items-start" class="group/line-editor" ml5 bg-gray:8 p2>
+    <div ml--12 w-6 text-right text-sm font-mono op30>
+      #{{ index + 1 }}
+    </div>
     <TimestampEditor v-model="line.t" />
     <TextInput v-model="input" w-full />
   </div>

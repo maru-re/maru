@@ -156,7 +156,7 @@ onMounted(() => {
   <div
     ref="lyricsOverflow"
     relative of-x-hidden of-y-auto
->
+  >
     <div lt-lg="absolute" pointer-events-auto sticky left-3 right-3 top-3 z-floating flex>
       <div
         v-if="activeLineEl && !targetIsVisible"

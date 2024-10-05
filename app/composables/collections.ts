@@ -1,7 +1,9 @@
 import type { MaruSongData } from '@marure/schema'
+import { validate } from '@marure/schema'
 import { _songsStorage } from '~/state/indexdb'
 
 export async function saveSongToStorage(song: MaruSongData): Promise<void> {
+  song = validate(song)
   localStorage.removeItem(`maru-song-${song.youtube}`)
   await _songsStorage.set(song.youtube, song)
 }
