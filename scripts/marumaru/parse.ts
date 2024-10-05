@@ -1,5 +1,5 @@
 import type { LyricLine, LyricWord, MaruSongData } from '@marure/schema'
-import { serializedToLrc } from '~~/packages/parser/src'
+import { serializeToLrc } from '~~/packages/parser/src'
 import * as cheerio from 'cheerio'
 
 export function parse(html: string, sourceUrl: string) {
@@ -70,7 +70,7 @@ export function parse(html: string, sourceUrl: string) {
     }
   })
 
-  site.lrc = serializedToLrc({ meta: {}, lyrics })
+  site.lrc = serializeToLrc({ meta: {}, lyrics })
 
   return site
 }

@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import type { LyricLine } from '@marure/schema'
 import { hiraganaToRomaji } from '@marure/romaji'
+import type { UiSettings } from '~/types/settings'
 
 const props = defineProps<{
   line: LyricLine
   index?: number
+  settings?: Partial<UiSettings>
 }>()
 
-const settings = useSettings()
+const globalSettings = useSettings()
+const settings = computed(() => props.settings || globalSettings.value)
 
 const romaji = computed(() => {
   const text = props.line.words.map(w => w.r || w.w).join(' ')

@@ -73,12 +73,23 @@ const notesString = computed({
       <TextInput v-model="artistsString" label="歌手" />
       <TextInput v-model="tagsString" label="標籤" />
     </div>
-    <TextInput
-      v-model="state.lrc"
-      label="LRC 歌詞"
-      type="textarea"
-      input-class="h-400"
-    />
+    <div>
+      <div>
+        <LyricsLineEditor
+          v-for="line, idx of state.lyrics"
+          :key="idx"
+          v-model:line="state.lyrics[idx]!"
+          :index="idx"
+        />
+      </div>
+      <TextInput
+        v-model="state.lrc"
+        label="LRC 歌詞"
+        type="textarea"
+        input-class="h-400"
+      />
+    </div>
+
     <TextInput
       v-model="notesString"
       label="備註"

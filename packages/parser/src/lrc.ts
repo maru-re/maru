@@ -4,7 +4,7 @@ import { secondsToTimestamp, timestampToSeconds } from './timestamp'
 const reTimeStamp = /<([\d:.]+)>\s*/g
 const reRuby = /\{((?:\\\}|[^}])+)\}\(((?:\\\)|[^)])+)\)/g
 
-export function parseLrcLine(line: string): LyricWord[] {
+export function parseLrcLineContent(line: string): LyricWord[] {
   const items: LyricWord[] = []
 
   let i = 0
@@ -92,7 +92,7 @@ export function parseLrc(lrc: string = ''): ParsedLrc {
         i += 1
       lines.push({
         t: timestampToSeconds(time),
-        words: parseLrcLine(text),
+        words: parseLrcLineContent(text),
       })
     }
     // Custom tags
@@ -119,7 +119,22 @@ export function parseLrc(lrc: string = ''): ParsedLrc {
   }
 }
 
-export function serializedToLrc(lrc: ParsedLrc): string {
+export function serializeLineContentToLrc(words: LyricWord[]): string {
+  return words
+    .map((i) => {
+      let str = ''
+      if (i.t)
+        str += `<${i.t}> `
+      if (i.r)
+        str += `{${i.w}}(${i.r})`
+      else
+        str += i.w
+      return str
+    })
+    .join('')
+}
+
+export function serializeToLrc(lrc: ParsedLrc): string {
   const lines: string[] = []
 
   for (const [key, value] of Object.entries(lrc.meta)) {
@@ -130,19 +145,7 @@ export function serializedToLrc(lrc: ParsedLrc): string {
 
   for (const line of lrc.lyrics) {
     const time = line.t
-    const text = line
-      .words
-      .map((i) => {
-        let str = ''
-        if (i.t)
-          str += `<${i.t}> `
-        if (i.r)
-          str += `{${i.w}}(${i.r})`
-        else
-          str += i.w
-        return str
-      })
-      .join('')
+    const text = serializeLineContentToLrc(line.words)
 
     lines.push(`[${secondsToTimestamp(time)}] ${text}`.trimEnd())
 

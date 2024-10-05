@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseLrc, parseLrcLine, serializedToLrc } from '../src'
+import { parseLrc, parseLrcLineContent, serializeToLrc } from '../src'
 
 describe('lrc', () => {
   it('case 1', () => {
@@ -194,7 +194,7 @@ describe('lrc', () => {
         }
       `)
 
-    expect(serializedToLrc(result))
+    expect(serializeToLrc(result))
       .toMatchInlineSnapshot(`
         "[ar:Camila Cabello, Young Thug]
         [ti:Havana]
@@ -310,7 +310,7 @@ describe('lrc', () => {
         "meta": {},
       }
     `)
-    expect(serializedToLrc(result)).toMatchInlineSnapshot(`
+    expect(serializeToLrc(result)).toMatchInlineSnapshot(`
       "[00:06.80] あたま{てかてか}(テカテカ) さえて{ぴかぴか}(ピカピカ)
       [trans:zh-Hant] 光溜溜的大頭 又閃又亮晶晶
       [00:11.25] それがどうした ぼく{どら}(ドラ)えもん
@@ -323,7 +323,7 @@ describe('lrc', () => {
 describe('lrc-line', () => {
   // https://en.wikipedia.org/wiki/LRC_(file_format)
   it('parse A2 extension', () => {
-    expect(parseLrcLine('<00:00.04> When <00:00.16> the <00:00.82> truth <00:01.29> is <00:01.63> found <00:03.09> to <00:03.37> be <00:05.92> lies'))
+    expect(parseLrcLineContent('<00:00.04> When <00:00.16> the <00:00.82> truth <00:01.29> is <00:01.63> found <00:03.09> to <00:03.37> be <00:05.92> lies'))
       .toMatchInlineSnapshot(`
         [
           {
@@ -371,7 +371,7 @@ describe('lrc-line', () => {
   })
 
   it('parse ruby', () => {
-    expect(parseLrcLine('{昨日}(きのう)の{朝}(あさ) {早}(はや)くに'))
+    expect(parseLrcLineContent('{昨日}(きのう)の{朝}(あさ) {早}(はや)くに'))
       .toMatchInlineSnapshot(`
         [
           {
@@ -409,7 +409,7 @@ describe('lrc-line', () => {
   })
 
   it('parse ruby escape', () => {
-    expect(parseLrcLine('{\\}}(\\))'))
+    expect(parseLrcLineContent('{\\}}(\\))'))
       .toMatchInlineSnapshot(`
         [
           {
