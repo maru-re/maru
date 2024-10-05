@@ -36,7 +36,9 @@ const input = computed({
       <div my2 ml--12 w-6 text-right text-sm font-mono op30>
         #{{ index + 1 }}
       </div>
-      <TimestampEditor v-model="line.t" />
+      <div flex="~ col gap-2">
+        <TimestampEditor v-model="line.t" />
+      </div>
       <div w-full flex="~ col gap-2">
         <LyricsLine
           text-lg font-jp-serif box-input
@@ -49,7 +51,8 @@ const input = computed({
       </div>
     </div>
     <div v-for="lang of translations" :key="lang" flex="~ gap-2 items-center">
-      <div w-30 text-right text-sm font-mono op50>
+      <div w-23 text-right text-sm op50 flex="~ gap-1 items-center justify-end">
+        <div i-uil-english-to-chinese />
         {{ lang }}
       </div>
       <TextInput

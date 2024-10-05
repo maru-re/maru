@@ -1,48 +1,50 @@
 <script setup lang="ts">
-import { secondsToTimestamp } from '@marure/parser'
+import { secondsToTimestamp, timestampToSeconds } from '@marure/parser'
 
 const modelValue = defineModel('modelValue', {
   type: Number,
   default: 0,
 })
 
-const minute = ref(0)
-const second = ref(0)
-const microsecond = ref(0)
+const invalid = ref(false)
 
-watch(
-  modelValue,
-  () => {
-    const value = secondsToTimestamp(modelValue.value).split(/[.:]/g)
-    minute.value = Number(value[0])
-    second.value = Number(value[1])
-    microsecond.value = Number(value[2])
+const _text = ref(secondsToTimestamp(modelValue.value))
+
+const data = computed({
+  get() {
+    return _text.value
   },
-  { immediate: true },
-)
+  set(v) {
+    _text.value = v
+    const seconds = timestampToSeconds(v)
+    if (!Number.isNaN(seconds)) {
+      invalid.value = false
+      modelValue.value = seconds
+      _text.value = secondsToTimestamp(seconds)
+    }
+    else {
+      invalid.value = true
+    }
+  },
+})
 
-const inputM = ref<any>()
-const inputS = ref<any>()
-const inputMS = ref<any>()
+const input = ref<HTMLInputElement>()
 
-const inputs = [
-  inputM,
-  inputS,
-  inputMS,
-]
-
-function focusNext(idx: number, e: KeyboardEvent) {
-  const input = inputs[idx]
-  input?.value?.focus(e)
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Enter') {
+    e.preventDefault()
+    input.value?.blur()
+  }
 }
 </script>
 
 <template>
-  <div flex="~" h-max w-max font-mono box-input>
-    <DigitInput ref="inputM" v-model="minute" :min="0" :step="1" :max="60" @next="(e: any) => focusNext(1, e)" />
-    <span op50>:</span>
-    <DigitInput ref="inputS" v-model="second" :min="0" :step="1" :max="60" @next="(e: any) => focusNext(2, e)" />
-    <span op50>.</span>
-    <DigitInput ref="inputMS" v-model="microsecond" :min="0" :step="1" :max="9999" />
-  </div>
+  <input
+    ref="input"
+    v-model="data"
+    placeholder="00:00.00"
+    w-25 text-right font-mono box-input
+    :class="invalid ? 'border-red text-red' : ''"
+    @keydown="onKeydown"
+  >
 </template>
