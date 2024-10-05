@@ -7,6 +7,7 @@ const modelValue = defineModel<string>('modelValue')
 
 const inputClass = 'min-h-400 box-input'
 const editorEl = useTemplateRef('editor')
+const text = ref(modelValue.value)
 
 const isSupported = getSupported()
 if (isSupported) {
@@ -44,7 +45,7 @@ function getSupported() {
       :class="inputClass"
       contenteditable="plaintext-only"
       @input="updateModelValue"
-      v-text="modelValue"
+      v-text="text"
     />
     <textarea
       v-else
