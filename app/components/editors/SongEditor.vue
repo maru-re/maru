@@ -111,11 +111,9 @@ const notesString = computed({
         :index="idx"
       />
     </div>
-    <TextInput
+    <LyricsEditor
       v-model="state.lrc"
       label="LRC 歌詞"
-      type="textarea"
-      input-class="h-400"
     />
 
     <TextInput
