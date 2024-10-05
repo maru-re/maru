@@ -81,6 +81,8 @@ export function usePlayer(data: MaruSongDataParsed) {
     }))
   }
 
+  let pausedAt = 0
+
   const active = ref<{
     index: number
     start: number
@@ -99,6 +101,9 @@ export function usePlayer(data: MaruSongDataParsed) {
     if (n == null) {
       active.value = null
       return
+    }
+    else if (n !== active.value?.index) {
+      pausedAt = 0
     }
 
     if (active.value?.index === n)
@@ -141,10 +146,11 @@ export function usePlayer(data: MaruSongDataParsed) {
         ? 'paused'
         : 'ended'
     current.value = player.value.getCurrentTime() || 0
-    if (settings.value.autoPause && status.value === 'playing' && active.value && current.value >= active.value.end) {
-      current.value = active.value.end + 0.005
+    if (settings.value.autoPause && status.value === 'playing' && active.value && current.value >= active.value.end && pausedAt < 1) {
+      current.value = active.value.end
       player.value.seekTo(current.value)
       player.value.pauseVideo()
+      pausedAt = active.value.index
     }
     else {
       if (status.value === 'playing') {
@@ -163,6 +169,7 @@ export function usePlayer(data: MaruSongDataParsed) {
     player.value?.playVideo()
     current.value = st
     updateActive()
+    pausedAt = 0
   }
 
   onUnmounted(() => {
