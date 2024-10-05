@@ -91,6 +91,20 @@ function changeTab(tab: 'lrc' | 'lyrics') {
   showTab.value = tab
 }
 
+function insertLineAfter(index: number) {
+  const after = state.lyrics[index + 1]
+  const t = after ? after.t - 0.1 : state.lyrics[index]!.t + 0.1
+  state.lyrics.splice(index + 1, 0, {
+    t,
+    words: [],
+    trans: {},
+  })
+}
+
+function deleteLine(index: number) {
+  state.lyrics.splice(index, 1)
+}
+
 const lrc = computed({
   get: () => state.lrc,
   set: (value: string) => {
@@ -185,15 +199,27 @@ useEventListener('keydown', (e) => {
       </SimpleButton>
     </div>
     <div v-show="showTab === 'lyrics'" flex="~ col gap-1" ml--5>
-      <LyricsLineEditor
+      <template
         v-for="line, idx of state.lyrics"
         :key="idx"
-        v-model:line="state.lyrics[idx]!"
-        :index="idx"
-        :next="state.lyrics[idx + 1]"
-        :translations="translations"
-        :controls="controls"
-      />
+      >
+        <LyricsLineEditor
+          v-model:line="state.lyrics[idx]!"
+          :index="idx"
+          :next="state.lyrics[idx + 1]"
+          :translations="translations"
+          :controls="controls"
+          @delete="deleteLine(idx)"
+        />
+        <div flex="~ justify-center">
+          <IconButton
+            icon="i-uil:plus" my--2 op10 transition-all
+            hover="op100 my-0 text-primary bg-gray:20"
+            title="插入行"
+            @click="insertLineAfter(idx)"
+          />
+        </div>
+      </template>
     </div>
     <div v-show="showTab === 'lrc'">
       <TextInput

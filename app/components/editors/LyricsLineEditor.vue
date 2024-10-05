@@ -9,6 +9,10 @@ const props = defineProps<{
   translations?: string[]
 }>()
 
+const emit = defineEmits<{
+  (event: 'delete'): void
+}>()
+
 const line = defineModel<LyricLine>('line', { required: true })
 
 for (const lang of props.translations || []) {
@@ -62,6 +66,7 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
       </div>
       <div w-full flex="~ col gap-2">
         <LyricsLine
+          v-if="line.words.length"
           text-lg font-jp-serif box-input
           role="" flex="~ col items-start"
           :line="line"
@@ -71,14 +76,24 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
         <TextInput v-model="input" w-full />
       </div>
     </div>
-    <div v-for="lang of translations" :key="lang" flex="~ gap-2 items-center">
-      <div w-28 flex-none text-right text-sm op50 flex="~ gap-1 items-center justify-end">
-        <div i-uil-english-to-chinese />
-        {{ lang }}
+    <template v-if="line.words.length">
+      <div v-for="lang of translations" :key="lang" flex="~ gap-2 items-center">
+        <div w-28 flex-none text-right text-sm op50 flex="~ gap-1 items-center justify-end">
+          <div i-uil-english-to-chinese />
+          {{ lang }}
+        </div>
+        <TextInput
+          v-model="line.trans![lang]"
+          w-full
+        />
       </div>
-      <TextInput
-        v-model="line.trans![lang]"
-        w-full
+    </template>
+    <div absolute right--10 top-2>
+      <IconButton
+        icon="i-uil:trash-alt"
+        op10 hover="op100 text-red"
+        title="刪除行"
+        @click="emit('delete')"
       />
     </div>
   </div>
