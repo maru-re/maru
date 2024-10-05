@@ -3,6 +3,7 @@ const props = defineProps<{
   label?: string
   type?: 'input' | 'textarea'
   inputClass?: string
+  disabled?: boolean
 }>()
 
 const modelValue = defineModel<string>('modelValue')
@@ -17,6 +18,7 @@ const modelValue = defineModel<string>('modelValue')
       :placeholder="props.label"
       box-input
       :class="inputClass"
+      :disabled
     />
     <input
       v-else
@@ -24,6 +26,7 @@ const modelValue = defineModel<string>('modelValue')
       :placeholder="props.label"
       box-input
       :class="inputClass"
+      :disabled
     >
   </label>
 </template>

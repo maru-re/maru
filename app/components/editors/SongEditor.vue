@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
-import { serializeToLrc } from '~~/packages/parser/src'
+import { parseLrc, serializeToLrc } from '~~/packages/parser/src'
 
 const props = defineProps<{
   data?: MaruSongDataParsed
@@ -72,6 +72,43 @@ watch(
   () => controls.reload(),
 )
 
+const dirtyLyrics = ref<'none' | 'lrc' | 'lyrics'>('none')
+const showTab = ref<'lrc' | 'lyrics'>('lyrics')
+
+function syncLrc() {
+  if (dirtyLyrics.value === 'lrc') {
+    state.lrc = serializeToLrc({ lyrics: state.lyrics, meta: {} })
+  }
+  else if (dirtyLyrics.value === 'lyrics') {
+    state.lyrics = parseLrc(state.lrc).lyrics
+  }
+  dirtyLyrics.value = 'none'
+}
+
+function changeTab(tab: 'lrc' | 'lyrics') {
+  syncLrc()
+  showTab.value = tab
+}
+
+const lrc = computed({
+  get: () => state.lrc,
+  set: (value: string) => {
+    state.lrc = value
+    dirtyLyrics.value = 'lyrics'
+  },
+})
+
+watch(
+  state.lyrics,
+  () => {
+    dirtyLyrics.value = 'lrc'
+  },
+  { deep: true },
+)
+
+// TODO: make this customizable
+const translations = ['zh-Hant']
+
 const artistsString = computed({
   get: () => (state.artists || []).join(', '),
   set: (value: string) => {
@@ -98,32 +135,49 @@ const notesString = computed({
   <div px10 py20 flex="~ col gap-3">
     <YouTubePlayer w-100 rounded-lg border="~ base" />
     <div grid="~ gap-2 cols-4">
-      <TextInput v-model="youtubeString" label="YouTube ID" input-class="font-mono" />
+      <TextInput v-model="youtubeString" label="YouTube ID" input-class="font-mono" disabled />
       <TextInput v-model="state.title" label="歌曲標題" />
       <TextInput v-model="artistsString" label="歌手" />
       <TextInput v-model="tagsString" label="標籤" />
     </div>
-    <div>
+    <TextInput
+      v-model="notesString"
+      label="備註"
+      type="textarea"
+      input-class="h-30"
+    />
+    <div flex="~ gap-2 items-center">
+      <SimpleButton
+        :class="showTab === 'lyrics' ? '' : 'op50'"
+        @click="changeTab('lyrics')"
+      >
+        可視化
+      </SimpleButton>
+      <SimpleButton
+        :class="showTab === 'lrc' ? '' : 'op50'"
+        @click="changeTab('lrc')"
+      >
+        LRC
+      </SimpleButton>
+    </div>
+    <div v-show="showTab === 'lyrics'" flex="~ col gap-1">
       <LyricsLineEditor
         v-for="line, idx of state.lyrics"
         :key="idx"
         v-model:line="state.lyrics[idx]!"
         :index="idx"
+        :translations="translations"
       />
     </div>
-    <TextInput
-      v-model="state.lrc"
-      label="LRC 歌詞"
-      type="textarea"
-      input-class="h-400"
-    />
+    <div v-show="showTab === 'lrc'">
+      <TextInput
+        v-model="lrc"
+        label="LRC 歌詞"
+        type="textarea"
+        input-class="h-400"
+      />
+    </div>
 
-    <TextInput
-      v-model="notesString"
-      label="備註"
-      type="textarea"
-      input-class="h-100"
-    />
     <!-- <pre v-text="JSON.stringify(state, null, 2)" /> -->
 
     <div border="~ base rounded-xl" fixed bottom-5 right-5 p2 shadow-xl bg-base>
