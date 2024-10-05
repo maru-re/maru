@@ -3,7 +3,7 @@ import type { YouTube, YouTubePlayer } from '~/types/player'
 
 export type PlayerControls = ReturnType<typeof usePlayer>
 
-export function usePlayer(data: MaruSongDataParsed) {
+export function usePlayer(data: MaruSongDataParsed, autoplay = true) {
   const player = shallowRef<YouTubePlayer | undefined>(undefined)
   const current = ref(0)
   const duration = ref(0)
@@ -56,7 +56,7 @@ export function usePlayer(data: MaruSongDataParsed) {
       height: width * 9 / 16,
       videoId: data.youtube,
       playerVars: {
-        autoplay: 1,
+        autoplay: autoplay ? 1 : 0,
         cc_lang_pref: 0,
         enablejsapi: 1,
         color: 'white',

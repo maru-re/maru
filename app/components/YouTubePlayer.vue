@@ -3,8 +3,8 @@ const { error } = getPlayer()!
 </script>
 
 <template>
-  <div class="aspect-16/9 flex-none of-hidden shadow-lg">
-    <div id="player" flex bg-hover text-center>
+  <div class="relative aspect-16/9 flex-none of-hidden shadow-lg">
+    <div id="player" h-full w-full flex bg-hover text-center>
       <div v-if="!error" ma text-sm op50>
         YouTube 連接中...
       </div>

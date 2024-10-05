@@ -45,8 +45,9 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
       <div flex="~ col gap-1">
         <TimestampEditor
           v-model="line.t"
-          w-25
-          :input-class="isActive ? 'border-primary ring-2 ring-primary:20' : ''"
+          w-32
+          :class="isActive ? 'border-primary' : ''"
+          @go="props.controls?.go(line)"
         >
           <div v-if="isActive && duration && controls" pointer-events-none absolute inset-0 of-hidden rounded-lg mix-blend-darken dark:mix-blend-lighten>
             <div
@@ -71,7 +72,7 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
       </div>
     </div>
     <div v-for="lang of translations" :key="lang" flex="~ gap-2 items-center">
-      <div w-21 flex-none text-right text-sm op50 flex="~ gap-1 items-center justify-end">
+      <div w-28 flex-none text-right text-sm op50 flex="~ gap-1 items-center justify-end">
         <div i-uil-english-to-chinese />
         {{ lang }}
       </div>

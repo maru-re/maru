@@ -8,7 +8,10 @@ defineProps<{
 </script>
 
 <template>
-  <component :is="to ? NuxtLink : 'button'" :to="to" aspect-ratio-1 flex-none rounded-full p1 hover="bg-[#8883]">
+  <component
+    :is="to ? NuxtLink : 'button'" :to="to"
+    aspect-ratio-1 flex-none rounded-full p1 hover="bg-[#8883]"
+  >
     <div :class="icon" />
   </component>
 </template>

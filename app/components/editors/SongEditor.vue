@@ -49,7 +49,7 @@ async function save() {
   dirty.value = false
 }
 
-const controls = usePlayer(state)
+const controls = usePlayer(state, false)
 
 const youtubeString = computed({
   get: () => state.youtube,
@@ -130,24 +130,47 @@ const notesString = computed({
     state.notes = value.split('\n')
   },
 })
+
+useEventListener('keydown', (e) => {
+  // Skip if the user is typing in an input
+  if (e.target instanceof HTMLInputElement)
+    return
+  if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault()
+    save()
+    return
+  }
+  if (e.key === ' ') {
+    e.preventDefault()
+    controls.toggle()
+    ;(document.activeElement as HTMLElement)?.blur?.()
+  }
+})
 </script>
 
 <template>
-  <div px10 py20 flex="~ col gap-3">
-    <YouTubePlayer w-100 rounded-lg border="~ base" />
-    <div grid="~ gap-2 cols-4">
+  <div fixed right-8 top-8 z-floating>
+    <YouTubePlayer w-120 rounded-lg border="~ base" />
+  </div>
+  <div mxa max-w-300 flex="~ col gap-3">
+    <BasicNav />
+    <div flex="~ col gap-2" max-w-150>
+      <h1 mb5 text-2xl>
+        歌詞編輯
+      </h1>
       <TextInput v-model="youtubeString" label="YouTube ID" input-class="font-mono" disabled />
       <TextInput v-model="state.title" label="歌曲標題" />
       <TextInput v-model="artistsString" label="歌手" />
       <TextInput v-model="tagsString" label="標籤" />
+      <TextInput
+        v-model="notesString"
+        label="備註"
+        type="textarea"
+        input-class="h-30"
+      />
     </div>
-    <TextInput
-      v-model="notesString"
-      label="備註"
-      type="textarea"
-      input-class="h-30"
-    />
-    <div flex="~ gap-2 items-center">
+
+    <div flex="~ gap-2 items-center" mt5>
       <SimpleButton
         :class="showTab === 'lyrics' ? '' : 'op50'"
         @click="changeTab('lyrics')"
@@ -161,7 +184,7 @@ const notesString = computed({
         LRC
       </SimpleButton>
     </div>
-    <div v-show="showTab === 'lyrics'" flex="~ col gap-1">
+    <div v-show="showTab === 'lyrics'" flex="~ col gap-1" ml--5>
       <LyricsLineEditor
         v-for="line, idx of state.lyrics"
         :key="idx"

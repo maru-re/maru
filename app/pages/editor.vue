@@ -13,8 +13,10 @@ useSeoMeta({
 </script>
 
 <template>
-  <SongEditor
-    :data="data"
-    :source="source"
-  />
+  <div px15 py20>
+    <SongEditor
+      :data="data"
+      :source="source"
+    />
+  </div>
 </template>

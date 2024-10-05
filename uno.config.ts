@@ -19,7 +19,9 @@ export default defineConfig({
       'border-base': 'border-gray:20',
       'floating-glass': 'bg-white:70 shadow-lg backdrop-blur-4 dark:bg-black:70 z-floating border border-base rounded-full',
 
-      'box-input': 'bg-base color-base border-base border rounded-lg px2 py1 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary:20 disabled:bg-gray:10 disabled:color-gray:50',
+      'box-input': 'box-input-shell box-input-inner focus:(border-primary ring-2 ring-primary:20)',
+      'box-input-shell': 'bg-base color-base border-base border rounded-lg focus-within:(border-primary ring-2 ring-primary:20) disabled:(bg-gray:10 color-gray:50)',
+      'box-input-inner': 'px2 py1 outline-none w-full bg-base rounded-lg',
 
       'z-hover': 'z-50',
       'z-floating': 'z-100',
