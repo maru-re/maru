@@ -26,6 +26,7 @@ const romaji = computed(() => {
     class="lyric-line group"
   >
     <div class="lyric-line-source" lang="jp">
+      <div v-if="!line.words.length" i-uil-ellipsis-h op50 />
       <template v-for="word, i of line.words" :key="i">
         <template v-if="word.r">
           <ruby v-if="settings.kanji && settings.furigana" :st="word.t">
