@@ -177,7 +177,7 @@ onMounted(() => {
       <SettingsNav mxa />
     </div>
     <div
-      flex="~ col gap-1.5em" class="lyrics-track"
+      flex="~ col gap-1.2em" class="lyrics-track"
       of-hidden py-1000px text-center
       :style="{
         fontSize: `${settings.fontSize}rem`,
@@ -210,13 +210,13 @@ onMounted(() => {
 }
 
 .lyric-line.active {
-  --uno: op100 scale-115;
+  --uno: op100 scale-105;
 }
 .lyric-line.inactive {
-  --uno: op30 filter-saturate-0;
+  --uno: op30 filter-saturate-0 scale-90;
 }
 .lyric-line.next {
-  --uno: op60 filter-saturate-50;
+  --uno: op60 filter-saturate-50 scale-90;
 }
 
 .lyric-line-source {

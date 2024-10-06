@@ -76,7 +76,7 @@ const ltMd = bp.isSmaller('md')
       <template #popper>
         <div px4 py2>
           <div>
-            歌詞字號
+            歌詞字號 ({{ settings.fontSize }})
           </div>
           <div>
             <input v-model="settings.fontSize" type="range" min="0.6" max="2" step="0.2">

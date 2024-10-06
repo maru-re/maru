@@ -11,7 +11,7 @@ export const _settings = useLocalStorage<UiSettings>(
     follow: true,
     autoPause: false,
     speed: 1,
-    fontSize: 1,
+    fontSize: 1.2,
   },
   {
     mergeDefaults: true,
