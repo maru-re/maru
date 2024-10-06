@@ -222,13 +222,7 @@ useEventListener('keydown', (e) => {
       </template>
     </div>
     <div v-show="showTab === 'lrc'">
-      <TextInput
-        v-model="lrc"
-        label="LRC 歌詞"
-        type="textarea"
-        font-mono
-        input-class="h-400"
-      />
+      <LyricsRawEditor v-model="lrc" />
     </div>
 
     <div border="~ base rounded-xl" fixed bottom-5 right-5 p2 shadow-xl bg-base>
