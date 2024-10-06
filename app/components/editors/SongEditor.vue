@@ -147,7 +147,7 @@ const notesString = computed({
 
 useEventListener('keydown', (e) => {
   // Skip if the user is typing in an input
-  if (e.target instanceof HTMLInputElement)
+  if (e.target instanceof HTMLInputElement || (e.target as HTMLElement).role === 'input')
     return
   if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
     e.preventDefault()
@@ -169,7 +169,7 @@ useEventListener('keydown', (e) => {
   <div mxa max-w-300 flex="~ col gap-3">
     <BasicNav />
     <div flex="~ col gap-2" max-w-150>
-      <h1 mb5 text-2xl>
+      <h1 my4 text-2xl>
         歌詞編輯
       </h1>
       <TextInput v-model="youtubeString" label="YouTube ID" input-class="font-mono" disabled />
@@ -222,7 +222,10 @@ useEventListener('keydown', (e) => {
       </template>
     </div>
     <div v-show="showTab === 'lrc'">
-      <LyricsRawEditor v-model="lrc" />
+      <LyricsRawEditor
+        v-model="lrc"
+        input-class="min-h-400"
+      />
     </div>
 
     <div border="~ base rounded-xl" fixed bottom-5 right-5 p2 shadow-xl bg-base>

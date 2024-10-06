@@ -1,18 +1,21 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   label?: string
+  type?: 'text' | 'textarea'
+  inputClass?: string
+  lang?: 'lyric' | 'lyric-inline'
 }>()
 
 const modelValue = defineModel<string>('modelValue')
 
-const inputClass = 'min-h-400 box-input'
+const sharedClass = 'box-input font-mono'
 const editor = useTemplateRef<HTMLDivElement>('editor')
 const text = ref(modelValue.value)
 
 const isSupported = getSupported()
 if (isSupported) {
   usePlainShiki(editor, {
-    lang: 'lyric' as any,
+    lang: props.lang ?? 'lyric',
     themes: {
       light: 'vitesse-light',
       dark: 'vitesse-dark',
@@ -42,8 +45,9 @@ function getSupported() {
     <div
       v-if="isSupported"
       ref="editor"
-      font-mono
-      :class="inputClass"
+      role="input"
+      p2
+      :class="[sharedClass, inputClass]"
       contenteditable="plaintext-only"
       @input="updateModelValue"
       v-text="text"
@@ -51,8 +55,7 @@ function getSupported() {
     <textarea
       v-else
       v-model="modelValue"
-      font-mono
-      :class="inputClass"
+      :class="[sharedClass, inputClass]"
       :placeholder="label"
     />
   </label>

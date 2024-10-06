@@ -1,5 +1,5 @@
 import type { CreatePlainShikiReturns, MountPlainShikiOptions } from 'plain-shiki'
-import type { LanguageRegistration } from 'shiki/core'
+import type { HighlighterCore, LanguageRegistration } from 'shiki/core'
 import { createPlainShiki } from 'plain-shiki'
 import { createHighlighterCore } from 'shiki/core'
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
@@ -115,9 +115,22 @@ const grammarLyric: LanguageRegistration = {
   },
 }
 
-export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, 'lang'> & {
-  lang: 'lyric'
+const grammarLyricInline: LanguageRegistration = {
+  ...grammarLyric,
+  name: 'lyric-inline',
+  scopeName: 'source.lyric.inline',
+  patterns: [
+    {
+      include: '#text',
+    },
+  ],
 }
+
+export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, 'lang'> & {
+  lang: 'lyric' | 'lyric-inline'
+}
+
+let shikiPromise: Promise<HighlighterCore> | undefined
 
 export function usePlainShiki(el: MaybeRefOrGetter<HTMLElement | null>, options: UsePlainShikiOptions) {
   const target = toRef(el)
@@ -137,13 +150,13 @@ export function usePlainShiki(el: MaybeRefOrGetter<HTMLElement | null>, options:
   })
 
   tryOnMounted(async () => {
-    const shiki = await createHighlighterCore({
-      langs: [grammarLyric],
+    shikiPromise ||= createHighlighterCore({
+      langs: [grammarLyric, grammarLyricInline],
       themes: [vitesseLight, vitesseDark],
-      engine: createJavaScriptRegexEngine(), // createOnigurumaEngine(import('shiki/wasm')),
+      engine: createJavaScriptRegexEngine(),
     })
 
-    plain = createPlainShiki(shiki)
+    plain = createPlainShiki(await shikiPromise)
     trigger()
   })
 

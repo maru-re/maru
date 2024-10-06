@@ -73,7 +73,10 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
           :index="index"
           :settings="{ furigana: true, kanji: true, romaji: false, translation: false }"
         />
-        <TextInput v-model="input" w-full />
+        <LyricsRawEditor
+          v-model="input"
+          lang="lyric-inline"
+        />
       </div>
     </div>
     <template v-if="line.words.length">
