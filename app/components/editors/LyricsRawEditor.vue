@@ -6,12 +6,12 @@ defineProps<{
 const modelValue = defineModel<string>('modelValue')
 
 const inputClass = 'min-h-400 box-input'
-const editorEl = useTemplateRef('editor')
+const editor = useTemplateRef<HTMLDivElement>('editor')
 const text = ref(modelValue.value)
 
 const isSupported = getSupported()
 if (isSupported) {
-  usePlainShiki(editorEl, {
+  usePlainShiki(editor, {
     lang: 'lyric' as any,
     themes: {
       light: 'vitesse-light',
@@ -21,7 +21,7 @@ if (isSupported) {
 }
 
 function updateModelValue() {
-  modelValue.value = editorEl.value?.textContent ?? ''
+  modelValue.value = editor.value?.textContent ?? ''
 }
 
 function getSupported() {
@@ -42,6 +42,7 @@ function getSupported() {
     <div
       v-if="isSupported"
       ref="editor"
+      font-mono
       :class="inputClass"
       contenteditable="plaintext-only"
       @input="updateModelValue"
@@ -50,6 +51,7 @@ function getSupported() {
     <textarea
       v-else
       v-model="modelValue"
+      font-mono
       :class="inputClass"
       :placeholder="label"
     />

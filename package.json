@@ -48,7 +48,7 @@
     "nuxt-compile-markdown": "^0.1.1",
     "pinia": "^2.2.4",
     "plain-shiki": "^0.0.7",
-    "shiki": "^1.21.0",
+    "shiki": "^1.21.1",
     "shiki-language-lyric": "^0.0.1",
     "typescript": "^5.6.2",
     "unbuild": "^2.0.0",

@@ -1,11 +1,122 @@
-import { createPlainShiki, type CreatePlainShikiReturns, type MountPlainShikiOptions } from 'plain-shiki'
-import { type BundledLanguage, createHighlighterCore, createOnigurumaEngine } from 'shiki'
+import type { CreatePlainShikiReturns, MountPlainShikiOptions } from 'plain-shiki'
+import type { LanguageRegistration } from 'shiki/core'
+import { createPlainShiki } from 'plain-shiki'
+import { createHighlighterCore } from 'shiki/core'
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 import vitesseDark from 'shiki/themes/vitesse-dark.mjs'
 import vitesseLight from 'shiki/themes/vitesse-light.mjs'
-import lyric from 'shiki-language-lyric'
+
+const grammarLyric: LanguageRegistration = {
+  // $schema: 'https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json',
+  displayName: 'Lyric',
+  fileTypes: [
+    'lrc',
+  ],
+  name: 'lyric',
+  scopeName: 'source.lyric',
+  patterns: [
+    {
+      include: '#line',
+    },
+  ],
+  repository: {
+    'line': {
+      begin: '^\\s*(\\[)([^\\]]*?)(\\])',
+      beginCaptures: {
+        1: {
+          name: 'punctuation.begin.lyric',
+        },
+        2: {
+          patterns: [
+            {
+              include: '#timestamp',
+            },
+            {
+              include: '#key-value',
+            },
+          ],
+        },
+        3: {
+          name: 'punctuation.end.lyric',
+        },
+      },
+      end: '$',
+      // name: 'string.lyric',
+      patterns: [
+        {
+          include: '#text',
+        },
+      ],
+    },
+    'timestamp': {
+      match: '(\\d{2})(:)(\\d{2})(\\.)(\\d{2,})',
+      captures: {
+        1: {
+          name: 'constant.numeric.minute.lyric',
+        },
+        2: {
+          name: 'punctuation.separator.colon.lyric',
+        },
+        3: {
+          name: 'constant.numeric.second.lyric',
+        },
+        4: {
+          name: 'punctuation.separator.dot.lyric',
+        },
+        5: {
+          name: 'constant.numeric.millisecond.lyric',
+        },
+      },
+    },
+    'key-value': {
+      match: '([^:]+)(:)(.*)',
+      captures: {
+        1: {
+          name: 'variable.other.key.lyric',
+        },
+        2: {
+          name: 'punctuation.separator.colon.lyric',
+        },
+        3: {
+          name: 'string.value.lyric',
+        },
+      },
+    },
+    'text': {
+      patterns: [
+        {
+          include: '#ruby',
+        },
+      ],
+    },
+    'ruby': {
+      match: '(\\{)([^}]*)(\\})(\\()([^(]*)(\\))',
+      captures: {
+        1: {
+          name: 'punctuation.definition.begin.lyric',
+        },
+        2: {
+          name: 'constant.lyric',
+        },
+        3: {
+          name: 'punctuation.definition.end.lyric',
+        },
+        4: {
+          name: 'punctuation.brace.begin.lyric',
+        },
+        5: {
+          name: 'variable.ruby.lyric',
+        },
+        6: {
+          name: 'punctuation.brace.end.lyric',
+        },
+      },
+    },
+  },
+}
 
 export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, 'lang'> & {
-  lang: MaybeRefOrGetter<BundledLanguage>
+  lang: 'lyric'
 }
 
 export function usePlainShiki(el: MaybeRefOrGetter<HTMLElement | null>, options: UsePlainShikiOptions) {
@@ -20,16 +131,16 @@ export function usePlainShiki(el: MaybeRefOrGetter<HTMLElement | null>, options:
     if (target.value) {
       ctx = plain?.mount(target.value, {
         ...options,
-        lang: lang.value,
+        lang: lang.value as any,
       })
     }
   })
 
   tryOnMounted(async () => {
     const shiki = await createHighlighterCore({
-      langs: [lyric],
+      langs: [grammarLyric],
       themes: [vitesseLight, vitesseDark],
-      engine: createOnigurumaEngine(() => import('@shikijs/core/wasm-inlined')),
+      engine: createJavaScriptRegexEngine(), // createOnigurumaEngine(import('shiki/wasm')),
     })
 
     plain = createPlainShiki(shiki)
