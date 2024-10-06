@@ -132,7 +132,10 @@ export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, 'lang'> & {
 
 let shikiPromise: Promise<HighlighterCore> | undefined
 
-export function usePlainShiki(el: MaybeRefOrGetter<HTMLElement | null>, options: UsePlainShikiOptions) {
+export function usePlainShiki(
+  el: MaybeRefOrGetter<HTMLElement | null>,
+  options: UsePlainShikiOptions,
+) {
   const target = toRef(el)
   const lang = toRef(options.lang)
 

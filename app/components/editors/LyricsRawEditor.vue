@@ -11,20 +11,40 @@ const modelValue = defineModel<string>('modelValue')
 const sharedClass = 'box-input font-mono'
 const editor = useTemplateRef<HTMLDivElement>('editor')
 const text = ref(modelValue.value)
+const revision = ref(0)
+
+const updatePaused = ref(false)
+watch(
+  modelValue,
+  () => {
+    if (updatePaused.value)
+      return
+    text.value = modelValue.value
+    revision.value += 1
+  },
+  { flush: 'sync' },
+)
 
 const isSupported = getSupported()
 if (isSupported) {
-  usePlainShiki(editor, {
-    lang: props.lang ?? 'lyric',
-    themes: {
-      light: 'vitesse-light',
-      dark: 'vitesse-dark',
+  usePlainShiki(
+    editor,
+    {
+      lang: props.lang ?? 'lyric',
+      themes: {
+        light: 'vitesse-light',
+        dark: 'vitesse-dark',
+      },
     },
-  })
+  )
 }
 
 function updateModelValue() {
+  updatePaused.value = true
   modelValue.value = editor.value?.textContent ?? ''
+  nextTick(() => {
+    updatePaused.value = false
+  })
 }
 
 function getSupported() {
@@ -44,6 +64,7 @@ function getSupported() {
     <span v-if="label" op75>{{ label }}</span>
     <div
       v-if="isSupported"
+      :key="revision"
       ref="editor"
       role="input"
       p2
