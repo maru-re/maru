@@ -155,6 +155,7 @@ async function remove() {
         />
         <ActionButton
           v-if="source === 'local'"
+          lt-md="hidden"
           type="icon"
           icon="i-uil-edit"
           title="編輯歌詞"

@@ -114,8 +114,8 @@ async function onFileChange(e: Event) {
           <NuxtLink to="/play?demo=1" op50 hover="op100 underline">
             Demo
           </NuxtLink>
-          <span mx2 op50> · </span>
-          <NuxtLink to="/create" op50 hover="op100 underline">
+          <span mx2 op50 lt-md="hidden"> · </span>
+          <NuxtLink to="/create" op50 hover="op100 underline" lt-md="hidden">
             建立歌詞
           </NuxtLink>
         </div>
