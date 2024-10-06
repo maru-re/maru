@@ -2,17 +2,19 @@
 import type { MaruSongDataParsed } from '@marure/schema'
 import { Dropdown, Tooltip } from 'floating-vue'
 import { compressToEncodedURIComponent } from 'lz-string'
+import type { SongDataSource } from '~/composables/loader'
 import { removeSongs } from '~/composables/store'
 
 const props = defineProps<{
   data: MaruSongDataParsed
-  source: 'share' | 'local' | 'demo'
+  source: SongDataSource
 }>()
 const emit = defineEmits<{
   afterRemove: [id: string]
 }>()
 
 const router = useRouter()
+const route = useRoute()
 
 const {
   isFavorite,
@@ -40,6 +42,10 @@ const shareUrl = computed(() => {
 
 function copyShareLink() {
   navigator.clipboard.writeText(shareUrl.value)
+}
+
+function editSong() {
+  router.push({ path: '/editor', query: route.query })
 }
 
 async function saveSong() {
@@ -135,6 +141,19 @@ async function remove() {
             </div>
           </template>
         </Dropdown>
+        <Tooltip v-if="source === 'local'">
+          <IconButton
+            flex-none
+            icon="i-uil-edit"
+            @click="editSong()"
+          />
+          <template #popper>
+            <div>
+              編輯歌曲
+            </div>
+          </template>
+        </Tooltip>
+
         <Tooltip v-if="source === 'share'">
           <IconButton
             flex-none

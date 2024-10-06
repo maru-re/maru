@@ -13,6 +13,9 @@ const state = reactive<MaruSongDataParsed>(
     : createEmptySongData(),
 )
 
+const router = useRouter()
+const route = useRoute()
+
 const dirty = ref(false)
 watch(
   state,
@@ -75,6 +78,10 @@ function insertLineAfter(index: number) {
     words: [],
     trans: {},
   })
+}
+
+function gotoSong() {
+  router.push({ path: '/play', query: route.query })
 }
 
 function deleteLine(index: number) {
@@ -213,7 +220,14 @@ onMounted(() => {
       />
     </div>
 
-    <div border="~ base rounded-xl" fixed bottom-5 right-5 p2 shadow-xl bg-base>
+    <div border="~ base rounded-xl" flex="~ col gap-2" fixed bottom-5 right-5 p2 shadow-xl bg-base>
+      <SimpleButton
+        :disabled="dirty"
+        icon="i-uil-play-circle"
+        @click="gotoSong()"
+      >
+        前往歌曲
+      </SimpleButton>
       <SimpleButton
         :disabled="!dirty"
         icon="i-uil-save"
