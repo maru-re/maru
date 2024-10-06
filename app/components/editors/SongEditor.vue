@@ -49,7 +49,7 @@ async function save() {
   dirty.value = false
 }
 
-const controls = usePlayer(state)
+const controls = usePlayer(state, false)
 
 const youtubeString = computed({
   get: () => state.youtube,
@@ -91,6 +91,20 @@ function changeTab(tab: 'lrc' | 'lyrics') {
   showTab.value = tab
 }
 
+function insertLineAfter(index: number) {
+  const after = state.lyrics[index + 1]
+  const t = after ? after.t - 0.1 : state.lyrics[index]!.t + 0.1
+  state.lyrics.splice(index + 1, 0, {
+    t,
+    words: [],
+    trans: {},
+  })
+}
+
+function deleteLine(index: number) {
+  state.lyrics.splice(index, 1)
+}
+
 const lrc = computed({
   get: () => state.lrc,
   set: (value: string) => {
@@ -130,24 +144,47 @@ const notesString = computed({
     state.notes = value.split('\n')
   },
 })
+
+useEventListener('keydown', (e) => {
+  // Skip if the user is typing in an input
+  if (e.target instanceof HTMLInputElement)
+    return
+  if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault()
+    save()
+    return
+  }
+  if (e.key === ' ') {
+    e.preventDefault()
+    controls.toggle()
+    ;(document.activeElement as HTMLElement)?.blur?.()
+  }
+})
 </script>
 
 <template>
-  <div px10 py20 flex="~ col gap-3">
-    <YouTubePlayer w-100 rounded-lg border="~ base" />
-    <div grid="~ gap-2 cols-4">
+  <div fixed right-8 top-8 z-floating>
+    <YouTubePlayer w-120 rounded-lg border="~ base" />
+  </div>
+  <div mxa max-w-300 flex="~ col gap-3">
+    <BasicNav />
+    <div flex="~ col gap-2" max-w-150>
+      <h1 mb5 text-2xl>
+        歌詞編輯
+      </h1>
       <TextInput v-model="youtubeString" label="YouTube ID" input-class="font-mono" disabled />
       <TextInput v-model="state.title" label="歌曲標題" />
       <TextInput v-model="artistsString" label="歌手" />
       <TextInput v-model="tagsString" label="標籤" />
+      <TextInput
+        v-model="notesString"
+        label="備註"
+        type="textarea"
+        input-class="h-30"
+      />
     </div>
-    <TextInput
-      v-model="notesString"
-      label="備註"
-      type="textarea"
-      input-class="h-30"
-    />
-    <div flex="~ gap-2 items-center">
+
+    <div flex="~ gap-2 items-center" mt5>
       <SimpleButton
         :class="showTab === 'lyrics' ? '' : 'op50'"
         @click="changeTab('lyrics')"
@@ -161,22 +198,32 @@ const notesString = computed({
         LRC
       </SimpleButton>
     </div>
-    <div v-show="showTab === 'lyrics'" flex="~ col gap-1">
-      <LyricsLineEditor
+    <div v-show="showTab === 'lyrics'" flex="~ col gap-1" ml--5>
+      <template
         v-for="line, idx of state.lyrics"
         :key="idx"
-        v-model:line="state.lyrics[idx]!"
-        :index="idx"
-        :next="state.lyrics[idx + 1]"
-        :translations="translations"
-        :controls="controls"
-      />
+      >
+        <LyricsLineEditor
+          v-model:line="state.lyrics[idx]!"
+          :index="idx"
+          :next="state.lyrics[idx + 1]"
+          :translations="translations"
+          :controls="controls"
+          @delete="deleteLine(idx)"
+        />
+        <div flex="~ justify-center">
+          <IconButton
+            icon="i-uil:plus" my--2 op10 transition-all
+            hover="op100 my-0 text-primary bg-gray:20"
+            title="插入行"
+            @click="insertLineAfter(idx)"
+          />
+        </div>
+      </template>
     </div>
     <div v-show="showTab === 'lrc'">
       <LyricsRawEditor v-model="lrc" />
     </div>
-
-    <!-- <pre v-text="JSON.stringify(state, null, 2)" /> -->
 
     <div border="~ base rounded-xl" fixed bottom-5 right-5 p2 shadow-xl bg-base>
       <SimpleButton

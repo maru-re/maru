@@ -5,37 +5,54 @@ defineProps<{
   inputClass?: string
 }>()
 
+const emit = defineEmits<{
+  (event: 'go'): void
+}>()
+
 const modelValue = defineModel('modelValue', {
   type: Number,
   default: 0,
 })
 
 const invalid = ref(false)
-
-const _text = ref(secondsToTimestamp(modelValue.value))
-
-const data = computed({
-  get() {
-    return _text.value
-  },
-  set(v) {
-    _text.value = v
-    const seconds = timestampToSeconds(v)
-    if (!Number.isNaN(seconds)) {
-      invalid.value = false
-      modelValue.value = seconds
-      _text.value = secondsToTimestamp(seconds)
-    }
-    else {
-      invalid.value = true
-    }
-  },
-})
-
 const input = ref<HTMLInputElement>()
 
+const timestamp = ref(secondsToTimestamp(modelValue.value))
+
+watchEffect(() => {
+  timestamp.value = secondsToTimestamp(modelValue.value)
+})
+
+function onBlur() {
+  try {
+    modelValue.value = timestampToSeconds(timestamp.value)
+  }
+  catch {}
+  timestamp.value = secondsToTimestamp(modelValue.value)
+  invalid.value = false
+}
+
+function onInput() {
+  timestamp.value = input.value!.value as string
+  try {
+    timestampToSeconds(timestamp.value)
+    invalid.value = false
+  }
+  catch {
+    invalid.value = true
+  }
+}
+
 function onKeydown(e: KeyboardEvent) {
-  if (e.key === 'Enter') {
+  if (e.key === 'ArrowUp') {
+    e.preventDefault()
+    modelValue.value -= 0.1
+  }
+  else if (e.key === 'ArrowDown') {
+    e.preventDefault()
+    modelValue.value += 0.1
+  }
+  else if (e.key === 'Enter' || e.key === 'Escape') {
     e.preventDefault()
     input.value?.blur()
   }
@@ -43,14 +60,24 @@ function onKeydown(e: KeyboardEvent) {
 </script>
 
 <template>
-  <div relative>
+  <div
+    relative pl0.5 box-input-shell
+    :class="[invalid ? 'border-red! text-red!' : '']"
+    flex="~ items-center"
+  >
+    <IconButton
+      icon="i-uil:play"
+      tabindex="-1" h-max op50 hover="op100"
+      @click="emit('go')"
+    />
     <input
       ref="input"
-      v-model="data"
+      :value="timestamp"
       placeholder="00:00.00"
-      w-full text-right font-mono box-input
-      :class="[invalid ? 'border-red text-red' : '', inputClass]"
+      w-full flex-auto py1 pr2 text-right font-mono box-input-inner
+      @input="onInput"
       @keydown="onKeydown"
+      @blur="onBlur"
     >
     <slot />
   </div>
