@@ -116,7 +116,7 @@ async function onFileChange(e: Event) {
           </NuxtLink>
           <span mx2 op50> · </span>
           <NuxtLink to="/create" op50 hover="op100 underline">
-            建立歌曲
+            建立歌詞
           </NuxtLink>
         </div>
       </div>

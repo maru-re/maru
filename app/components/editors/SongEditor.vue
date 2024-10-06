@@ -72,9 +72,30 @@ function changeTab(tab: 'lrc' | 'lyrics') {
 
 function insertLineAfter(index: number) {
   const after = state.lyrics[index + 1]
-  const t = after ? after.t - 0.1 : state.lyrics[index]!.t + 0.1
+  let t = after ? after.t - 0.1 : state.lyrics[index]!.t + 0.1
+  if (controls.active.value?.index === index) {
+    t = controls.current.value
+  }
   state.lyrics.splice(index + 1, 0, {
     t,
+    words: [],
+    trans: {},
+  })
+}
+
+function insertAtCurrentTime() {
+  for (let i = 0; i < state.lyrics.length; i++) {
+    if (state.lyrics[i]!.t > controls.current.value) {
+      state.lyrics.splice(i, 0, {
+        t: controls.current.value,
+        words: [],
+        trans: {},
+      })
+      return
+    }
+  }
+  state.lyrics.push({
+    t: controls.current.value,
     words: [],
     trans: {},
   })
@@ -174,11 +195,16 @@ onMounted(() => {
         :icon="controls.status.value === 'playing' ? 'i-uil-pause' : 'i-uil-play'"
         @click="controls.toggle()"
       /> -->
-      <div flex-auto />
+      <IconButton
+        title="在當前時間戳插入"
+        icon="i-uil-plus-circle"
+        @click="insertAtCurrentTime()"
+      />
       <div font-mono>
         {{ currentTimestamp }}
       </div>
       <IconButton
+        title="複製時間戳"
         :icon="copied ? 'i-uil:check text-green5' : 'i-uil:clipboard'"
         @click="copyCurrentTimestamp()"
       />
