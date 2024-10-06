@@ -52,7 +52,7 @@ function selectAll() {
 }
 
 async function exportSelected() {
-  await exportSongs(selectedSongs.value.map(song => song.youtube))
+  await exportSongsZip(selectedSongs.value.map(song => song.youtube))
 }
 
 async function deleteSelected() {

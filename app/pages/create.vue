@@ -28,7 +28,7 @@ const data = reactive<MaruSongDataParsed>({
 const controls = usePlayer(data)
 
 function go() {
-  router.push(`/editor?create=${id.value}`)
+  router.push(`/edit?create=${id.value}`)
 }
 
 watch(
@@ -41,12 +41,16 @@ watch(
   <div flex="~ col gap-2 items-center justify-center" h-full w-full p10>
     <BasicNav />
     <h1 text-2xl font-bold>
-      建立歌曲
+      建立歌詞
     </h1>
     <div mt5 op75>
-      在下方貼上 YouTube MV 歌曲連結或 ID
+      貼上 YouTube MV 歌曲連結
     </div>
-    <TextInput v-model="input" w-100 input-class="text-center" />
+    <TextInput
+      v-model="input" w-100 font-mono
+      input-class="text-center"
+      placeholder="https://youtube.com/watch?v="
+    />
     <SimpleButton icon="i-uil-edit" :disabled="!id" mt2 @click="go()">
       建立
     </SimpleButton>

@@ -104,6 +104,10 @@ watch(
   { deep: true },
 )
 
+function exportNow() {
+  exportSongMaru(state)
+}
+
 // TODO: make this customizable
 const translations = ['zh-Hant']
 
@@ -249,6 +253,12 @@ onMounted(() => {
         @click="gotoSong()"
       >
         前往歌曲
+      </SimpleButton>
+      <SimpleButton
+        icon="i-uil-file-download-alt"
+        @click="exportNow()"
+      >
+        導出歌詞
       </SimpleButton>
       <SimpleButton
         :disabled="!dirty"

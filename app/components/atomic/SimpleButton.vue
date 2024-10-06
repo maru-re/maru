@@ -2,6 +2,7 @@
 defineProps<{
   icon?: string
   color?: string
+  title?: string
 }>()
 </script>
 
@@ -11,6 +12,8 @@ defineProps<{
     px2.5 py2 line-height-1em shadow
   >
     <div v-if="icon" :class="icon" />
-    <slot />
+    <slot>
+      {{ title }}
+    </slot>
   </button>
 </template>

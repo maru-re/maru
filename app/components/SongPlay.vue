@@ -44,8 +44,12 @@ function copyShareLink() {
   navigator.clipboard.writeText(shareUrl.value)
 }
 
+async function exportCurrent() {
+  exportSongMaru(props.data)
+}
+
 function editSong() {
-  router.push({ path: '/editor', query: route.query })
+  router.push({ path: '/edit', query: route.query })
 }
 
 async function saveSong() {
@@ -121,9 +125,10 @@ async function remove() {
         </div>
         <div flex-auto />
         <Dropdown v-if="source === 'local'">
-          <IconButton
-            flex-none
+          <ActionButton
+            type="icon"
             icon="i-ph-trash-duotone op40 hover:op100 hover:text-red"
+            title="刪除歌詞"
           />
           <template #popper="{ hide }">
             <div flex flex-col gap-2 p4>
@@ -141,35 +146,32 @@ async function remove() {
             </div>
           </template>
         </Dropdown>
-        <Tooltip v-if="source === 'local'">
-          <IconButton
-            flex-none
-            icon="i-uil-edit"
-            @click="editSong()"
-          />
-          <template #popper>
-            <div>
-              編輯歌曲
-            </div>
-          </template>
-        </Tooltip>
-
-        <Tooltip v-if="source === 'share'">
-          <IconButton
-            flex-none
-            icon="i-uil-save"
-            @click="saveSong()"
-          />
-          <template #popper>
-            <div>
-              儲存歌曲
-            </div>
-          </template>
-        </Tooltip>
+        <ActionButton
+          v-if="source === 'local'"
+          type="icon"
+          icon="i-uil-file-download-alt"
+          title="導出歌詞"
+          @click="exportCurrent"
+        />
+        <ActionButton
+          v-if="source === 'local'"
+          type="icon"
+          icon="i-uil-edit"
+          title="編輯歌詞"
+          @click="editSong"
+        />
+        <ActionButton
+          v-if="source === 'share'"
+          type="icon"
+          icon="i-uil-save"
+          title="儲存歌詞"
+          @click="saveSong()"
+        />
         <Dropdown>
-          <IconButton
-            flex-none
+          <ActionButton
+            type="icon"
             icon="i-uil-share-alt"
+            title="分享歌詞"
           />
           <template #popper="{ hide }">
             <div p5 flex="~ col gap-2">

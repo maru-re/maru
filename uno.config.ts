@@ -21,7 +21,7 @@ export default defineConfig({
 
       'box-input': 'box-input-shell box-input-inner focus:(border-primary ring-2 ring-primary:20)',
       'box-input-shell': 'bg-base color-base border-base border rounded-lg focus-within:(border-primary ring-2 ring-primary:20) disabled:(bg-gray:10 color-gray:50)',
-      'box-input-inner': 'px2 py1 outline-none w-full bg-base rounded-lg',
+      'box-input-inner': 'px2 py1 outline-none w-full bg-base rounded-lg placeholder-gray:50',
 
       'z-hover': 'z-50',
       'z-floating': 'z-100',

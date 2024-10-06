@@ -17,7 +17,7 @@ function removeAll() {
           清除所有資料
         </div>
       </SimpleButton>
-      <SimpleButton icon="i-uil-folder-download" @click="exportSongs()">
+      <SimpleButton icon="i-uil-folder-download" @click="exportSongsZip()">
         <div translate-y-0.5px>
           下載所有歌詞檔案
         </div>

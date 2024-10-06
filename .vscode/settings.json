@@ -1,6 +1,7 @@
 {
   "files.associations": {
-    "*.css": "postcss"
+    "*.css": "postcss",
+    "*.maru": "yaml"
   },
 
   // Disable the default formatter, use eslint instead

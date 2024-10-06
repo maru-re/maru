@@ -6,7 +6,7 @@ const query = { ...useRoute().query }
 const { data, source } = await useSongData(() => query)
 
 useSeoMeta({
-  title: () => data.value
+  title: () => data.value?.title
     ? `編輯歌詞 ${data.value.title} - ${data.value.artists?.join(', ')} 歌詞 | 唱歌學日語 | ${appName}`
     : `建立歌詞 | 唱歌學日語 | ${appName}`,
 })

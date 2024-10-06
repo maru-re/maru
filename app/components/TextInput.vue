@@ -4,6 +4,7 @@ const props = defineProps<{
   type?: 'input' | 'textarea'
   inputClass?: string
   disabled?: boolean
+  placeholder?: string
 }>()
 
 const modelValue = defineModel<string>('modelValue')
@@ -15,7 +16,7 @@ const modelValue = defineModel<string>('modelValue')
     <textarea
       v-if="props.type === 'textarea'"
       v-model="modelValue"
-      :placeholder="props.label"
+      :placeholder="placeholder ?? props.label"
       box-input
       :class="inputClass"
       :disabled
@@ -23,7 +24,7 @@ const modelValue = defineModel<string>('modelValue')
     <input
       v-else
       v-model="modelValue"
-      :placeholder="props.label"
+      :placeholder="placeholder ?? props.label"
       box-input
       :class="inputClass"
       :disabled
