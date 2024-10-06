@@ -3,7 +3,7 @@ const props = defineProps<{
   label?: string
   type?: 'text' | 'textarea'
   inputClass?: string
-  lang?: 'lyric' | 'lyric-inline'
+  lang?: 'lyric' | 'lyric-inline' | 'yaml'
 }>()
 
 const modelValue = defineModel<string>('modelValue')

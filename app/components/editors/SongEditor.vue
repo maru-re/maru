@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
 import { parseLrc, secondsToTimestamp, serializeToLrc } from '~~/packages/parser/src'
+import YAML from 'js-yaml'
 
 const props = defineProps<{
   data?: MaruSongDataParsed
@@ -53,7 +54,7 @@ watch(
 )
 
 const dirtyLyrics = ref<'none' | 'lrc' | 'lyrics'>('none')
-const showTab = ref<'lrc' | 'lyrics'>('lyrics')
+const showTab = ref<'lrc' | 'lyrics' | 'yaml'>('lyrics')
 
 function syncLrc() {
   if (dirtyLyrics.value === 'lrc') {
@@ -65,8 +66,12 @@ function syncLrc() {
   dirtyLyrics.value = 'none'
 }
 
-function changeTab(tab: 'lrc' | 'lyrics') {
+const yaml = ref('')
+
+function changeTab(tab: 'lrc' | 'lyrics' | 'yaml') {
   syncLrc()
+  if (tab === 'yaml')
+    yaml.value = YAML.dump({ ...state, lyrics: undefined })
   showTab.value = tab
 }
 
@@ -245,6 +250,12 @@ onMounted(() => {
       >
         LRC
       </SimpleButton>
+      <SimpleButton
+        :class="showTab === 'yaml' ? '' : 'op50'"
+        @click="changeTab('yaml')"
+      >
+        YAML
+      </SimpleButton>
     </div>
     <div v-show="showTab === 'lyrics'" flex="~ col gap-1" ml--5>
       <template
@@ -272,6 +283,16 @@ onMounted(() => {
     <div v-show="showTab === 'lrc'">
       <LyricsRawEditor
         v-model="lrc"
+        input-class="min-h-400"
+      />
+    </div>
+    <div v-show="showTab === 'yaml'">
+      <div mb1 op50>
+        YAML 編輯功能暫未實裝
+      </div>
+      <LyricsRawEditor
+        lang="yaml"
+        :model-value="yaml"
         input-class="min-h-400"
       />
     </div>
