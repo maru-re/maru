@@ -108,13 +108,13 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(typescript@5.6.2)(vue@3.5.6(typescript@5.6.2))
       plain-shiki:
-        specifier: ^0.0.7
+        specifier: 0.0.7
         version: 0.0.7
       shiki:
         specifier: ^1.21.1
         version: 1.21.1
       shiki-language-lyric:
-        specifier: ^0.0.1
+        specifier: 0.0.1
         version: 0.0.1
       typescript:
         specifier: ^5.6.2
