@@ -11,12 +11,14 @@ export interface UseSongDataResult {
   error: Ref<unknown>
 }
 
-export function useSongData(query: () => {
-  share?: string
-  id?: string
-  create?: string
-  demo?: string
-}): UseSongDataResult & { then: (cb: (ctx: UseSongDataResult) => void) => Promise<void> } {
+export function useSongData(
+  query: () => {
+    share?: string
+    id?: string
+    demo?: string
+  },
+  create = false,
+): UseSongDataResult & { then: (cb: (ctx: UseSongDataResult) => void) => Promise<void> } {
   const source = ref<SongDataSource>('demo')
   const status = ref<'loading' | 'error' | 'done' | 'missing'>('loading')
   const data = shallowRef<MaruSongDataParsed>()
@@ -41,10 +43,6 @@ export function useSongData(query: () => {
               decompressFromEncodedURIComponent(query.share),
             )))
           }
-          else if (query.create) {
-            source.value = 'create'
-            data.value = createEmptySongData(query.create)
-          }
           else if (query.id) {
             source.value = 'local'
             const raw = await loadSongFromStorage(query.id)
@@ -52,7 +50,13 @@ export function useSongData(query: () => {
               ? parseSongData(validate(raw))
               : undefined
             if (!data.value) {
-              status.value = 'missing'
+              if (create) {
+                source.value = 'create'
+                data.value = createEmptySongData(query.id)
+              }
+              else {
+                status.value = 'missing'
+              }
             }
           }
           else {

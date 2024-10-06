@@ -34,10 +34,10 @@ export async function removeAllData() {
   _recentIds.value = []
 }
 
-export async function saveSongsToLocal(songs: MaruSongData[]) {
+export async function saveSongsToLocal(songs: MaruSongData[], override = true) {
   const append: MaruSongGist[] = []
   for (const song of songs) {
-    await saveSongToStorage(song)
+    await saveSongToStorage(song, override)
     const gist = markRaw(extractGist(song))
     append.unshift(gist)
   }

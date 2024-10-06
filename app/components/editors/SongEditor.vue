@@ -41,7 +41,7 @@ async function save() {
   }
   state.lrc = serializeToLrc({ lyrics: state.lyrics, meta: {} })
   const copy = { ...toRaw(state), lyrics: undefined }
-  await saveSongToStorage(copy)
+  await saveSongsToLocal([copy])
   dirty.value = false
 }
 
@@ -85,6 +85,10 @@ function insertLineAfter(index: number) {
 
 function insertAtCurrentTime() {
   for (let i = 0; i < state.lyrics.length; i++) {
+    // Skip if the timestamp already exists
+    if (state.lyrics[i]!.t === controls.current.value) {
+      return
+    }
     if (state.lyrics[i]!.t > controls.current.value) {
       state.lyrics.splice(i, 0, {
         t: controls.current.value,

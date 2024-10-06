@@ -28,7 +28,7 @@ const data = reactive<MaruSongDataParsed>({
 const controls = usePlayer(data)
 
 function go() {
-  router.push(`/edit?create=${id.value}`)
+  router.push(`/edit?id=${id.value}`)
 }
 
 watch(

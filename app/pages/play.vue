@@ -45,17 +45,26 @@ watchEffect(() => {
         {{ error }}
       </p>
     </template>
-    <template v-else-if="status === 'missing'">
-      <h1 text-4xl text-red>
+    <template v-else-if="status === 'missing' || !data">
+      <h1 text-10em font-serif>
         404
       </h1>
       <p>
         歌曲不存在。
-        <!-- TODO: make show a editor -->
       </p>
     </template>
-    <NuxtLink to="/" mt-10 hover="underline">
-      回到首頁
-    </NuxtLink>
+    <div mt10 flex="~ gap-2">
+      <SimpleButton
+        v-if="status === 'missing' || !data"
+        icon="i-uil-plus-circle"
+        :to="`/edit?id=${route.query.id}`"
+        title="創建歌詞"
+      />
+      <SimpleButton
+        icon="i-uil-home-alt"
+        to="/"
+        title="回到首頁"
+      />
+    </div>
   </div>
 </template>
