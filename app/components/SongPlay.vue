@@ -170,7 +170,7 @@ async function remove() {
         />
       </div>
       <YouTubePlayer
-        border-rounded-1.5em
+        border="~ base rounded-1.5em"
         lt-sm="rounded-0 border-0 border-b border-base"
         lt-lg="max-w-680px w-full mxa"
       />

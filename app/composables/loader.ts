@@ -2,19 +2,22 @@ import { parseSongData } from '@marure/parser'
 import { type MaruSongDataParsed, validate } from '@marure/schema'
 import { decompressFromEncodedURIComponent } from 'lz-string'
 
+export type SongDataSource = 'share' | 'local' | 'demo' | 'create'
+
 export interface UseSongDataResult {
   status: Ref<'loading' | 'error' | 'done' | 'missing'>
   data: Ref<MaruSongDataParsed | undefined>
-  source: Ref<'share' | 'local' | 'demo'>
+  source: Ref<SongDataSource>
   error: Ref<unknown>
 }
 
 export function useSongData(query: () => {
   share?: string
   id?: string
+  create?: string
   demo?: string
 }): UseSongDataResult & { then: (cb: (ctx: UseSongDataResult) => void) => Promise<void> } {
-  const source = ref<'share' | 'local' | 'demo'>('demo')
+  const source = ref<SongDataSource>('demo')
   const status = ref<'loading' | 'error' | 'done' | 'missing'>('loading')
   const data = shallowRef<MaruSongDataParsed>()
   const error = shallowRef<unknown>()
@@ -37,6 +40,10 @@ export function useSongData(query: () => {
             data.value = parseSongData(validate(JSON.parse(
               decompressFromEncodedURIComponent(query.share),
             )))
+          }
+          else if (query.create) {
+            source.value = 'create'
+            data.value = createEmptySongData(query.create)
           }
           else if (query.id) {
             source.value = 'local'

@@ -91,7 +91,7 @@ async function onFileChange(e: Event) {
         基於 YouTube 的歌曲歌詞閱讀器
       </div>
 
-      <div p5 flex="~ gap-2 items-center justify-center">
+      <div p5 flex="~ col gap-2 items-center justify-center">
         <div
           border="~ dashed #888 rounded-2"
           flex="~ gap-2 items-center"
@@ -107,6 +107,15 @@ async function onFileChange(e: Event) {
             absolute inset-0 h-full w-full cursor-pointer opacity-0
             @change="onFileChange"
           >
+        </div>
+        <div flex="~ justify-center wrap">
+          <NuxtLink to="/play?demo=1" op50 hover="op100 underline">
+            Demo
+          </NuxtLink>
+          <span mx2 op50> · </span>
+          <NuxtLink to="/create" op50 hover="op100 underline">
+            建立歌曲
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -135,10 +144,6 @@ async function onFileChange(e: Event) {
       </div>
     </div>
     <div flex="~ justify-center wrap">
-      <NuxtLink to="/play?demo=1" op50 hover="op100 underline">
-        Demo
-      </NuxtLink>
-      <span mx2 op50> · </span>
       <NuxtLink to="/format" op50 hover="op100 underline">
         檔案格式
       </NuxtLink>

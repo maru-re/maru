@@ -4,20 +4,13 @@ import { parseLrc, serializeToLrc } from '~~/packages/parser/src'
 
 const props = defineProps<{
   data?: MaruSongDataParsed
+  source?: string
 }>()
 
 const state = reactive<MaruSongDataParsed>(
   props.data
     ? structuredClone(toRaw(props.data))
-    : {
-        schema: 'v1',
-        title: '',
-        youtube: '',
-        artists: [],
-        lyrics: [],
-        lrc: '',
-        tags: [],
-      },
+    : createEmptySongData(),
 )
 
 const dirty = ref(false)
@@ -50,23 +43,6 @@ async function save() {
 }
 
 const controls = usePlayer(state, false)
-
-const youtubeString = computed({
-  get: () => state.youtube,
-  set: (value: string) => {
-    if (value.startsWith('https://www.youtube.com/watch')) {
-      const url = new URL(value)
-      state.youtube = url.searchParams.get('v') || ''
-    }
-    else if (value.startsWith('https://youtu.be/')) {
-      const url = new URL(value)
-      state.youtube = url.pathname.slice(1)
-    }
-    else {
-      state.youtube = value
-    }
-  },
-})
 
 watch(
   () => state.youtube,
@@ -160,6 +136,15 @@ useEventListener('keydown', (e) => {
     ;(document.activeElement as HTMLElement)?.blur?.()
   }
 })
+
+onMounted(() => {
+  if (state.lyrics.length === 0) {
+    state.lyrics.push({
+      t: 0,
+      words: [],
+    })
+  }
+})
 </script>
 
 <template>
@@ -172,7 +157,7 @@ useEventListener('keydown', (e) => {
       <h1 my4 text-2xl>
         歌詞編輯
       </h1>
-      <TextInput v-model="youtubeString" label="YouTube ID" input-class="font-mono" disabled />
+      <TextInput :model-value="state.youtube" label="YouTube ID" input-class="font-mono" disabled />
       <TextInput v-model="state.title" label="歌曲標題" />
       <TextInput v-model="artistsString" label="歌手" />
       <TextInput v-model="tagsString" label="標籤" />

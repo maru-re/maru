@@ -27,7 +27,7 @@ for (const file of files) {
   }
   await fs.mkdir(join(cwd, 'out/data'), { recursive: true })
   await fs.writeFile(
-    join(cwd, 'out/data', `[${parsed.youtube}]-${normalizeFilename(parsed.title)}-${normalizeFilename((parsed.artists || []).join('-'))}.yaml`),
+    join(cwd, 'out/data', `[${parsed.youtube}]-${normalizeFilename(parsed.title)}-${normalizeFilename((parsed.artists || []).join('-'))}.maru`),
     YAML.dump(parsed),
   )
 }
