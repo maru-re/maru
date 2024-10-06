@@ -76,6 +76,8 @@ async function onFileChange(e: Event) {
 
 <template>
   <div>
+    <DropZone />
+    <ImportDialog />
     <div pb-10 pt-25 flex="~ col gap-2 items-center">
       <div i-mdi-circle-double text-5xl op75 />
       <div text-4xl font-jp-serif>
