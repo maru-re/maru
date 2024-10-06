@@ -182,6 +182,7 @@ export function usePlayer(data: MaruSongDataParsed, autoplay = true) {
     current,
     duration,
     go,
+    status,
     active,
     play,
     toggle,

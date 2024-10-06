@@ -60,7 +60,10 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
             />
           </div>
         </TimestampEditor>
-        <div v-if="duration != null" text-right text-sm font-mono op35>
+        <div
+          v-if="duration != null" w-max self-end text-right text-sm font-mono
+          :class="duration < 0 ? 'op100 bg-red:10 text-red px2 rounded-full font-bold' : 'op35'"
+        >
           {{ duration.toFixed(2) }}s
         </div>
       </div>
