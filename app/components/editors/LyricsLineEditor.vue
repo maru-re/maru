@@ -16,8 +16,8 @@ const emit = defineEmits<{
 const line = defineModel<LyricLine>('line', { required: true })
 
 watchImmediate(() => line.value.trans, () => {
+  line.value.trans ??= {}
   for (const lang of props.translations || []) {
-    line.value.trans ??= {}
     line.value.trans[lang] ||= ''
   }
 })
