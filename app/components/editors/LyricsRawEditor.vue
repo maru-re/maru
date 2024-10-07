@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const props = defineProps<{
-  label?: string
   type?: 'text' | 'textarea'
   inputClass?: string
   lang?: 'lyric' | 'lyric-inline' | 'yaml'
@@ -10,6 +9,7 @@ const modelValue = defineModel<string>('modelValue')
 
 const sharedClass = 'box-input font-mono'
 const editor = useTemplateRef<HTMLDivElement>('editor')
+const container = useTemplateRef<HTMLLabelElement>('container')
 const text = ref(modelValue.value)
 const revision = ref(0)
 
@@ -39,6 +39,8 @@ if (isSupported) {
   )
 }
 
+const { focused } = useFocus(editor)
+
 function updateModelValue() {
   updatePaused.value = true
   modelValue.value = editor.value?.textContent ?? ''
@@ -60,8 +62,8 @@ function getSupported() {
 </script>
 
 <template>
-  <label flex="~ col gap-1">
-    <span v-if="label" op75>{{ label }}</span>
+  <div ref="container" flex="~ col gap-1" relative>
+    <slot :focused="focused" />
     <div
       v-if="isSupported"
       :key="revision"
@@ -75,9 +77,9 @@ function getSupported() {
     />
     <textarea
       v-else
+      ref="editor"
       v-model="modelValue"
       :class="[sharedClass, inputClass]"
-      :placeholder="label"
     />
-  </label>
+  </div>
 </template>

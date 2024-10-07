@@ -84,7 +84,22 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
           <LyricsRawEditor
             v-model="input"
             lang="lyric-inline"
-          />
+          >
+            <!-- TODO:  -->
+            <!-- <template #default="{ focused }">
+              <div
+                v-if="focused"
+                pos="absolute top-110% left-50%"
+                px2 py1 ring-2
+                translate-x="-50%"
+                ring-primary:50
+                floating-glass
+                flex="~ gap-2"
+              >
+                <ActionButton icon="i-uil:check" title="確定" />
+              </div>
+            </template> -->
+          </LyricsRawEditor>
         </div>
       </div>
       <template v-if="line.words.length">
