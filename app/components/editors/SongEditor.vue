@@ -69,6 +69,9 @@ function syncLrc() {
 const yaml = ref('')
 
 function changeTab(tab: 'lrc' | 'lyrics' | 'yaml') {
+  if (showTab.value === tab) {
+    return
+  }
   syncLrc()
   if (tab === 'yaml')
     yaml.value = YAML.dump({ ...state, lyrics: undefined })
