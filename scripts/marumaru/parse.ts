@@ -9,7 +9,7 @@ export function parse(html: string, sourceUrl: string) {
     schema: 'v1',
     youtube: $('#VideoID').text().trim(),
     title: $('#SongName').text().trim(),
-    artists: $('#Singer').text().split(/[,;、×]|\bfeat\.?|\bft\s*\.?|\bwith\b/gi).map(s => s.trim()).filter(Boolean),
+    artists: $('#Singer').text().split(/[,;、×]|\bfeat\.?|\bft\s*\.?|\bwith\r/gi).map(s => s.trim()).filter(Boolean),
     tags: $('#SongType').text().split(/[,;、]/g).map(s => s.trim()).filter(Boolean),
     lrc: '',
   }
@@ -48,13 +48,13 @@ export function parse(html: string, sourceUrl: string) {
 
     el.contents().each((_, _word) => {
       const word = $(_word)
-      const rb = word.find('rb').text()
-      const rt = word.find('rt').text()
+      const w = word.find('rb').text()
+      const r = word.find('rt').text()
       const text = word.text()
-      if (rt)
-        words.push({ r: rb, w: rt })
+      if (r)
+        words.push({ r, w })
       else
-        words.push({ w: rb || text })
+        words.push({ w: w || text })
     })
 
     const translations: Record<string, string> = {}
