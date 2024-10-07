@@ -63,12 +63,6 @@ export const MaruSongSchama = object({
   )),
   lrc: string(),
   notes: optional(array(string())),
-  credits: optional(object({
-    song: optional(string()),
-    lyrics: optional(string()),
-    translations: optional(string()),
-    extra: optional(string()),
-  })),
 })
 
 export type LyricLine = InferInput<typeof LyricLineSchema>

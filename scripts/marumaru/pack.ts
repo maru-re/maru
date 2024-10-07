@@ -8,7 +8,7 @@ import JSZip from 'jszip'
 import { normalizeFilename } from './parse'
 
 const cwd = fileURLToPath(new URL('.', import.meta.url))
-const paths = await fg('out/data/**/*.yaml', { cwd, absolute: true })
+const paths = await fg('out/data/**/*.maru', { cwd, absolute: true })
 
 const files = await Promise.all(paths.map(async (path) => {
   const content = await fs.readFile(path, 'utf-8')
@@ -26,7 +26,8 @@ const tags = new Set<string>(
   files.flatMap(({ data }) => data.tags || []),
 )
 
-await fs.rm(join(cwd, `out/packs`), { recursive: true })
+await fs.rm(join(cwd, `out/packs`), { recursive: true, force: true })
+await fs.mkdir(join(cwd, `out/packs`), { recursive: true })
 
 for (const artist of artists) {
   const zip = new JSZip()
@@ -37,7 +38,7 @@ for (const artist of artists) {
     zip.file(basename(path), content)
   }
   await fs.mkdir(join(cwd, `out/packs/by-artist`), { recursive: true })
-  await fs.writeFile(join(cwd, `out/packs/by-artist/${normalizeFilename(artist)}.zip`), await zip.generateAsync({ type: 'nodebuffer' }))
+  await fs.writeFile(join(cwd, `out/packs/by-artist/${normalizeFilename(artist)}-[${songs.length}].zip`), await zip.generateAsync({ type: 'nodebuffer' }))
 }
 
 for (const tag of tags) {
@@ -47,5 +48,5 @@ for (const tag of tags) {
     zip.file(basename(path), content)
   }
   await fs.mkdir(join(cwd, `out/packs/by-tag`), { recursive: true })
-  await fs.writeFile(join(cwd, `out/packs/by-tag/${normalizeFilename(tag)}.zip`), await zip.generateAsync({ type: 'nodebuffer' }))
+  await fs.writeFile(join(cwd, `out/packs/by-tag/${normalizeFilename(tag)}-[${songs.length}].zip`), await zip.generateAsync({ type: 'nodebuffer' }))
 }

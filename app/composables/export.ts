@@ -1,4 +1,4 @@
-import type { MaruSongData } from '~~/packages/schema/src'
+import type { MaruSongData } from '@marure/schema'
 import YAML from 'js-yaml'
 import { _collections } from '~/state/local-storage'
 

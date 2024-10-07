@@ -9,9 +9,6 @@ export function parse(html: string, sourceUrl: string) {
     schema: 'v1',
     youtube: $('#VideoID').text().trim(),
     title: $('#SongName').text().trim(),
-    credits: {
-      lyrics: sourceUrl,
-    },
     artists: $('#Singer').text().split(/[,;、×]|\bfeat\.?|\bft\s*\.?|\bwith\b/gi).map(s => s.trim()).filter(Boolean),
     tags: $('#SongType').text().split(/[,;、]/g).map(s => s.trim()).filter(Boolean),
     lrc: '',
@@ -28,6 +25,12 @@ export function parse(html: string, sourceUrl: string) {
   const credits = $([...$('[lang="ja"]')].find(i => $(i).attr('style')?.includes('#333'))).find('br').replaceWith('\n').end().text()
   if (credits)
     site.notes = credits.split(/\n+/g)
+
+  site.notes ||= []
+  site.notes.push(
+    '',
+    `歌詞與時間戳提取自 Marumaru: ${sourceUrl}`,
+  )
 
   const $list = $('#LyricsList')
   $list.find('.LyricsYomi').each((_, _el) => {
