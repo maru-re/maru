@@ -2,7 +2,6 @@
 import Fuse from 'fuse.js'
 import SongsGrid from '~/components/SongsGrid.vue'
 
-const route = useRoute()
 const router = useRouter()
 const {
   recentIds,
@@ -10,7 +9,8 @@ const {
   collections,
 } = useCollections()
 
-const rawSearch = ref(String(route.query.s || ''))
+const hash = useRouteHash()
+const rawSearch = ref(String(hash.value.s || ''))
 const search = useDebounce(rawSearch, 300)
 
 const fuse = computed(() => new Fuse(collections.value, {
@@ -20,9 +20,9 @@ const fuse = computed(() => new Fuse(collections.value, {
 }))
 
 const { ignoreUpdates } = watchIgnorable(
-  () => route.query.s,
+  () => hash.value.s,
   () => {
-    const str = String(route.query.s || '')
+    const str = String(hash.value.s || '')
     if (str !== search.value && str !== rawSearch.value)
       rawSearch.value = str
   },
@@ -33,7 +33,7 @@ watch(
   search,
   () => {
     ignoreUpdates(() => {
-      router.replace({ query: { s: search.value.trim() || undefined } })
+      router.replace({ hash: search.value ? `#s=${search.value}` : '' })
     })
   },
   { immediate: true },
@@ -111,7 +111,7 @@ async function onFileChange(e: Event) {
           >
         </div>
         <div flex="~ justify-center wrap">
-          <NuxtLink to="/play?demo=1" op50 hover="op100 underline">
+          <NuxtLink to="/play#demo=1" op50 hover="op100 underline">
             Demo
           </NuxtLink>
           <span mx2 op50 lt-md="hidden"> · </span>

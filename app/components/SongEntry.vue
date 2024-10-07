@@ -32,7 +32,7 @@ const favorited = computed({
     <NuxtLink
       class="song-entry-cover aspect-5/2"
       :class="link ? '' : 'pointer-events-none'"
-      :to="`/play?id=${song.youtube}`"
+      :to="`/play#id=${song.youtube}`"
       border="transparent rounded-xl"
       absolute inset-0 block of-hidden transition-all duration-500 bg-base
       group-hover="aspect-16/9 translate-y--16.25% shadow-2xl scale-115"

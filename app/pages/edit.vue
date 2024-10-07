@@ -2,7 +2,7 @@
 import { appName } from '~/constants'
 
 // Make it non-reactive on purpose
-const query = { ...useRoute().query }
+const query = { ...useRouteHash().value }
 const { data, source } = await useSongData(() => query, true)
 
 useSeoMeta({

@@ -1,10 +1,13 @@
+import type { MaruSongDataParsed } from '@marure/schema'
+import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { parseSongData } from '@marure/parser'
-import { type MaruSongDataParsed, validate } from '@marure/schema'
+import { validate } from '@marure/schema'
 import { decompressFromEncodedURIComponent } from 'lz-string'
 
 export type SongDataSource = 'share' | 'local' | 'demo' | 'create'
 
 export interface UseSongDataResult {
+  id: Ref<string>
   status: Ref<'loading' | 'error' | 'done' | 'missing'>
   data: Ref<MaruSongDataParsed | undefined>
   source: Ref<SongDataSource>
@@ -23,6 +26,7 @@ export function useSongData(
   const status = ref<'loading' | 'error' | 'done' | 'missing'>('loading')
   const data = shallowRef<MaruSongDataParsed>()
   const error = shallowRef<unknown>()
+  const id = ref()
   let promise: Promise<void> | undefined
 
   watch(
@@ -44,6 +48,7 @@ export function useSongData(
             )))
           }
           else if (query.id) {
+            id.value = query.id
             source.value = 'local'
             const raw = await loadSongFromStorage(query.id)
             data.value = raw
@@ -75,6 +80,7 @@ export function useSongData(
   )
 
   const ctx: UseSongDataResult = {
+    id,
     status,
     data,
     source,

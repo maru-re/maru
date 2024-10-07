@@ -32,7 +32,7 @@ const favorited = computed({
 
 const shareUrl = computed(() => {
   try {
-    return `${location.origin}/play?share=${compressToEncodedURIComponent(JSON.stringify(props.data))}`
+    return `${location.origin}/play#share=${compressToEncodedURIComponent(JSON.stringify(props.data))}`
   }
   catch (e) {
     console.error(e)
@@ -49,12 +49,12 @@ async function exportCurrent() {
 }
 
 function editSong() {
-  router.push({ path: '/edit', query: route.query })
+  router.push({ path: '/edit', hash: route.hash })
 }
 
 async function saveSong() {
   await saveSongsToLocal([props.data])
-  router.replace(`/play?id=${props.data.youtube}`)
+  router.replace(`/play#id=${props.data.youtube}`)
 }
 
 const settings = useSettings()

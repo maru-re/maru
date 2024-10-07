@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { appName } from '~/constants'
 
-const route = useRoute()
-const { data, status, source, error } = useSongData(() => route.query)
+const hash = useRouteHash()
+const { id, data, status, source, error } = useSongData(() => hash.value)
 const { addRecent } = useCollections()
 
 useSeoMeta({
@@ -55,9 +55,9 @@ watchEffect(() => {
     </template>
     <div mt10 flex="~ gap-2">
       <SimpleButton
-        v-if="status === 'missing' || !data"
+        v-if="(status === 'missing' || !data) && id"
         icon="i-uil-plus-circle"
-        :to="`/edit?id=${route.query.id}`"
+        :to="`/edit#id=${id}`"
         title="創建歌詞"
       />
       <SimpleButton

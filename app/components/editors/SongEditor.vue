@@ -111,7 +111,7 @@ function insertAtCurrentTime() {
 }
 
 function gotoSong() {
-  router.push({ path: '/play', query: route.query })
+  router.push({ path: '/play', hash: route.hash })
 }
 
 function deleteLine(index: number) {

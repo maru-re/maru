@@ -5,7 +5,7 @@ const route = useRoute()
 const router = useRouter()
 const id = (route.params as any).id as string
 
-router.replace(`/play?id=${id}`)
+router.replace(`/play#id=${id}`)
 </script>
 
 <template>
