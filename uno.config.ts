@@ -9,6 +9,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import { ofetch } from "ofetch";
 
 export default defineConfig({
   shortcuts: [
@@ -52,6 +53,13 @@ export default defineConfig({
     }),
     presetTypography(),
     presetWebFonts({
+      customFetch:async (url) => {
+        if (url.startsWith("https://fonts.googleapis.com/")) {
+          return Promise.resolve({ data: 'pre-fetched Google Fonts data' });
+        }
+        return await ofetch(url, { ignoreResponseError: true });
+      },
+      provider: 'google',
       fonts: {
         'sans': 'DM Sans',
         'serif': 'DM Serif Display',
