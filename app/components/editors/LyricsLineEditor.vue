@@ -15,10 +15,12 @@ const emit = defineEmits<{
 
 const line = defineModel<LyricLine>('line', { required: true })
 
-for (const lang of props.translations || []) {
+watchImmediate(() => line.value.trans, () => {
   line.value.trans ??= {}
-  line.value.trans[lang] ||= ''
-}
+  for (const lang of props.translations || []) {
+    line.value.trans[lang] ||= ''
+  }
+})
 
 const input = computed({
   get() {
