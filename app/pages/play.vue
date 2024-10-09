@@ -36,11 +36,11 @@ watchEffect(() => {
   <div v-else h-screen w-screen flex="~ col items-center justify-center" p5>
     <BasicNav />
     <template v-if="status === 'loading'">
-      <div>{{ $t("loading") }}</div>
+      <div>{{ $t("common.loading") }}</div>
     </template>
     <template v-else-if="status === 'error'">
       <h1 text-4xl text-red>
-        {{ $t("error") }}
+        {{ $t("common.error") }}
       </h1>
       <p>
         {{ error }}
@@ -64,7 +64,7 @@ watchEffect(() => {
       <SimpleButton
         icon="i-uil-home-alt"
         to="/"
-        :title="$t('backToHome')"
+        :title="$t('common.backToHome')"
       />
     </div>
   </div>

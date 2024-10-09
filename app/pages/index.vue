@@ -101,7 +101,7 @@ async function onFileChange(e: Event) {
           hover="border-primary text-primary bg-primary/5 op100"
         >
           <div i-uil-file-plus-alt />
-          <span>{{ $t("importFile") }}</span>
+          <span>{{ $t("import.importFile") }}</span>
           <input
             type="file"
             :accept="SUPPORTED_IMPORT_EXT.map(ext => `.${ext}`).join(', ')"

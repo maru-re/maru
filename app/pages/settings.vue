@@ -9,7 +9,7 @@ function removeAll() {
   <div mxa max-w-150 p15 lt-lg="p6" text-sm line-height-1.5em>
     <BasicNav />
     <h3 mb5 text-lg font-bold>
-      {{ $t("settings") }}
+      {{ $t("common.settings") }}
     </h3>
     <div py2 flex="~ gap-2">
       <SimpleButton icon="i-uil-trash" color="btn-simple-red" @click="removeAll()">

@@ -107,7 +107,7 @@ const ltMd = bp.isSmaller('md')
         <IconButton to="/" icon="i-uil-angle-left-b" />
         <template #popper>
           <div>
-            {{ $t("backToHome") }}
+            {{ $t("common.backToHome") }}
           </div>
         </template>
       </Tooltip>

@@ -52,7 +52,7 @@ watch(
       placeholder="https://youtube.com/watch?v="
     />
     <SimpleButton icon="i-uil-edit" :disabled="!id" mt2 @click="go()">
-      {{ $t("建立") }}
+      {{ $t("common.create") }}
     </SimpleButton>
     <YouTubePlayer border="~ base" mt10 w-120 rounded-xl shadow-lg />
   </div>
