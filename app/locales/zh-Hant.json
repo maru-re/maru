@@ -25,6 +25,11 @@
     "link": "複製連結"
   },
   "demo": "Demo",
+  "displayMode": {
+    "toggleMode": "切換為{mode}模式",
+    "light": "明亮",
+    "dark": "暗黑"
+  },
   "downloadAllLyrics": "下載所有歌詞檔案",
   "dragFileToHere": "拖拽檔案到這裡",
   "editor": {
@@ -94,7 +99,6 @@
     "tags": "標籤"
   },
   "songNotFound": "歌曲不存在。",
-  "toggleDisplayMode": "切換為{mode}模式",
   "tryRefreshPage": "請嘗試重新整理頁面",
   "visualization": "可視化",
   "youtube": {

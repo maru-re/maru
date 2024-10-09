@@ -64,7 +64,7 @@ function toggle(event: MouseEvent) {
     <IconButton icon="i-uil-sun dark:i-uil-moon" @click="toggle" />
     <template #popper>
       <div>
-        切換為{{ $t("toggleDisplayMode", { mode: color.value === 'dark' ? '明亮' : '暗黑' }) }}模式
+        {{ $t("displayMode.toggleMode", { mode: color.value === 'dark' ? $t("displayMode.light") : $t("displayMode.dark") }) }}
       </div>
     </template>
   </Tooltip>
