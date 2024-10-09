@@ -15,7 +15,8 @@ useHead({
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <div fixed right-3 top-3 p2 floating-glass lt-lg="hidden">
-    <DarkToggle />
+  <div fixed right-3 top-3 flex="~ gap-2" lt-lg="hidden">
+    <DarkToggle class="p2 floating-glass" />
+    <I18nSelector class="p2 floating-glass" />
   </div>
 </template>
