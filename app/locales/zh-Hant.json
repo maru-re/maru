@@ -79,5 +79,10 @@
     "autoPausePerLyrics": "每句歌詞自動暫停"
   },
   "songNotFound": "歌曲不存在。",
-  "toggleDisplayMode": "切換為{mode}模式"
+  "toggleDisplayMode": "切換為{mode}模式",
+  "tryRefreshPage": "請嘗試重新整理頁面",
+  "youtube": {
+    "connecting": "YouTube 連接中...",
+    "connectionFail": "YouTube 連接失敗"
+  }
 }
