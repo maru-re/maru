@@ -134,7 +134,7 @@ async function onFileChange(e: Event) {
         <input
           v-model="rawSearch"
           type="text"
-          :placeholder="`搜尋已匯入的歌曲 (${collections.length})`"
+          :placeholder="$t('search.searchImportedSong', [collections.length])"
           absolute inset-0 w-auto bg-transparent p5 px10 outline-none
         >
         <div flex-auto />
@@ -179,9 +179,8 @@ async function onFileChange(e: Event) {
       <SongsGrid v-if="result?.length" :link="true" :songs="result" :manage="true">
         <template #title>
           <template v-if="search.trim()">
-            <span>{{ $t("searchResult") }}</span>
-            <span text-sm op50>{{ result.length }} 之 {{ collections.length }}</span>
-            <span text-sm op50>{{ $t("searchResultCount", { resultLength: result.length, collectionsLength: collections.length }) }}</span>
+            <span>{{ $t("search.searchResult") }}</span>
+            <span text-sm op50>{{ $t("search.searchResultCount", { resultLength: result.length, collectionsLength: collections.length }) }}</span>
           </template>
           <template v-else>
             <span>{{ $t("allSong") }}</span>
@@ -205,7 +204,7 @@ async function onFileChange(e: Event) {
       </SongsGrid>
 
       <div v-else-if="search" text-center op50>
-        {{ $t("noResult") }}
+        {{ $t("search.noResult") }}
       </div>
     </div>
   </div>

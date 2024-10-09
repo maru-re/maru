@@ -72,12 +72,15 @@
     "saveLyrics": "儲存歌詞",
     "shareLyrics": "分享歌詞"
   },
-  "noResult": "沒找到符合的歌曲。",
   "pasteYoutubeLink": "貼上 YouTube MV 歌曲連結",
   "recentSongs": "最近看過",
   "scrollToCurrentLyrics": "滾動至目前歌詞",
-  "searchResult": "搜尋結果",
-  "searchResultCount": "{resultLength} 之 {collectionsLength}",
+  "search": {
+    "noResult": "沒找到符合的歌曲。",
+    "searchImportedSong": "搜尋已匯入的歌曲（{0}）",
+    "searchResult": "搜尋結果",
+    "searchResultCount": "{resultLength} 之 {collectionsLength}"
+  },
   "seo": {
     "title": {
       "edit": "編輯歌詞 {title} - {artists} 歌詞 | 唱歌學日語 | {appName}",
