@@ -45,6 +45,15 @@
     }
   },
   "settings": "設定",
+  "settingsNav": {
+    "displayFurigana": "是否顯示振假名",
+    "displayKanji": "是否顯示漢字",
+    "displayRomaji": "是否顯示羅馬字",
+    "displayTranslation": "是否顯示翻譯",
+    "lyricsSize": "歌詞字號（{fontSize}）",
+    "scrollWithLyrics": "跟隨歌詞滾動",
+    "autoPausePerLyrics": "每句歌詞自動暫停"
+  },
   "songNotFound": "歌曲不存在。",
   "toggleDisplayMode": "切換為{mode}模式"
 }

@@ -20,7 +20,7 @@ const ltMd = bp.isSmaller('md')
       <template #popper>
         <div>
           <div mb1>
-            是否顯示振假名
+            {{ $t("settingsNav.displayFurigana") }}
           </div>
           <div font-jp-serif>
             <span>漢字</span>
@@ -38,7 +38,7 @@ const ltMd = bp.isSmaller('md')
       <template #popper>
         <div>
           <div mb1>
-            是否顯示漢字
+            {{ $t("settingsNav.displayKanji") }}
           </div>
           <div font-jp-serif>
             <span>かんじ</span>
@@ -53,7 +53,7 @@ const ltMd = bp.isSmaller('md')
       <template #popper>
         <div>
           <div mb1>
-            是否顯示羅馬字
+            {{ $t("settingsNav.displayRomaji") }}
           </div>
           <div>
             <span font-jp-serif>面白い</span>
@@ -67,7 +67,7 @@ const ltMd = bp.isSmaller('md')
       <IconToggle v-model="settings.translation" icon="i-uil-english-to-chinese" />
       <template #popper>
         <div>
-          是否顯示翻譯
+          {{ $t("settingsNav.displayTranslation") }}
         </div>
       </template>
     </Tooltip>
@@ -76,7 +76,7 @@ const ltMd = bp.isSmaller('md')
       <template #popper>
         <div px4 py2>
           <div>
-            歌詞字號 ({{ settings.fontSize }})
+            {{ $t("settingsNav.lyricsSize", { fontSize: settings.fontSize }) }}
           </div>
           <div>
             <input v-model="settings.fontSize" type="range" min="0.6" max="2" step="0.2">
@@ -89,7 +89,7 @@ const ltMd = bp.isSmaller('md')
       <IconToggle v-model="settings.follow" icon="i-uil-right-indent-alt" />
       <template #popper>
         <div>
-          跟隨歌詞滾動
+          {{ $t("settingsNav.scrollWithLyrics") }}
         </div>
       </template>
     </Tooltip>
@@ -97,7 +97,7 @@ const ltMd = bp.isSmaller('md')
       <IconToggle v-model="settings.autoPause" icon="i-uil-pause-circle" />
       <template #popper>
         <div>
-          每句歌詞自動暫停
+          {{ $t("settingsNav.autoPausePerLyrics") }}
         </div>
       </template>
     </Tooltip>
@@ -107,7 +107,7 @@ const ltMd = bp.isSmaller('md')
         <IconButton to="/" icon="i-uil-angle-left-b" />
         <template #popper>
           <div>
-            返回首頁
+            {{ $t("backToHome") }}
           </div>
         </template>
       </Tooltip>
