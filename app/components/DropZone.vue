@@ -65,7 +65,7 @@ onMounted(() => {
       h-full w-full bg-white:50 dark:bg-black:50
     >
       <div text-xl>
-        拖拽檔案到這裡
+        {{ $t("dragFileToHere") }}
       </div>
     </div>
   </div>
