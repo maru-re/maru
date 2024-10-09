@@ -7,6 +7,7 @@
   "create": "建立",
   "createLyrics": "建立歌詞",
   "demo": "Demo",
+  "done": "完成",
   "downloadAllLyrics": "下載所有歌詞檔案",
   "dragFileToHere": "拖拽檔案到這裡",
   "error": "錯誤",
@@ -20,6 +21,11 @@
     }
   },
   "importFile": "匯入歌詞檔案",
+  "importing": "匯入檔案中...",
+  "importComplete": "匯入完成！",
+  "importFail": "匯入失敗！",
+  "importSuccess": "匯入成功！",
+  "importSuccessPartly": "部分匯入成功！",
   "intro": {
     "title": "「唱歌學日文」",
     "description": "基於 YouTube 的歌曲歌詞閱讀器"
