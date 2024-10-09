@@ -120,7 +120,7 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
         <IconButton
           icon="i-uil:trash-alt"
           op10 hover="op100 text-red"
-          title="刪除行"
+          :title="$t('editor.deleteRow')"
           @click="emit('delete')"
         />
       </div>

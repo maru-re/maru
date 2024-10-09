@@ -8,6 +8,8 @@ const props = defineProps<{
   source?: string
 }>()
 
+const { t } = useI18n()
+
 const state = reactive<MaruSongDataParsed>(
   props.data
     ? structuredClone(toRaw(props.data))
@@ -37,7 +39,7 @@ useEventListener('beforeunload', (e) => {
 async function save() {
   if (!state.youtube) {
     // eslint-disable-next-line no-alert
-    alert('YouTube ID is required')
+    alert(t('youtube.requireId'))
     return
   }
   state.lrc = serializeToLrc({ lyrics: state.lyrics, meta: {} })
@@ -208,7 +210,7 @@ onMounted(() => {
         @click="controls.toggle()"
       /> -->
       <IconButton
-        title="在當前時間戳插入"
+        :title="$t('editor.insertAtCurrentTime')"
         icon="i-uil-plus-circle"
         @click="insertAtCurrentTime()"
       />
@@ -216,7 +218,7 @@ onMounted(() => {
         {{ currentTimestamp }}
       </div>
       <IconButton
-        title="複製時間戳"
+        :title="$t('editor.copyTimestamp')"
         :icon="copied ? 'i-uil:check text-green5' : 'i-uil:clipboard'"
         @click="copyCurrentTimestamp()"
       />
@@ -226,15 +228,15 @@ onMounted(() => {
     <BasicNav />
     <div flex="~ col gap-2" max-w-150>
       <h1 my4 text-2xl>
-        歌詞編輯
+        {{ $t("lyrics.editLyrics") }}
       </h1>
       <TextInput :model-value="state.youtube" label="YouTube ID" input-class="font-mono" disabled />
-      <TextInput v-model="state.title" label="歌曲標題" />
-      <TextInput v-model="artistsString" label="歌手" />
-      <TextInput v-model="tagsString" label="標籤" />
+      <TextInput v-model="state.title" :label="$t('song.title')" />
+      <TextInput v-model="artistsString" :label="$t('song.artist')" />
+      <TextInput v-model="tagsString" :label="$t('song.tags')" />
       <TextInput
         v-model="notesString"
-        label="備註"
+        :label="$t('common.notes')"
         type="textarea"
         input-class="h-30"
       />
@@ -245,7 +247,7 @@ onMounted(() => {
         :class="showTab === 'lyrics' ? '' : 'op50'"
         @click="changeTab('lyrics')"
       >
-        可視化
+        {{ $t("visualization") }}
       </SimpleButton>
       <SimpleButton
         :class="showTab === 'lrc' ? '' : 'op50'"
@@ -277,7 +279,7 @@ onMounted(() => {
           <IconButton
             icon="i-uil:plus" my--2 op10 transition-all
             hover="op100 my-0 text-primary bg-gray:20"
-            title="插入行"
+            :title="$t('editor.insertRow')"
             @click="insertLineAfter(idx)"
           />
         </div>
@@ -291,7 +293,7 @@ onMounted(() => {
     </div>
     <div v-show="showTab === 'yaml'">
       <div mb1 op50>
-        YAML 編輯功能暫未實裝
+        {{ $t("editor.yamlNotSupportYet") }}
       </div>
       <LyricsRawEditor
         lang="yaml"
@@ -306,20 +308,20 @@ onMounted(() => {
         icon="i-uil-play-circle"
         @click="gotoSong()"
       >
-        前往歌曲
+        {{ $t("editor.gotoSong") }}
       </SimpleButton>
       <SimpleButton
         icon="i-uil-file-download-alt"
         @click="exportNow()"
       >
-        導出歌詞
+        {{ $t("lyrics.exportLyrics") }}
       </SimpleButton>
       <SimpleButton
         :disabled="!dirty"
         icon="i-uil-save"
         @click="save()"
       >
-        儲存
+        {{ $t("common.save") }}
       </SimpleButton>
     </div>
   </div>

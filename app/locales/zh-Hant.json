@@ -12,8 +12,10 @@
     "error": "錯誤",
     "exportSelected": "匯出所選",
     "loading": "加載中...",
+    "notes": "備註",
     "remove": "刪除",
     "removeSelected": "刪除所選",
+    "save": "儲存",
     "select": "選取",
     "selectAll": "全選",
     "selectInverse": "反選",
@@ -25,6 +27,14 @@
   "demo": "Demo",
   "downloadAllLyrics": "下載所有歌詞檔案",
   "dragFileToHere": "拖拽檔案到這裡",
+  "editor": {
+    "copyTimestamp": "複製時間戳",
+    "deleteRow": "刪除行",
+    "gotoSong": "前往歌曲",
+    "insertAtCurrentTime": "在當前時間戳插入",
+    "insertRow": "插入行",
+    "yamlNotSupportYet": "YAML 編輯功能暫未實裝"
+  },
   "footer": {
     "message": "網站開發中、許多功能尚未完善。歡迎透過 Discord 回報問題",
     "fileFormat": "檔案格式",
@@ -78,11 +88,18 @@
     "scrollWithLyrics": "跟隨歌詞滾動",
     "autoPausePerLyrics": "每句歌詞自動暫停"
   },
+  "song": {
+    "artist": "歌手",
+    "title": "歌曲標題",
+    "tags": "標籤"
+  },
   "songNotFound": "歌曲不存在。",
   "toggleDisplayMode": "切換為{mode}模式",
   "tryRefreshPage": "請嘗試重新整理頁面",
+  "visualization": "可視化",
   "youtube": {
     "connecting": "YouTube 連接中...",
-    "connectionFail": "YouTube 連接失敗"
+    "connectionFail": "YouTube 連接失敗",
+    "requireId": "YouTube ID is required"
   }
 }
