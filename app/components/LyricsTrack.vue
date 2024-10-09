@@ -168,7 +168,7 @@ onMounted(() => {
           <IconButton icon="i-uil-right-indent-alt" class="!p4" />
           <template #popper>
             <div>
-              滾動至目前歌詞
+              {{ $t("scrollToCurrentLyrics") }}
             </div>
           </template>
         </Tooltip>

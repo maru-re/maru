@@ -34,6 +34,7 @@
   "noResult": "沒找到符合的歌曲。",
   "pasteYoutubeLink": "貼上 YouTube MV 歌曲連結",
   "recentSongs": "最近看過",
+  "scrollToCurrentLyrics": "滾動至目前歌詞",
   "searchResult": "搜尋結果",
   "searchResultCount": "{resultLength} 之 {collectionsLength}",
   "seo": {
