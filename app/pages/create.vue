@@ -41,10 +41,10 @@ watch(
   <div flex="~ col gap-2 items-center justify-center" h-full w-full p10>
     <BasicNav />
     <h1 text-2xl font-bold>
-      建立歌詞
+      {{ $t("createLyrics") }}
     </h1>
     <div mt5 op75>
-      貼上 YouTube MV 歌曲連結
+      {{ $t("pasteYoutubeLink") }}
     </div>
     <TextInput
       v-model="input" w-100 font-mono
@@ -52,7 +52,7 @@ watch(
       placeholder="https://youtube.com/watch?v="
     />
     <SimpleButton icon="i-uil-edit" :disabled="!id" mt2 @click="go()">
-      建立
+      {{ $t("建立") }}
     </SimpleButton>
     <YouTubePlayer border="~ base" mt10 w-120 rounded-xl shadow-lg />
   </div>

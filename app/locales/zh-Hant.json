@@ -20,5 +20,7 @@
   "searchResult": "搜尋結果",
   "searchResultCount": "{resultLength} 之 {collectionsLength}",
   "allSong": "所有歌曲",
-  "noResult": "沒找到符合的歌曲。"
+  "noResult": "沒找到符合的歌曲。",
+  "pasteYoutubeLink": "貼上 YouTube MV 歌曲連結",
+  "create": "建立"
 }
