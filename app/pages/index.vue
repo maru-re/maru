@@ -116,7 +116,7 @@ async function onFileChange(e: Event) {
           </NuxtLink>
           <span mx2 op50 lt-md="hidden"> · </span>
           <NuxtLink to="/create" op50 hover="op100 underline" lt-md="hidden">
-            {{ $t("createLyrics") }}
+            {{ $t("lyrics.createLyrics") }}
           </NuxtLink>
         </div>
       </div>

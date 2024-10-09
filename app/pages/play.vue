@@ -59,7 +59,7 @@ watchEffect(() => {
         v-if="(status === 'missing' || !data) && id"
         icon="i-uil-plus-circle"
         :to="`/edit#id=${id}`"
-        :title="$t('createLyrics')"
+        :title="$t('lyrics.createLyrics')"
       />
       <SimpleButton
         icon="i-uil-home-alt"

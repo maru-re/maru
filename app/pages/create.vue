@@ -41,7 +41,7 @@ watch(
   <div flex="~ col gap-2 items-center justify-center" h-full w-full p10>
     <BasicNav />
     <h1 text-2xl font-bold>
-      {{ $t("createLyrics") }}
+      {{ $t("lyrics.createLyrics") }}
     </h1>
     <div mt5 op75>
       {{ $t("pasteYoutubeLink") }}

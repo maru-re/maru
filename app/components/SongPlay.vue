@@ -128,19 +128,19 @@ async function remove() {
           <ActionButton
             type="icon"
             icon="i-ph-trash-duotone op40 hover:op100 hover:text-red"
-            title="刪除歌詞"
+            :title="$t('lyrics.removeLyrics')"
           />
           <template #popper="{ hide }">
             <div flex flex-col gap-2 p4>
               <h3>
-                確認要刪除此歌曲？
+                {{ $t("lyrics.removeLyricsConfirm") }}
               </h3>
               <div flex gap-2>
                 <SimpleButton color="btn-simple-red" bg-red:10 px5 text-red:80 @click="remove">
-                  刪除
+                  {{ $t("common.remove") }}
                 </SimpleButton>
                 <SimpleButton px5 @click="hide()">
-                  取消
+                  {{ $t("common.cancel") }}
                 </SimpleButton>
               </div>
             </div>
@@ -150,7 +150,7 @@ async function remove() {
           v-if="source === 'local'"
           type="icon"
           icon="i-uil-file-download-alt"
-          title="導出歌詞"
+          :title="$t('export.exportLyrics')"
           @click="exportCurrent"
         />
         <ActionButton
@@ -158,21 +158,21 @@ async function remove() {
           lt-md="hidden"
           type="icon"
           icon="i-uil-edit"
-          title="編輯歌詞"
+          :title="$t('editLyrics')"
           @click="editSong"
         />
         <ActionButton
           v-if="source === 'share'"
           type="icon"
           icon="i-uil-save"
-          title="儲存歌詞"
+          :title="$t('saveLyrics')"
           @click="saveSong()"
         />
         <Dropdown>
           <ActionButton
             type="icon"
             icon="i-uil-share-alt"
-            title="分享歌詞"
+            :title="$t('shareLyrics')"
           />
           <template #popper="{ hide }">
             <div p5 flex="~ col gap-2">
@@ -180,7 +180,7 @@ async function remove() {
                 <pre max-h-50 max-w-100 of-auto ws-pre-wrap break-all rounded bg-gray:15 p2>{{ shareUrl }}</pre>
               </div>
               <SimpleButton icon="i-uil-copy" @click="copyShareLink(), hide()">
-                複製連結
+                {{ $t("copy.link") }}
               </SimpleButton>
             </div>
           </template>

@@ -5,13 +5,17 @@
   "clearAllData": "清除所有資料",
   "common": {
     "backToHome": "回到首頁",
+    "cancel": "取消",
     "create": "建立",
     "done": "完成",
     "error": "錯誤",
     "loading": "加載中...",
+    "remove": "刪除",
     "settings": "設定"
   },
-  "createLyrics": "建立歌詞",
+  "copy": {
+    "link": "複製連結"
+  },
   "demo": "Demo",
   "downloadAllLyrics": "下載所有歌詞檔案",
   "dragFileToHere": "拖拽檔案到這裡",
@@ -35,6 +39,15 @@
   "intro": {
     "title": "「唱歌學日文」",
     "description": "基於 YouTube 的歌曲歌詞閱讀器"
+  },
+  "lyrics": {
+    "createLyrics": "建立歌詞",
+    "editLyrics": "編輯歌詞",
+    "exportLyrics": "導出歌詞",
+    "removeLyrics": "刪除歌詞",
+    "removeLyricsConfirm": "確認要刪除此歌曲？",
+    "saveLyrics": "儲存歌詞",
+    "shareLyrics": "分享歌詞"
   },
   "noResult": "沒找到符合的歌曲。",
   "pasteYoutubeLink": "貼上 YouTube MV 歌曲連結",
