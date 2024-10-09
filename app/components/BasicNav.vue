@@ -8,7 +8,7 @@
     </NuxtLink>
     <div flex="~ col" font-jp-serif>
       <ruby text-xl>
-        <rb>二重丸</rb>
+        <rb>{{ $t("nijuumaru") }}</rb>
         <rt>にじゅうまる</rt>
       </ruby>
       <span mt--1 text-xs op50>maru.re</span>

@@ -82,7 +82,7 @@ async function onFileChange(e: Event) {
       <div i-mdi-circle-double text-5xl op75 />
       <div text-4xl font-jp-serif>
         <ruby>
-          <rb>二重丸</rb>
+          <rb>{{ $t("nijuumaru") }}</rb>
           <rt>にじゅうまる</rt>
         </ruby>
       </div>
