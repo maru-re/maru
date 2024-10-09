@@ -138,7 +138,7 @@ export default defineNuxtConfig({
       // { code: 'en', language: 'en-US', file: 'en.json' },
     ],
     defaultLocale: 'zh-Hant',
-    strategy: 'prefix_and_default',
+    strategy: 'no_prefix',
     vueI18n: './locales/i18n.config.ts',
   },
 
