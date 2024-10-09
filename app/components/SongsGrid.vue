@@ -72,36 +72,36 @@ function revertSelection() {
       <slot name="title-action">
         <template v-if="manage">
           <SimpleButton text-xs icon="i-uil-check-square" @click="selectAll()">
-            全選
+            {{ $t("common.selectAll") }}
           </SimpleButton>
           <SimpleButton v-if="selecting" text-xs icon="i-uil-square" @click="revertSelection()">
-            反選
+            {{ $t("common.selectInverse") }}
           </SimpleButton>
           <SimpleButton v-if="selecting" :disabled="!selectedSongs.length" text-xs icon="i-uil-folder-download" @click="exportSelected()">
-            匯出所選 <span op50>{{ selectedSongs.length }}</span>
+            {{ $t("common.exportSelected") }} <span op50>{{ selectedSongs.length }}</span>
           </SimpleButton>
           <Dropdown v-if="selecting" placement="top" :class="selectedSongs.length ? '' : 'pointer-events-none'">
             <SimpleButton :disabled="!selectedSongs.length" icon="i-uil-trash" color="btn-simple-red" text-xs>
-              刪除所選 <span op50>{{ selectedSongs.length }}</span>
+              {{ $t("common.removeSelected") }} <span op50>{{ selectedSongs.length }}</span>
             </SimpleButton>
             <template #popper="{ hide }">
               <div flex flex-col gap-2 p4 text-sm>
                 <h3>
-                  確認要刪除選中的 {{ selectedSongs.length }} 首歌曲？
+                  {{ $t("batchRemoveLyricsConfirm", [selectedSongs.length]) }}
                 </h3>
                 <div flex gap-2 text-sm>
                   <SimpleButton color="btn-simple-red" bg-red:10 px4 text-xs text-red:80 @click="deleteSelected(), hide()">
-                    刪除
+                    {{ $t("common.remove") }}
                   </SimpleButton>
                   <SimpleButton px4 text-xs @click="hide()">
-                    取消
+                    {{ $t("common.cancel") }}
                   </SimpleButton>
                 </div>
               </div>
             </template>
           </Dropdown>
           <SimpleButton text-xs :icon="selecting ? 'i-uil-times' : 'i-uil-th'" @click="selecting = !selecting">
-            {{ selecting ? '取消選取' : '選取' }}
+            {{ selecting ? $t("common.deselect") : $t("common.select") }}
           </SimpleButton>
         </template>
       </slot>

@@ -7,10 +7,16 @@
     "backToHome": "回到首頁",
     "cancel": "取消",
     "create": "建立",
+    "deselect": "取消選取",
     "done": "完成",
     "error": "錯誤",
+    "exportSelected": "匯出所選",
     "loading": "加載中...",
     "remove": "刪除",
+    "removeSelected": "刪除所選",
+    "select": "選取",
+    "selectAll": "全選",
+    "selectInverse": "反選",
     "settings": "設定"
   },
   "copy": {
@@ -41,6 +47,7 @@
     "description": "基於 YouTube 的歌曲歌詞閱讀器"
   },
   "lyrics": {
+    "batchRemoveLyricsConfirm": "確認要刪除選中的 {0} 首歌曲？",
     "createLyrics": "建立歌詞",
     "editLyrics": "編輯歌詞",
     "exportLyrics": "導出歌詞",
