@@ -155,11 +155,11 @@ async function onFileChange(e: Event) {
       </NuxtLink>
       <span mx2 op50> · </span>
       <a href="https://chat.maru.re" target="_blank" op50 hover="op100 underline">
-        {{ $t("footer.contact.Discord") }}
+        {{ $t("footer.contact.discord") }}
       </a>
       <span mx2 op50> · </span>
       <a href="https://github.com/maru-re/maru" target="_blank" op50 hover="op100 underline">
-        {{ $t("footer.contact.Github") }}
+        {{ $t("footer.contact.github") }}
       </a>
     </div>
 
