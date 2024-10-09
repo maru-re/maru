@@ -3,6 +3,8 @@ import { parseSongData } from '~~/packages/parser/src'
 import YAML from 'yaml'
 import { _importingState, type FailedResult, type SucceededResult } from '~/state/import'
 
+const { t } = useI18n()
+
 export const SUPPORTED_IMPORT_EXT = ['json', 'yml', 'yaml', 'maru', 'zip']
 
 async function * traverseFileList(files?: FileList | File[] | FileSystemEntry[]): AsyncGenerator<File> {
@@ -86,7 +88,7 @@ export async function importFromFiles(files?: FileList | FileSystemEntry[] | nul
 
   if (_importingState.value.isImporting && !_importingState.value.isFinished) {
     // eslint-disable-next-line no-alert
-    alert('另一個匯入作業正在進行中，請等待完成後再試。')
+    alert(t('import.anotherImporting'))
     return
   }
 

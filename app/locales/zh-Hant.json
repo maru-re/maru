@@ -50,6 +50,7 @@
     }
   },
   "import": {
+    "anotherImporting": "另一個匯入作業正在進行中，請等待完成後再試。",
     "importFile": "匯入歌詞檔案",
     "importing": "匯入檔案中...",
     "importComplete": "匯入完成！",
