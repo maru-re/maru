@@ -1,11 +1,11 @@
 {
-  "intro": {
-    "title": "「唱歌學日文」",
-    "description": "基於 YouTube 的歌曲歌詞閱讀器"
-  },
-  "importFile": "匯入歌詞檔案",
-  "demo": "Demo",
+  "addToFav": "收藏歌曲",
+  "allSong": "所有歌曲",
+  "backToHome": "回到首頁",
+  "create": "建立",
   "createLyrics": "建立歌詞",
+  "demo": "Demo",
+  "error": "錯誤",
   "footer": {
     "message": "網站開發中、許多功能尚未完善。歡迎透過 Discord 回報問題",
     "fileFormat": "檔案格式",
@@ -15,18 +15,23 @@
       "Github": "Github"
     }
   },
-  "addToFav": "收藏歌曲",
+  "importFile": "匯入歌詞檔案",
+  "intro": {
+    "title": "「唱歌學日文」",
+    "description": "基於 YouTube 的歌曲歌詞閱讀器"
+  },
+  "loading": "加載中...",
+  "noResult": "沒找到符合的歌曲。",
+  "pasteYoutubeLink": "貼上 YouTube MV 歌曲連結",
   "recentSongs": "最近看過",
   "searchResult": "搜尋結果",
   "searchResultCount": "{resultLength} 之 {collectionsLength}",
-  "allSong": "所有歌曲",
-  "noResult": "沒找到符合的歌曲。",
-  "pasteYoutubeLink": "貼上 YouTube MV 歌曲連結",
-  "create": "建立",
   "seo": {
     "title": {
       "edit": "編輯歌詞 {title} - {artists} 歌詞 | 唱歌學日語 | {appName}",
-      "new": "建立歌詞 | 唱歌學日語 | {appName}"
+      "new": "建立歌詞 | 唱歌學日語 | {appName}",
+      "play": "{title} - {artists} 歌詞 | 唱歌學日語 | {appName}"
     }
-  }
+  },
+  "songNotFound": "歌曲不存在。"
 }
