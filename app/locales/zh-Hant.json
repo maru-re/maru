@@ -36,5 +36,6 @@
     }
   },
   "settings": "設定",
-  "songNotFound": "歌曲不存在。"
+  "songNotFound": "歌曲不存在。",
+  "toggleDisplayMode": "切換為{mode}模式"
 }
