@@ -133,9 +133,9 @@ export default defineNuxtConfig({
   i18n: {
     langDir: './locales',
     locales: [
-      { code: 'zh-Hant', language: 'zh-Hant', file: 'zh-Hant.json' },
-      // { code: 'zh-Hans', language: 'zh-Hans', file: 'zh-Hans.json' },
-      // { code: 'en', language: 'en-US', file: 'en.json' },
+      { code: 'zh-Hant', language: 'zh-Hant', name: '繁體中文', file: 'zh-Hant.json' },
+      { code: 'zh-Hans', language: 'zh-Hans', name: '简体中文', file: 'zh-Hans.json' },
+      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
     ],
     defaultLocale: 'zh-Hant',
     strategy: 'no_prefix',
