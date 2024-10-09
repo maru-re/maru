@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/eslint',
     'nuxt-compile-markdown',
+    '@nuxtjs/i18n',
   ],
 
   ssr: false,
@@ -127,6 +128,18 @@ export default defineNuxtConfig({
         moduleResolution: 'bundler',
       },
     },
+  },
+
+  i18n: {
+    langDir: './locales',
+    locales: [
+      { code: 'zh-Hant', language: 'zh-Hant', file: 'zh-Hant.json' },
+      // { code: 'zh-Hans', language: 'zh-Hans', file: 'zh-Hans.json' },
+      // { code: 'en', language: 'en-US', file: 'en.json' },
+    ],
+    defaultLocale: 'zh-Hant',
+    strategy: 'prefix_and_default',
+    vueI18n: './locales/i18n.config.ts',
   },
 
   compatibilityDate: '2024-08-14',

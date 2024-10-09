@@ -87,7 +87,7 @@ async function onFileChange(e: Event) {
         </ruby>
       </div>
       <div mt5 text-center op75>
-        「唱歌學日文」
+        {{ $t("intro.title") }}
       </div>
       <div text-center op50>
         基於 YouTube 的歌曲歌詞閱讀器
