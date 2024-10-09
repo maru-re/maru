@@ -22,5 +22,11 @@
   "allSong": "所有歌曲",
   "noResult": "沒找到符合的歌曲。",
   "pasteYoutubeLink": "貼上 YouTube MV 歌曲連結",
-  "create": "建立"
+  "create": "建立",
+  "seo": {
+    "title": {
+      "edit": "編輯歌詞 {title} - {artists} 歌詞 | 唱歌學日語 | {appName}",
+      "new": "建立歌詞 | 唱歌學日語 | {appName}"
+    }
+  }
 }
