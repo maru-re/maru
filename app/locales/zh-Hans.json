@@ -1,6 +1,113 @@
 {
+  "nijuumaru": "二重丸",
+  "addToFav": "收藏歌曲",
+  "allSong": "所有歌曲",
+  "clearAllData": "清除所有数据",
+  "common": {
+    "backToHome": "回到首页",
+    "cancel": "取消",
+    "create": "创建",
+    "deselect": "取消选取",
+    "done": "完成",
+    "error": "错误",
+    "exportSelected": "导出所选",
+    "loading": "加载中...",
+    "notes": "备注",
+    "remove": "删除",
+    "removeSelected": "删除所选",
+    "save": "保存",
+    "select": "选取",
+    "selectAll": "全选",
+    "selectInverse": "反选",
+    "settings": "设置"
+  },
+  "copy": {
+    "link": "拷贝链接"
+  },
+  "demo": "演示",
+  "displayMode": {
+    "toggleMode": "切换为{mode}模式",
+    "light": "明亮",
+    "dark": "暗黑"
+  },
+  "downloadAllLyrics": "下载所有歌词文件",
+  "dragFileToHere": "拖拽文件到这里",
+  "editor": {
+    "copyTimestamp": "拷贝时间戳",
+    "deleteRow": "删除行",
+    "gotoSong": "前往歌曲",
+    "insertAtCurrentTime": "在当前时间戳插入",
+    "insertRow": "插入行",
+    "yamlNotSupportYet": "YAML 编辑功能暂未实装"
+  },
+  "footer": {
+    "message": "网站开发中、许多功能尚未完善。欢迎通过 Discord 回报问题",
+    "fileFormat": "文件格式",
+    "aboutUS": "关于我们",
+    "contact": {
+      "Discord": "Discord",
+      "Github": "Github"
+    }
+  },
+  "import": {
+    "anotherImporting": "另一个导入作业正在进行中，请等待完成后再试。",
+    "importFile": "导入歌词文件",
+    "importing": "导入文件中...",
+    "importComplete": "导入完成！",
+    "importFail": "导入失败！",
+    "importSuccess": "导入成功！",
+    "importSuccessPartly": "部分导入成功！"
+  },
   "intro": {
     "title": "「唱歌学日文」",
     "description": "基于 YouTube 的歌曲歌词阅读器"
+  },
+  "lyrics": {
+    "batchRemoveLyricsConfirm": "确认要删除选中的 {0} 首歌曲？",
+    "createLyrics": "创建歌词",
+    "editLyrics": "编辑歌词",
+    "exportLyrics": "导出歌词",
+    "removeLyrics": "删除歌词",
+    "removeLyricsConfirm": "确认要删除此歌曲？",
+    "saveLyrics": "保存歌词",
+    "shareLyrics": "分享歌词"
+  },
+  "pasteYoutubeLink": "粘贴 YouTube MV 歌曲链接",
+  "recentSongs": "最近看过",
+  "scrollToCurrentLyrics": "滚动至目前歌词",
+  "search": {
+    "noResult": "没找到符合的歌曲。",
+    "searchImportedSong": "搜索已导入的歌曲（{0}）",
+    "searchResult": "搜索结果",
+    "searchResultCount": "{resultLength} 之 {collectionsLength}"
+  },
+  "seo": {
+    "title": {
+      "edit": "编辑歌词 {title} - {artists} 歌词 | 唱歌学日语 | {appName}",
+      "new": "创建歌词 | 唱歌学日语 | {appName}",
+      "play": "{title} - {artists} 歌词 | 唱歌学日语 | {appName}"
+    }
+  },
+  "settingsNav": {
+    "displayFurigana": "是否显示振假名",
+    "displayKanji": "是否显示汉字",
+    "displayRomaji": "是否显示罗马字",
+    "displayTranslation": "是否显示翻译",
+    "lyricsSize": "歌词字号（{fontSize}）",
+    "scrollWithLyrics": "跟随歌词滚动",
+    "autoPausePerLyrics": "每句歌词自动暂停"
+  },
+  "song": {
+    "artist": "歌手",
+    "title": "歌曲标题",
+    "tags": "标签"
+  },
+  "songNotFound": "歌曲不存在。",
+  "tryRefreshPage": "请尝试刷新页面",
+  "visualization": "可视化",
+  "youtube": {
+    "connecting": "YouTube 连接中...",
+    "connectionFail": "YouTube 连接失败",
+    "requireId": "YouTube ID is required"
   }
 }
