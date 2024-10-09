@@ -139,7 +139,7 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'zh-Hant',
     strategy: 'no_prefix',
-    vueI18n: './locales/i18n.config.ts',
+    vueI18n: './app/locales/i18n.config.ts',
   },
 
   compatibilityDate: '2024-08-14',
