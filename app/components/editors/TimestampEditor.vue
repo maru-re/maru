@@ -7,6 +7,7 @@ defineProps<{
 
 const emit = defineEmits<{
   (event: 'go', autoPlay: boolean): void
+  (event: 'next'): void
 }>()
 
 const modelValue = defineModel('modelValue', {
@@ -54,9 +55,13 @@ function onKeydown(e: KeyboardEvent) {
     modelValue.value += 0.1
     emit('go', false)
   }
-  else if (e.key === 'Enter' || e.key === 'Escape') {
+  else if (e.key === 'Escape') {
     e.preventDefault()
     input.value?.blur()
+  }
+  else if (e.key === 'Enter') {
+    e.preventDefault()
+    emit('next')
   }
 }
 </script>
@@ -74,6 +79,7 @@ function onKeydown(e: KeyboardEvent) {
     />
     <input
       ref="input"
+      class="timestamp-input"
       :value="timestamp"
       placeholder="00:00.00"
       w-full flex-auto py1 pr2 text-right font-mono box-input-inner
