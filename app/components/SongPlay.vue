@@ -150,7 +150,7 @@ async function remove() {
           v-if="source === 'local'"
           type="icon"
           icon="i-uil-file-download-alt"
-          :title="$t('export.exportLyrics')"
+          :title="$t('lyrics.exportLyrics')"
           @click="exportCurrent"
         />
         <ActionButton
@@ -158,21 +158,21 @@ async function remove() {
           lt-md="hidden"
           type="icon"
           icon="i-uil-edit"
-          :title="$t('editLyrics')"
+          :title="$t('lyrics.editLyrics')"
           @click="editSong"
         />
         <ActionButton
           v-if="source === 'share'"
           type="icon"
           icon="i-uil-save"
-          :title="$t('saveLyrics')"
+          :title="$t('lyrics.saveLyrics')"
           @click="saveSong()"
         />
         <Dropdown>
           <ActionButton
             type="icon"
             icon="i-uil-share-alt"
-            :title="$t('shareLyrics')"
+            :title="$t('lyrics.shareLyrics')"
           />
           <template #popper="{ hide }">
             <div p5 flex="~ col gap-2">

@@ -87,7 +87,7 @@ function revertSelection() {
             <template #popper="{ hide }">
               <div flex flex-col gap-2 p4 text-sm>
                 <h3>
-                  {{ $t("batchRemoveLyricsConfirm", [selectedSongs.length]) }}
+                  {{ $t("lyrics.batchRemoveLyricsConfirm", [selectedSongs.length]) }}
                 </h3>
                 <div flex gap-2 text-sm>
                   <SimpleButton color="btn-simple-red" bg-red:10 px4 text-xs text-red:80 @click="deleteSelected(), hide()">
