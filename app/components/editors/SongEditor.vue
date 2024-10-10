@@ -9,7 +9,7 @@ const props = defineProps<{
   source?: string
 }>()
 
-const { t } = useI18n()
+const { t, locale, locales } = useI18n()
 
 const state = reactive<MaruSongDataParsed>(
   props.data
@@ -163,8 +163,21 @@ function exportNow() {
   exportSongMaru(state)
 }
 
-// TODO: make this customizable
-const translations = ['zh-Hant']
+const translations = reactive(Array.from(
+  new Set([
+    locale.value,
+    ...state.lyrics.flatMap(i => Object.keys(i.trans || {})),
+  ]),
+))
+
+function toggleTranslations(lang: string) {
+  if (translations.includes(lang)) {
+    translations.splice(translations.indexOf(lang), 1)
+  }
+  else {
+    translations.push(lang)
+  }
+}
 
 const artistsString = computed({
   get: () => (state.artists || []).join(', '),
@@ -283,6 +296,17 @@ onMounted(() => {
       </SimpleButton>
     </div>
     <div v-show="showTab === 'lyrics'" flex="~ col gap-1" ml--5>
+      <div flex="~ gap-2 items-center" border="~ base rounded-xl" mb2 ml5 px4 py2>
+        <div i-uil-english-to-chinese mr1 />
+        <SimpleButton
+          v-for="item of locales" :key="item.code"
+          :class="translations.includes(item.code) ? 'op100 text-primary' : 'op50'"
+          :icon="translations.includes(item.code) ? 'i-uil-check-circle text-primary' : 'i-uil-circle op50'"
+          @click="toggleTranslations(item.code)"
+        >
+          {{ item.name || item.code }}
+        </SimpleButton>
+      </div>
       <template
         v-for="line, idx of state.lyrics"
         :key="idx"

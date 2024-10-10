@@ -13,6 +13,8 @@ const emit = defineEmits<{
   (event: 'delete'): void
 }>()
 
+const { locales } = useI18n()
+
 const line = defineModel<LyricLine>('line', { required: true })
 
 watchImmediate(() => line.value.trans, () => {
@@ -108,7 +110,7 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
         <div v-for="lang of translations" :key="lang" flex="~ gap-2 items-center">
           <div w-28 flex-none text-right text-sm op50 flex="~ gap-1 items-center justify-end">
             <div i-uil-english-to-chinese />
-            {{ lang }}
+            {{ locales.find(i => i.code === lang)?.name ?? lang }}
           </div>
           <TextInput
             v-model="line.trans![lang]"
