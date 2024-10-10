@@ -37,7 +37,13 @@
     "gotoSong": "前往歌曲",
     "insertAtCurrentTime": "在当前时间戳插入",
     "insertRow": "插入行",
-    "yamlNotSupportYet": "YAML 编辑功能暂未实装"
+    "yamlNotSupportYet": "YAML 编辑功能暂未实装",
+    "timestamp": {
+      "stepBackward": "往前微调时间",
+      "skipForward": "往后微调时间",
+      "setCurrentTime": "设为当前播放时间",
+      "configAutoNext": "设为当前播放时间后，是否自动跳到下一个时间戳"
+    }
   },
   "favSongs": "收藏歌曲",
   "footer": {

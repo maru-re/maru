@@ -37,7 +37,13 @@
     "gotoSong": "Go to Song",
     "insertAtCurrentTime": "Insert at Current Timestamp",
     "insertRow": "Insert Row",
-    "yamlNotSupportYet": "YAML editing feature not yet implemented"
+    "yamlNotSupportYet": "YAML editing feature not yet implemented",
+    "timestamp": {
+      "stepBackward": "Step backward",
+      "skipForward": "Step forward",
+      "setCurrentTime": "Apply current playback time",
+      "configAutoNext": "Allow jump to the next timestamp after applying current playback time"
+    }
   },
   "favSongs": "Favorite Songs",
   "footer": {

@@ -112,7 +112,7 @@ function onKeydown(e: KeyboardEvent) {
         <IconButton icon="i-uil:step-backward" text-sm @click="adjustTime(-0.1)" @pointerdown.prevent />
         <template #popper>
           <div flex="~ items-center">
-            往前微調時間<kbd kbd-key ml2><div i-uil-arrow-up mx--1 /></kbd>
+            {{ $t('editor.timestamp.stepBackward') }} <kbd kbd-key ml2><div i-uil-arrow-up mx--1 /></kbd>
           </div>
         </template>
       </Tooltip>
@@ -121,7 +121,7 @@ function onKeydown(e: KeyboardEvent) {
         <IconButton icon="i-uil:skip-forward" text-sm @click="adjustTime(0.1)" @pointerdown.prevent />
         <template #popper>
           <div flex="~ items-center">
-            往後微調時間<kbd kbd-key ml2><div i-uil-arrow-down mx--1 /></kbd>
+            {{ $t('editor.timestamp.skipForward') }} <kbd kbd-key ml2><div i-uil-arrow-down mx--1 /></kbd>
           </div>
         </template>
       </Tooltip>
@@ -132,7 +132,7 @@ function onKeydown(e: KeyboardEvent) {
         <IconButton icon="i-uil:clock" text-sm @click="setToCurrentTime()" @pointerdown.prevent />
         <template #popper>
           <div flex="~ items-center">
-            設為當前播放時間<kbd kbd-key ml2>T</kbd>
+            {{ $t('editor.timestamp.setCurrentTime') }} <kbd kbd-key ml2>T</kbd>
           </div>
         </template>
       </Tooltip>
@@ -140,7 +140,7 @@ function onKeydown(e: KeyboardEvent) {
       <Tooltip>
         <IconToggle v-model="editor.goNextAfterSetCurrentTimestemp" icon="i-uil:enter" text-sm active-class="text-green" @pointerdown.prevent />
         <template #popper>
-          設為當前播放時間後，是否自動跳到下一個時間戳
+          {{ $t('editor.timestamp.configAutoNext') }}
         </template>
       </Tooltip>
     </div>
