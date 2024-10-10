@@ -107,9 +107,12 @@ function onKeydown(e: KeyboardEvent) {
       @keydown="onKeydown"
       @blur="onBlur"
     >
-    <div border="~ base" flex="items-center gap-0.5" absolute right-0 top--8.5 z-0 hidden h-8 rounded-lg px-2 peer-focus-flex bg-base>
+    <div
+      border="~ base" flex="items-center gap-0.5"
+      absolute left-0 top--9.5 z-0 hidden h-8 px1 floating-glass peer-focus-flex
+    >
       <Tooltip>
-        <IconButton icon="i-uil:step-backward" text-sm @click="adjustTime(-0.1)" @pointerdown.prevent />
+        <IconButton icon="i-uil-angle-double-left" text-sm @click="adjustTime(-0.1)" @pointerdown.prevent />
         <template #popper>
           <div flex="~ items-center">
             {{ $t('editor.timestamp.stepBackward') }} <kbd kbd-key ml2><div i-uil-arrow-up mx--1 /></kbd>
@@ -118,7 +121,7 @@ function onKeydown(e: KeyboardEvent) {
       </Tooltip>
 
       <Tooltip>
-        <IconButton icon="i-uil:skip-forward" text-sm @click="adjustTime(0.1)" @pointerdown.prevent />
+        <IconButton icon="i-uil-angle-double-right" text-sm @click="adjustTime(0.1)" @pointerdown.prevent />
         <template #popper>
           <div flex="~ items-center">
             {{ $t('editor.timestamp.skipForward') }} <kbd kbd-key ml2><div i-uil-arrow-down mx--1 /></kbd>
