@@ -35,8 +35,11 @@
     "copyTimestamp": "Copy Timestamp",
     "deleteRow": "Delete Row",
     "gotoSong": "Go to Song",
+    "insert": "Insert",
+    "lyricsPlaceholder": "Lyrics",
     "insertAtCurrentTime": "Insert at Current Timestamp",
     "insertRow": "Insert Row",
+    "insertMultiline": "Insert multi rows lyrics",
     "yamlNotSupportYet": "YAML editing feature not yet implemented",
     "timestamp": {
       "stepBackward": "Step backward",

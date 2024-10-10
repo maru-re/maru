@@ -31,6 +31,8 @@ watch(
   { deep: true },
 )
 
+const showImportMultiLineDialog = ref(false)
+
 // Prevent unsaved changes
 useEventListener('beforeunload', (e) => {
   if (dirty.value) {
@@ -81,6 +83,23 @@ function changeTab(tab: 'lrc' | 'lyrics' | 'yaml') {
   if (tab === 'yaml')
     yaml.value = YAML.dump({ ...state, lyrics: undefined })
   showTab.value = tab
+}
+
+function insertMultiline(lyrics: string) {
+  const after = state.lyrics[state.lyrics.length - 1]
+  const t = after ? after.t + 0.1 : 0
+  const lines = lyrics.split('\n')
+  for (const line of lines) {
+    if (!line.trim())
+      continue
+
+    const words = line.split('').map(word => ({ w: word }))
+    state.lyrics.push({
+      t,
+      words,
+      trans: {},
+    })
+  }
 }
 
 function insertLineAfter(index: number) {
@@ -330,6 +349,17 @@ onMounted(() => {
           />
         </div>
       </template>
+
+      <div flex="~ justify-center" mt-10>
+        <SimpleButton class="px4! py3!" icon="i-uil-file-plus-alt" @click="showImportMultiLineDialog = true">
+          {{ $t("editor.insertMultiline") }}
+        </SimpleButton>
+      </div>
+
+      <InsertMultilineLyricsDialog
+        v-model="showImportMultiLineDialog"
+        @import="insertMultiline"
+      />
     </div>
     <div v-show="showTab === 'lrc'">
       <LyricsRawEditor

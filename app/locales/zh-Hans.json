@@ -35,8 +35,11 @@
     "copyTimestamp": "拷贝时间戳",
     "deleteRow": "删除行",
     "gotoSong": "前往歌曲",
+    "insert": "插入",
+    "lyricsPlaceholder": "歌词",
     "insertAtCurrentTime": "在当前时间戳插入",
     "insertRow": "插入行",
+    "insertMultiline": "插入多行歌词",
     "yamlNotSupportYet": "YAML 编辑功能暂未实装",
     "timestamp": {
       "stepBackward": "往前微调时间",
