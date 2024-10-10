@@ -2,10 +2,13 @@
 import { secondsToTimestamp, timestampToSeconds } from '@marure/parser'
 import { Tooltip } from 'floating-vue'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   inputClass?: string
   currentTime?: number
-}>()
+  offset?: number
+}>(), {
+  offset: 0,
+})
 
 const emit = defineEmits<{
   (event: 'go', autoPlay: boolean): void
@@ -55,7 +58,7 @@ function adjustTime(delta: 0.1 | -0.1) {
 
 function setToCurrentTime(emitNext = !(shift?.value)) {
   if (props.currentTime !== undefined) {
-    modelValue.value = props.currentTime
+    modelValue.value = props.currentTime - props.offset
     if (emitNext) {
       nextTick(() => emit('next'))
     }

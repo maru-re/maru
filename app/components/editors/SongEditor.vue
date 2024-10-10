@@ -212,6 +212,13 @@ const tagsString = computed({
   },
 })
 
+const offsetString = computed({
+  get: () => String(state.offset || ''),
+  set: (value: string) => {
+    state.offset = Number(value)
+  },
+})
+
 const notesString = computed({
   get: () => (state.notes || []).join('\n'),
   set: (value: string) => {
@@ -286,6 +293,7 @@ onMounted(() => {
       <TextInput v-model="state.title" :label="$t('song.title')" />
       <TextInput v-model="artistsString" :label="$t('song.artist')" />
       <TextInput v-model="tagsString" :label="$t('song.tags')" />
+      <TextInput v-model="offsetString" :label="$t('song.offset')" />
       <TextInput
         v-model="notesString"
         :label="$t('common.notes')"
@@ -335,6 +343,7 @@ onMounted(() => {
           :next="state.lyrics[idx + 1]"
           :translations="translations"
           :controls="controls"
+          :offset="state.offset"
           @delete="deleteLine(idx)"
         />
         <div flex="~ justify-center">

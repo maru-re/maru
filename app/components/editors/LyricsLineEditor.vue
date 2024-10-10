@@ -2,12 +2,15 @@
 import type { LyricLine } from '@marure/schema'
 import { parseLrcLineContent, serializeLineContentToLrc } from '@marure/parser'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   index: number
   next?: LyricLine
   controls?: PlayerControls
+  offset?: number
   translations?: string[]
-}>()
+}>(), {
+  offset: 0,
+})
 
 const emit = defineEmits<{
   (event: 'delete'): void
@@ -63,6 +66,7 @@ function goNextLineTimestamp() {
             w-32
             :class="isActive ? 'border-primary' : ''"
             :current-time="controls?.current.value"
+            :offset
             @go="autoPlay => props.controls?.go(line, autoPlay)"
             @next="goNextLineTimestamp"
           >
@@ -73,7 +77,7 @@ function goNextLineTimestamp() {
             >
               <div
                 left-0 h-full bg-primary:20 dark:bg-primary:40
-                :style="{ width: `${(controls.current.value - line.t) / duration * 100}%` }"
+                :style="{ width: `${(controls.current.value - offset - line.t) / duration * 100}%` }"
               />
             </div>
           </TimestampEditor>
