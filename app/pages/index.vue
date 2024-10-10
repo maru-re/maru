@@ -112,7 +112,7 @@ async function onFileChange(e: Event) {
         </div>
         <div flex="~ justify-center wrap">
           <NuxtLink to="/play#demo=1" op50 hover="op100 underline">
-            {{ $t("demo") }}
+            {{ $t("demo.title") }}
           </NuxtLink>
           <span mx2 op50 lt-md="hidden"> · </span>
           <NuxtLink to="/create" op50 hover="op100 underline" lt-md="hidden">
