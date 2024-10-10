@@ -23,7 +23,12 @@
   "copy": {
     "link": "拷贝链接"
   },
-  "demo": "演示",
+  "demo": {
+    "title": "演示",
+    "sampleTitle": "演示用歌词样本",
+    "sampleTextEnd": "演示用歌词样本到此为止，版权归发行公司所有",
+    "sampleReminder": "本歌词样本仅用于演示 App 功能，版权归发行公司所有。"
+  },
   "displayMode": {
     "toggleMode": "切换为{mode}模式",
     "light": "明亮",
@@ -35,9 +40,18 @@
     "copyTimestamp": "拷贝时间戳",
     "deleteRow": "删除行",
     "gotoSong": "前往歌曲",
+    "insert": "插入",
+    "lyricsPlaceholder": "歌词",
     "insertAtCurrentTime": "在当前时间戳插入",
     "insertRow": "插入行",
-    "yamlNotSupportYet": "YAML 编辑功能暂未实装"
+    "insertMultiline": "插入多行歌词",
+    "yamlNotSupportYet": "YAML 编辑功能暂未实装",
+    "timestamp": {
+      "stepBackward": "往前微调时间",
+      "skipForward": "往后微调时间",
+      "setCurrentTime": "设为当前播放时间",
+      "configAutoNext": "设为当前播放时间后，是否自动跳到下一个时间戳"
+    }
   },
   "favSongs": "收藏歌曲",
   "footer": {
@@ -88,14 +102,16 @@
       "play": "{title} - {artists} 歌词 | 唱歌学日语 | {appName}"
     }
   },
-  "settingsNav": {
-    "displayFurigana": "是否显示振假名",
-    "displayKanji": "是否显示汉字",
-    "displayRomaji": "是否显示罗马字",
-    "displayTranslation": "是否显示翻译",
-    "lyricsSize": "歌词字号（{fontSize}）",
+  "settings": {
+    "displayFurigana": "显示振假名",
+    "displayKanji": "显示汉字",
+    "displayRomaji": "显示罗马字",
+    "displayTranslation": "显示翻译",
+    "lyricsSize": "歌词字号 ({fontSize})",
     "scrollWithLyrics": "跟随歌词滚动",
-    "autoPausePerLyrics": "每句歌词自动暂停"
+    "autoPausePerLyrics": "每句歌词自动暂停",
+    "convertChineseHansHant": "自动简繁体转换",
+    "loopSong": "单曲循环播放"
   },
   "song": {
     "artist": "歌手",

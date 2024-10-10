@@ -18,9 +18,9 @@ function onClickOutside() {
 </script>
 
 <template>
-  <ModalDialog
+  <ModalPopup
     :model-value="state.isImporting"
-    dialog-class="w-80vw! h-80vh grid grid-rows-[max-content_1fr_max-content] p0!"
+    dialog-class="max-h-80vh! min-h-50vh grid grid-rows-[max-content_1fr_max-content] p0!"
     @click-outside="onClickOutside"
   >
     <div p2 text-xl flex="~ gap-2 items-center justify-center" border="b base">
@@ -84,5 +84,5 @@ function onClickOutside() {
         <SongsGrid :songs="state.succeeded.map(i => i.data)" />
       </div>
     </div>
-  </ModalDialog>
+  </ModalPopup>
 </template>

@@ -7,7 +7,7 @@ export function usePlayer(data: MaruSongDataParsed, autoplay = true) {
   const player = shallowRef<YouTubePlayer | undefined>(undefined)
   const current = ref(0)
   const duration = ref(0)
-  const status = ref<'playing' | 'paused' | 'ended' | 'loading'>('loading')
+  const status = ref<'playing' | 'paused' | 'ended' | 'loading' | 'unstarted'>('unstarted')
   const settings = useSettings()
   const error = ref<any>(null)
   const localOffset = ref(0)
@@ -73,6 +73,9 @@ export function usePlayer(data: MaruSongDataParsed, autoplay = true) {
         },
         onStateChange() {
           updateCurrent()
+          if (settings.value.loopSong && status.value === 'ended') {
+            player.value?.seekTo(0)
+          }
         },
         onError(e) {
           error.value = e
@@ -144,7 +147,9 @@ export function usePlayer(data: MaruSongDataParsed, autoplay = true) {
       ? 'playing'
       : player.value.getPlayerState() === YT!.PlayerState.PAUSED
         ? 'paused'
-        : 'ended'
+        : player.value.getPlayerState() === YT!.PlayerState.ENDED
+          ? 'ended'
+          : 'loading'
     current.value = player.value.getCurrentTime() || 0
     if (settings.value.autoPause && status.value === 'playing' && active.value && current.value >= active.value.end && pausedAt < 1) {
       current.value = active.value.end
@@ -159,14 +164,15 @@ export function usePlayer(data: MaruSongDataParsed, autoplay = true) {
     }
   }
 
-  function go(input: number | LyricLine | undefined) {
+  function go(input: number | LyricLine | undefined, autoPlay = true) {
     if (input == null)
       return
     const st = typeof input === 'number'
       ? input
       : input.t + offset.value
     player.value?.seekTo(st, true)
-    player.value?.playVideo()
+    if (autoPlay)
+      player.value?.playVideo()
     current.value = st
     updateActive()
     pausedAt = 0

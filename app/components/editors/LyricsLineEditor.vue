@@ -35,6 +35,11 @@ const input = computed({
 
 const duration = computed(() => props.next ? props.next.t - line.value.t : null)
 const isActive = computed(() => props.controls?.active.value?.index === props.index)
+
+function goNextLineTimestamp() {
+  const el = document.querySelector<HTMLInputElement>(`[data-editor-line="${props.index + 1}"] .timestamp-input`)
+  el?.focus()
+}
 </script>
 
 <template>
@@ -43,6 +48,7 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
       border="~ rounded-lg"
       flex="~ col gap-2"
       class="group/line-editor"
+      :data-editor-line="index"
       relative ml5 p2
       tabindex="1"
       :class="isActive ? 'border-primary ring-3 ring-primary:20 bg-primary:5' : 'border-base bg-gray:4'"
@@ -56,7 +62,9 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
             v-model="line.t"
             w-32
             :class="isActive ? 'border-primary' : ''"
-            @go="props.controls?.go(line)"
+            :current-time="controls?.current.value"
+            @go="autoPlay => props.controls?.go(line, autoPlay)"
+            @next="goNextLineTimestamp"
           >
             <div
               v-if="isActive && duration && controls"

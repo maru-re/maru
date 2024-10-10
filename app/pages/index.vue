@@ -75,10 +75,10 @@ async function onFileChange(e: Event) {
 </script>
 
 <template>
-  <div>
+  <div p4>
     <DropZone />
     <ImportDialog />
-    <div pb-10 pt-25 flex="~ col gap-2 items-center">
+    <div flex="~ col gap-2 items-center" pb-10 pt-25>
       <div i-mdi-circle-double text-5xl op75 />
       <div text-4xl font-jp-serif>
         <ruby>
@@ -112,7 +112,7 @@ async function onFileChange(e: Event) {
         </div>
         <div flex="~ justify-center wrap">
           <NuxtLink to="/play#demo=1" op50 hover="op100 underline">
-            {{ $t("demo") }}
+            {{ $t("demo.title") }}
           </NuxtLink>
           <span mx2 op50 lt-md="hidden"> · </span>
           <NuxtLink to="/create" op50 hover="op100 underline" lt-md="hidden">
@@ -121,11 +121,11 @@ async function onFileChange(e: Event) {
         </div>
       </div>
     </div>
-    <div flex="~ gap-1 items-center" mxa mb2 w-max rounded-full bg-orange:10 px3 py1 text-sm text-orange>
+    <div flex="~ gap-1 items-center" mxa mb2 max-w-full w-max rounded-full bg-orange:10 px3 py1 text-wrap text-sm text-orange>
       <div i-uil-flask flex-none text-base />
       {{ $t("footer.message") }}
     </div>
-    <div v-if="collections.length > 0" sticky left-0 right-0 top-0 z-floating flex p3>
+    <div v-if="collections.length > 0" sticky left-0 right-0 top-0 z-floating flex py3>
       <div
         flex="~ gap-3 items-center"
         ma h-3em max-w-100 w-full of-hidden px3 floating-glass

@@ -23,7 +23,12 @@
   "copy": {
     "link": "Copy Link"
   },
-  "demo": "Demo",
+  "demo": {
+    "title": "Demo",
+    "sampleTitle": "Sample Lyrics for Demo",
+    "sampleTextEnd": "Sample lyrics for demo ends here, all rights reserved by the publishing company.",
+    "sampleReminder": "This lyrics sample is only for demonstrating the functionality of the app, and all rights are reserved by the publishing company."
+  },
   "displayMode": {
     "toggleMode": "Toggle to {mode} mode",
     "light": "Light",
@@ -35,9 +40,18 @@
     "copyTimestamp": "Copy Timestamp",
     "deleteRow": "Delete Row",
     "gotoSong": "Go to Song",
+    "insert": "Insert",
+    "lyricsPlaceholder": "Lyrics",
     "insertAtCurrentTime": "Insert at Current Timestamp",
     "insertRow": "Insert Row",
-    "yamlNotSupportYet": "YAML editing feature not yet implemented"
+    "insertMultiline": "Insert multi rows lyrics",
+    "yamlNotSupportYet": "YAML editing feature not yet implemented",
+    "timestamp": {
+      "stepBackward": "Step backward",
+      "skipForward": "Step forward",
+      "setCurrentTime": "Apply current playback time",
+      "configAutoNext": "Allow jump to the next timestamp after applying current playback time"
+    }
   },
   "favSongs": "Favorite Songs",
   "footer": {
@@ -88,14 +102,15 @@
       "play": "{title} - {artists} Lyrics | Sing and Learn Japanese | {appName}"
     }
   },
-  "settingsNav": {
+  "settings": {
     "displayFurigana": "Display Furigana",
     "displayKanji": "Display Kanji",
     "displayRomaji": "Display Romaji",
     "displayTranslation": "Display Translation",
     "lyricsSize": "Lyrics Font Size ({fontSize})",
     "scrollWithLyrics": "Scroll with Lyrics",
-    "autoPausePerLyrics": "Auto Pause per Lyrics"
+    "autoPausePerLyrics": "Auto Pause per Lyrics",
+    "convertChineseHansHant": "Automatic Chinese conversion"
   },
   "song": {
     "artist": "Artist",

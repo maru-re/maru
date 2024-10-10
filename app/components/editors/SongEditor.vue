@@ -20,6 +20,8 @@ const state = reactive<MaruSongDataParsed>(
 const router = useRouter()
 const route = useRoute()
 
+provideEditorContext()
+
 const dirty = ref(false)
 watch(
   state,
@@ -28,6 +30,8 @@ watch(
   },
   { deep: true },
 )
+
+const showImportMultiLineDialog = ref(false)
 
 // Prevent unsaved changes
 useEventListener('beforeunload', (e) => {
@@ -79,6 +83,23 @@ function changeTab(tab: 'lrc' | 'lyrics' | 'yaml') {
   if (tab === 'yaml')
     yaml.value = YAML.dump({ ...state, lyrics: undefined })
   showTab.value = tab
+}
+
+function insertMultiline(lyrics: string) {
+  const after = state.lyrics[state.lyrics.length - 1]
+  const t = after ? after.t + 0.1 : 0
+  const lines = lyrics.split('\n')
+  for (const line of lines) {
+    if (!line.trim())
+      continue
+
+    const words = line.split('').map(word => ({ w: word }))
+    state.lyrics.push({
+      t,
+      words,
+      trans: {},
+    })
+  }
 }
 
 function insertLineAfter(index: number) {
@@ -298,14 +319,13 @@ onMounted(() => {
     <div v-show="showTab === 'lyrics'" flex="~ col gap-1" ml--5>
       <div flex="~ gap-2 items-center" border="~ base rounded-xl" mb2 ml5 px4 py2>
         <div i-uil-english-to-chinese mr1 />
-        <SimpleButton
-          v-for="item of locales" :key="item.code"
-          :class="translations.includes(item.code) ? 'op100 text-primary' : 'op50'"
-          :icon="translations.includes(item.code) ? 'i-uil-check-circle text-primary' : 'i-uil-circle op50'"
+        <ToggleButton
+          v-for="item of locales"
+          :key="item.code"
+          :model-value="translations.includes(item.code)"
+          :title="item.name || item.code"
           @click="toggleTranslations(item.code)"
-        >
-          {{ item.name || item.code }}
-        </SimpleButton>
+        />
       </div>
       <template
         v-for="line, idx of state.lyrics"
@@ -328,6 +348,17 @@ onMounted(() => {
           />
         </div>
       </template>
+
+      <div flex="~ justify-center" mt-10>
+        <SimpleButton class="px4! py3!" icon="i-uil-file-plus-alt" @click="showImportMultiLineDialog = true">
+          {{ $t("editor.insertMultiline") }}
+        </SimpleButton>
+      </div>
+
+      <InsertMultilineLyricsDialog
+        v-model="showImportMultiLineDialog"
+        @import="insertMultiline"
+      />
     </div>
     <div v-show="showTab === 'lrc'">
       <LyricsRawEditor

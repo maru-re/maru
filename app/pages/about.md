@@ -13,6 +13,8 @@ App 完全免費且 <a href="https://github.com/maru-re/maru" target="_blank">�
 
 ## Credits
 
-感謝 jpmarumaru.com 曾提供的優質日文學習平台，本 App 的開發身受其啟發。
+感謝 jpmarumaru.com 曾提供的優質日文學習平台，本 App 的開發深受其啟發。
 
-也感謝所有 <a href="https://github.com/maru-re/maru/graphs/contributors" target="_blank">參與開發的朋友們</a>，以及大家的支持與鼓勵。
+也感謝所有 <a href="https://github.com/maru-re/maru/graphs/contributors" target="_blank">參與開發的朋友們</a>、以及大家的支持。
+
+<BuildInfo />

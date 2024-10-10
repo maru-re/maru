@@ -157,24 +157,23 @@ onMounted(() => {
     ref="lyricsOverflow"
     relative of-x-hidden of-y-auto
   >
+    <div
+      v-if="activeLineEl && !targetIsVisible"
+      fixed bottom-3 right-3 p2 floating-glass
+      flex="~ gap-2 items-center"
+      @click="() => scrollToActiveLine('smooth')"
+    >
+      <Tooltip placement="left" distance="8">
+        <IconButton icon="i-uil-right-indent-alt" />
+        <template #popper>
+          <div>
+            {{ $t("scrollToCurrentLyrics") }}
+          </div>
+        </template>
+      </Tooltip>
+    </div>
     <div lt-lg="absolute" pointer-events-auto sticky left-3 right-3 top-3 z-floating flex>
-      <div
-        v-if="activeLineEl && !targetIsVisible"
-        fixed bottom-3 right-3 floating-glass
-        flex="~ gap-2 items-center"
-        @click="() => scrollToActiveLine('smooth')"
-      >
-        <Tooltip placement="left" distance="8">
-          <IconButton icon="i-uil-right-indent-alt" class="!p4" />
-          <template #popper>
-            <div>
-              {{ $t("scrollToCurrentLyrics") }}
-            </div>
-          </template>
-        </Tooltip>
-      </div>
-
-      <SettingsNav mxa />
+      <SettingsNav mxa lt-lg="hidden" />
     </div>
     <div
       flex="~ col gap-1.2em" class="lyrics-track"
