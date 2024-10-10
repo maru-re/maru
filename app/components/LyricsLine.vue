@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { LyricLine } from '@marure/schema'
 import { hiraganaToRomaji } from '@marure/romaji'
+import { convertCC } from '~/addons/simplecc'
 import type { UiSettings } from '~/types/settings'
 
 const props = defineProps<{
@@ -15,6 +16,35 @@ const settings = computed(() => props.settings || globalSettings.value)
 const romaji = computed(() => {
   const text = props.line.words.map(w => w.r || w.w).join(' ')
   return hiraganaToRomaji(text)
+})
+
+const { locale } = useI18n()
+const translation = ref<string>()
+
+watchEffect(async () => {
+  if (!settings.value.translation) {
+    translation.value = ''
+    return
+  }
+  const matched = props.line.trans?.[locale.value]
+  if (matched) {
+    translation.value = matched
+    return
+  }
+
+  translation.value = ''
+
+  if (!settings.value.convertChineseHansHant)
+    return
+
+  if (locale.value === 'zh-Hans' && props.line.trans?.['zh-Hant']) {
+    const hant = props.line.trans['zh-Hant']
+    translation.value = await convertCC(hant, 't2s')
+  }
+  if (locale.value === 'zh-Hant' && props.line.trans?.['zh-Hans']) {
+    const hans = props.line.trans['zh-Hans']
+    translation.value = await convertCC(hans, 's2t')
+  }
 })
 </script>
 
@@ -49,11 +79,11 @@ const romaji = computed(() => {
       {{ romaji }}
     </div>
     <div
-      v-if="settings.translation && line.trans?.['zh-Hant']"
+      v-if="settings.translation && translation"
       class="lyric-line-translate"
-      lang="zh" mt-1
+      :lang="locale" mt-1
     >
-      {{ line.trans['zh-Hant'] }}
+      {{ translation }}
     </div>
   </div>
 </template>

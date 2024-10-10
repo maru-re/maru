@@ -218,15 +218,6 @@ async function remove() {
             {{ line }}
           </div>
         </div>
-        <!-- <div border="t base" my1 h-1px w-30px />
-        <p v-if="data.credits?.lyrics" text-xs>
-          此頁面的資料提取自 jpmarumaru.com（已關站）的歷史快照，感謝原站長與網友們的無私貢獻。<br>
-          <a :href="data.credits.lyrics" op75 hover="op100 underline" target="_blank">來自 web.archive.org 的源網站快照</a>
-          <span> · </span>
-          <a href="/about" target="_blank" op75 hover="op100 underline">關於我們</a>
-          <span> · </span>
-          <a href="/copyright" target="_blank" op75 hover="op100 underline">版權著作權說明</a>
-        </p> -->
       </div>
     </div>
     <LyricsTrack :data="data" :controls="controls" />

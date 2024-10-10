@@ -7,4 +7,5 @@ export interface UiSettings {
   autoPause: boolean
   speed: number
   fontSize: number
+  convertChineseHansHant: boolean
 }
