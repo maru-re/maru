@@ -14,12 +14,12 @@ function importLyrics() {
 </script>
 
 <template>
-  <ModalDialog
+  <ModalPopup
     v-model="visible"
-    dialog-class="w-50vw! max-w-700px h-80vh p0!"
+    dialog-class="h-60vh! p0! flex justify-center"
     @click-outside="visible = false"
   >
-    <div flex="~ col gap-4" h-full p6>
+    <div flex="~ col gap-4" h-full max-w-700px w-full p6>
       <h2 text-xl>
         {{ $t("editor.insertMultiline") }}
         <div float-right>
@@ -33,5 +33,5 @@ function importLyrics() {
         {{ $t("editor.insert") }}
       </SimpleButton>
     </div>
-  </ModalDialog>
+  </ModalPopup>
 </template>
