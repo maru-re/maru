@@ -1,7 +1,15 @@
+import type { MaruSongDataParsed } from '@marure/schema'
 import { parseSongData } from '@marure/parser'
+import { useNuxtApp } from 'nuxt/app'
+import { shallowRef, watchEffect } from 'vue'
 import YAML from 'yaml'
 
-export default parseSongData(YAML.parse(`
+export default function sampleData() {
+  const nuxtApp = useNuxtApp()
+  const songData = shallowRef<MaruSongDataParsed>()
+
+  watchEffect(() => {
+    const parsedData = YAML.parse(`
 schema: v1
 youtube: SX_ViT4Ra7k
 title: Lemon
@@ -11,7 +19,7 @@ tags:
   - J-POP
 dateLyricsUpdated: '2024-06-12'
 lrc: |-
-  [00:00.00] < 展示用歌詞樣本 >
+  [00:00.00] < ${nuxtApp.$i18n.t('demo.sampleTitle')} >
   [00:02.40] {夢}(ゆめ)ならばどれほどよかったでしょう
   [trans:zh-Hant] 如果是場夢該有多好
   [00:07.62] {未}(いま)だにあなたのことを{夢}(ゆめ)にみる
@@ -42,10 +50,15 @@ lrc: |-
   [trans:zh-Hant] 在雨停歇前無法回去
   [01:22.15] {今}(いま)でもあなたはわたしの{光}(ひかり)
   [trans:zh-Hant] 如今你依然是我的光
-  [01:30.00] < 展示用歌詞樣本到此為止、版權歸發行公司所有 >
+  [01:30.00] < ${nuxtApp.$i18n.t('demo.sampleTextEnd')} >
 notes:
-  - 本歌詞樣本僅用於展示 App 之功能，版權歸發行公司所有。
+  - ${nuxtApp.$i18n.t('demo.sampleReminder')} 
 credits:
   lyrics: >-
     https://web.archive.org/web/20240612224459/https://www.jpmarumaru.com/tw/JPSongPlay-11243.html
-`))
+    `)
+    songData.value = parseSongData(parsedData)
+  })
+
+  return songData.value
+}

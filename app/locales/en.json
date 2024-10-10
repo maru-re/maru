@@ -23,7 +23,12 @@
   "copy": {
     "link": "Copy Link"
   },
-  "demo": "Demo",
+  "demo": {
+    "title": "Demo",
+    "sampleTitle": "Sample Lyrics for Demo",
+    "sampleTextEnd": "Sample lyrics for demo ends here, all rights reserved by the publishing company.",
+    "sampleReminder": "This lyrics sample is only for demonstrating the functionality of the app, and all rights are reserved by the publishing company."
+  },
   "displayMode": {
     "toggleMode": "Toggle to {mode} mode",
     "light": "Light",

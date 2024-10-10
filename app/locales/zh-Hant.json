@@ -23,7 +23,12 @@
   "copy": {
     "link": "複製連結"
   },
-  "demo": "Demo",
+  "demo": {
+    "title": "展示",
+    "sampleTitle": "展示用歌詞樣本",
+    "sampleTextEnd": "展示用歌詞樣本到此為止，版權歸發行公司所有",
+    "sampleReminder": "本歌詞樣本僅用於展示 App 之功能，版權歸發行公司所有。"
+  },
   "displayMode": {
     "toggleMode": "切換為{mode}模式",
     "light": "明亮",

@@ -23,7 +23,12 @@
   "copy": {
     "link": "拷贝链接"
   },
-  "demo": "演示",
+  "demo": {
+    "title": "演示",
+    "sampleTitle": "演示用歌词样本",
+    "sampleTextEnd": "演示用歌词样本到此为止，版权归发行公司所有",
+    "sampleReminder": "本歌词样本仅用于演示 App 功能，版权归发行公司所有。"
+  },
   "displayMode": {
     "toggleMode": "切换为{mode}模式",
     "light": "明亮",

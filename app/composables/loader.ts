@@ -39,7 +39,7 @@ export function useSongData(
         try {
           if (query.demo) {
             source.value = 'demo'
-            data.value = await import('../samples/sample-1').then(r => r.default)
+            data.value = await import('../samples/sample-1').then(r => r.default())
           }
           else if (query.share) {
             source.value = 'share'
