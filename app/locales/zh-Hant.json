@@ -49,8 +49,8 @@
     "timestamp": {
       "stepBackward": "往前微調時間",
       "skipForward": "往後微調時間",
-      "setCurrentTime": "設為當前播放時間",
-      "configAutoNext": "設為當前播放時間後，是否自動跳到下一個時間戳"
+      "setCurrentTime": "設為當前播放時間後跳行",
+      "setCurrentTimeOnly": "設為當前播放時間"
     }
   },
   "favSongs": "收藏歌曲",
