@@ -228,7 +228,7 @@ const notesString = computed({
 
 const { copied, copy } = useClipboard({ read: false })
 
-const currentTimestamp = computed(() => secondsToTimestamp(controls.current.value))
+const currentTimestamp = computed(() => secondsToTimestamp(controls.current.value - (state.offset ?? 0)))
 
 function copyCurrentTimestamp() {
   copy(currentTimestamp.value)
@@ -274,7 +274,8 @@ onMounted(() => {
         @click="insertAtCurrentTime()"
       />
       <div font-mono>
-        {{ currentTimestamp }}
+        <span>{{ currentTimestamp }}</span>
+        <span v-if="state.offset" text-primary> +{{ state.offset }}</span>
       </div>
       <IconButton
         :title="$t('editor.copyTimestamp')"

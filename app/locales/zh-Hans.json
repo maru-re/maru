@@ -117,7 +117,7 @@
     "artist": "歌手",
     "title": "歌曲标题",
     "tags": "标签",
-    "offset": "偏移量"
+    "offset": "偏移"
   },
   "songNotFound": "歌曲不存在。",
   "tryRefreshPage": "请尝试刷新页面",
