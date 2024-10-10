@@ -164,14 +164,15 @@ export function usePlayer(data: MaruSongDataParsed, autoplay = true) {
     }
   }
 
-  function go(input: number | LyricLine | undefined) {
+  function go(input: number | LyricLine | undefined, autoPlay = true) {
     if (input == null)
       return
     const st = typeof input === 'number'
       ? input
       : input.t + offset.value
     player.value?.seekTo(st, true)
-    player.value?.playVideo()
+    if (autoPlay)
+      player.value?.playVideo()
     current.value = st
     updateActive()
     pausedAt = 0

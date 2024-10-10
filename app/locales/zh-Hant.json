@@ -35,9 +35,18 @@
     "copyTimestamp": "複製時間戳",
     "deleteRow": "刪除行",
     "gotoSong": "前往歌曲",
+    "insert": "插入",
+    "lyricsPlaceholder": "歌詞",
     "insertAtCurrentTime": "在當前時間戳插入",
     "insertRow": "插入行",
-    "yamlNotSupportYet": "YAML 編輯功能暫未實裝"
+    "insertMultiline": "插入多行歌詞",
+    "yamlNotSupportYet": "YAML 編輯功能暫未實裝",
+    "timestamp": {
+      "stepBackward": "往前微調時間",
+      "skipForward": "往後微調時間",
+      "setCurrentTime": "設為當前播放時間",
+      "configAutoNext": "設為當前播放時間後，是否自動跳到下一個時間戳"
+    }
   },
   "favSongs": "收藏歌曲",
   "footer": {
