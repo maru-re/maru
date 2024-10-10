@@ -61,6 +61,7 @@ function insertRuby() {
   anchorNode.textContent = `${text.slice(0, start)}{${text.slice(start, end)}}()${text.slice(end)}`
   selection.setPosition(anchorNode, end + 3)
   updateHighlight()
+  updateModelValue()
   return true
 }
 
