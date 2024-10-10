@@ -17,12 +17,12 @@ const modelValue = defineModel('modelValue', {
   default: 0,
 })
 
-const editor = useEditorContext()
-
 const invalid = ref(false)
 const input = ref<HTMLInputElement>()
 
 const timestamp = ref(secondsToTimestamp(modelValue.value))
+
+const { shift } = useMagicKeys()
 
 watchEffect(() => {
   timestamp.value = secondsToTimestamp(modelValue.value)
@@ -53,7 +53,7 @@ function adjustTime(delta: 0.1 | -0.1) {
   emit('go', false)
 }
 
-function setToCurrentTime(emitNext = editor.value.goNextAfterSetCurrentTimestemp) {
+function setToCurrentTime(emitNext = !(shift?.value)) {
   if (props.currentTime !== undefined) {
     modelValue.value = props.currentTime
     if (emitNext) {
@@ -115,7 +115,7 @@ function onKeydown(e: KeyboardEvent) {
         <IconButton icon="i-uil-angle-double-left" text-sm @click="adjustTime(-0.1)" @pointerdown.prevent />
         <template #popper>
           <div flex="~ items-center">
-            {{ $t('editor.timestamp.stepBackward') }} <kbd kbd-key ml2><div i-uil-arrow-up mx--1 /></kbd>
+            {{ $t('editor.timestamp.stepBackward') }} <kbd ml2 kbd-key><div i-uil-arrow-up mx--1 /></kbd>
           </div>
         </template>
       </Tooltip>
@@ -124,7 +124,7 @@ function onKeydown(e: KeyboardEvent) {
         <IconButton icon="i-uil-angle-double-right" text-sm @click="adjustTime(0.1)" @pointerdown.prevent />
         <template #popper>
           <div flex="~ items-center">
-            {{ $t('editor.timestamp.skipForward') }} <kbd kbd-key ml2><div i-uil-arrow-down mx--1 /></kbd>
+            {{ $t('editor.timestamp.skipForward') }} <kbd ml2 kbd-key><div i-uil-arrow-down mx--1 /></kbd>
           </div>
         </template>
       </Tooltip>
@@ -134,16 +134,16 @@ function onKeydown(e: KeyboardEvent) {
       <Tooltip>
         <IconButton icon="i-uil:clock" text-sm @click="setToCurrentTime()" @pointerdown.prevent />
         <template #popper>
-          <div flex="~ items-center">
-            {{ $t('editor.timestamp.setCurrentTime') }} <kbd kbd-key ml2>T</kbd>
+          <div space-y-1>
+            <div flex="~ items-center" :class="!shift && 'op40'">
+              {{ $t('editor.timestamp.setCurrentTimeOnly') }}
+              <kbd ml2 kbd-key><div i-ph-arrow-fat-up h-1lh text-2.5 /></kbd>
+              <kbd ml1 kbd-key>T<span mx-1>/</span><div i-ph-mouse-left-click-fill h-1lh text-2.5 /></kbd>
+            </div>
+            <div flex="~ items-center" :class="shift && 'op40'">
+              {{ $t('editor.timestamp.setCurrentTime') }} <kbd ml2 kbd-key>T</kbd>
+            </div>
           </div>
-        </template>
-      </Tooltip>
-
-      <Tooltip>
-        <IconToggle v-model="editor.goNextAfterSetCurrentTimestemp" icon="i-uil:enter" text-sm active-class="text-green" @pointerdown.prevent />
-        <template #popper>
-          {{ $t('editor.timestamp.configAutoNext') }}
         </template>
       </Tooltip>
     </div>
