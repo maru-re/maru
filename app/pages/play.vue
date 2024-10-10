@@ -4,10 +4,11 @@ import { appName } from '~/constants'
 const hash = useRouteHash()
 const { id, data, status, source, error } = useSongData(() => hash.value)
 const { addRecent } = useCollections()
+const { t } = useI18n()
 
 useSeoMeta({
   title: () => data.value
-    ? `${data.value.title} - ${data.value.artists?.join(', ')} 歌詞 | 唱歌學日語 | ${appName}`
+    ? t('seo.title.play', { title: data.value.title, artists: data.value.artists?.join(', '), appName })
     : appName,
 })
 
@@ -35,11 +36,11 @@ watchEffect(() => {
   <div v-else h-screen w-screen flex="~ col items-center justify-center" p5>
     <BasicNav />
     <template v-if="status === 'loading'">
-      <div>加載中...</div>
+      <div>{{ $t("common.loading") }}</div>
     </template>
     <template v-else-if="status === 'error'">
       <h1 text-4xl text-red>
-        錯誤
+        {{ $t("common.error") }}
       </h1>
       <p>
         {{ error }}
@@ -50,7 +51,7 @@ watchEffect(() => {
         404
       </h1>
       <p>
-        歌曲不存在。
+        {{ $t("songNotFound") }}
       </p>
     </template>
     <div mt10 flex="~ gap-2">
@@ -58,12 +59,12 @@ watchEffect(() => {
         v-if="(status === 'missing' || !data) && id"
         icon="i-uil-plus-circle"
         :to="`/edit#id=${id}`"
-        title="創建歌詞"
+        :title="$t('lyrics.createLyrics')"
       />
       <SimpleButton
         icon="i-uil-home-alt"
         to="/"
-        title="回到首頁"
+        :title="$t('common.backToHome')"
       />
     </div>
   </div>

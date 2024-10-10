@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { appName } from '~/constants'
 
+const { t } = useI18n()
+
 // Make it non-reactive on purpose
 const query = { ...useRouteHash().value }
 const { data, source } = await useSongData(() => query, true)
 
 useSeoMeta({
   title: () => data.value?.title
-    ? `編輯歌詞 ${data.value.title} - ${data.value.artists?.join(', ')} 歌詞 | 唱歌學日語 | ${appName}`
-    : `建立歌詞 | 唱歌學日語 | ${appName}`,
+    ? t('seo.title.edit', { title: data.value.title, artists: data.value.artists?.join(', '), appName })
+    : t('seo.title.new', { appName }),
 })
 </script>
 

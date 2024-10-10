@@ -82,15 +82,15 @@ async function onFileChange(e: Event) {
       <div i-mdi-circle-double text-5xl op75 />
       <div text-4xl font-jp-serif>
         <ruby>
-          <rb>二重丸</rb>
+          <rb>{{ $t("nijuumaru") }}</rb>
           <rt>にじゅうまる</rt>
         </ruby>
       </div>
       <div mt5 text-center op75>
-        「唱歌學日文」
+        {{ $t("intro.title") }}
       </div>
       <div text-center op50>
-        基於 YouTube 的歌曲歌詞閱讀器
+        {{ $t("intro.description") }}
       </div>
 
       <div p5 flex="~ col gap-2 items-center justify-center">
@@ -101,7 +101,7 @@ async function onFileChange(e: Event) {
           hover="border-primary text-primary bg-primary/5 op100"
         >
           <div i-uil-file-plus-alt />
-          <span>匯入歌詞檔案</span>
+          <span>{{ $t("import.importFile") }}</span>
           <input
             type="file"
             :accept="SUPPORTED_IMPORT_EXT.map(ext => `.${ext}`).join(', ')"
@@ -112,18 +112,18 @@ async function onFileChange(e: Event) {
         </div>
         <div flex="~ justify-center wrap">
           <NuxtLink to="/play#demo=1" op50 hover="op100 underline">
-            Demo
+            {{ $t("demo") }}
           </NuxtLink>
           <span mx2 op50 lt-md="hidden"> · </span>
           <NuxtLink to="/create" op50 hover="op100 underline" lt-md="hidden">
-            建立歌詞
+            {{ $t("lyrics.createLyrics") }}
           </NuxtLink>
         </div>
       </div>
     </div>
     <div flex="~ gap-1 items-center" mxa mb2 w-max rounded-full bg-orange:10 px3 py1 text-sm text-orange>
       <div i-uil-flask flex-none text-base />
-      網站開發中、許多功能尚未完善。歡迎透過 Discord 回報問題
+      {{ $t("footer.message") }}
     </div>
     <div v-if="collections.length > 0" sticky left-0 right-0 top-0 z-floating flex p3>
       <div
@@ -134,7 +134,7 @@ async function onFileChange(e: Event) {
         <input
           v-model="rawSearch"
           type="text"
-          :placeholder="`搜尋已匯入的歌曲 (${collections.length})`"
+          :placeholder="$t('search.searchImportedSong', [collections.length])"
           absolute inset-0 w-auto bg-transparent p5 px10 outline-none
         >
         <div flex-auto />
@@ -147,43 +147,43 @@ async function onFileChange(e: Event) {
     </div>
     <div flex="~ justify-center wrap">
       <NuxtLink to="/format" op50 hover="op100 underline">
-        檔案格式
+        {{ $t("footer.fileFormat") }}
       </NuxtLink>
       <span mx2 op50> · </span>
       <NuxtLink to="/about" op50 hover="op100 underline">
-        關於我們
+        {{ $t("footer.aboutUS") }}
       </NuxtLink>
       <span mx2 op50> · </span>
       <a href="https://chat.maru.re" target="_blank" op50 hover="op100 underline">
-        Discord
+        {{ $t("footer.contact.discord") }}
       </a>
       <span mx2 op50> · </span>
       <a href="https://github.com/maru-re/maru" target="_blank" op50 hover="op100 underline">
-        GitHub
+        {{ $t("footer.contact.github") }}
       </a>
     </div>
 
     <div p10 flex="~ col gap-8">
       <SongsGrid v-if="!search.trimEnd() && favorited.length" :link="true" :songs="favorited" show-favorite="hover">
         <template #title>
-          <div>收藏歌曲</div>
+          <div>{{ $t("favSongs") }}</div>
         </template>
       </SongsGrid>
 
       <SongsGrid v-if="!search.trimEnd() && recent.length" :link="true" :songs="recent">
         <template #title>
-          <div>最近看過</div>
+          <div>{{ $t("recentSongs") }}</div>
         </template>
       </SongsGrid>
 
       <SongsGrid v-if="result?.length" :link="true" :songs="result" :manage="true">
         <template #title>
           <template v-if="search.trim()">
-            <span>搜尋結果</span>
-            <span text-sm op50>{{ result.length }} 之 {{ collections.length }}</span>
+            <span>{{ $t("search.searchResult") }}</span>
+            <span text-sm op50>{{ $t("search.searchResultCount", { resultLength: result.length, collectionsLength: collections.length }) }}</span>
           </template>
           <template v-else>
-            <span>所有歌曲</span>
+            <span>{{ $t("allSong") }}</span>
             <span text-sm op50>{{ collections.length }}</span>
           </template>
         </template>
@@ -204,7 +204,7 @@ async function onFileChange(e: Event) {
       </SongsGrid>
 
       <div v-else-if="search" text-center op50>
-        沒找到符合的歌曲。
+        {{ $t("search.noResult") }}
       </div>
     </div>
   </div>

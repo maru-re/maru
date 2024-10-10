@@ -85,8 +85,9 @@ export async function importFromFiles(files?: FileList | FileSystemEntry[] | nul
   }
 
   if (_importingState.value.isImporting && !_importingState.value.isFinished) {
+    const { $i18n } = useNuxtApp()
     // eslint-disable-next-line no-alert
-    alert('另一個匯入作業正在進行中，請等待完成後再試。')
+    alert($i18n.t('import.anotherImporting'))
     return
   }
 

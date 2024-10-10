@@ -51,5 +51,10 @@
   "typescript.preferences.autoImportSpecifierExcludeRegexes": [
     "~~/packages",
     "~~"
-  ]
+  ],
+  "i18n-ally.localesPaths": [
+    "app/locales"
+  ],
+  "i18n-ally.sourceLanguage": "zh-Hant",
+  "i18n-ally.keystyle": "nested"
 }

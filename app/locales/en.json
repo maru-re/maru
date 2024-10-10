@@ -1,0 +1,113 @@
+{
+  "nijuumaru": "二重丸",
+  "allSong": "All Songs",
+  "clearAllData": "Clear All Data",
+  "common": {
+    "backToHome": "Back to Home",
+    "cancel": "Cancel",
+    "create": "Create",
+    "deselect": "Deselect",
+    "done": "Done",
+    "error": "Error",
+    "exportSelected": "Export Selected",
+    "loading": "Loading...",
+    "notes": "Notes",
+    "remove": "Remove",
+    "removeSelected": "Remove Selected",
+    "save": "Save",
+    "select": "Select",
+    "selectAll": "Select All",
+    "selectInverse": "Select Inverse",
+    "settings": "Settings"
+  },
+  "copy": {
+    "link": "Copy Link"
+  },
+  "demo": "Demo",
+  "displayMode": {
+    "toggleMode": "Toggle to {mode} mode",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "downloadAllLyrics": "Download All Lyrics",
+  "dragFileToHere": "Drag files here",
+  "editor": {
+    "copyTimestamp": "Copy Timestamp",
+    "deleteRow": "Delete Row",
+    "gotoSong": "Go to Song",
+    "insertAtCurrentTime": "Insert at Current Timestamp",
+    "insertRow": "Insert Row",
+    "yamlNotSupportYet": "YAML editing feature not yet implemented"
+  },
+  "favSongs": "Favorite Songs",
+  "footer": {
+    "message": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord",
+    "fileFormat": "File Format",
+    "aboutUS": "About Us",
+    "contact": {
+      "discord": "Discord",
+      "github": "GitHub"
+    }
+  },
+  "import": {
+    "anotherImporting": "Another import operation is in progress. Please wait until it is complete and try again.",
+    "importFile": "Import Lyrics File",
+    "importing": "Importing file...",
+    "importComplete": "Import Complete!",
+    "importFail": "Import Failed!",
+    "importSuccess": "Import Successful!",
+    "importSuccessPartly": "Partially Imported Successfully!"
+  },
+  "intro": {
+    "title": "Sing and Learn Japanese",
+    "description": "A song lyrics reader based on YouTube"
+  },
+  "lyrics": {
+    "batchRemoveLyricsConfirm": "Are you sure you want to delete the selected {0} songs?",
+    "createLyrics": "Create Lyrics",
+    "editLyrics": "Edit Lyrics",
+    "exportLyrics": "Export Lyrics",
+    "removeLyrics": "Remove Lyrics",
+    "removeLyricsConfirm": "Are you sure you want to delete this song?",
+    "saveLyrics": "Save Lyrics",
+    "shareLyrics": "Share Lyrics"
+  },
+  "pasteYoutubeLink": "Paste YouTube MV Song Link",
+  "recentSongs": "Recently Viewed",
+  "scrollToCurrentLyrics": "Scroll to Current Lyrics",
+  "search": {
+    "noResult": "No matching songs found.",
+    "searchImportedSong": "Search Imported Songs ({0})",
+    "searchResult": "Search Result(s)",
+    "searchResultCount": "{resultLength} of {collectionsLength}"
+  },
+  "seo": {
+    "title": {
+      "edit": "Edit Lyrics {title} - {artists} Lyrics | Sing and Learn Japanese | {appName}",
+      "new": "Create Lyrics | Sing and Learn Japanese | {appName}",
+      "play": "{title} - {artists} Lyrics | Sing and Learn Japanese | {appName}"
+    }
+  },
+  "settingsNav": {
+    "displayFurigana": "Display Furigana",
+    "displayKanji": "Display Kanji",
+    "displayRomaji": "Display Romaji",
+    "displayTranslation": "Display Translation",
+    "lyricsSize": "Lyrics Font Size ({fontSize})",
+    "scrollWithLyrics": "Scroll with Lyrics",
+    "autoPausePerLyrics": "Auto Pause per Lyrics"
+  },
+  "song": {
+    "artist": "Artist",
+    "title": "Song Title",
+    "tags": "Tags"
+  },
+  "songNotFound": "Song not found.",
+  "tryRefreshPage": "Please try refreshing the page.",
+  "visualization": "Visualization",
+  "youtube": {
+    "connecting": "Connecting to YouTube...",
+    "connectionFail": "YouTube connection failed",
+    "requireId": "YouTube ID cannot be empty"
+  }
+}

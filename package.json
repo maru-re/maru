@@ -27,6 +27,7 @@
     "@nuxt/devtools": "^1.5.2",
     "@nuxt/eslint": "^0.5.7",
     "@nuxtjs/color-mode": "^3.5.1",
+    "@nuxtjs/i18n": "^8.5.5",
     "@pinia/nuxt": "^0.5.5",
     "@types/js-yaml": "^4.0.9",
     "@unocss/eslint-config": "^0.63.3",
