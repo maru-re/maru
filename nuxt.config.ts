@@ -1,5 +1,8 @@
 import { fileURLToPath } from 'node:url'
+import { execaSync } from 'execa'
 import { appDescription, appName } from './app/constants'
+
+const gitSha = execaSync('git', ['rev-parse', 'HEAD']).stdout.trim()
 
 export default defineNuxtConfig({
   modules: [
@@ -20,6 +23,13 @@ export default defineNuxtConfig({
         light: 'vitesse-light',
         dark: 'vitesse-dark',
       },
+    },
+  },
+
+  runtimeConfig: {
+    public: {
+      buildTime: Date.now(),
+      sha: gitSha,
     },
   },
 
@@ -90,6 +100,9 @@ export default defineNuxtConfig({
         pathPrefix: false,
       },
     ],
+    transform: {
+      include: [/\.vue/, /\.md/],
+    },
   },
 
   eslint: {

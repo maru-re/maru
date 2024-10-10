@@ -97,14 +97,16 @@
       "play": "{title} - {artists} 歌词 | 唱歌学日语 | {appName}"
     }
   },
-  "settingsNav": {
-    "displayFurigana": "是否显示振假名",
-    "displayKanji": "是否显示汉字",
-    "displayRomaji": "是否显示罗马字",
-    "displayTranslation": "是否显示翻译",
-    "lyricsSize": "歌词字号（{fontSize}）",
+  "settings": {
+    "displayFurigana": "显示振假名",
+    "displayKanji": "显示汉字",
+    "displayRomaji": "显示罗马字",
+    "displayTranslation": "显示翻译",
+    "lyricsSize": "歌词字号 ({fontSize})",
     "scrollWithLyrics": "跟随歌词滚动",
-    "autoPausePerLyrics": "每句歌词自动暂停"
+    "autoPausePerLyrics": "每句歌词自动暂停",
+    "convertChineseHansHant": "自动简繁体转换",
+    "loopSong": "单曲循环播放"
   },
   "song": {
     "artist": "歌手",

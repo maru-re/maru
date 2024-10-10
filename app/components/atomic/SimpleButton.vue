@@ -14,10 +14,10 @@ defineProps<{
     :is="to ? NuxtLink : 'button'"
     :to="to"
     :class="color || 'btn-simple-primary'"
-    px2.5 py2 line-height-1em shadow
+    relative px2.5 py2 line-height-1em shadow
   >
     <div v-if="icon" :class="icon" />
-    <slot>
+    <slot :title="title">
       {{ title }}
     </slot>
   </component>

@@ -97,14 +97,15 @@
       "play": "{title} - {artists} Lyrics | Sing and Learn Japanese | {appName}"
     }
   },
-  "settingsNav": {
+  "settings": {
     "displayFurigana": "Display Furigana",
     "displayKanji": "Display Kanji",
     "displayRomaji": "Display Romaji",
     "displayTranslation": "Display Translation",
     "lyricsSize": "Lyrics Font Size ({fontSize})",
     "scrollWithLyrics": "Scroll with Lyrics",
-    "autoPausePerLyrics": "Auto Pause per Lyrics"
+    "autoPausePerLyrics": "Auto Pause per Lyrics",
+    "convertChineseHansHant": "Automatic Chinese conversion"
   },
   "song": {
     "artist": "Artist",
