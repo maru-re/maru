@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
 import { parseLrc, secondsToTimestamp, serializeToLrc } from '~~/packages/parser/src'
+import { inferSongInfoFromVideoTitle } from '~~/packages/utils/src'
 import YAML from 'js-yaml'
 
 const props = defineProps<{
@@ -138,6 +139,25 @@ watch(
   },
   { deep: true },
 )
+
+// Auto fill song info from video title
+watchEffect(() => {
+  if (!controls.player.value)
+    return
+  if (state.title && state.artists?.length)
+    return
+  if (controls.status.value === 'loading' || !controls.player.value.videoTitle)
+    return
+
+  const parsed = inferSongInfoFromVideoTitle(controls.player.value.videoTitle)
+  if (!parsed)
+    return
+
+  if (parsed.title)
+    state.title ||= parsed.title
+  if (parsed.artists && !state.artists?.length)
+    state.artists = parsed.artists
+})
 
 function exportNow() {
   exportSongMaru(state)

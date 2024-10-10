@@ -1,4 +1,5 @@
 import type { MaruSongData } from '@marure/schema'
+import { normalizeFilename } from '@marure/utils'
 import YAML from 'js-yaml'
 import { _collections } from '~/state/local-storage'
 
@@ -64,8 +65,4 @@ export async function exportSongsZip(ids?: string[]) {
   catch (e) {
     console.error(e)
   }
-}
-
-export function normalizeFilename(str: string) {
-  return str.replace(/[^\w\-\p{Script=Han}\p{Script=Katakana}\p{Script=Hiragana}]+/gu, '_')
 }

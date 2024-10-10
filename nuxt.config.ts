@@ -120,6 +120,7 @@ export default defineNuxtConfig({
     '@marure/romaji': fileURLToPath(new URL('./packages/romaji/src/index.ts', import.meta.url)),
     '@marure/schema': fileURLToPath(new URL('./packages/schema/src/index.ts', import.meta.url)),
     '@marure/parser': fileURLToPath(new URL('./packages/parser/src/index.ts', import.meta.url)),
+    '@marure/utils': fileURLToPath(new URL('./packages/utils/src/index.ts', import.meta.url)),
   },
 
   typescript: {

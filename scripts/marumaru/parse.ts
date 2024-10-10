@@ -1,6 +1,7 @@
 import type { LyricLine, LyricWord, MaruSongData } from '@marure/schema'
-import { serializeToLrc } from '~~/packages/parser/src'
 import * as cheerio from 'cheerio'
+import { serializeToLrc } from '../../packages/parser/src'
+import { splitArtistNames } from '../../packages/utils/src'
 
 export function parse(html: string, sourceUrl: string) {
   const $ = cheerio.load(html)
@@ -9,7 +10,7 @@ export function parse(html: string, sourceUrl: string) {
     schema: 'v1',
     youtube: $('#VideoID').text().trim(),
     title: $('#SongName').text().trim(),
-    artists: $('#Singer').text().split(/[,;、×]|\bfeat\.?|\bft\s*\.?|\bwith\r/gi).map(s => s.trim()).filter(Boolean),
+    artists: splitArtistNames($('#Singer').text() || ''),
     tags: $('#SongType').text().split(/[,;、]/g).map(s => s.trim()).filter(Boolean),
     lrc: '',
   }
@@ -81,8 +82,4 @@ export function parse(html: string, sourceUrl: string) {
 export function st2sec(st: string) {
   const [h, m, s] = st.split(':').map(Number) as [number, number, number]
   return h * 3600 + m * 60 + s
-}
-
-export function normalizeFilename(str: string) {
-  return str.replace(/[^\w\-\p{Script=Han}\p{Script=Katakana}\p{Script=Hiragana}]+/gu, '_')
 }

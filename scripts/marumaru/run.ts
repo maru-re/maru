@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import YAML from 'js-yaml'
 import { validate } from '../../packages/schema/src'
-import { normalizeFilename, parse } from './parse'
+import { normalizeFilename } from '../../packages/utils/src'
+import { parse } from './parse'
 import { urls } from './sources'
 
 const cwd = fileURLToPath(new URL('.', import.meta.url))

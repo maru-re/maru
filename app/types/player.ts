@@ -11,6 +11,8 @@ export interface YouTubePlayerOptions {
 }
 
 export declare class YouTubePlayer {
+  videoTitle: string
+
   constructor(id: string | HTMLElement, options: YouTubePlayerOptions)
 
   playVideo(): void

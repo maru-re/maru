@@ -1,11 +1,11 @@
-import type { MaruSongData } from '~~/packages/schema/src'
+import type { MaruSongData } from '../../packages/schema/src'
 import fs from 'node:fs/promises'
 import { basename, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import YAML from 'js-yaml'
 import JSZip from 'jszip'
-import { normalizeFilename } from './parse'
+import { normalizeFilename } from '../../packages/utils/src'
 
 const cwd = fileURLToPath(new URL('.', import.meta.url))
 const paths = await fg('out/data/**/*.maru', { cwd, absolute: true })
