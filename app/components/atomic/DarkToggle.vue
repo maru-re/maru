@@ -60,7 +60,7 @@ function toggle(event: MouseEvent) {
 </script>
 
 <template>
-  <Tooltip placement="left">
+  <Tooltip placement="bottom">
     <IconButton icon="i-uil-sun dark:i-uil-moon" @click="toggle" />
     <template #popper>
       <div>
