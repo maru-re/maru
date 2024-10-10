@@ -45,8 +45,8 @@
     "fileFormat": "檔案格式",
     "aboutUS": "關於我們",
     "contact": {
-      "Discord": "Discord",
-      "Github": "Github"
+      "discord": "Discord",
+      "github": "GitHub"
     }
   },
   "import": {
@@ -108,6 +108,6 @@
   "youtube": {
     "connecting": "YouTube 連接中...",
     "connectionFail": "YouTube 連接失敗",
-    "requireId": "YouTube ID is required"
+    "requireId": "YouTube ID 不能留空"
   }
 }
