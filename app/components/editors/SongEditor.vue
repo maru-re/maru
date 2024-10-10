@@ -298,14 +298,13 @@ onMounted(() => {
     <div v-show="showTab === 'lyrics'" flex="~ col gap-1" ml--5>
       <div flex="~ gap-2 items-center" border="~ base rounded-xl" mb2 ml5 px4 py2>
         <div i-uil-english-to-chinese mr1 />
-        <SimpleButton
-          v-for="item of locales" :key="item.code"
-          :class="translations.includes(item.code) ? 'op100 text-primary' : 'op50'"
-          :icon="translations.includes(item.code) ? 'i-uil-check-circle text-primary' : 'i-uil-circle op50'"
+        <ToggleButton
+          v-for="item of locales"
+          :key="item.code"
+          :model-value="translations.includes(item.code)"
+          :title="item.name || item.code"
           @click="toggleTranslations(item.code)"
-        >
-          {{ item.name || item.code }}
-        </SimpleButton>
+        />
       </div>
       <template
         v-for="line, idx of state.lyrics"

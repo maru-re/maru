@@ -3,6 +3,7 @@ import { Tooltip } from 'floating-vue'
 import { appName } from '~/constants'
 
 import { showSettingsDialog } from '~/state/models'
+import { isMobileScreen } from './state/breakpoints'
 
 import 'floating-vue/dist/style.css'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
@@ -36,7 +37,7 @@ const route = useRoute()
     </Tooltip>
   </div>
 
-  <ModalPopup v-model="showSettingsDialog" direction="top">
+  <ModalPopup v-model="showSettingsDialog" :direction="isMobileScreen ? 'bottom' : 'top'">
     <SettingsPanel />
   </ModalPopup>
 </template>

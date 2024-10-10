@@ -30,9 +30,12 @@ export declare class YouTubePlayer {
 export interface YouTube {
   Player: typeof YouTubePlayer
   PlayerState: {
+    UNSTARTED: number
     ENDED: number
     PLAYING: number
     PAUSED: number
+    CUED: number
+    BUFFERING: number
   }
 }
 

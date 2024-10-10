@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { breakpointsTailwind } from '@vueuse/core'
 import { Menu, Tooltip } from 'floating-vue'
 import { useSettings } from '~/composables/settings'
+import { isMobileScreen } from '~/state/breakpoints'
 
 const settings = useSettings()
 const route = useRoute()
-
-const bp = useBreakpoints(breakpointsTailwind)
-const ltMd = bp.isSmaller('md')
 </script>
 
 <template>
@@ -20,7 +17,7 @@ const ltMd = bp.isSmaller('md')
       <template #popper>
         <div>
           <div mb1>
-            {{ $t("settingsNav.displayFurigana") }}
+            {{ $t("settings.displayFurigana") }}
           </div>
           <div font-jp-serif>
             <span>漢字</span>
@@ -38,7 +35,7 @@ const ltMd = bp.isSmaller('md')
       <template #popper>
         <div>
           <div mb1>
-            {{ $t("settingsNav.displayKanji") }}
+            {{ $t("settings.displayKanji") }}
           </div>
           <div font-jp-serif>
             <span>かんじ</span>
@@ -53,7 +50,7 @@ const ltMd = bp.isSmaller('md')
       <template #popper>
         <div>
           <div mb1>
-            {{ $t("settingsNav.displayRomaji") }}
+            {{ $t("settings.displayRomaji") }}
           </div>
           <div>
             <span font-jp-serif>面白い</span>
@@ -67,7 +64,7 @@ const ltMd = bp.isSmaller('md')
       <IconToggle v-model="settings.translation" icon="i-uil-english-to-chinese" />
       <template #popper>
         <div>
-          {{ $t("settingsNav.displayTranslation") }}
+          {{ $t("settings.displayTranslation") }}
         </div>
       </template>
     </Tooltip>
@@ -76,7 +73,7 @@ const ltMd = bp.isSmaller('md')
       <template #popper>
         <div px4 py2>
           <div>
-            {{ $t("settingsNav.lyricsSize", { fontSize: settings.fontSize }) }}
+            {{ $t("settings.lyricsSize", { fontSize: settings.fontSize }) }}
           </div>
           <div>
             <input v-model="settings.fontSize" type="range" min="0.6" max="2" step="0.2">
@@ -89,7 +86,7 @@ const ltMd = bp.isSmaller('md')
       <IconToggle v-model="settings.follow" icon="i-uil-right-indent-alt" />
       <template #popper>
         <div>
-          {{ $t("settingsNav.scrollWithLyrics") }}
+          {{ $t("settings.scrollWithLyrics") }}
         </div>
       </template>
     </Tooltip>
@@ -97,11 +94,11 @@ const ltMd = bp.isSmaller('md')
       <IconToggle v-model="settings.autoPause" icon="i-uil-pause-circle" />
       <template #popper>
         <div>
-          {{ $t("settingsNav.autoPausePerLyrics") }}
+          {{ $t("settings.autoPausePerLyrics") }}
         </div>
       </template>
     </Tooltip>
-    <template v-if="route.path !== '/' && ltMd">
+    <template v-if="route.path !== '/' && isMobileScreen">
       <div class="setting-nav-divider" />
       <Tooltip placement="top">
         <IconButton to="/" icon="i-uil-angle-left-b" />

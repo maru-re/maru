@@ -13,6 +13,7 @@ export const _settings = useLocalStorage<UiSettings>(
     speed: 1,
     fontSize: 1.2,
     convertChineseHansHant: true,
+    loopSong: false,
   },
   {
     mergeDefaults: true,

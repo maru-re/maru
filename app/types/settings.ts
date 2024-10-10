@@ -8,4 +8,5 @@ export interface UiSettings {
   speed: number
   fontSize: number
   convertChineseHansHant: boolean
+  loopSong: boolean
 }
