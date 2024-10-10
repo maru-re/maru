@@ -56,7 +56,7 @@ const isActive = computed(() => props.controls?.active.value?.index === props.in
             v-model="line.t"
             w-32
             :class="isActive ? 'border-primary' : ''"
-            @go="props.controls?.go(line)"
+            @go="autoPlay => props.controls?.go(line, autoPlay)"
           >
             <div
               v-if="isActive && duration && controls"

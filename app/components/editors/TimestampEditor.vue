@@ -6,7 +6,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (event: 'go'): void
+  (event: 'go', autoPlay: boolean): void
 }>()
 
 const modelValue = defineModel('modelValue', {
@@ -47,10 +47,12 @@ function onKeydown(e: KeyboardEvent) {
   if (e.key === 'ArrowUp') {
     e.preventDefault()
     modelValue.value -= 0.1
+    emit('go', false)
   }
   else if (e.key === 'ArrowDown') {
     e.preventDefault()
     modelValue.value += 0.1
+    emit('go', false)
   }
   else if (e.key === 'Enter' || e.key === 'Escape') {
     e.preventDefault()
@@ -68,7 +70,7 @@ function onKeydown(e: KeyboardEvent) {
     <IconButton
       icon="i-uil:play"
       tabindex="-1" h-max op50 hover="op100"
-      @click="emit('go')"
+      @click="emit('go', true)"
     />
     <input
       ref="input"
