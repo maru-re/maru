@@ -78,7 +78,7 @@
   "search": {
     "noResult": "No matching songs found.",
     "searchImportedSong": "Search Imported Songs ({0})",
-    "searchResult": "Search Results",
+    "searchResult": "Search Result(s)",
     "searchResultCount": "{resultLength} of {collectionsLength}"
   },
   "seo": {
