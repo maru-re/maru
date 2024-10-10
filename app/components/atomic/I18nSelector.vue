@@ -6,7 +6,7 @@ const { locale, locales, setLocale } = useI18n()
 
 <template>
   <Menu placement="top">
-    <IconButton icon="i-ph-translate" />
+    <IconButton icon="i-uil-english-to-chinese" />
     <template #popper>
       <div p2 flex="~ col gap-1">
         <SimpleButton
