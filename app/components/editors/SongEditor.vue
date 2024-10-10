@@ -20,6 +20,8 @@ const state = reactive<MaruSongDataParsed>(
 const router = useRouter()
 const route = useRoute()
 
+provideEditorContext()
+
 const dirty = ref(false)
 watch(
   state,

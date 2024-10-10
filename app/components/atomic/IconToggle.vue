@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   icon: string
+  activeClass?: string
 }>()
 
 const value = defineModel('modelValue', { default: true })
@@ -8,7 +9,7 @@ const value = defineModel('modelValue', { default: true })
 
 <template>
   <IconButton
-    :icon="[icon, value ? '' : 'op20'].join(' ')"
+    :icon="[icon, value ? activeClass : 'op20'].join(' ')"
     @click.prevent="value = !value"
   />
 </template>
