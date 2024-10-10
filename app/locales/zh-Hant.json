@@ -1,6 +1,5 @@
 {
   "nijuumaru": "二重丸",
-  "addToFav": "收藏歌曲",
   "allSong": "所有歌曲",
   "clearAllData": "清除所有資料",
   "common": {
@@ -40,6 +39,7 @@
     "insertRow": "插入行",
     "yamlNotSupportYet": "YAML 編輯功能暫未實裝"
   },
+  "favSongs": "收藏歌曲",
   "footer": {
     "message": "網站開發中、許多功能尚未完善。歡迎透過 Discord 回報問題",
     "fileFormat": "檔案格式",

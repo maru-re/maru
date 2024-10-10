@@ -1,6 +1,5 @@
 {
   "nijuumaru": "二重丸",
-  "addToFav": "Add to Favorites",
   "allSong": "All Songs",
   "clearAllData": "Clear All Data",
   "common": {
@@ -40,6 +39,7 @@
     "insertRow": "Insert Row",
     "yamlNotSupportYet": "YAML editing feature not yet implemented"
   },
+  "favSongs": "Favorite Songs",
   "footer": {
     "message": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord",
     "fileFormat": "File Format",

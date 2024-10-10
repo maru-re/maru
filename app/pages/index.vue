@@ -166,7 +166,7 @@ async function onFileChange(e: Event) {
     <div p10 flex="~ col gap-8">
       <SongsGrid v-if="!search.trimEnd() && favorited.length" :link="true" :songs="favorited" show-favorite="hover">
         <template #title>
-          <div>{{ $t("addToFav") }}</div>
+          <div>{{ $t("favSongs") }}</div>
         </template>
       </SongsGrid>
 
