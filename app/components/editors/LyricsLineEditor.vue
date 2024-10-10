@@ -62,6 +62,7 @@ function goNextLineTimestamp() {
             v-model="line.t"
             w-32
             :class="isActive ? 'border-primary' : ''"
+            :current-time="controls?.current.value"
             @go="autoPlay => props.controls?.go(line, autoPlay)"
             @next="goNextLineTimestamp"
           >

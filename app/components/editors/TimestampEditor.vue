@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { secondsToTimestamp, timestampToSeconds } from '@marure/parser'
 
-defineProps<{
+const props = defineProps<{
   inputClass?: string
+  currentTime?: number
 }>()
 
 const emit = defineEmits<{
@@ -62,6 +63,15 @@ function onKeydown(e: KeyboardEvent) {
   else if (e.key === 'Enter') {
     e.preventDefault()
     emit('next')
+  }
+  else if (e.code === 'KeyT') {
+    e.preventDefault()
+    if (props.currentTime !== undefined) {
+      modelValue.value = props.currentTime
+      nextTick(() => {
+        emit('next')
+      })
+    }
   }
 }
 </script>
