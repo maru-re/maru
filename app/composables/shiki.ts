@@ -21,6 +21,7 @@ const grammarLyricInline: LanguageRegistration = {
 
 export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, 'lang'> & {
   lang: 'lyric' | 'lyric-inline' | 'yaml'
+  enabled?: boolean
 }
 
 let shikiPromise: Promise<HighlighterCore> | undefined
@@ -35,28 +36,38 @@ export function usePlainShiki(
   let plain: CreatePlainShikiReturns
   let ctx: ReturnType<(typeof plain)['mount']>
 
-  const { trigger } = watchTriggerable([target, lang], () => {
-    ctx?.dispose()
-    if (target.value) {
-      ctx = plain?.mount(target.value, {
-        ...options,
-        lang: lang.value as any,
-      })
-    }
-  })
-
-  tryOnMounted(async () => {
-    shikiPromise ||= createHighlighterCore({
-      langs: [grammarLyric, grammarLyricInline, grammarYaml],
-      themes: [vitesseLight, vitesseDark],
-      engine: createJavaScriptRegexEngine(),
+  if (options.enabled ?? true) {
+    const { trigger } = watchTriggerable([target, lang], () => {
+      ctx?.dispose()
+      if (target.value) {
+        ctx = plain?.mount(target.value, {
+          ...options,
+          lang: lang.value as any,
+        })
+      }
     })
 
-    plain = createPlainShiki(await shikiPromise)
-    trigger()
-  })
+    tryOnMounted(async () => {
+      shikiPromise ||= createHighlighterCore({
+        langs: [grammarLyric, grammarLyricInline, grammarYaml],
+        themes: [vitesseLight, vitesseDark],
+        engine: createJavaScriptRegexEngine(),
+      })
 
-  tryOnUnmounted(() => {
-    ctx?.dispose()
-  })
+      plain = createPlainShiki(await shikiPromise)
+      trigger()
+    })
+
+    tryOnUnmounted(() => {
+      ctx?.dispose()
+    })
+  }
+
+  function update() {
+    ctx?.update()
+  }
+
+  return {
+    update,
+  }
 }
