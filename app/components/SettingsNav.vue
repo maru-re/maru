@@ -98,17 +98,6 @@ const route = useRoute()
         </div>
       </template>
     </Tooltip>
-    <template v-if="route.path !== '/' && isMobileScreen">
-      <div class="setting-nav-divider" />
-      <Tooltip placement="top">
-        <IconButton to="/" icon="i-uil-angle-left-b" />
-        <template #popper>
-          <div>
-            {{ $t("common.backToHome") }}
-          </div>
-        </template>
-      </Tooltip>
-    </template>
   </div>
 </template>
 

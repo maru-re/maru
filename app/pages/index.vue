@@ -12,6 +12,8 @@ const {
 const hash = useRouteHash()
 const rawSearch = ref(String(hash.value.s || ''))
 const search = useDebounce(rawSearch, 300)
+const searchEl = ref<HTMLInputElement | null>(null)
+const searchAnchorEl = ref<HTMLDivElement | null>(null)
 
 const fuse = computed(() => new Fuse(collections.value, {
   keys: ['title', 'artists', 'tags'],
@@ -19,7 +21,7 @@ const fuse = computed(() => new Fuse(collections.value, {
   threshold: 0.4,
 }))
 
-const { ignoreUpdates } = watchIgnorable(
+watch(
   () => hash.value.s,
   () => {
     const str = String(hash.value.s || '')
@@ -32,9 +34,7 @@ const { ignoreUpdates } = watchIgnorable(
 watch(
   search,
   () => {
-    ignoreUpdates(() => {
-      router.replace({ hash: search.value ? `#s=${search.value}` : '' })
-    })
+    history.replaceState({}, '', search.value ? `#s=${search.value}` : '')
   },
   { immediate: true },
 )
@@ -72,6 +72,18 @@ async function onFileChange(e: Event) {
   const files = input.files
   await importFromFiles(files)
 }
+
+function scrollToSearchResult() {
+  searchAnchorEl.value?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+}
+
+onMounted(() => {
+  if (search.value)
+    scrollToSearchResult()
+})
 </script>
 
 <template>
@@ -132,10 +144,13 @@ async function onFileChange(e: Event) {
       >
         <div i-uil-search text-lg op25 />
         <input
+          ref="searchEl"
           v-model="rawSearch"
           type="text"
           :placeholder="$t('search.searchImportedSong', [collections.length])"
+          class="placeholder-hex-888"
           absolute inset-0 w-auto bg-transparent p5 px10 outline-none
+          @keydown="scrollToSearchResult()"
         >
         <div flex-auto />
         <IconButton
@@ -163,7 +178,9 @@ async function onFileChange(e: Event) {
       </a>
     </div>
 
-    <div p10 flex="~ col gap-8">
+    <div ref="searchAnchorEl" mb8 />
+
+    <div flex="~ col gap-8" min-h-100vh p10>
       <SongsGrid v-if="!search.trimEnd() && favorited.length" :link="true" :songs="favorited" show-favorite="hover">
         <template #title>
           <div>{{ $t("actions.favorite") }}</div>
@@ -183,7 +200,7 @@ async function onFileChange(e: Event) {
             <span text-sm op50>{{ $t("search.searchResultCount", { resultLength: result.length, collectionsLength: collections.length }) }}</span>
           </template>
           <template v-else>
-            <span>titles.allSongallSong") }}</span>
+            <span>{{ $t('titles.allSong') }}</span>
             <span text-sm op50>{{ collections.length }}</span>
           </template>
         </template>

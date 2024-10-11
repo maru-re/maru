@@ -153,13 +153,24 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    ref="lyricsOverflow"
-    relative of-x-hidden of-y-auto
-  >
+  <div relative h-full w-full of-hidden>
+    <div
+      lg="hidden"
+      absolute left-3 top-3 p1 floating-glass
+      flex="~ gap-2 items-center"
+    >
+      <Tooltip placement="top">
+        <IconButton to="/" icon="i-uil-angle-left-b" />
+        <template #popper>
+          <div>
+            {{ $t("common.backToHome") }}
+          </div>
+        </template>
+      </Tooltip>
+    </div>
     <div
       v-if="activeLineEl && !targetIsVisible"
-      fixed bottom-3 right-3 p2 floating-glass
+      absolute bottom-3 right-3 p2 floating-glass
       flex="~ gap-2 items-center"
       @click="() => scrollToActiveLine('smooth')"
     >
@@ -172,32 +183,39 @@ onMounted(() => {
         </template>
       </Tooltip>
     </div>
-    <div lt-lg="absolute" pointer-events-auto sticky left-3 right-3 top-3 z-floating flex>
+    <div pointer-events-auto absolute left-3 right-3 top-3 z-floating flex>
       <SettingsNav mxa lt-lg="hidden" />
     </div>
-    <div
-      flex="~ col gap-1.2em" class="lyrics-track"
-      of-hidden py-1000px text-center
-      :style="{
-        fontSize: `${settings.fontSize}rem`,
-      }"
-    >
-      <div pb10 font-jp-serif>
-        <h1 text-2em>
-          {{ data.title }}
-        </h1>
-        <ArtistsList :artists="data.artists" />
-      </div>
 
-      <LyricsLine
-        v-for="line, index of data.lyrics"
-        :key="index"
-        :class="getClassLine(index)"
-        :index="index"
-        :line="line"
-        @pointerdown="e => onPointerDown(e, line)"
-        @pointerup="e => onPointerUp(e, line)"
-      />
+    <!-- Track -->
+    <div
+      ref="lyricsOverflow"
+      relative h-full w-full of-x-hidden of-y-auto
+    >
+      <div
+        flex="~ col gap-1.2em" class="lyrics-track"
+        of-hidden py-1000px text-center
+        :style="{
+          fontSize: `${settings.fontSize}rem`,
+        }"
+      >
+        <div pb10 font-jp-serif>
+          <h1 text-2em>
+            {{ data.title }}
+          </h1>
+          <ArtistsList :artists="data.artists" />
+        </div>
+
+        <LyricsLine
+          v-for="line, index of data.lyrics"
+          :key="index"
+          :class="getClassLine(index)"
+          :index="index"
+          :line="line"
+          @pointerdown="e => onPointerDown(e, line)"
+          @pointerup="e => onPointerUp(e, line)"
+        />
+      </div>
     </div>
   </div>
 </template>
