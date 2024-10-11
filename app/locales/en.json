@@ -1,7 +1,4 @@
 {
-  "nijuumaru": "二重丸",
-  "allSong": "All Songs",
-  "clearAllData": "Clear All Data",
   "common": {
     "backToHome": "Back to Home",
     "cancel": "Cancel",
@@ -9,11 +6,9 @@
     "deselect": "Deselect",
     "done": "Done",
     "error": "Error",
-    "exportSelected": "Export Selected",
     "loading": "Loading...",
     "notes": "Notes",
     "remove": "Remove",
-    "removeSelected": "Remove Selected",
     "save": "Save",
     "select": "Select",
     "selectAll": "Select All",
@@ -34,7 +29,6 @@
     "light": "Light",
     "dark": "Dark"
   },
-  "downloadAllLyrics": "Download All Lyrics",
   "dragFileToHere": "Drag files here",
   "editor": {
     "copyTimestamp": "Copy Timestamp",
@@ -51,11 +45,10 @@
       "skipForward": "Step forward",
       "setCurrentTime": "Apply current playback time and go next",
       "setCurrentTimeOnly": "Apply current playback time"
-    }
+    },
+    "visualization": "Visualization"
   },
-  "favSongs": "Favorite Songs",
   "footer": {
-    "message": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord",
     "fileFormat": "File Format",
     "aboutUS": "About Us",
     "contact": {
@@ -87,8 +80,6 @@
     "shareLyrics": "Share Lyrics"
   },
   "pasteYoutubeLink": "Paste YouTube MV Song Link",
-  "recentSongs": "Recently Viewed",
-  "scrollToCurrentLyrics": "Scroll to Current Lyrics",
   "search": {
     "noResult": "No matching songs found.",
     "searchImportedSong": "Search Imported Songs ({0})",
@@ -118,12 +109,29 @@
     "tags": "Tags",
     "offset": "Offset"
   },
-  "songNotFound": "Song not found.",
   "tryRefreshPage": "Please try refreshing the page.",
-  "visualization": "Visualization",
   "youtube": {
     "connecting": "Connecting to YouTube...",
     "connectionFail": "YouTube connection failed",
     "requireId": "YouTube ID cannot be empty"
+  },
+  "actions": {
+    "favorite": "Favorite Songs",
+    "scrollToCurrent": "Scroll to Current Lyrics",
+    "clearAllData": "Clear All Data",
+    "downloadAllLyrics": "Download All Lyrics",
+    "exportSelected": "Export Selected",
+    "removeSelected": "Remove Selected"
+  },
+  "messages": {
+    "wip": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord"
+  },
+  "appname": "二重丸",
+  "errors": {
+    "songNotFound": "Song not found."
+  },
+  "titles": {
+    "recentSongs": "Recently Viewed",
+    "allSong": "All Songs"
   }
 }

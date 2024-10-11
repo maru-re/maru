@@ -1,7 +1,4 @@
 {
-  "nijuumaru": "二重丸",
-  "allSong": "所有歌曲",
-  "clearAllData": "清除所有資料",
   "common": {
     "backToHome": "回到首頁",
     "cancel": "取消",
@@ -9,11 +6,9 @@
     "deselect": "取消選取",
     "done": "完成",
     "error": "錯誤",
-    "exportSelected": "匯出所選",
     "loading": "加載中...",
     "notes": "備註",
     "remove": "刪除",
-    "removeSelected": "刪除所選",
     "save": "儲存",
     "select": "選取",
     "selectAll": "全選",
@@ -34,7 +29,6 @@
     "light": "明亮",
     "dark": "暗黑"
   },
-  "downloadAllLyrics": "下載所有歌詞檔案",
   "dragFileToHere": "拖拽檔案到這裡",
   "editor": {
     "copyTimestamp": "複製時間戳",
@@ -51,11 +45,10 @@
       "skipForward": "往後微調時間",
       "setCurrentTime": "設為當前播放時間後跳行",
       "setCurrentTimeOnly": "設為當前播放時間"
-    }
+    },
+    "visualization": "可視化"
   },
-  "favSongs": "收藏歌曲",
   "footer": {
-    "message": "網站開發中、許多功能尚未完善。歡迎透過 Discord 回報問題",
     "fileFormat": "檔案格式",
     "aboutUS": "關於我們",
     "contact": {
@@ -87,8 +80,6 @@
     "shareLyrics": "分享歌詞"
   },
   "pasteYoutubeLink": "貼上 YouTube MV 歌曲連結",
-  "recentSongs": "最近看過",
-  "scrollToCurrentLyrics": "滾動至目前歌詞",
   "search": {
     "noResult": "沒找到符合的歌曲。",
     "searchImportedSong": "搜尋已匯入的歌曲（{0}）",
@@ -119,12 +110,30 @@
     "tags": "標籤",
     "offset": "偏移"
   },
-  "songNotFound": "歌曲不存在。",
   "tryRefreshPage": "請嘗試重新整理頁面",
-  "visualization": "可視化",
   "youtube": {
     "connecting": "YouTube 連接中...",
     "connectionFail": "YouTube 連接失敗",
     "requireId": "YouTube ID 不能留空"
+  },
+  "messages": {
+    "fromShare": "來自分享連結",
+    "wip": "網站開發中、許多功能尚未完善。歡迎透過 Discord 回報問題"
+  },
+  "actions": {
+    "favorite": "收藏歌曲",
+    "scrollToCurrent": "滾動至目前歌詞",
+    "clearAllData": "清除所有資料",
+    "downloadAllLyrics": "下載所有歌詞檔案",
+    "exportSelected": "匯出所選",
+    "removeSelected": "刪除所選"
+  },
+  "appname": "二重丸",
+  "errors": {
+    "songNotFound": "歌曲不存在。"
+  },
+  "titles": {
+    "recentSongs": "最近看過",
+    "allSong": "所有歌曲"
   }
 }

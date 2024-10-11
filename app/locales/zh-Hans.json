@@ -1,7 +1,4 @@
 {
-  "nijuumaru": "二重丸",
-  "allSong": "所有歌曲",
-  "clearAllData": "清除所有数据",
   "common": {
     "backToHome": "回到首页",
     "cancel": "取消",
@@ -9,11 +6,9 @@
     "deselect": "取消选取",
     "done": "完成",
     "error": "错误",
-    "exportSelected": "导出所选",
     "loading": "加载中...",
     "notes": "备注",
     "remove": "删除",
-    "removeSelected": "删除所选",
     "save": "保存",
     "select": "选取",
     "selectAll": "全选",
@@ -34,7 +29,6 @@
     "light": "明亮",
     "dark": "暗黑"
   },
-  "downloadAllLyrics": "下载所有歌词文件",
   "dragFileToHere": "拖拽文件到这里",
   "editor": {
     "copyTimestamp": "拷贝时间戳",
@@ -51,11 +45,10 @@
       "skipForward": "往后微调时间",
       "setCurrentTime": "设为当前播放时间后跳行",
       "setCurrentTimeOnly": "设为当前播放时间"
-    }
+    },
+    "visualization": "可视化"
   },
-  "favSongs": "收藏歌曲",
   "footer": {
-    "message": "网站开发中、许多功能尚未完善。欢迎通过 Discord 回报问题",
     "fileFormat": "文件格式",
     "aboutUS": "关于我们",
     "contact": {
@@ -87,8 +80,6 @@
     "shareLyrics": "分享歌词"
   },
   "pasteYoutubeLink": "粘贴 YouTube MV 歌曲链接",
-  "recentSongs": "最近看过",
-  "scrollToCurrentLyrics": "滚动至目前歌词",
   "search": {
     "noResult": "没找到符合的歌曲。",
     "searchImportedSong": "搜索已导入的歌曲（{0}）",
@@ -119,12 +110,29 @@
     "tags": "标签",
     "offset": "偏移"
   },
-  "songNotFound": "歌曲不存在。",
   "tryRefreshPage": "请尝试刷新页面",
-  "visualization": "可视化",
   "youtube": {
     "connecting": "YouTube 连接中...",
     "connectionFail": "YouTube 连接失败",
     "requireId": "YouTube ID 不能留空"
+  },
+  "actions": {
+    "favorite": "收藏歌曲",
+    "scrollToCurrent": "滚动至目前歌词",
+    "clearAllData": "清除所有数据",
+    "downloadAllLyrics": "下载所有歌词文件",
+    "exportSelected": "导出所选",
+    "removeSelected": "删除所选"
+  },
+  "messages": {
+    "wip": "网站开发中、许多功能尚未完善。欢迎通过 Discord 回报问题"
+  },
+  "appname": "二重丸",
+  "errors": {
+    "songNotFound": "歌曲不存在。"
+  },
+  "titles": {
+    "recentSongs": "最近看过",
+    "allSong": "所有歌曲"
   }
 }

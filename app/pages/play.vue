@@ -51,7 +51,7 @@ watchEffect(() => {
         404
       </h1>
       <p>
-        {{ $t("songNotFound") }}
+        {{ $t("errors.songNotFound") }}
       </p>
     </template>
     <div mt10 flex="~ gap-2">

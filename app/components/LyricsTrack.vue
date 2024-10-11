@@ -167,7 +167,7 @@ onMounted(() => {
         <IconButton icon="i-uil-right-indent-alt" />
         <template #popper>
           <div>
-            {{ $t("scrollToCurrentLyrics") }}
+            {{ $t("actions.scrollToCurrent") }}
           </div>
         </template>
       </Tooltip>

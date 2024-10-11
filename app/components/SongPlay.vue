@@ -32,7 +32,7 @@ const favorited = computed({
 
 const shareUrl = computed(() => {
   try {
-    return `${location.origin}/play#share=${compressToEncodedURIComponent(JSON.stringify(props.data))}`
+    return `https://maru.re/play#share=${compressToEncodedURIComponent(JSON.stringify(props.data))}`
   }
   catch (e) {
     console.error(e)
@@ -122,6 +122,9 @@ async function remove() {
             {{ data.title }}
           </h1>
           <ArtistsList :artists="data.artists" mt--1 />
+        </div>
+        <div v-if="source === 'share'" rounded bg-amber:10 px2 py1 text-xs text-amber>
+          {{ $t('messages.fromShare') }}
         </div>
         <div flex-auto />
         <Dropdown v-if="source === 'local'">

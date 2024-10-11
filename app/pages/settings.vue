@@ -14,12 +14,12 @@ function removeAll() {
     <div py2 flex="~ gap-2">
       <SimpleButton icon="i-uil-trash" color="btn-simple-red" @click="removeAll()">
         <div translate-y-0.5px>
-          {{ $t("clearAllData") }}
+          {{ $t("actions.clearAllData") }}
         </div>
       </SimpleButton>
       <SimpleButton icon="i-uil-folder-download" @click="exportSongsZip()">
         <div translate-y-0.5px>
-          {{ $t("downloadAllLyrics") }}
+          actions.downloadAllLyricsllLyrics") }}
         </div>
       </SimpleButton>
     </div>

@@ -82,7 +82,7 @@ async function onFileChange(e: Event) {
       <div i-mdi-circle-double text-5xl op75 />
       <div text-4xl font-jp-serif>
         <ruby>
-          <rb>{{ $t("nijuumaru") }}</rb>
+          <rb>{{ $t("appname") }}</rb>
           <rt>にじゅうまる</rt>
         </ruby>
       </div>
@@ -123,7 +123,7 @@ async function onFileChange(e: Event) {
     </div>
     <div flex="~ gap-1 items-center" mxa mb2 max-w-full w-max rounded-full bg-orange:10 px3 py1 text-wrap text-sm text-orange>
       <div i-uil-flask flex-none text-base />
-      {{ $t("footer.message") }}
+      {{ $t("messages.wip") }}
     </div>
     <div v-if="collections.length > 0" sticky left-0 right-0 top-0 z-floating flex py3>
       <div
@@ -166,13 +166,13 @@ async function onFileChange(e: Event) {
     <div p10 flex="~ col gap-8">
       <SongsGrid v-if="!search.trimEnd() && favorited.length" :link="true" :songs="favorited" show-favorite="hover">
         <template #title>
-          <div>{{ $t("favSongs") }}</div>
+          <div>{{ $t("actions.favorite") }}</div>
         </template>
       </SongsGrid>
 
       <SongsGrid v-if="!search.trimEnd() && recent.length" :link="true" :songs="recent">
         <template #title>
-          <div>{{ $t("recentSongs") }}</div>
+          <div>{{ $t("titles.recentSongs") }}</div>
         </template>
       </SongsGrid>
 
@@ -183,7 +183,7 @@ async function onFileChange(e: Event) {
             <span text-sm op50>{{ $t("search.searchResultCount", { resultLength: result.length, collectionsLength: collections.length }) }}</span>
           </template>
           <template v-else>
-            <span>{{ $t("allSong") }}</span>
+            <span>titles.allSongallSong") }}</span>
             <span text-sm op50>{{ collections.length }}</span>
           </template>
         </template>

@@ -78,11 +78,11 @@ function revertSelection() {
             {{ $t("common.selectInverse") }}
           </SimpleButton>
           <SimpleButton v-if="selecting" :disabled="!selectedSongs.length" text-xs icon="i-uil-folder-download" @click="exportSelected()">
-            {{ $t("common.exportSelected") }} <span op50>{{ selectedSongs.length }}</span>
+            {{ $t("actions.exportSelected") }} <span op50>{{ selectedSongs.length }}</span>
           </SimpleButton>
           <Dropdown v-if="selecting" placement="top" :class="selectedSongs.length ? '' : 'pointer-events-none'">
             <SimpleButton :disabled="!selectedSongs.length" icon="i-uil-trash" color="btn-simple-red" text-xs>
-              {{ $t("common.removeSelected") }} <span op50>{{ selectedSongs.length }}</span>
+              {{ $t('actions.removeSelected') }} <span op50>{{ selectedSongs.length }}</span>
             </SimpleButton>
             <template #popper="{ hide }">
               <div flex flex-col gap-2 p4 text-sm>

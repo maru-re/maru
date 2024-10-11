@@ -308,7 +308,7 @@ onMounted(() => {
         :class="showTab === 'lyrics' ? '' : 'op50'"
         @click="changeTab('lyrics')"
       >
-        {{ $t("visualization") }}
+        {{ $t("editor.visualization") }}
       </SimpleButton>
       <SimpleButton
         :class="showTab === 'lrc' ? '' : 'op50'"
