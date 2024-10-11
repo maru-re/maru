@@ -67,7 +67,11 @@ const settings = useSettings()
       </template>
     </Tooltip>
     <Menu placement="top">
-      <IconButton icon="i-uil-text-size" />
+      <IconButton
+        :class="settings.fontSize.toString() === '1' ? 'op40 hover:color-base hover:op100' : 'color-primary'"
+        icon="i-uil-text-size"
+        @click="settings.fontSize = 1"
+      />
       <template #popper>
         <div px4 py2>
           <div>
