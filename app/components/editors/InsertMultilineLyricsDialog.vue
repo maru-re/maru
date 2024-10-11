@@ -22,11 +22,9 @@ function importLyrics() {
     <div flex="~ col gap-4" h-full max-w-700px w-full p6>
       <h2 text-xl>
         {{ $t("editor.insertMultiline") }}
-        <div float-right>
-          <button @click="visible = false">
-            <div i-uil-times />
-          </button>
-        </div>
+        <button float-right @click="visible = false">
+          <span i-uil-times />
+        </button>
       </h2>
       <TextInput v-model="lyrics" flex="1" type="textarea" input-class="h-full" :placeholder="$t('editor.lyricsPlaceholder')" />
       <SimpleButton class="px4! py3!" @click="importLyrics">
