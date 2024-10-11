@@ -200,9 +200,9 @@ onMounted(() => {
         }"
       >
         <div pb10 font-jp-serif>
-          <h1 text-2em>
+          <p text-2em>
             {{ data.title }}
-          </h1>
+          </p>
           <ArtistsList :artists="data.artists" />
         </div>
 
