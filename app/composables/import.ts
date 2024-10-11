@@ -58,7 +58,7 @@ export async function *parseFiles(files?: FileList | FileSystemEntry[]): AsyncGe
         case 'maru':
         case 'yml':
         case 'yaml': {
-          json = YAML.parse(await file.text())
+          json = YAML.load(await file.text())
           break
         }
         default:
