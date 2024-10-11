@@ -115,7 +115,8 @@
   "song": {
     "artist": "Artist",
     "title": "Song Title",
-    "tags": "Tags"
+    "tags": "Tags",
+    "offset": "Offset"
   },
   "songNotFound": "Song not found.",
   "tryRefreshPage": "Please try refreshing the page.",

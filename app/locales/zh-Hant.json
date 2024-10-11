@@ -116,7 +116,8 @@
   "song": {
     "artist": "歌手",
     "title": "歌曲標題",
-    "tags": "標籤"
+    "tags": "標籤",
+    "offset": "偏移"
   },
   "songNotFound": "歌曲不存在。",
   "tryRefreshPage": "請嘗試重新整理頁面",
