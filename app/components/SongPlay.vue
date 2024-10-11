@@ -82,6 +82,7 @@ onMounted(() => {
       <div lt-lg="hidden" min-h-80px flex rounded p2>
         <LyricsLine
           v-if="active"
+          role=""
           ma
           :style="{
             fontSize: `${settings.fontSize}rem`,
