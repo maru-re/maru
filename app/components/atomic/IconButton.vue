@@ -14,7 +14,7 @@ defineProps<{
     v-tooltip="title"
     :to="to"
     aspect-ratio-1 flex-none rounded-full p1
-    hover:bg-hex-8883
+    hover:bg-primary:15 hover:color-primary dark:hover:bg-primary:30
     :title="title"
   >
     <slot>
