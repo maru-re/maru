@@ -261,29 +261,31 @@ onMounted(() => {
 </script>
 
 <template>
-  <div fixed right-8 top-8 z-floating flex="~ col">
-    <YouTubePlayer w-120 rounded-lg border="~ base" />
-    <div flex="~ gap-2 items-center" mt--2 w-max self-end p1 px2 text-sm floating-glass>
-      <!-- <IconButton
-        :icon="controls.status.value === 'playing' ? 'i-uil-pause' : 'i-uil-play'"
-        @click="controls.toggle()"
-      /> -->
-      <IconButton
-        :title="$t('editor.insertAtCurrentTime')"
-        icon="i-uil-plus-circle"
-        @click="insertAtCurrentTime()"
-      />
-      <div font-mono>
-        <span>{{ currentTimestamp }}</span>
-        <span v-if="state.offset" text-primary> +{{ state.offset }}</span>
+  <DraggableWindow>
+    <div flex="~ col">
+      <YouTubePlayer w-120 rounded-lg border="~ base" />
+      <div flex="~ gap-2 items-center" mt--2 w-max self-end p1 px2 text-sm floating-glass>
+        <!-- <IconButton
+          :icon="controls.status.value === 'playing' ? 'i-uil-pause' : 'i-uil-play'"
+          @click="controls.toggle()"
+        /> -->
+        <IconButton
+          :title="$t('editor.insertAtCurrentTime')"
+          icon="i-uil-plus-circle"
+          @click="insertAtCurrentTime()"
+        />
+        <div font-mono>
+          <span>{{ currentTimestamp }}</span>
+          <span v-if="state.offset" text-primary> +{{ state.offset }}</span>
+        </div>
+        <IconButton
+          :title="$t('editor.copyTimestamp')"
+          :icon="copied ? 'i-uil:check text-green5' : 'i-uil:clipboard'"
+          @click="copyCurrentTimestamp()"
+        />
       </div>
-      <IconButton
-        :title="$t('editor.copyTimestamp')"
-        :icon="copied ? 'i-uil:check text-green5' : 'i-uil:clipboard'"
-        @click="copyCurrentTimestamp()"
-      />
     </div>
-  </div>
+  </DraggableWindow>
   <div mxa max-w-300 flex="~ col gap-3">
     <BasicNav />
     <div flex="~ col gap-2" max-w-150>
