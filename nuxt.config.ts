@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url'
 import { execaSync } from 'execa'
 import { appDescription, appName } from './app/constants'
+import { dependencies } from './package.json'
 
 const gitSha = execaSync('git', ['rev-parse', 'HEAD']).stdout.trim()
 
@@ -8,7 +9,6 @@ export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
-    '@pinia/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/eslint',
     'nuxt-compile-markdown',
@@ -118,7 +118,11 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: [
-        'fuse.js',
+        'unstorage/drivers/indexedb',
+        ...Object.keys(dependencies),
+      ],
+      exclude: [
+        'shiki',
       ],
     },
   },

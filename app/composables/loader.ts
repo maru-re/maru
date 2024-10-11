@@ -1,5 +1,4 @@
 import type { MaruSongDataParsed } from '@marure/schema'
-import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { parseSongData } from '@marure/parser'
 import { validate } from '@marure/schema'
 import { decompressFromEncodedURIComponent } from 'lz-string'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
-import { Dropdown, Tooltip } from 'floating-vue'
+import { Dropdown } from 'floating-vue'
 import { compressToEncodedURIComponent } from 'lz-string'
 import type { SongDataSource } from '~/composables/loader'
 import { removeSongs } from '~/composables/store'
