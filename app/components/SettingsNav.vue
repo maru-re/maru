@@ -22,7 +22,7 @@ const settings = useSettings()
             <span i-uil-arrow-right mx1>-></span>
             <ruby>
               <rb>漢字</rb>
-              <rt text-orange>かんじ</rt>
+              <rt text-0.625em text-orange>かんじ</rt>
             </ruby>
           </div>
         </div>
