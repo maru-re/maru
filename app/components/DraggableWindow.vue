@@ -1,10 +1,17 @@
 <script setup lang="ts">
+interface Props {
+  x?: number
+  y?: number
+}
+const props = withDefaults(defineProps<Props>(), {
+  x: 0,
+  y: 0,
+})
 const window = ref<HTMLElement | null>(null)
 const handle = ref<HTMLElement | null>(null)
 
-const { width } = useWindowSize()
 const { style } = useDraggable(window, {
-  initialValue: { x: width.value - 32 - 480, y: 60 },
+  initialValue: { x: props.x, y: props.y },
   handle,
   preventDefault: true,
 })
