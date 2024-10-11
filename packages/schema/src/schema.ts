@@ -40,7 +40,31 @@ export const LyricLineSchema = object({
   trans: optional(LyricTranslationSchema),
 })
 
-export const MaruSongSchama = object({
+export const MaruSongGistSchema = object({
+  schema: pipe(
+    string(),
+    regex(/^(v1)$/, 'Currently supported schema version: v1'),
+    description('Schema version'),
+  ),
+  youtube: pipe(
+    string(),
+    description('The YouTube video ID, also used as the song ID'),
+  ),
+  title: string(),
+  cover: optional(string()),
+  artists: optional(array(string())),
+  tags: optional(array(string())),
+  dateSongReleased: optional(pipe(string(), isoDate())),
+  dateLyricsUpdated: optional(pipe(string(), isoDate())),
+
+  url: optional(pipe(
+    string(),
+    description('URL to the full song data'),
+  )),
+})
+
+export const MaruSongSchema = object({
+  ...MaruSongGistSchema.entries,
   schema: pipe(
     string(),
     regex(/^(v1)$/, 'Currently supported schema version: v1'),
@@ -68,13 +92,9 @@ export const MaruSongSchama = object({
 export type LyricLine = InferInput<typeof LyricLineSchema>
 export type LyricWord = InferInput<typeof LyricWordSchema>
 export type LyricTranslation = InferInput<typeof LyricTranslationSchema>
-export type MaruSongData = InferInput<typeof MaruSongSchama>
+export type MaruSongData = InferInput<typeof MaruSongSchema>
+export type MaruSongGist = InferInput<typeof MaruSongGistSchema>
 
 export type MaruSongDataParsed = MaruSongData & {
   lyrics: LyricLine[]
 }
-
-export type MaruSongGist = Pick<
-  MaruSongData,
-  'schema' | 'youtube' | 'title' | 'cover' | 'artists' | 'tags' | 'dateSongReleased' | 'dateLyricsUpdated'
->
