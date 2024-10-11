@@ -26,20 +26,57 @@ watch(
 )
 
 const isSupported = getSupported()
-if (isSupported) {
-  usePlainShiki(
-    editor,
-    {
-      lang: props.lang ?? 'lyric',
-      themes: {
-        light: 'vitesse-light',
-        dark: 'vitesse-dark',
-      },
+const { update: updateHighlight } = usePlainShiki(
+  editor,
+  {
+    enabled: isSupported,
+    lang: props.lang ?? 'lyric',
+    themes: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
     },
-  )
-}
+  },
+)
 
 const { focused } = useFocus(editor)
+
+function insertRuby() {
+  const selection = document.getSelection()
+  if (!selection || selection.isCollapsed) {
+    return false
+  }
+
+  const { anchorNode, focusNode } = selection
+  if (!anchorNode || anchorNode !== focusNode || !editor.value?.contains(anchorNode)) {
+    return false
+  }
+
+  let start = selection.anchorOffset
+  let end = selection.focusOffset
+  if (start > end) {
+    [start, end] = [end, start]
+  }
+
+  const text = anchorNode.textContent!
+  anchorNode.textContent = `${text.slice(0, start)}{${text.slice(start, end)}}()${text.slice(end)}`
+  selection.setPosition(anchorNode, end + 3)
+  updateHighlight()
+  updateModelValue()
+  return true
+}
+
+function onKeyDown(event: KeyboardEvent) {
+  if (event.altKey && event.key === 'r') {
+    insertRuby()
+  }
+}
+
+function onBeforeInput(event: Event) {
+  const { data, inputType } = event as InputEvent
+  if (inputType === 'insertText' && data === '{' && insertRuby()) {
+    event.preventDefault()
+  }
+}
 
 function updateModelValue() {
   updatePaused.value = true
@@ -72,6 +109,8 @@ function getSupported() {
       p2
       :class="[sharedClass, inputClass]"
       contenteditable="plaintext-only"
+      @keydown="onKeyDown"
+      @beforeinput="onBeforeInput"
       @input="updateModelValue"
       v-text="text"
     />
