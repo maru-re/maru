@@ -101,7 +101,11 @@
     "lyricsSize": "Lyrics Font Size ({fontSize})",
     "scrollWithLyrics": "Scroll with Lyrics",
     "autoPausePerLyrics": "Auto Pause per Lyrics",
-    "convertChineseHansHant": "Automatic Chinese conversion"
+    "convertChineseHansHant": "Automatic Chinese conversion",
+    "groupLyricsDisplay": "Lyrics display settings",
+    "groupPlay": "Playback settings",
+    "loopSong": "Single loop playback",
+    "songActions": "Song operation"
   },
   "song": {
     "artist": "Artist",
@@ -124,7 +128,8 @@
     "removeSelected": "Remove Selected"
   },
   "messages": {
-    "wip": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord"
+    "wip": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord",
+    "fromShare": "from share link"
   },
   "appname": "二重丸",
   "errors": {

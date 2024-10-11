@@ -1,64 +1,14 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
-import { Dropdown } from 'floating-vue'
-import { compressToEncodedURIComponent } from 'lz-string'
 import type { SongDataSource } from '~/composables/loader'
-import { removeSongs } from '~/composables/store'
 
 const props = defineProps<{
-  data: MaruSongDataParsed
+  song: MaruSongDataParsed
   source: SongDataSource
 }>()
-const emit = defineEmits<{
-  afterRemove: [id: string]
-}>()
-
-const router = useRouter()
-const route = useRoute()
-
-const {
-  isFavorite,
-  toggleFavorite,
-} = useCollections()
-
-const favorited = computed({
-  get() {
-    return isFavorite(props.data.youtube)
-  },
-  set(value: boolean) {
-    toggleFavorite(props.data.youtube, value)
-  },
-})
-
-const shareUrl = computed(() => {
-  try {
-    return `https://maru.re/play#share=${compressToEncodedURIComponent(JSON.stringify(props.data))}`
-  }
-  catch (e) {
-    console.error(e)
-    return ''
-  }
-})
-
-function copyShareLink() {
-  navigator.clipboard.writeText(shareUrl.value)
-}
-
-async function exportCurrent() {
-  exportSongMaru(props.data)
-}
-
-function editSong() {
-  router.push({ path: '/edit', hash: route.hash })
-}
-
-async function saveSong() {
-  await saveSongsToLocal([props.data])
-  router.replace(`/play#id=${props.data.youtube}`)
-}
 
 const settings = useSettings()
-const controls = usePlayer(props.data)
+const controls = usePlayer(props.song)
 const { active, go, toggle } = controls
 
 onMounted(() => {
@@ -73,12 +23,12 @@ onMounted(() => {
       case 'ArrowLeft':
       case 'ArrowUp':
         e.preventDefault()
-        go(props.data.lyrics[Math.max(0, (active.value?.index || 0) - 1)])
+        go(props.song.lyrics[Math.max(0, (active.value?.index || 0) - 1)])
         break
       case 'ArrowRight':
       case 'ArrowDown':
         e.preventDefault()
-        go(props.data.lyrics[Math.min(props.data.lyrics.length - 1, (active.value?.index || 0) + 1)])
+        go(props.song.lyrics[Math.min(props.song.lyrics.length - 1, (active.value?.index || 0) + 1)])
         break
       case 'KeyR':
         if (active.value !== null) {
@@ -91,11 +41,6 @@ onMounted(() => {
     }
   })
 })
-
-async function remove() {
-  await removeSongs([props.data.youtube])
-  emit('afterRemove', props.data.youtube)
-}
 </script>
 
 <template>
@@ -119,80 +64,15 @@ async function remove() {
         </NuxtLink>
         <div flex="~ col" lt-lg="flex-row items-end" font-jp-serif>
           <h1 text-xl>
-            {{ data.title }}
+            {{ song.title }}
           </h1>
-          <ArtistsList :artists="data.artists" mt--1 />
+          <ArtistsList :artists="song.artists" mt--1 />
         </div>
         <div v-if="source === 'share'" rounded bg-amber:10 px2 py1 text-xs text-amber>
           {{ $t('messages.fromShare') }}
         </div>
         <div flex-auto />
-        <Dropdown v-if="source === 'local'">
-          <ActionButton
-            type="icon"
-            icon="i-ph-trash-duotone op40 hover:op100 hover:text-red"
-            :title="$t('lyrics.removeLyrics')"
-          />
-          <template #popper="{ hide }">
-            <div flex flex-col gap-2 p4>
-              <h3>
-                {{ $t("lyrics.removeLyricsConfirm") }}
-              </h3>
-              <div flex gap-2>
-                <SimpleButton color="btn-simple-red" bg-red:10 px5 text-red:80 @click="remove">
-                  {{ $t("common.remove") }}
-                </SimpleButton>
-                <SimpleButton px5 @click="hide()">
-                  {{ $t("common.cancel") }}
-                </SimpleButton>
-              </div>
-            </div>
-          </template>
-        </Dropdown>
-        <ActionButton
-          v-if="source === 'local'"
-          type="icon"
-          icon="i-uil-file-download-alt"
-          :title="$t('lyrics.exportLyrics')"
-          @click="exportCurrent"
-        />
-        <ActionButton
-          v-if="source === 'local'"
-          lt-md="hidden"
-          type="icon"
-          icon="i-uil-edit"
-          :title="$t('lyrics.editLyrics')"
-          @click="editSong"
-        />
-        <ActionButton
-          v-if="source === 'share'"
-          type="icon"
-          icon="i-uil-save"
-          :title="$t('lyrics.saveLyrics')"
-          @click="saveSong()"
-        />
-        <Dropdown>
-          <ActionButton
-            type="icon"
-            icon="i-uil-share-alt"
-            :title="$t('lyrics.shareLyrics')"
-          />
-          <template #popper="{ hide }">
-            <div p5 flex="~ col gap-2">
-              <div>
-                <pre max-h-50 max-w-100 of-auto ws-pre-wrap break-all rounded bg-gray:15 p2>{{ shareUrl }}</pre>
-              </div>
-              <SimpleButton icon="i-uil-copy" @click="copyShareLink(), hide()">
-                {{ $t("copy.link") }}
-              </SimpleButton>
-            </div>
-          </template>
-        </Dropdown>
-        <IconToggle
-          v-model="favorited"
-          flex-none
-          :icon="favorited ? 'i-ph-star-fill text-yellow6 dark:text-yellow2' : 'i-ph-star-duotone'"
-        />
+        <SongActions :song="song" :source="source" />
       </div>
       <YouTubePlayer
         border="~ base rounded-1.5em"
@@ -206,7 +86,7 @@ async function remove() {
           :style="{
             fontSize: `${settings.fontSize}rem`,
           }"
-          :line="data.lyrics[active.index]!"
+          :line="song.lyrics[active.index]!"
         />
       </div>
       <!-- <QRCode :data="data" /> -->
@@ -216,14 +96,14 @@ async function remove() {
         of-auto p1 text-xs text-hex-888
       >
         <div border="t base" my1 h-1px w-30px />
-        <div v-if="data.notes?.length" text-sm>
-          <div v-for="line, idx of data.notes" :key="idx">
+        <div v-if="song.notes?.length" text-sm>
+          <div v-for="line, idx of song.notes" :key="idx">
             {{ line }}
           </div>
         </div>
       </div>
     </div>
-    <LyricsTrack :data="data" :controls="controls" />
+    <LyricsTrack :data="song" :controls="controls" />
   </div>
 </template>
 

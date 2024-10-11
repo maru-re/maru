@@ -2,7 +2,6 @@
 import Fuse from 'fuse.js'
 import SongsGrid from '~/components/SongsGrid.vue'
 
-const router = useRouter()
 const {
   recentIds,
   favoriteIds,
@@ -88,8 +87,10 @@ onMounted(() => {
 
 <template>
   <div p4>
+    <FloatingActions />
     <DropZone />
     <ImportDialog />
+    <SettingsDialog />
     <div flex="~ col gap-2 items-center" pb-10 pt-25>
       <div i-mdi-circle-double text-5xl op75 />
       <div text-4xl font-jp-serif>

@@ -16,8 +16,10 @@ useSeoMeta({
 
 <template>
   <div px15 py20>
+    <SettingsDialog />
+    <FloatingActions />
     <SongEditor
-      :data="data"
+      :song="data"
       :source="source"
     />
   </div>

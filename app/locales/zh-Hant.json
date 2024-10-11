@@ -102,7 +102,10 @@
     "scrollWithLyrics": "跟隨歌詞滾動",
     "autoPausePerLyrics": "每句歌詞自動暫停",
     "loopSong": "單曲循環播放",
-    "convertChineseHansHant": "自動簡繁體轉換"
+    "convertChineseHansHant": "自動簡繁體轉換",
+    "groupPlay": "播放設定",
+    "groupLyricsDisplay": "歌詞展示設定",
+    "songActions": "歌曲操作"
   },
   "song": {
     "artist": "歌手",

@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { Menu, Tooltip } from 'floating-vue'
 import { useSettings } from '~/composables/settings'
-import { isMobileScreen } from '~/state/breakpoints'
 
 const settings = useSettings()
-const route = useRoute()
 </script>
 
 <template>

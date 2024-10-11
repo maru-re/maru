@@ -5,15 +5,15 @@ import { inferSongInfoFromVideoTitle } from '~~/packages/utils/src'
 import YAML from 'js-yaml'
 
 const props = defineProps<{
-  data?: MaruSongDataParsed
+  song?: MaruSongDataParsed
   source?: string
 }>()
 
 const { t, locale, locales } = useI18n()
 
 const state = reactive<MaruSongDataParsed>(
-  props.data
-    ? structuredClone(toRaw(props.data))
+  props.song
+    ? structuredClone(toRaw(props.song))
     : createEmptySongData(),
 )
 

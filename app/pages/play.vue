@@ -26,46 +26,51 @@ watchEffect(() => {
 </script>
 
 <template>
-  <SongPlay
-    v-if="data"
-    :key="data.youtube"
-    :data="data"
-    :source="source"
-    @after-remove="$router.replace('/')"
-  />
-  <div v-else h-screen w-screen flex="~ col items-center justify-center" p5>
-    <BasicNav />
-    <template v-if="status === 'loading'">
-      <div>{{ $t("common.loading") }}</div>
-    </template>
-    <template v-else-if="status === 'error'">
-      <h1 text-4xl text-red>
-        {{ $t("common.error") }}
-      </h1>
-      <p>
-        {{ error }}
-      </p>
-    </template>
-    <template v-else-if="status === 'missing' || !data">
-      <h1 text-10em font-serif>
-        404
-      </h1>
-      <p>
-        {{ $t("errors.songNotFound") }}
-      </p>
-    </template>
-    <div mt10 flex="~ gap-2">
-      <SimpleButton
-        v-if="(status === 'missing' || !data) && id"
-        icon="i-uil-plus-circle"
-        :to="`/edit#id=${id}`"
-        :title="$t('lyrics.createLyrics')"
-      />
-      <SimpleButton
-        icon="i-uil-home-alt"
-        to="/"
-        :title="$t('common.backToHome')"
-      />
+  <div>
+    <SongPlay
+      v-if="data"
+      :key="data.youtube"
+      :song="data"
+      :source="source"
+      @after-remove="$router.replace('/')"
+    />
+    <div v-else h-screen w-screen flex="~ col items-center justify-center" p5>
+      <BasicNav />
+      <template v-if="status === 'loading'">
+        <div>{{ $t("common.loading") }}</div>
+      </template>
+      <template v-else-if="status === 'error'">
+        <h1 text-4xl text-red>
+          {{ $t("common.error") }}
+        </h1>
+        <p>
+          {{ error }}
+        </p>
+      </template>
+      <template v-else-if="status === 'missing' || !data">
+        <h1 text-10em font-serif>
+          404
+        </h1>
+        <p>
+          {{ $t("errors.songNotFound") }}
+        </p>
+      </template>
+      <div mt10 flex="~ gap-2">
+        <SimpleButton
+          v-if="(status === 'missing' || !data) && id"
+          icon="i-uil-plus-circle"
+          :to="`/edit#id=${id}`"
+          :title="$t('lyrics.createLyrics')"
+        />
+        <SimpleButton
+          icon="i-uil-home-alt"
+          to="/"
+          :title="$t('common.backToHome')"
+        />
+      </div>
     </div>
+
+    <FloatingActions />
+    <SettingsDialog :song="data" :source="source" />
   </div>
 </template>

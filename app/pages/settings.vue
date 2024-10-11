@@ -19,7 +19,7 @@ function removeAll() {
       </SimpleButton>
       <SimpleButton icon="i-uil-folder-download" @click="exportSongsZip()">
         <div translate-y-0.5px>
-          actions.downloadAllLyricsllLyrics") }}
+          {{ $t('actions.downloadAllLyrics') }}
         </div>
       </SimpleButton>
     </div>
