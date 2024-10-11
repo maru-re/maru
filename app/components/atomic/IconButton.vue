@@ -18,7 +18,7 @@ defineProps<{
     :title="title"
   >
     <slot>
-      <div :class="icon" />
+      <span :class="icon" />
     </slot>
   </component>
 </template>

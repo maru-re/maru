@@ -16,7 +16,7 @@ defineProps<{
     :class="color || 'btn-simple-primary'"
     relative px2.5 py2 line-height-1em shadow
   >
-    <div v-if="icon" :class="icon" />
+    <span v-if="icon" :class="icon" />
     <slot :title="title">
       {{ title }}
     </slot>
