@@ -60,7 +60,7 @@ watchEffect(async () => {
       <template v-for="word, i of line.words" :key="i">
         <template v-if="word.r">
           <ruby v-if="settings.kanji && settings.furigana" :st="word.t">
-            {{ word.w }}
+            <rb>{{ word.w }}</rb>
             <rt mb-2px>{{ word.r }}</rt>
           </ruby>
           <span v-else-if="!settings.kanji" :st="word.t">
