@@ -2,7 +2,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@9.11.0",
+  "packageManager": "pnpm@9.12.1",
   "scripts": {
     "build": "nuxi build",
     "dev": "nuxi dev",
@@ -17,21 +17,21 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
     "@antfu/ni": "^0.23.0",
-    "@iconify-json/carbon": "^1.2.1",
-    "@iconify-json/mdi": "^1.2.0",
-    "@iconify-json/ph": "^1.2.0",
-    "@iconify-json/ri": "^1.2.0",
-    "@iconify-json/svg-spinners": "^1.2.0",
-    "@iconify-json/twemoji": "^1.2.0",
-    "@iconify-json/uil": "^1.2.0",
+    "@iconify-json/carbon": "^1.2.2",
+    "@iconify-json/mdi": "^1.2.1",
+    "@iconify-json/ph": "^1.2.1",
+    "@iconify-json/ri": "^1.2.1",
+    "@iconify-json/svg-spinners": "^1.2.1",
+    "@iconify-json/twemoji": "^1.2.1",
+    "@iconify-json/uil": "^1.2.1",
     "@nuxt/devtools": "^1.5.2",
     "@nuxt/eslint": "^0.5.7",
     "@nuxtjs/color-mode": "^3.5.1",
     "@nuxtjs/i18n": "^8.5.5",
     "@pinia/nuxt": "^0.5.5",
     "@types/js-yaml": "^4.0.9",
-    "@unocss/eslint-config": "^0.63.3",
-    "@unocss/nuxt": "^0.63.3",
+    "@unocss/eslint-config": "^0.63.4",
+    "@unocss/nuxt": "^0.63.4",
     "@vueuse/nuxt": "^11.1.0",
     "cheerio": "^1.0.0",
     "consola": "^3.2.3",
@@ -49,13 +49,13 @@
     "nuxt": "^3.13.2",
     "nuxt-compile-markdown": "^0.1.1",
     "pinia": "^2.2.4",
-    "plain-shiki": "^0.0.10",
+    "plain-shiki": "^0.0.11",
     "shiki": "^1.22.0",
     "shiki-language-lyric": "^0.0.3",
     "simplecc-wasm": "^1.0.0",
     "tinyexec": "^0.3.0",
     "tsx": "^4.19.1",
-    "typescript": "^5.6.2",
+    "typescript": "^5.6.3",
     "unbuild": "^2.0.0",
     "unstorage": "^1.12.0",
     "uqr": "^0.1.2",
@@ -65,6 +65,6 @@
     "weq8": "^0.2.2"
   },
   "resolutions": {
-    "@typescript-eslint/utils": "^8.8.0"
+    "@typescript-eslint/utils": "^8.8.1"
   }
 }
