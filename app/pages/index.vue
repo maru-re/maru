@@ -124,11 +124,11 @@ onMounted(() => {
           >
         </div>
         <div flex="~ justify-center wrap">
-          <NuxtLink to="/play#demo=1" op50 hover="op100 underline">
+          <NuxtLink to="/play#demo=1" op50 hover="op100 underline color-primary">
             {{ $t("demo.title") }}
           </NuxtLink>
           <span mx2 op50 lt-md="hidden"> · </span>
-          <NuxtLink to="/create" op50 hover="op100 underline" lt-md="hidden">
+          <NuxtLink to="/create" op50 hover="op100 underline color-primary" lt-md="hidden">
             {{ $t("lyrics.createLyrics") }}
           </NuxtLink>
         </div>
@@ -162,19 +162,19 @@ onMounted(() => {
       </div>
     </div>
     <div flex="~ justify-center wrap">
-      <NuxtLink to="/format" op50 hover="op100 underline">
+      <NuxtLink to="/format" op50 hover="op100 underline color-primary">
         {{ $t("footer.fileFormat") }}
       </NuxtLink>
       <span mx2 op50> · </span>
-      <NuxtLink to="/about" op50 hover="op100 underline">
+      <NuxtLink to="/about" op50 hover="op100 underline color-primary">
         {{ $t("footer.aboutUS") }}
       </NuxtLink>
       <span mx2 op50> · </span>
-      <a href="https://chat.maru.re" target="_blank" op50 hover="op100 underline">
+      <a href="https://chat.maru.re" target="_blank" op50 hover="op100 underline color-primary">
         {{ $t("footer.contact.discord") }}
       </a>
       <span mx2 op50> · </span>
-      <a href="https://github.com/maru-re/maru" target="_blank" op50 hover="op100 underline">
+      <a href="https://github.com/maru-re/maru" target="_blank" op50 hover="op100 underline color-primary">
         {{ $t("footer.contact.github") }}
       </a>
     </div>
