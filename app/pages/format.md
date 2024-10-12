@@ -1,5 +1,6 @@
 ---
 meta:
+  locale: zh-Hant
   layout: content
 ---
 

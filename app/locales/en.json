@@ -129,7 +129,8 @@
   },
   "messages": {
     "wip": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord",
-    "fromShare": "from share link"
+    "fromShare": "from share link",
+    "contentMissingTranslations": "There is currently no corresponding translation for this page, please consider using machine translation."
   },
   "appname": "二重丸",
   "errors": {

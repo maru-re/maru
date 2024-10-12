@@ -129,7 +129,8 @@
   },
   "messages": {
     "wip": "网站开发中、许多功能尚未完善。欢迎通过 Discord 回报问题",
-    "fromShare": "来自分享连结"
+    "fromShare": "来自分享连结",
+    "contentMissingTranslations": "这个页面暂时没有对应的翻译，请考虑使用机器翻译。"
   },
   "appname": "二重丸",
   "errors": {
