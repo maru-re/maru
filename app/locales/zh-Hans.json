@@ -19,7 +19,7 @@
     "link": "拷贝链接"
   },
   "demo": {
-    "title": "演示",
+    "title": "Demo",
     "sampleTitle": "演示用歌词样本",
     "sampleTextEnd": "演示用歌词样本到此为止，版权归发行公司所有",
     "sampleReminder": "本歌词样本仅用于演示 App 功能，版权归发行公司所有。"
@@ -50,7 +50,7 @@
   },
   "footer": {
     "fileFormat": "文件格式",
-    "aboutUS": "关于我们",
+    "about": "关于我们",
     "contact": {
       "discord": "Discord",
       "github": "GitHub"

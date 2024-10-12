@@ -167,7 +167,7 @@ onMounted(() => {
       </NuxtLink>
       <span mx2 op50> · </span>
       <NuxtLink to="/about" op50 hover="op100 underline color-primary">
-        {{ $t("footer.aboutUS") }}
+        {{ $t("footer.about") }}
       </NuxtLink>
       <span mx2 op50> · </span>
       <a href="https://chat.maru.re" target="_blank" op50 hover="op100 underline color-primary">

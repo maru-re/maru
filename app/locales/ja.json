@@ -31,7 +31,7 @@
     "sampleReminder": "この歌詞サンプルはアプリの機能を説明するためにのみ使用されており、著作権は出版社に属します。",
     "sampleTextEnd": "歌詞サンプルの表示はここまでで、著作権は出版社に帰属します。",
     "sampleTitle": "表示用のサンプル歌詞",
-    "title": "展示する"
+    "title": "Demo"
   },
   "displayMode": {
     "dark": "暗い",
@@ -61,9 +61,9 @@
     "songNotFound": "その曲は存在しません。"
   },
   "footer": {
-    "aboutUS": "私たちについて",
+    "about": "About",
     "contact": {
-      "discord": "不和",
+      "discord": "Discord",
       "github": "GitHub"
     },
     "fileFormat": "ファイル形式"

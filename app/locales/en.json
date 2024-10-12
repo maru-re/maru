@@ -50,7 +50,7 @@
   },
   "footer": {
     "fileFormat": "File Format",
-    "aboutUS": "About Us",
+    "about": "About Us",
     "contact": {
       "discord": "Discord",
       "github": "GitHub"
