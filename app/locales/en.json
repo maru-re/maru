@@ -139,5 +139,14 @@
   "titles": {
     "recentSongs": "Recently Viewed",
     "allSong": "All Songs"
+  },
+  "gpt": {
+    "addTranslationsFurigana": "ChatGPT adds translations and aliases (test)",
+    "prompts": {
+      "useLocaleToResponse": "-"
+    },
+    "copyPrompts": "copy prompt word",
+    "gotoChatGptAndPaste": "Go to ChatGPT and paste",
+    "noteAboutPrompts": "The following is the prompt word for ChatGPT, please paste it into ChatGPT"
   }
 }

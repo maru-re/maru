@@ -139,5 +139,14 @@
     "connecting": "YouTube に接続しています...",
     "connectionFail": "YouTube 接続に失敗しました",
     "requireId": "YouTube ID を空白のままにすることはできません"
+  },
+  "gpt": {
+    "addTranslationsFurigana": "ChatGPT は翻訳とエイリアスを追加します (テスト)",
+    "copyPrompts": "プロンプトの単語をコピーする",
+    "gotoChatGptAndPaste": "ChatGPT に移動して貼り付けます",
+    "prompts": {
+      "useLocaleToResponse": "その後の会話には日本語で応答してください"
+    },
+    "noteAboutPrompts": "以下は ChatGPT のプロンプトワードです。ChatGPT に貼り付けてください。"
   }
 }

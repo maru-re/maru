@@ -261,12 +261,13 @@ function makeupChatGPT() {
     `[trans:zh-Hant] 話說再也見不到你了`,
     '```',
     '',
-    `Respone me with \`${locale.value}\` for the following conversation`,
     `Please annotate the Kanji in the following lyrics, add translation for \`${locale.value}\`, and keeping the rest unchanged.`,
     '',
     '```lrc',
     state.lrc,
     '```',
+    ``,
+    t('gpt.prompts.useLocaleToResponse'),
   ].join('\n')
 
   gptText.value = message
@@ -415,7 +416,7 @@ onMounted(() => {
           icon="i-simple-icons-openai"
           @click="makeupChatGPT()"
         >
-          ChatGPT 添加翻譯與振假名 (測試)
+          {{ $t('gpt.addTranslationsFurigana') }}
         </SimpleButton>
       </div>
       <LyricsRawEditor
@@ -427,14 +428,14 @@ onMounted(() => {
         <div flex="~ col gap-2" p6>
           <div flex="~ gap-2 justify-center">
             <SimpleButton :icon="copied ? 'i-uil-check text-green5' : 'i-uil-clipboard'" @click="copy(gptText)">
-              複製提示詞
+              {{ $t('gpt.copyPrompts') }}
             </SimpleButton>
             <SimpleButton to="https://chatgpt.com" target="_blank" rel="noopener" icon="i-simple-icons-openai">
-              前往 ChatGPT 貼上
+              {{ $t('gpt.gotoChatGptAndPaste') }}
             </SimpleButton>
           </div>
           <div text-center op50>
-            以下是 ChatGPT 的提示詞，請將其貼上到 ChatGPT
+            {{ $t('gpt.noteAboutPrompts') }}
           </div>
           <pre mxa max-h-50vh max-w-200 of-auto rounded-xl bg-hex-888:15 px3 py2 text-sm v-text="gptText" />
         </div>

@@ -139,5 +139,14 @@
   "titles": {
     "recentSongs": "最近看过",
     "allSong": "所有歌曲"
+  },
+  "gpt": {
+    "addTranslationsFurigana": "ChatGPT 添加翻译与振假名 (测试)",
+    "copyPrompts": "复制提示词",
+    "gotoChatGptAndPaste": "前往 ChatGPT 贴上",
+    "noteAboutPrompts": "以下是 ChatGPT 的提示词，请将其贴上到 ChatGPT",
+    "prompts": {
+      "useLocaleToResponse": "请使用中文来回应我们之后的对话"
+    }
   }
 }
