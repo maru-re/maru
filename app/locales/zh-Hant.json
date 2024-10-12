@@ -94,7 +94,7 @@
     }
   },
   "settings": {
-    "displayFurigana": "顯示振假名",
+    "displayFurigana": "顯示漢字注音",
     "displayKanji": "顯示漢字",
     "displayRomaji": "顯示羅馬字",
     "displayTranslation": "顯示翻譯",
@@ -139,5 +139,14 @@
   "titles": {
     "recentSongs": "最近看過",
     "allSong": "所有歌曲"
+  },
+  "gpt": {
+    "addTranslationsFurigana": "ChatGPT 添加翻譯與漢字注音 (測試)",
+    "copyPrompts": "複製提示詞",
+    "gotoChatGptAndPaste": "前往 ChatGPT 貼上",
+    "noteAboutPrompts": "以下是 ChatGPT 的提示詞，請將其貼上到 ChatGPT",
+    "prompts": {
+      "useLocaleToResponse": "請使用中文來回應我們之後的對話"
+    }
   }
 }

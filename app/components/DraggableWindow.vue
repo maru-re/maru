@@ -10,11 +10,10 @@ const props = withDefaults(defineProps<Props>(), {
   maxInset: 0,
 })
 
-// #region : Setup draggable
 const dragWindow = ref<HTMLElement | null>(null)
 const dragHandle = ref<HTMLElement | null>(null)
 
-const { x: dragX, y: dragY, style } = useDraggable(dragWindow, {
+const { x: dragX, y: dragY, style, isDragging } = useDraggable(dragWindow, {
   initialValue: { x: props.x, y: props.y },
   handle: dragHandle,
   preventDefault: true,
@@ -52,6 +51,9 @@ onMounted(() => {
   <div
     ref="dragWindow"
     class="draggable-window"
+    :class="{
+      'pointer-events-none': isDragging,
+    }"
     fixed
     :style
     z-floating
@@ -60,7 +62,7 @@ onMounted(() => {
       ref="dragHandle"
       hover="op100 bg-gray/10"
       flex="~ items-center justify-center"
-      draggable mxa w-20 cursor-move rounded-full op25
+      draggable pointer-events-auto mxa w-20 cursor-move rounded-full op25
     >
       <div i-mdi-drag-horizontal ma text-size-xl />
     </div>

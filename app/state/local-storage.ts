@@ -4,10 +4,10 @@ import type { UiSettings } from '~/types/settings'
 export const _settings = useLocalStorage<UiSettings>(
   'maru-settings',
   {
-    romaji: false,
+    romaji: true,
     kanji: true,
     furigana: true,
-    translation: false,
+    translation: true,
     follow: true,
     autoPause: false,
     speed: 1,
