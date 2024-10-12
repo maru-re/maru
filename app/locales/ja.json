@@ -1,64 +1,64 @@
 {
   "actions": {
     "clearAllData": "すべてのデータをクリア",
-    "downloadAllLyrics": "すべての歌詞ファイルをダウンロードする",
+    "downloadAllLyrics": "すべての歌詞ファイルをダウンロード",
     "exportSelected": "選択したエクスポート",
     "favorite": "好きな曲",
     "removeSelected": "選択したものを削除",
-    "scrollToCurrent": "現在の歌詞までスクロールします"
+    "scrollToCurrent": "現在の歌詞までスクロール"
   },
   "appname": "二重丸",
   "common": {
     "backToHome": "ホームページに戻る",
     "cancel": "キャンセル",
-    "create": "確立する",
-    "deselect": "選択を解除します",
-    "done": "仕上げる",
+    "create": "作成",
+    "deselect": "選択解除",
+    "done": "完成",
     "error": "間違い",
     "loading": "読み込み中...",
-    "notes": "述べる",
+    "notes": "ノート",
     "remove": "消去",
     "save": "保存",
     "select": "選択",
     "selectAll": "すべて選択",
-    "selectInverse": "対抗選挙",
+    "selectInverse": "選択を反転",
     "settings": "設定"
   },
   "copy": {
     "link": "リンクをコピー"
   },
   "demo": {
-    "sampleReminder": "この歌詞サンプルはアプリの機能を説明するためにのみ使用されており、著作権は出版社に属します。",
-    "sampleTextEnd": "歌詞サンプルの表示はここまでで、著作権は出版社に帰属します。",
-    "sampleTitle": "表示用のサンプル歌詞",
+    "sampleReminder": "このサンプル歌詞はアプリの機能説明のためのみ使用されており、著作権は出版社に帰属します。",
+    "sampleTextEnd": "説明用のサンプル歌詞はここまで、一切の著作権は出版社に帰属します。",
+    "sampleTitle": "説明用のサンプル歌詞",
     "title": "Demo"
   },
   "displayMode": {
-    "dark": "暗い",
-    "light": "明るい",
-    "toggleMode": "{mode} モードに切り替えます"
+    "dark": "ダークモード",
+    "light": "ライトモード",
+    "toggleMode": "{mode} モードに切り替え"
   },
-  "dragFileToHere": "ファイルをここにドラッグします",
+  "dragFileToHere": "ファイルをここにドラッグしてください",
   "editor": {
-    "copyTimestamp": "タイムスタンプをコピーする",
+    "copyTimestamp": "タイムスタンプをコピー",
     "deleteRow": "行の削除",
-    "gotoSong": "曲へ行く",
-    "insert": "入れる",
+    "gotoSong": "歌に行く",
+    "insert": "挿入",
     "insertAtCurrentTime": "現在のタイムスタンプで挿入",
-    "insertMultiline": "複数行の歌詞を挿入する",
+    "insertMultiline": "複数行の歌詞を挿入",
     "insertRow": "行を挿入",
     "lyricsPlaceholder": "歌詞",
     "timestamp": {
-      "setCurrentTime": "現在の再生時間の後に行をスキップするように設定します",
-      "setCurrentTimeOnly": "現在の再生時間として設定",
-      "skipForward": "後で時間を微調整します",
-      "stepBackward": "時間を進める微調整"
+      "setCurrentTime": "現在の時間に設定して改行",
+      "setCurrentTimeOnly": "現在の時間に設定",
+      "skipForward": "時間を後ろに調整",
+      "stepBackward": "時間を前に調整"
     },
     "visualization": "視覚化",
-    "yamlNotSupportYet": "YAML編集機能はまだ実装されていない"
+    "yamlNotSupportYet": "YAML編集機能はまだ実装されていません"
   },
   "errors": {
-    "songNotFound": "その曲は存在しません。"
+    "songNotFound": "曲が見つかりませんでした"
   },
   "footer": {
     "about": "About",
@@ -69,17 +69,17 @@
     "fileFormat": "ファイル形式"
   },
   "import": {
-    "anotherImporting": "別のインポート操作が進行中です。完了するまで待ってから再試行してください。",
+    "anotherImporting": "まだ他のファイルがインポート中なので、完了してから再試行してください。",
     "importComplete": "インポート完了！",
-    "importFail": "インポートに失敗しました!",
-    "importFile": "歌詞ファイルをインポートする",
-    "importSuccess": "インポートが成功しました。",
-    "importSuccessPartly": "部分的にインポートが成功しました。",
+    "importFail": "インポート失敗!",
+    "importFile": "歌詞ファイルをインポート",
+    "importSuccess": "インポートが成功",
+    "importSuccessPartly": "一部インポート成功",
     "importing": "ファイルをインポート中..."
   },
   "intro": {
-    "description": "YouTube ベースの歌詞リーダー",
-    "title": "「歌って日本語を学びましょう」"
+    "description": "YouTubeを基にした歌詞リーダー",
+    "title": "「歌いながら日本語を学ぶ」"
   },
   "lyrics": {
     "batchRemoveLyricsConfirm": "選択した {0} 曲を削除してもよろしいですか?",
@@ -94,7 +94,7 @@
   "messages": {
     "contentMissingTranslations": "現在、このページに対応する翻訳はありません。機械翻訳の使用を検討してください。",
     "fromShare": "共有リンクから",
-    "wip": "ウェブサイトは開発中であり、多くの機能がまだ完成していません。 \nDiscord 経由でお気軽に問題を報告してください"
+    "wip": "ウェブサイトは開発中であり、多くの機能がまだ完成していません。 \nDiscordで気軽に問題を報告してください"
   },
   "pasteYoutubeLink": "YouTube MV 曲のリンクを貼り付けます",
   "search": {
