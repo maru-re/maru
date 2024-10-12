@@ -18,6 +18,7 @@ const { x: dragX, y: dragY, style } = useDraggable(dragWindow, {
   initialValue: { x: props.x, y: props.y },
   handle: dragHandle,
   preventDefault: true,
+  onEnd: limitPosition,
 })
 // #endregion
 
