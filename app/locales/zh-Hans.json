@@ -94,7 +94,7 @@
     }
   },
   "settings": {
-    "displayFurigana": "显示振假名",
+    "displayFurigana": "显示假名注音",
     "displayKanji": "显示汉字",
     "displayRomaji": "显示罗马字",
     "displayTranslation": "显示翻译",
@@ -141,7 +141,7 @@
     "allSong": "所有歌曲"
   },
   "gpt": {
-    "addTranslationsFurigana": "ChatGPT 添加翻译与振假名 (测试)",
+    "addTranslationsFurigana": "ChatGPT 添加翻译与假名注音 (测试)",
     "copyPrompts": "复制提示词",
     "gotoChatGptAndPaste": "前往 ChatGPT 贴上",
     "noteAboutPrompts": "以下是 ChatGPT 的提示词，请将其贴上到 ChatGPT",
