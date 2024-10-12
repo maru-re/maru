@@ -1,0 +1,143 @@
+{
+  "actions": {
+    "clearAllData": "すべてのデータをクリア",
+    "downloadAllLyrics": "すべての歌詞ファイルをダウンロードする",
+    "exportSelected": "選択したエクスポート",
+    "favorite": "好きな曲",
+    "removeSelected": "選択したものを削除",
+    "scrollToCurrent": "現在の歌詞までスクロールします"
+  },
+  "appname": "二重丸",
+  "common": {
+    "backToHome": "ホームページに戻る",
+    "cancel": "キャンセル",
+    "create": "確立する",
+    "deselect": "選択を解除します",
+    "done": "仕上げる",
+    "error": "間違い",
+    "loading": "読み込み中...",
+    "notes": "述べる",
+    "remove": "消去",
+    "save": "保存",
+    "select": "選択",
+    "selectAll": "すべて選択",
+    "selectInverse": "対抗選挙",
+    "settings": "設定"
+  },
+  "copy": {
+    "link": "リンクをコピー"
+  },
+  "demo": {
+    "sampleReminder": "この歌詞サンプルはアプリの機能を説明するためにのみ使用されており、著作権は出版社に属します。",
+    "sampleTextEnd": "歌詞サンプルの表示はここまでで、著作権は出版社に帰属します。",
+    "sampleTitle": "表示用のサンプル歌詞",
+    "title": "展示する"
+  },
+  "displayMode": {
+    "dark": "暗い",
+    "light": "明るい",
+    "toggleMode": "{mode} モードに切り替えます"
+  },
+  "dragFileToHere": "ファイルをここにドラッグします",
+  "editor": {
+    "copyTimestamp": "タイムスタンプをコピーする",
+    "deleteRow": "行の削除",
+    "gotoSong": "曲へ行く",
+    "insert": "入れる",
+    "insertAtCurrentTime": "現在のタイムスタンプで挿入",
+    "insertMultiline": "複数行の歌詞を挿入する",
+    "insertRow": "行を挿入",
+    "lyricsPlaceholder": "歌詞",
+    "timestamp": {
+      "setCurrentTime": "現在の再生時間の後に行をスキップするように設定します",
+      "setCurrentTimeOnly": "現在の再生時間として設定",
+      "skipForward": "後で時間を微調整します",
+      "stepBackward": "時間を進める微調整"
+    },
+    "visualization": "視覚化",
+    "yamlNotSupportYet": "YAML編集機能はまだ実装されていない"
+  },
+  "errors": {
+    "songNotFound": "その曲は存在しません。"
+  },
+  "footer": {
+    "aboutUS": "私たちについて",
+    "contact": {
+      "discord": "不和",
+      "github": "GitHub"
+    },
+    "fileFormat": "ファイル形式"
+  },
+  "import": {
+    "anotherImporting": "別のインポート操作が進行中です。完了するまで待ってから再試行してください。",
+    "importComplete": "インポート完了！",
+    "importFail": "インポートに失敗しました!",
+    "importFile": "歌詞ファイルをインポートする",
+    "importSuccess": "インポートが成功しました。",
+    "importSuccessPartly": "部分的にインポートが成功しました。",
+    "importing": "ファイルをインポート中..."
+  },
+  "intro": {
+    "description": "YouTube ベースの歌詞リーダー",
+    "title": "「歌って日本語を学びましょう」"
+  },
+  "lyrics": {
+    "batchRemoveLyricsConfirm": "選択した {0} 曲を削除してもよろしいですか?",
+    "createLyrics": "歌詞を作成する",
+    "editLyrics": "歌詞を編集する",
+    "exportLyrics": "歌詞をエクスポートする",
+    "removeLyrics": "歌詞を削除する",
+    "removeLyricsConfirm": "この曲を削除してもよろしいですか?",
+    "saveLyrics": "歌詞の保存",
+    "shareLyrics": "歌詞を共有する"
+  },
+  "messages": {
+    "contentMissingTranslations": "現在、このページに対応する翻訳はありません。機械翻訳の使用を検討してください。",
+    "fromShare": "共有リンクから",
+    "wip": "ウェブサイトは開発中であり、多くの機能がまだ完成していません。 \nDiscord 経由でお気軽に問題を報告してください"
+  },
+  "pasteYoutubeLink": "YouTube MV 曲のリンクを貼り付けます",
+  "search": {
+    "noResult": "一致する曲が見つかりませんでした。",
+    "searchImportedSong": "インポートされた曲を検索 ({0})",
+    "searchResult": "検索結果",
+    "searchResultCount": "{resultLength} から {collectionsLength}"
+  },
+  "seo": {
+    "title": {
+      "edit": "歌詞を編集 {title} - {artists} の歌詞を歌って学習 | {appName}",
+      "new": "歌詞を作成 | 歌って日本語を学ぶ | {appName}",
+      "play": "{title} - {artists} の歌詞 | {appName}"
+    }
+  },
+  "settings": {
+    "autoPausePerLyrics": "すべての歌詞を自動的に一時停止します",
+    "convertChineseHansHant": "簡体字中国語と繁体字中国語の自動変換",
+    "displayFurigana": "エイリアスを表示",
+    "displayKanji": "漢字を表示する",
+    "displayRomaji": "ローマ字を表示",
+    "displayTranslation": "翻訳を表示",
+    "groupLyricsDisplay": "歌詞表示設定",
+    "groupPlay": "再生設定",
+    "loopSong": "シングルループ再生",
+    "lyricsSize": "歌詞のフォントサイズ ({fontSize})",
+    "scrollWithLyrics": "スクロールして歌詞をたどってください",
+    "songActions": "ソングの操作"
+  },
+  "song": {
+    "artist": "歌手",
+    "offset": "オフセット",
+    "tags": "ラベル",
+    "title": "曲名"
+  },
+  "titles": {
+    "allSong": "すべての曲",
+    "recentSongs": "最近見た"
+  },
+  "tryRefreshPage": "ページを更新してみてください",
+  "youtube": {
+    "connecting": "YouTube に接続しています...",
+    "connectionFail": "YouTube 接続に失敗しました",
+    "requireId": "YouTube ID を空白のままにすることはできません"
+  }
+}

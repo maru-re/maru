@@ -154,6 +154,7 @@ export default defineNuxtConfig({
       { code: 'zh-Hant', language: 'zh-Hant', name: '繁體中文', file: 'zh-Hant.json' },
       { code: 'zh-Hans', language: 'zh-Hans', name: '简体中文', file: 'zh-Hans.json' },
       { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'ja', language: 'ja', name: '日本語', file: 'ja.json' },
     ],
     defaultLocale: 'zh-Hant',
     strategy: 'no_prefix',
