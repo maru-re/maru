@@ -34,8 +34,8 @@
     "title": "Demo"
   },
   "displayMode": {
-    "dark": "ダークモード",
-    "light": "ライトモード",
+    "dark": "ダーク",
+    "light": "ライト",
     "toggleMode": "{mode} モードに切り替え"
   },
   "dragFileToHere": "ファイルをここにドラッグしてください",
