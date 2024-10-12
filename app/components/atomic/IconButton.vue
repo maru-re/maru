@@ -18,7 +18,7 @@ defineProps<{
     class="icon-button"
   >
     <slot>
-      <span :class="icon" />
+      <span :class="icon" block />
     </slot>
   </component>
 </template>

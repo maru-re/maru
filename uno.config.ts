@@ -51,9 +51,6 @@ export default defineConfig({
     presetAttributify(),
     presetIcons({
       scale: 1.2,
-      extraProperties: {
-        display: 'inline-block',
-      },
     }),
     presetTypography(),
     presetWebFonts({
