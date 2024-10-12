@@ -27,14 +27,12 @@ const { style } = useDraggable(window, {
   >
     <div
       ref="handle"
-      draggable
-      i-mdi-drag-horizontal
-      mxa h-8 w-15 cursor-move text-size-lg
-    />
+      hover="op100 bg-gray/10"
+      flex="~ items-center justify-center"
+      draggable mxa w-20 cursor-move rounded-full op25
+    >
+      <div i-mdi-drag-horizontal ma text-size-xl />
+    </div>
     <slot />
   </div>
 </template>
-
-<style lang="scss" scoped>
-
-</style>
