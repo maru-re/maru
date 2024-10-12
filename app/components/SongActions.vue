@@ -3,6 +3,7 @@ import type { MaruSongDataParsed } from '@marure/schema'
 import { Dropdown } from 'floating-vue'
 import { compressToEncodedURIComponent } from 'lz-string'
 import { removeSongs } from '~/composables/store'
+import { isMobileScreen } from '~/state/breakpoints'
 
 const props = withDefaults(
   defineProps<{
@@ -62,6 +63,11 @@ async function remove() {
 async function saveSong() {
   await saveSongsToLocal([props.song])
   router.replace(`/play#id=${props.song.youtube}`)
+}
+
+const showShareQifiCode = ref(false)
+function shareWithQifi() {
+  showShareQifiCode.value = true
 }
 </script>
 
@@ -124,6 +130,10 @@ async function saveSong() {
         <SimpleButton icon="i-uil-copy" @click="copyShareLink(), hide()">
           {{ $t("copy.link") }}
         </SimpleButton>
+        <div h-1px w-full bg-gray:15 />
+        <SimpleButton icon="i-ph-qr-code" @click="shareWithQifi(), hide()">
+          掃碼分享
+        </SimpleButton>
       </div>
     </template>
   </Dropdown>
@@ -133,4 +143,9 @@ async function saveSong() {
     :title="$t('actions.favorite')"
     @click="favorited = !favorited"
   />
+  <ModalPopup v-model="showShareQifiCode" :direction="isMobileScreen ? 'top' : 'right'" use-v-if>
+    <div mx-auto aspect-square max-h-97vh max-w-500px w-100vw flex-col>
+      <QifiCode :share-url="shareUrl" @done="showShareQifiCode = false" />
+    </div>
+  </ModalPopup>
 </template>

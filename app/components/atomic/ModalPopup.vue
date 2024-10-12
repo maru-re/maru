@@ -4,10 +4,12 @@ const props = withDefaults(defineProps<{
   mask?: boolean
   dialogClass?: string
   closable?: boolean
+  useVIf?: boolean
 }>(), {
   direction: 'bottom',
   mask: true,
   closable: true,
+  useVIf: false,
 })
 
 const emit = defineEmits(['clickOutside'])
@@ -66,23 +68,40 @@ const transform = computed(() => {
       return ''
   }
 })
+
+const enable = ref(false)
+watch(() => modelValue.value, async (value) => {
+  if (!value) {
+    await new Promise(resolve => setTimeout(resolve, 500))
+  }
+  enable.value = !!value
+})
+
+const show = ref(false)
+watch(() => modelValue.value, async (value) => {
+  if (value) {
+    await new Promise(resolve => setTimeout(resolve))
+  }
+  show.value = !!value
+})
 </script>
 
 <template>
   <div
+    v-if="!useVIf || enable"
     fixed z-dialog
-    :class="[containerPositionClass, modelValue ? '' : 'pointer-events-none']"
+    :class="[containerPositionClass, show ? '' : 'pointer-events-none']"
   >
     <div
       v-if="mask"
       class="absolute bottom-0 left-0 right-0 top-0 transition-opacity duration-500 ease-out bg-base"
-      :class="modelValue ? 'opacity-50' : 'opacity-0'"
+      :class="show ? 'opacity-50' : 'opacity-0'"
       @click="onClickEmptySpace()"
     />
     <div
       class="scrolls absolute max-h-screen max-w-screen overflow-auto border-base transition-all duration-200 ease-out bg-base"
       :class="[positionClass, dialogClass]"
-      :style="modelValue ? {} : { transform }"
+      :style="show ? {} : { transform }"
     >
       <slot />
     </div>
