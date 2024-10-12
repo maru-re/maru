@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<Props>(), {
 const window = ref<HTMLElement | null>(null)
 const handle = ref<HTMLElement | null>(null)
 
-const { style } = useDraggable(window, {
+const { style, isDragging } = useDraggable(window, {
   initialValue: { x: props.x, y: props.y },
   handle,
   preventDefault: true,
@@ -21,6 +21,9 @@ const { style } = useDraggable(window, {
   <div
     ref="window"
     class="draggable-window"
+    :class="{
+      'pointer-events-none': isDragging,
+    }"
     fixed
     :style
     z-floating
@@ -29,7 +32,7 @@ const { style } = useDraggable(window, {
       ref="handle"
       hover="op100 bg-gray/10"
       flex="~ items-center justify-center"
-      draggable mxa w-20 cursor-move rounded-full op25
+      draggable pointer-events-auto mxa w-20 cursor-move rounded-full op25
     >
       <div i-mdi-drag-horizontal ma text-size-xl />
     </div>
