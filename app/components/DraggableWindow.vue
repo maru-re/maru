@@ -42,8 +42,8 @@ function limitPosition() {
 }
 
 onMounted(() => {
-  const limitPositionDebounced = useDebounceFn(() => limitPosition(), 250)
-  useEventListener('resize', () => limitPositionDebounced(), { passive: true })
+  const limitPositionDebounced = useDebounceFn(limitPosition, 250)
+  useEventListener('resize', limitPositionDebounced, { passive: true })
 })
 // #endregion
 </script>
