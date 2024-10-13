@@ -21,7 +21,7 @@ const state = reactive<MaruSongDataParsed>(
 
 const stateRef = toRef(state)
 
-const { undo, redo } = useDebouncedRefHistory(stateRef, { deep: true, debounce: 1000, capacity: 15 })
+const { undo, redo } = useDebouncedRefHistory(stateRef, { deep: true, debounce: 500, capacity: 15 })
 
 const router = useRouter()
 const route = useRoute()
@@ -53,7 +53,7 @@ async function save() {
     alert(t('youtube.requireId'))
     return
   }
-  stateRef.value.lrc = serializeToLrc({ lyrics: stateRef.value.lyrics, meta: {} })
+  stateRef.value.lrc = serializeToLrc({ lyrics: toRaw(stateRef.value).lyrics, meta: {} })
   const copy = { ...toRaw(stateRef.value), lyrics: undefined }
   await saveSongsToLocal([copy])
   dirty.value = false
@@ -85,9 +85,16 @@ function changeTab(tab: 'lrc' | 'lyrics' | 'yaml') {
   if (showTab.value === tab) {
     return
   }
+  // for the redo and undo
+  if (tab === 'lyrics' && dirtyLyrics.value === 'none') {
+    dirtyLyrics.value = 'lyrics'
+  }
+  else if (tab === 'lrc' && dirtyLyrics.value === 'none') {
+    dirtyLyrics.value = 'lrc'
+  }
   syncLrc()
   if (tab === 'yaml')
-    yaml.value = YAML.dump({ ...stateRef, lyrics: undefined })
+    yaml.value = YAML.dump({ ...toRaw(stateRef.value), lyrics: undefined })
   showTab.value = tab
 }
 
