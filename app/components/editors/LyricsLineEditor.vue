@@ -57,7 +57,11 @@ function goNextLineTimestamp() {
       :class="isActive ? 'border-primary ring-3 ring-primary:20 bg-primary:5' : 'border-base bg-gray:4'"
     >
       <div flex="~ gap-2 items-start">
-        <div my2 ml--12 w-6 text-right text-sm font-mono op30>
+        <div
+          position="absolute left--10 top-1/2"
+          translate-y="-50%"
+          w-6 text-right text-sm font-mono op29
+        >
           #{{ index + 1 }}
         </div>
         <div flex="~ col gap-1">
