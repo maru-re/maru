@@ -91,7 +91,7 @@ function goNextLineTimestamp() {
         <div w-full flex="~ col gap-2">
           <LyricsLine
             v-if="line.words.length"
-            w-max rounded-lg bg-gray:5 py1 pb2 font-jp-serif
+            w-full rounded-lg bg-gray:5 py1 pb2 font-jp-serif
             role="" flex="~ col items-start" border="~ base"
             :line="line"
             :index="index"
