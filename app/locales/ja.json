@@ -44,6 +44,8 @@
     "deleteRow": "行の削除",
     "gotoSong": "歌に行く",
     "insert": "挿入",
+    "redo": "やり直し",
+    "undo": "元に戻す",
     "insertAtCurrentTime": "現在のタイムスタンプで挿入",
     "insertMultiline": "複数行の歌詞を挿入",
     "insertRow": "行を挿入",

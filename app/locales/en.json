@@ -35,6 +35,8 @@
     "deleteRow": "Delete Row",
     "gotoSong": "Go to Song",
     "insert": "Insert",
+    "redo": "Redo",
+    "undo": "Undo",
     "lyricsPlaceholder": "Lyrics",
     "insertAtCurrentTime": "Insert at Current Timestamp",
     "insertRow": "Insert Row",

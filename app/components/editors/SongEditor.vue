@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
+import { useDebouncedRefHistory } from '@vueuse/core'
 import { parseLrc, secondsToTimestamp, serializeToLrc } from '~~/packages/parser/src'
 import { inferSongInfoFromVideoTitle } from '~~/packages/utils/src'
 import YAML from 'js-yaml'
@@ -18,10 +19,15 @@ const state = reactive<MaruSongDataParsed>(
     : createEmptySongData(),
 )
 
+const stateRef = toRef(state)
+
+const { undo, redo } = useDebouncedRefHistory(stateRef, { deep: true, debounce: 1000, capacity: 15 })
+
 const router = useRouter()
 const route = useRoute()
 
 const dirty = ref(false)
+
 watch(
   state,
   () => {
@@ -42,21 +48,21 @@ useEventListener('beforeunload', (e) => {
 })
 
 async function save() {
-  if (!state.youtube) {
+  if (!stateRef.value.youtube) {
     // eslint-disable-next-line no-alert
     alert(t('youtube.requireId'))
     return
   }
-  syncLrc()
-  const copy = { ...toRaw(state), lyrics: undefined }
+  stateRef.value.lrc = serializeToLrc({ lyrics: stateRef.value.lyrics, meta: {} })
+  const copy = { ...toRaw(stateRef.value), lyrics: undefined }
   await saveSongsToLocal([copy])
   dirty.value = false
 }
 
-const controls = usePlayer(state, false)
+const controls = usePlayer(stateRef.value, false)
 
 watch(
-  () => state.youtube,
+  () => stateRef.value.youtube,
   () => controls.reload(),
 )
 
@@ -65,10 +71,10 @@ const showTab = ref<'lrc' | 'lyrics' | 'yaml'>('lyrics')
 
 function syncLrc() {
   if (dirtyLyrics.value === 'lrc') {
-    state.lrc = serializeToLrc({ lyrics: state.lyrics, meta: {} })
+    stateRef.value.lrc = serializeToLrc({ lyrics: stateRef.value.lyrics, meta: {} })
   }
   else if (dirtyLyrics.value === 'lyrics') {
-    state.lyrics = parseLrc(state.lrc).lyrics
+    stateRef.value.lyrics = parseLrc(stateRef.value.lrc).lyrics
   }
   dirtyLyrics.value = 'none'
 }
@@ -81,12 +87,12 @@ function changeTab(tab: 'lrc' | 'lyrics' | 'yaml') {
   }
   syncLrc()
   if (tab === 'yaml')
-    yaml.value = YAML.dump({ ...state, lyrics: undefined })
+    yaml.value = YAML.dump({ ...stateRef, lyrics: undefined })
   showTab.value = tab
 }
 
 function insertMultiline(lyrics: string) {
-  const after = state.lyrics[state.lyrics.length - 1]
+  const after = stateRef.value.lyrics[stateRef.value.lyrics.length - 1]
   const t = after ? after.t + 0.1 : 0
   const lines = lyrics.split('\n')
   for (const line of lines) {
@@ -94,7 +100,7 @@ function insertMultiline(lyrics: string) {
       continue
 
     const words = line.split('').map(word => ({ w: word }))
-    state.lyrics.push({
+    stateRef.value.lyrics.push({
       t,
       words,
       trans: {},
@@ -103,12 +109,12 @@ function insertMultiline(lyrics: string) {
 }
 
 function insertLineAfter(index: number) {
-  const after = state.lyrics[index + 1]
-  let t = after ? after.t - 0.1 : state.lyrics[index]!.t + 0.1
+  const after = stateRef.value.lyrics[index + 1]
+  let t = after ? after.t - 0.1 : stateRef.value.lyrics[index]!.t + 0.1
   if (controls.active.value?.index === index) {
     t = controls.current.value
   }
-  state.lyrics.splice(index + 1, 0, {
+  stateRef.value.lyrics.splice(index + 1, 0, {
     t,
     words: [],
     trans: {},
@@ -116,13 +122,13 @@ function insertLineAfter(index: number) {
 }
 
 function insertAtCurrentTime() {
-  for (let i = 0; i < state.lyrics.length; i++) {
+  for (let i = 0; i < stateRef.value.lyrics.length; i++) {
     // Skip if the timestamp already exists
-    if (state.lyrics[i]!.t === controls.current.value) {
+    if (stateRef.value.lyrics[i]!.t === controls.current.value) {
       return
     }
-    if (state.lyrics[i]!.t > controls.current.value) {
-      state.lyrics.splice(i, 0, {
+    if (stateRef.value.lyrics[i]!.t > controls.current.value) {
+      stateRef.value.lyrics.splice(i, 0, {
         t: controls.current.value,
         words: [],
         trans: {},
@@ -130,7 +136,7 @@ function insertAtCurrentTime() {
       return
     }
   }
-  state.lyrics.push({
+  stateRef.value.lyrics.push({
     t: controls.current.value,
     words: [],
     trans: {},
@@ -142,19 +148,19 @@ function gotoSong() {
 }
 
 function deleteLine(index: number) {
-  state.lyrics.splice(index, 1)
+  stateRef.value.lyrics.splice(index, 1)
 }
 
 const lrc = computed({
-  get: () => state.lrc,
+  get: () => stateRef.value.lrc,
   set: (value: string) => {
-    state.lrc = value
+    stateRef.value.lrc = value
     dirtyLyrics.value = 'lyrics'
   },
 })
 
 watch(
-  state.lyrics,
+  stateRef.value.lyrics,
   () => {
     dirtyLyrics.value = 'lrc'
   },
@@ -165,7 +171,7 @@ watch(
 watchEffect(() => {
   if (!controls.player.value)
     return
-  if (state.title && state.artists?.length)
+  if (stateRef.value.title && stateRef.value.artists?.length)
     return
   if (controls.status.value === 'loading' || !controls.player.value.videoTitle)
     return
@@ -175,19 +181,19 @@ watchEffect(() => {
     return
 
   if (parsed.title)
-    state.title ||= parsed.title
-  if (parsed.artists && !state.artists?.length)
-    state.artists = parsed.artists
+    stateRef.value.title ||= parsed.title
+  if (parsed.artists && !stateRef.value.artists?.length)
+    stateRef.value.artists = parsed.artists
 })
 
 function exportNow() {
-  exportSongMaru(state)
+  exportSongMaru(stateRef.value)
 }
 
 const translations = reactive(Array.from(
   new Set([
     locale.value,
-    ...state.lyrics.flatMap(i => Object.keys(i.trans || {})),
+    ...stateRef.value.lyrics.flatMap(i => Object.keys(i.trans || {})),
   ]),
 ))
 
@@ -201,36 +207,36 @@ function toggleTranslations(lang: string) {
 }
 
 const artistsString = computed({
-  get: () => (state.artists || []).join(', '),
+  get: () => (stateRef.value.artists || []).join(', '),
   set: (value: string) => {
-    state.artists = value.split(',').map(v => v.trim())
+    stateRef.value.artists = value.split(',').map(v => v.trim())
   },
 })
 
 const tagsString = computed({
-  get: () => (state.tags || []).join(', '),
+  get: () => (stateRef.value.tags || []).join(', '),
   set: (value: string) => {
-    state.tags = value.split(',').map(v => v.trim())
+    stateRef.value.tags = value.split(',').map(v => v.trim())
   },
 })
 
 const offsetString = computed({
-  get: () => String(state.offset || ''),
+  get: () => String(stateRef.value.offset || ''),
   set: (value: string) => {
-    state.offset = Number(value)
+    stateRef.value.offset = Number(value)
   },
 })
 
 const notesString = computed({
-  get: () => (state.notes || []).join('\n'),
+  get: () => (stateRef.value.notes || []).join('\n'),
   set: (value: string) => {
-    state.notes = value.split('\n')
+    stateRef.value.notes = value.split('\n')
   },
 })
 
 const { copied, copy } = useClipboard({ read: false })
 
-const currentTimestamp = computed(() => secondsToTimestamp(controls.current.value - (state.offset ?? 0)))
+const currentTimestamp = computed(() => secondsToTimestamp(controls.current.value - (stateRef.value.offset ?? 0)))
 
 function copyCurrentTimestamp() {
   copy(currentTimestamp.value)
@@ -264,7 +270,7 @@ function makeupChatGPT() {
     `Please annotate the Kanji in the following lyrics, add translation for \`${locale.value}\`, and keeping the rest unchanged.`,
     '',
     '```lrc',
-    state.lrc,
+    stateRef.value.lrc,
     '```',
     ``,
     t('gpt.prompts.useLocaleToResponse'),
@@ -291,8 +297,8 @@ useEventListener('keydown', (e) => {
 })
 
 onMounted(() => {
-  if (state.lyrics.length === 0) {
-    state.lyrics.push({
+  if (stateRef.value.lyrics.length === 0) {
+    stateRef.value.lyrics.push({
       t: 0,
       words: [],
     })
@@ -316,7 +322,7 @@ onMounted(() => {
         />
         <div font-mono>
           <span>{{ currentTimestamp }}</span>
-          <span v-if="state.offset" text-primary> +{{ state.offset }}</span>
+          <span v-if="stateRef.offset" text-primary> +{{ stateRef.offset }}</span>
         </div>
         <IconButton
           :title="$t('editor.copyTimestamp')"
@@ -332,8 +338,8 @@ onMounted(() => {
       <h1 my4 text-2xl>
         {{ $t("lyrics.editLyrics") }}
       </h1>
-      <TextInput :model-value="state.youtube" label="YouTube ID" input-class="font-mono" disabled />
-      <TextInput v-model="state.title" :label="$t('song.title')" />
+      <TextInput :model-value="stateRef.youtube" label="YouTube ID" input-class="font-mono" disabled />
+      <TextInput v-model="stateRef.title" :label="$t('song.title')" />
       <TextInput v-model="artistsString" :label="$t('song.artist')" />
       <TextInput v-model="tagsString" :label="$t('song.tags')" />
       <TextInput v-model="offsetString" :label="$t('song.offset')" />
@@ -377,16 +383,16 @@ onMounted(() => {
         />
       </div>
       <template
-        v-for="line, idx of state.lyrics"
+        v-for="line, idx of stateRef.lyrics"
         :key="idx"
       >
         <LyricsLineEditor
-          v-model:line="state.lyrics[idx]!"
+          v-model:line="stateRef.lyrics[idx]!"
           :index="idx"
-          :next="state.lyrics[idx + 1]"
+          :next="stateRef.lyrics[idx + 1]"
           :translations="translations"
           :controls="controls"
-          :offset="state.offset"
+          :offset="stateRef.offset"
           @delete="deleteLine(idx)"
         />
         <div flex="~ justify-center">
@@ -465,6 +471,20 @@ onMounted(() => {
         @click="exportNow()"
       >
         {{ $t("lyrics.exportLyrics") }}
+      </SimpleButton>
+      <SimpleButton
+        icon="i-mdi-undo-variant"
+        :disabled="!dirty"
+        @click="undo"
+      >
+        {{ $t("editor.redo") }}
+      </SimpleButton>
+      <SimpleButton
+        :disabled="!dirty"
+        icon="i-mdi-redo-variant"
+        @click="redo"
+      >
+        {{ $t("editor.undo") }}
       </SimpleButton>
       <SimpleButton
         :disabled="!dirty"

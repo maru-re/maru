@@ -35,6 +35,8 @@
     "deleteRow": "刪除行",
     "gotoSong": "前往歌曲",
     "insert": "插入",
+    "redo": "重做",
+    "undo": "撤銷",
     "lyricsPlaceholder": "歌詞",
     "insertAtCurrentTime": "在當前時間戳插入",
     "insertRow": "插入行",
