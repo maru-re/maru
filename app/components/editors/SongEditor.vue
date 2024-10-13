@@ -47,7 +47,7 @@ async function save() {
     alert(t('youtube.requireId'))
     return
   }
-  state.lrc = serializeToLrc({ lyrics: state.lyrics, meta: {} })
+  syncLrc()
   const copy = { ...toRaw(state), lyrics: undefined }
   await saveSongsToLocal([copy])
   dirty.value = false
