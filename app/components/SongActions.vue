@@ -75,7 +75,7 @@ function shareWithQifi() {
   <Dropdown v-if="source === 'local'">
     <ActionButton
       :type
-      icon="i-uil-trash-alt op40 hover:op100 hover:text-red"
+      icon="i-uil-trash-alt op40 @hover:op100 @hover:text-red"
       :title="$t('lyrics.removeLyrics')"
     />
     <template #popper="{ hide }">

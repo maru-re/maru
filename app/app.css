@@ -104,7 +104,7 @@ html.dark {
 /* Markdown */
 
 .markdown-content a {
-  --uno: 'op75 hover:op100 hover:underline';
+  --uno: 'op75 @hover:op100 @hover:underline';
 }
 
 .markdown-content h1 {

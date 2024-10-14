@@ -25,6 +25,6 @@ defineProps<{
 
 <style>
 .icon-button {
-  --uno: 'hover:bg-primary:15 hover:color-primary dark:hover:bg-primary:30';
+  --uno: '@hover:bg-primary:15 @hover:color-primary dark:@hover:bg-primary:30';
 }
 </style>

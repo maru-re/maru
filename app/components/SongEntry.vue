@@ -28,14 +28,14 @@ const favorited = computed({
 </script>
 
 <template>
-  <div class="song-entry relative aspect-5/2" hover:z-hover ma-5px :class="link ? 'group' : ''">
+  <div class="song-entry relative @hover:z-hover ma-5px aspect-5/2" :class="link ? 'group' : ''">
     <NuxtLink
       class="song-entry-cover aspect-5/2"
       :class="link ? '' : 'pointer-events-none'"
       :to="`/play#id=${song.youtube}`"
       border="transparent rounded-xl"
       absolute inset-0 block of-hidden transition-all duration-500 bg-base
-      group-hover="aspect-16/9 translate-y--16.25% shadow-2xl scale-115"
+      media-group-hover="aspect-16/9 translate-y--16.25% shadow-2xl scale-115"
     >
       <img
         :src="song.cover || `https://img.youtube.com/vi/${song.youtube}/mqdefault.jpg`"
@@ -54,13 +54,14 @@ const favorited = computed({
       <div
         v-if="showFavorite"
         absolute right-1 top-1 rounded-full transition-all duration-250
-        group-hover="bg-black:50 op100"
+        media-group-hover="bg-black:50 op100"
         flex="~ items-center justify-center"
         :class="(showFavorite === 'hover' || !favorited) && 'op0'"
       >
         <IconToggle
           v-model="favorited"
-          text-sm text-white transition-all duration-250 hover:bg-black:75
+          class="@hover:bg-black:75"
+          text-sm text-white transition-all duration-250
           :icon="favorited ? 'i-ph-star-fill text-yellow6 dark:text-yellow2' : 'i-ph-star op80! '"
         />
       </div>
