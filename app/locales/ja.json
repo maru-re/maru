@@ -148,5 +148,21 @@
       "useLocaleToResponse": "その後の会話には日本語で応答してください"
     },
     "noteAboutPrompts": "以下は ChatGPT のプロンプトワードです。ChatGPT に貼り付けてください。"
+  },
+  "shortcuts": {
+    "down": "下",
+    "general": "ユニバーサル",
+    "left": "左",
+    "nextLine": "次の文",
+    "or": "または",
+    "playPause": "再生/一時停止",
+    "prevLine": "前の文",
+    "repeatCurrentLine": "現在の文を再生する",
+    "right": "右",
+    "showTable": "ショートカットキーテーブルを表示",
+    "songPlay": "曲の再生",
+    "space": "スペースキー",
+    "up": "上",
+    "table": "ショートカットリスト"
   }
 }

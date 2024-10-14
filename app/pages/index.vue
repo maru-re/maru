@@ -91,7 +91,6 @@ onMounted(() => {
     <DropZone />
     <ImportDialog />
     <SettingsDialog />
-    <ShortcutDialog />
     <div flex="~ col gap-2 items-center" pb-10 pt-25>
       <div i-mdi-circle-double text-5xl op75 />
       <div text-4xl font-jp-serif>

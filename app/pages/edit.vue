@@ -17,7 +17,6 @@ useSeoMeta({
 <template>
   <div px15 py20>
     <SettingsDialog />
-    <ShortcutDialog />
     <FloatingActions />
     <SongEditor
       :song="data"

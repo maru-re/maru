@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Tooltip } from 'floating-vue'
-import { showSettingsDialog, showShortcutDialog } from '~/state/models'
+import { showSettingsDialog } from '~/state/models'
 
 const route = useRoute()
 </script>
@@ -9,12 +9,6 @@ const route = useRoute()
   <div fixed right-3 top-3 flex="~ gap-2" z-floating lt-lg="bottom-3 left-3 top-unset right-unset" class="p2 floating-glass">
     <DarkToggle />
     <I18nSelector v-if="route.path === '/'" />
-    <Tooltip placement="bottom">
-      <IconButton icon="i-uil-keyboard-hide" @click="showShortcutDialog = !showShortcutDialog" />
-      <template #popper>
-        查看快捷鍵
-      </template>
-    </Tooltip>
     <Tooltip placement="bottom">
       <IconButton
         icon="i-uil-setting"

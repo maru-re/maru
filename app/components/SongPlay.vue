@@ -10,6 +10,18 @@ const props = defineProps<{
 const settings = useSettings()
 const controls = usePlayer(props.song)
 const { active, go, toggle } = controls
+const { t } = useI18n()
+
+useShortcutsRegistry(() => ({
+  title: t('shortcuts.songPlay'),
+  key: 'song-play',
+  shortcuts: [
+    { title: t('shortcuts.playPause'), combos: [[t('shortcuts.space')]] },
+    { title: t('shortcuts.prevLine'), combos: [[t('shortcuts.left')], [t('shortcuts.up')]] },
+    { title: t('shortcuts.nextLine'), combos: [[t('shortcuts.right')], [t('shortcuts.down')]] },
+    { title: t('shortcuts.repeatCurrentLine'), combos: [['R']] },
+  ],
+}))
 
 onMounted(() => {
   useEventListener('keydown', (e) => {

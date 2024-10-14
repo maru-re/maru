@@ -72,6 +72,5 @@ watchEffect(() => {
 
     <FloatingActions />
     <SettingsDialog :song="data" :source="source" />
-    <ShortcutDialog />
   </div>
 </template>
