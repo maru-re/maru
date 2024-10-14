@@ -112,19 +112,19 @@ html.dark {
 }
 
 .markdown-content h2 {
-  --uno: text-xl mb5 op75 border-b border-base py2;
+  --uno: text-xl mb5 mt4 op75 border-b border-base py2;
 }
 
-.markdown-content p {
-  --uno: mb5;
+.markdown-content p + p {
+  --uno: mt5;
+}
+
+.markdown-content p > code {
+  --uno: px1.5 py1 bg-hex-8883 rounded max-w-200 of-auto text-sm;
 }
 
 .markdown-content pre {
-  --uno: mb5;
-}
-
-.markdown-content pre {
-  --uno: px3 py2 bg-gray-100 rounded max-w-200 of-auto text-sm;
+  --uno: my4 of-auto px3 py2 rounded-lg;
 }
 
 .markdown-content .shiki {

@@ -8,9 +8,16 @@ const props = defineProps<{
 }>()
 
 const settings = useSettings()
+const router = useRouter()
 const controls = usePlayer(props.song)
+const showInfoModal = ref(false)
 const { active, go, toggle } = controls
 const { t } = useI18n()
+
+async function saveSharedSong() {
+  await saveSongsToLocal([props.song])
+  router.replace(`/play#id=${props.song.youtube}`)
+}
 
 useShortcutsRegistry(() => ({
   title: t('shortcuts.songPlay'),
@@ -102,10 +109,60 @@ onMounted(() => {
           :line="song.lyrics[active.index]!"
         />
       </div>
-      <!-- <QRCode :data="data" /> -->
       <SongNotes :notes="song.notes" lt-lg="hidden" p1 />
     </div>
-    <LyricsTrack :data="song" :controls="controls" />
+    <LyricsTrack
+      :song="song"
+      :controls="controls"
+      :source="source"
+    >
+      <div
+        lg="hidden"
+        absolute left-3 top-3 p1 floating-glass
+        flex="~ gap-2 items-center"
+      >
+        <ActionButton to="/" icon="i-uil-angle-left-b" :title="$t('common.backToHome')" />
+      </div>
+      <!-- Top Right -->
+      <div lg="hidden" absolute right-3 top-3 flex="~ gap-2 items-center">
+        <div v-if="source === 'share'" z-hover rounded bg-base>
+          <div rounded bg-amber:10 px2 py1 text-xs text-amber border="~ amber/25">
+            {{ $t('messages.fromShare') }}
+          </div>
+        </div>
+        <div
+          v-if="source === 'share'"
+          p1 floating-glass
+          flex="~ gap-2 items-center"
+        >
+          <ActionButton
+            type="icon"
+            icon="i-uil-save"
+            :title="$t('lyrics.saveLyrics')"
+            @click="saveSharedSong()"
+          />
+        </div>
+        <div
+          p1 floating-glass
+          flex="~ gap-2 items-center"
+        >
+          <ActionButton type="icon" icon="i-uil-info-circle" :title="$t('common.notes')" @click="showInfoModal = true" />
+        </div>
+      </div>
+
+      <div pointer-events-auto absolute left-3 right-3 top-3 z-floating flex>
+        <SettingsFloat mxa lt-lg="hidden" />
+      </div>
+    </LyricsTrack>
+    <ModalPopup v-model="showInfoModal" dialog-class="max-h-90vh! p4">
+      <div pb-1 font-jp-serif>
+        <p text-1.5em>
+          {{ song.title }}
+        </p>
+        <ArtistsList :artists="song.artists" />
+      </div>
+      <SongNotes :notes="song.notes" />
+    </ModalPopup>
   </div>
 </template>
 

@@ -57,6 +57,18 @@ const { t, locale } = useI18n()
           />
         </SettingsDialogGroup>
         <SettingsDialogGroup
+          :title="$t('settings.lyricsSize')"
+        >
+          <div flex="~ col gap-1" w-40>
+            <div flex="~ gap-1 items-center">
+              <div i-uil-text-size />
+              {{ $t("settings.lyricsSize") }}
+              <span op50>{{ `${Math.round(settings.fontSize * 100)}%` }}</span>
+            </div>
+            <OptionSlider v-model="settings.fontSize" :min="0.6" :max="2" :step="0.2" />
+          </div>
+        </SettingsDialogGroup>
+        <SettingsDialogGroup
           :title="$t('settings.groupPlay')"
         >
           <ToggleButton

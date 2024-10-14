@@ -100,7 +100,7 @@
     "displayKanji": "显示汉字",
     "displayRomaji": "显示罗马字",
     "displayTranslation": "显示翻译",
-    "lyricsSize": "歌词字号 ({fontSize})",
+    "lyricsSize": "歌词字号",
     "scrollWithLyrics": "跟随歌词滚动",
     "autoPausePerLyrics": "每句歌词自动暂停",
     "convertChineseHansHant": "自动简繁体转换",
