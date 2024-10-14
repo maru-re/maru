@@ -131,7 +131,8 @@
     "removeSelected": "删除所选",
     "shareViaQR": "二维码分享",
     "close": "关闭",
-    "pauseQifi": "暂停 {0} 秒"
+    "pauseQifi": "暂停 {0} 秒",
+    "languages": "语言 / Languages"
   },
   "messages": {
     "wip": "网站开发中、许多功能尚未完善。欢迎通过 Discord 回报问题",

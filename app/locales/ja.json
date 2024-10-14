@@ -6,7 +6,10 @@
     "favorite": "好きな曲",
     "removeSelected": "選択したものを削除",
     "scrollToCurrent": "現在の歌詞までスクロール",
-    "shareViaQR": "QRシェア"
+    "shareViaQR": "QRシェア",
+    "close": "閉鎖",
+    "languages": "言語 / Languages",
+    "pauseQifi": "{0} 秒間一時停止します"
   },
   "appname": "二重丸",
   "common": {
@@ -125,7 +128,8 @@
     "loopSong": "シングルループ再生",
     "lyricsSize": "歌詞のフォントサイズ",
     "scrollWithLyrics": "スクロールして歌詞をたどってください",
-    "songActions": "ソングの操作"
+    "songActions": "ソングの操作",
+    "groupGeneral": "ユニバーサル"
   },
   "song": {
     "artist": "歌手",

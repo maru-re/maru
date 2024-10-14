@@ -131,7 +131,8 @@
     "removeSelected": "Remove Selected",
     "shareViaQR": "Share via QR Code",
     "close": "Close",
-    "pauseQifi": "Pause {0}s"
+    "pauseQifi": "Pause {0}s",
+    "languages": "Languages"
   },
   "messages": {
     "wip": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord",
