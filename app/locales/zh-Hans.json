@@ -128,7 +128,9 @@
     "downloadAllLyrics": "下载所有歌词文件",
     "exportSelected": "导出所选",
     "removeSelected": "删除所选",
-    "shareViaQR": "二维码分享"
+    "shareViaQR": "二维码分享",
+    "close": "关闭",
+    "pauseQifi": "暂停 {0} 秒"
   },
   "messages": {
     "wip": "网站开发中、许多功能尚未完善。欢迎通过 Discord 回报问题",

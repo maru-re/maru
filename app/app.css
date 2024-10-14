@@ -100,3 +100,77 @@ html.dark {
   width: 0 !important;
   height: 0 !important;
 }
+
+/* Markdown */
+
+.markdown-content a {
+  --uno: 'op75 hover:op100 hover:underline';
+}
+
+.markdown-content h1 {
+  --uno: font-bold text-2xl mb5;
+}
+
+.markdown-content h2 {
+  --uno: text-xl mb5 op75 border-b border-base py2;
+}
+
+.markdown-content p {
+  --uno: mb5;
+}
+
+.markdown-content pre {
+  --uno: mb5;
+}
+
+.markdown-content pre {
+  --uno: px3 py2 bg-gray-100 rounded max-w-200 of-auto text-sm;
+}
+
+.markdown-content .shiki {
+  background: #f7f7f7 !important;
+}
+
+.dark .markdown-content .shiki {
+  background: var(--shiki-dark-bg) !important;
+}
+
+.dark .markdown-content .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+.markdown-magic-link {
+  display: inline-flex;
+  align-items: center;
+  background: rgb(156 163 175 / 0.3);
+  transform: translateY(3px);
+  line-height: 100%;
+  color: var(--fg-light) !important;
+  --uno: gap-1 transition rounded px1.5 py1 important-border-0 font-condensed;
+}
+
+.markdown-magic-link:hover {
+  background: rgb(156 163 175 / 0.4);
+  color: var(--fg) !important;
+}
+
+.markdown-magic-link-image {
+  display: inline-block;
+  height: 1.1em;
+  width: 1.1em;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 2px;
+}
+
+.markdown-magic-link.markdown-magic-link-github-at {
+  transform: translateY(6px);
+  --uno: pl-0 py-0 pr2 text-sm gap-1.2 rounded-full;
+}
+
+.markdown-magic-link.markdown-magic-link-github-at .markdown-magic-link-image {
+  height: 1.6em;
+  width: 1.6em;
+  border-radius: 50%;
+}

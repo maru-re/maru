@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { execaSync } from 'execa'
+import MarkdownItMagicLink from 'markdown-it-magic-link'
 import { appDescription, appName } from './app/constants'
 import { dependencies } from './package.json'
 
@@ -23,6 +24,16 @@ export default defineNuxtConfig({
         light: 'vitesse-light',
         dark: 'vitesse-dark',
       },
+    },
+    markdownItSetup(md) {
+      md.use(MarkdownItMagicLink, {
+        linksMap: {
+          QiFi: 'https://github.com/qifi-dev/qrs',
+        },
+        imageOverrides: [
+          ['https://github.com/qifi-dev/qrs', 'https://cdn.jsdelivr.net/gh/qifi-dev/qrs/public/logo.svg'],
+        ],
+      })
     },
   },
 
