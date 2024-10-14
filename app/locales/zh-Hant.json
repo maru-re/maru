@@ -168,5 +168,11 @@
     "right": "右",
     "down": "下",
     "table": "快捷鍵列表"
+  },
+  "share": {
+    "qifi": {
+      "pausePlayback": "暫停 3 秒",
+      "close": "關閉"
+    }
   }
 }

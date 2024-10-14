@@ -132,6 +132,9 @@ importers:
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
+      markdown-it-magic-link:
+        specifier: ^0.1.4
+        version: 0.1.4
       nuxt:
         specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.5.0)(encoding@0.1.13)(eslint@9.12.0(jiti@2.0.0))(idb-keyval@6.2.1)(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@3.29.5)(terser@5.31.6)(typescript@5.6.3)(vite@5.4.6(@types/node@22.5.0)(terser@5.31.6))(vue-tsc@2.1.6(typescript@5.6.3))(webpack-sources@3.2.3)
@@ -3778,6 +3781,9 @@ packages:
   make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
+
+  markdown-it-magic-link@0.1.4:
+    resolution: {integrity: sha512-Y0CgJVtqdGGeWJ+8bN+eBEr2q2ugmf5AMJWSbxBpmGcqARbKBB62biB7LwkoxtbddlmVkACYBFyjlMP/SzYlzg==}
 
   markdown-it-mdc@0.2.5:
     resolution: {integrity: sha512-7nj5/efQlZX+OAVw5nAYEH6kXtiNmRoMf5i7WDCeFRLXl5POFQCb+9s6qIsaBHnDLVWpZC3UTIPoVStbR9+24A==}
@@ -9922,6 +9928,10 @@ snapshots:
   make-dir@3.1.0:
     dependencies:
       semver: 6.3.1
+
+  markdown-it-magic-link@0.1.4:
+    dependencies:
+      markdown-it: 14.1.0
 
   markdown-it-mdc@0.2.5(@types/markdown-it@14.1.2)(markdown-it@14.1.0):
     dependencies:

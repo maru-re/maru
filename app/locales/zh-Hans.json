@@ -167,5 +167,11 @@
     "space": "空白键",
     "up": "上",
     "table": "快捷键列表"
+  },
+  "share": {
+    "qifi": {
+      "pausePlayback": "暂停 3 秒",
+      "close": "关闭"
+    }
   }
 }
