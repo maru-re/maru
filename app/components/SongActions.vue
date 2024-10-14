@@ -131,7 +131,7 @@ function shareWithQifi() {
           {{ $t("copy.link") }}
         </SimpleButton>
         <div h-1px w-full bg-gray:15 />
-        <SimpleButton icon="i-ph-qr-code" @click="shareWithQifi(), hide()">
+        <SimpleButton icon="i-uil-qrcode-scan" @click="shareWithQifi(), hide()">
           掃碼分享
         </SimpleButton>
       </div>
@@ -143,9 +143,15 @@ function shareWithQifi() {
     :title="$t('actions.favorite')"
     @click="favorited = !favorited"
   />
-  <ModalPopup v-model="showShareQifiCode" :direction="isMobileScreen ? 'top' : 'right'" use-v-if>
-    <div mx-auto aspect-square max-h-97vh max-w-500px w-100vw flex-col>
-      <QifiCode :share-url="shareUrl" @done="showShareQifiCode = false" />
-    </div>
+  <ModalPopup
+    v-model="showShareQifiCode"
+    :direction="isMobileScreen ? 'top' : 'right'"
+    :use-v-if="true"
+    :dialog-class="isMobileScreen ? 'max-h-85vh! of-auto' : 'max-w-150!'"
+  >
+    <QifiCode
+      :share-url="shareUrl"
+      @done="showShareQifiCode = false"
+    />
   </ModalPopup>
 </template>

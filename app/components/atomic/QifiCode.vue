@@ -26,7 +26,7 @@ function startShare() {
   const generater = createGeneraterSVG(merged, {
     urlPrefix: props.prefix,
     sliceSize: props.sliceSize,
-    border: 4,
+    border: 1,
     invert: colorMode.value === 'dark',
   })
   fountain = undefined
@@ -44,11 +44,11 @@ onMounted(() => {
   }, () => 1000 / props.fps)
 })
 
-function stopSometime() {
+function stopSometime(seconds: number) {
   interval.pause()
   setTimeout(() => {
     interval.resume()
-  }, 1000 * 5)
+  }, 1000 * seconds)
 }
 
 function onDone() {
@@ -57,41 +57,37 @@ function onDone() {
 </script>
 
 <template>
-  <div>
+  <div flex="~ col gap-2" p4>
+    <h3 flex items-center gap2 p2 text-xl>
+      <span i-uil-qrcode-scan inline-block />
+      掃碼分享
+    </h3>
     <div
       class="sticky top-0 z-10 aspect-square [&>svg]:h-full [&>svg]:w-full"
       overflow-hidden
       v-html="svg"
     />
-    <h1 flex items-center gap2 px4 text-xl>
-      <span i-ph-qr-code inline-block />
-      掃碼分享
-    </h1>
-    <div flex="~ col gap4" p4>
-      <SimpleButton w-full @click="stopSometime">
-        <span i-ph-pause />
-        Pause 5s
+    <div flex="~ gap-2">
+      <SimpleButton w-full icon="i-uil-pause-circle" @click="stopSometime(3)">
+        暫停 3 秒
       </SimpleButton>
-      <SimpleButton w-full @click="onDone">
-        <span i-ph-arrow-u-down-left />
-        Done
+      <SimpleButton w-full icon="i-uil-multiply " @click="onDone()">
+        關閉
       </SimpleButton>
-      <Collapsable label="如何掃描?">
-        <div flex="~ col gap-4" p2>
-          <p>
-            這是名為 <a href="https://github.com/qifi-dev/qrs" text-blue underline>QiFi/Qrs</a> 的動態二維碼。你可以使用系統自帶的掃描器 APP 或者相機 APP 掃描動態二維碼。
-          </p>
-          <p>
-            通常而言這會自動打開瀏覽器，並將你導向一個掃描器頁面，你需要在那裡繼續掃描來傳輸 .maru 文件的剩餘信息，這個過程會需要你的相機權限，請放心，這個網頁的代碼開源，並且不會保存你的相機畫面。數據全部接收完成後，會自動在 maru 播放器中打開對應的歌曲。
-          </p>
-          <p>
-            部分相機 APP 會因為動態變化的二維碼而無法正常掃描，這時你可以點擊 <span i-ph-pause inline-block /> 暫停 5 秒，這會有助於你掃描。
-          </p>
-          <p>
-            你也可以手動輸入掃描網頁的地址：<a href="https://qrss.netlify.app" text-blue underline>https://qrss.netlify.app</a>
-          </p>
-        </div>
-      </Collapsable>
+    </div>
+    <div flex="~ col gap-4" mt2 p2 text-sm>
+      <p>
+        由於單個 QR Code 的傳輸大小限制，我們採用了名為 <a href="https://github.com/qifi-dev/qrs" text-blue underline>QiFi/Qrs</a> 的 <b>動態 QR Code</b>。
+      </p>
+      <p>
+        使用相機 App 掃描後，將導向 QRS 掃描器頁面，繼續掃描傳輸剩餘信息。過程中可能會需要相機權限，請放心，網頁代碼開源且不保存相機畫面。數據接收完成後，會自動回到 maru 打開對應歌曲。
+      </p>
+      <p>
+        部分相機 APP 會因為動態變化的二維碼而無法正常掃描，也你可以點擊 <span i-uil-pause-circle inline-block align-middle /> 暫停 5 秒，這會有助於你掃描。
+      </p>
+      <p>
+        你也可以手動輸入掃描網頁的地址：<a href="https://qrss.netlify.app" text-blue underline>qrss.netlify.app</a>
+      </p>
     </div>
   </div>
 </template>
