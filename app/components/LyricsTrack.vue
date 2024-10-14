@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { LyricLine, MaruSongDataParsed } from '@marure/schema'
-import { Tooltip } from 'floating-vue'
 import type { PlayerControls } from '~/composables/player'
 
 const props = defineProps<{
