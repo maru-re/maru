@@ -107,7 +107,8 @@
     "groupLyricsDisplay": "Lyrics display settings",
     "groupPlay": "Playback settings",
     "loopSong": "Single loop playback",
-    "songActions": "Song operation"
+    "songActions": "Song operation",
+    "groupGeneral": "General"
   },
   "song": {
     "artist": "Artist",

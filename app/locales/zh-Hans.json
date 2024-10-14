@@ -107,7 +107,8 @@
     "loopSong": "单曲循环播放",
     "groupLyricsDisplay": "歌词展示设定",
     "groupPlay": "播放设定",
-    "songActions": "歌曲操作"
+    "songActions": "歌曲操作",
+    "groupGeneral": "通用"
   },
   "song": {
     "artist": "歌手",
