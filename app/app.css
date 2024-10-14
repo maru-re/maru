@@ -104,7 +104,7 @@ html.dark {
 .markdown-magic-link {
   display: inline-flex;
   align-items: center;
-  background: rgb(156 163 175 / 0.3) ;
+  background: rgb(156 163 175 / 0.3);
   transform: translateY(3px);
   line-height: 100%;
   color: var(--fg-light) !important;
