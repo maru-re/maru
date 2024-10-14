@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@qifi/generate':
+        specifier: ^0.1.0
+        version: 0.1.0
       '@vueuse/core':
         specifier: ^11.1.0
         version: 11.1.0(vue@3.5.6(typescript@5.6.3))
@@ -1400,6 +1403,9 @@ packages:
 
   '@polka/url@1.0.0-next.25':
     resolution: {integrity: sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==}
+
+  '@qifi/generate@0.1.0':
+    resolution: {integrity: sha512-IFB+FPSnmfIGWuaCa5NVLZUrf8rGDDmV0Mal87a5SVkRvLSCBwvLkMOTEjggYZgI45rxkjNsam71Ge6n2x4QNA==}
 
   '@rollup/plugin-alias@5.1.0':
     resolution: {integrity: sha512-lpA3RZ9PdIG7qqhEfv79tBffNaoDuukFDrmhLqg9ifv99u/ehn+lOg30x2zmhf8AQqQUZaMk/B9fZraQ6/acDQ==}
@@ -3580,6 +3586,9 @@ packages:
     resolution: {integrity: sha512-pmfRbVRs/7khFrSAYnSiJ8C0D5GvzkE4Ey2pAvUcJsw1ly/p+7ut27jbJrjY79BpAJQJ4gXYFtK6d1Aub+9baQ==}
     hasBin: true
 
+  js-base64@3.7.7:
+    resolution: {integrity: sha512-7rCnleh0z2CkXhH67J8K1Ytz0b2Y+yxTPL+/KOJoa20hfnVQ/3/T6W/KflYI4bRHRagNeXeU2bkNGI3v1oS/lw==}
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -3753,6 +3762,9 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  luby-transform@0.1.0:
+    resolution: {integrity: sha512-NlgBxEB7Kzityvor+FuCRN05+oy4NaOBHSkCyDKu6It2q/WDOa5bEiyCOdbXjmk//TIszg6sDLB7r2lL0nz9jA==}
 
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
@@ -4246,6 +4258,9 @@ packages:
 
   pako@1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
+
+  pako@2.1.0:
+    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -7024,6 +7039,12 @@ snapshots:
 
   '@polka/url@1.0.0-next.25': {}
 
+  '@qifi/generate@0.1.0':
+    dependencies:
+      js-base64: 3.7.7
+      luby-transform: 0.1.0
+      uqr: 0.1.2
+
   '@rollup/plugin-alias@5.1.0(rollup@3.29.5)':
     dependencies:
       slash: 4.0.0
@@ -9713,6 +9734,8 @@ snapshots:
 
   jiti@2.0.0-beta.3: {}
 
+  js-base64@3.7.7: {}
+
   js-tokens@4.0.0: {}
 
   js-tokens@9.0.0: {}
@@ -9892,6 +9915,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  luby-transform@0.1.0:
+    dependencies:
+      pako: 2.1.0
 
   lz-string@1.5.0: {}
 
@@ -10742,6 +10769,8 @@ snapshots:
   package-manager-detector@0.2.0: {}
 
   pako@1.0.11: {}
+
+  pako@2.1.0: {}
 
   parent-module@1.0.1:
     dependencies:

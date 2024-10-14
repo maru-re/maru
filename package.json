@@ -15,6 +15,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@qifi/generate": "^0.1.0",
     "@vueuse/core": "^11.1.0",
     "floating-vue": "^5.2.2",
     "fuse.js": "^7.0.0",
