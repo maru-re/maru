@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
+import { Menu } from 'floating-vue'
 import { isMobileScreen } from '~/state/breakpoints'
 import { showSettingsDialog, showShortcutDialog } from '~/state/models'
 
@@ -9,7 +10,7 @@ defineProps<{
 }>()
 
 const settings = useSettings()
-const { t, locale } = useI18n()
+const { t, locale, locales, setLocale } = useI18n()
 </script>
 
 <template>
@@ -85,6 +86,22 @@ const { t, locale } = useI18n()
         <SettingsDialogGroup
           :title="$t('settings.groupGeneral')"
         >
+          <DarkToggle
+            type="button"
+          />
+          <Menu>
+            <SimpleButton icon="i-uil-english-to-chinese" :title="t('actions.languages')" />
+            <template #popper>
+              <div p2 flex="~ col gap-1">
+                <SimpleButton
+                  v-for="_locale in locales" :key="_locale.code"
+                  :class="_locale.code !== locale && 'op50'"
+                  :title="_locale.name"
+                  @click="setLocale(_locale.code)"
+                />
+              </div>
+            </template>
+          </Menu>
           <ActionButton
             icon="i-uil-keyboard-alt"
             type="button"

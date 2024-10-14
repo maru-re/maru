@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Tooltip } from 'floating-vue'
+defineProps<{
+  type?: 'icon' | 'button'
+}>()
 
 const color = useColorMode()
 
@@ -60,12 +62,10 @@ function toggle(event: MouseEvent) {
 </script>
 
 <template>
-  <Tooltip placement="bottom">
-    <IconButton icon="i-uil-sun dark:i-uil-moon" @click="toggle" />
-    <template #popper>
-      <div>
-        {{ $t("displayMode.toggleMode", { mode: color.value === 'dark' ? $t("displayMode.light") : $t("displayMode.dark") }) }}
-      </div>
-    </template>
-  </Tooltip>
+  <ActionButton
+    icon="i-uil-sun dark:i-uil-moon"
+    :type
+    :title="$t('displayMode.toggleMode', { mode: color.value === 'dark' ? $t('displayMode.light') : $t('displayMode.dark') })"
+    @click="toggle"
+  />
 </template>
