@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
+import { parseLrc, secondsToTimestamp, serializeToLrc } from '@marure/parser'
+import { inferSongInfoFromVideoTitle } from '@marure/utils'
 import { useDebouncedRefHistory } from '@vueuse/core'
-import { parseLrc, secondsToTimestamp, serializeToLrc } from '~~/packages/parser/src'
-import { inferSongInfoFromVideoTitle } from '~~/packages/utils/src'
 import YAML from 'js-yaml'
 
 const props = defineProps<{
@@ -21,7 +21,18 @@ const state = reactive<MaruSongDataParsed>(
 
 const stateRef = toRef(state)
 
-const { undo, redo } = useDebouncedRefHistory(stateRef, { deep: true, debounce: 500, capacity: 15 })
+const {
+  undo,
+  redo,
+  canRedo,
+  canUndo,
+  pause,
+  resume,
+} = useDebouncedRefHistory(stateRef, {
+  deep: true,
+  debounce: 500,
+  capacity: 15,
+})
 
 const router = useRouter()
 const route = useRoute()
@@ -53,7 +64,7 @@ async function save() {
     alert(t('youtube.requireId'))
     return
   }
-  stateRef.value.lrc = serializeToLrc({ lyrics: toRaw(stateRef.value).lyrics, meta: {} })
+  syncLrc()
   const copy = { ...toRaw(stateRef.value), lyrics: undefined }
   await saveSongsToLocal([copy])
   dirty.value = false
@@ -70,6 +81,7 @@ const dirtyLyrics = ref<'none' | 'lrc' | 'lyrics'>('none')
 const showTab = ref<'lrc' | 'lyrics' | 'yaml'>('lyrics')
 
 function syncLrc() {
+  pause()
   if (dirtyLyrics.value === 'lrc') {
     stateRef.value.lrc = serializeToLrc({ lyrics: stateRef.value.lyrics, meta: {} })
   }
@@ -77,6 +89,7 @@ function syncLrc() {
     stateRef.value.lyrics = parseLrc(stateRef.value.lrc).lyrics
   }
   dirtyLyrics.value = 'none'
+  nextTick(() => resume())
 }
 
 const yaml = ref('')
@@ -289,17 +302,26 @@ function makeupChatGPT() {
 
 useEventListener('keydown', (e) => {
   // Skip if the user is typing in an input
-  if (e.target instanceof HTMLInputElement || (e.target as HTMLElement).role === 'input')
+  if (e.target instanceof HTMLInputElement || (e.target as HTMLElement).role === 'input') {
     return
+  }
+
   if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
     e.preventDefault()
     save()
-    return
   }
-  if (e.key === ' ') {
+  else if (e.code === 'Space') {
     e.preventDefault()
     controls.toggle()
     ;(document.activeElement as HTMLElement)?.blur?.()
+  }
+  else if (e.key === 'z' && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault()
+    undo()
+  }
+  else if (e.key === 'y' && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault()
+    redo()
   }
 })
 
@@ -467,6 +489,21 @@ onMounted(() => {
 
     <div border="~ base rounded-xl" flex="~ col gap-2" fixed bottom-5 right-5 p2 shadow-xl bg-base>
       <SimpleButton
+        icon="i-mdi-undo-variant"
+        :disabled="!canUndo"
+        @click="undo"
+      >
+        {{ $t("editor.undo") }}
+      </SimpleButton>
+      <SimpleButton
+        :disabled="!canRedo"
+        icon="i-mdi-redo-variant"
+        @click="redo"
+      >
+        {{ $t("editor.redo") }}
+      </SimpleButton>
+
+      <SimpleButton
         :disabled="dirty"
         icon="i-uil-play-circle"
         @click="gotoSong()"
@@ -478,20 +515,6 @@ onMounted(() => {
         @click="exportNow()"
       >
         {{ $t("lyrics.exportLyrics") }}
-      </SimpleButton>
-      <SimpleButton
-        icon="i-mdi-undo-variant"
-        :disabled="!dirty"
-        @click="undo"
-      >
-        {{ $t("editor.redo") }}
-      </SimpleButton>
-      <SimpleButton
-        :disabled="!dirty"
-        icon="i-mdi-redo-variant"
-        @click="redo"
-      >
-        {{ $t("editor.undo") }}
       </SimpleButton>
       <SimpleButton
         :disabled="!dirty"
