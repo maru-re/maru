@@ -10,6 +10,9 @@ const props = withDefaults(defineProps<Props>(), {
   maxInset: 0,
 })
 
+let stickRight = false
+let stickBottom = false
+
 const dragWindow = ref<HTMLElement | null>(null)
 const dragHandle = ref<HTMLElement | null>(null)
 
@@ -17,7 +20,11 @@ const { x: dragX, y: dragY, style, isDragging } = useDraggable(dragWindow, {
   initialValue: { x: props.x, y: props.y },
   handle: dragHandle,
   preventDefault: true,
-  onEnd: limitPosition,
+  onEnd() {
+    stickRight = false
+    stickBottom = false
+    limitPosition()
+  },
 })
 // #endregion
 
@@ -29,15 +36,17 @@ function limitPosition() {
   if (dragWindowBounding.left.value < props.maxInset) {
     dragX.value = props.maxInset
   }
-  else if (dragWindowBounding.right.value > (windowWidth.value - props.maxInset)) {
+  else if (stickRight || dragWindowBounding.right.value > windowWidth.value - props.maxInset) {
     dragX.value = windowWidth.value - props.maxInset - dragWindowBounding.width.value
+    stickRight = true
   }
 
   if (dragWindowBounding.top.value < props.maxInset) {
     dragY.value = props.maxInset
   }
-  else if (dragWindowBounding.bottom.value > (windowHeight.value - props.maxInset)) {
+  else if (stickBottom || dragWindowBounding.bottom.value > windowHeight.value - props.maxInset) {
     dragY.value = windowHeight.value - props.maxInset - dragWindowBounding.height.value
+    stickBottom = true
   }
 }
 
