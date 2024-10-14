@@ -91,7 +91,7 @@ onMounted(() => {
     <DropZone />
     <ImportDialog />
     <SettingsDialog />
-    <div flex="~ col gap-2 items-center" pb-10 pt-25>
+    <div flex="~ col gap-2 items-center" pb-10 pt-25 lt-md="pt-10 pb-5">
       <div i-mdi-circle-double text-5xl op75 />
       <div text-4xl font-jp-serif>
         <ruby>
@@ -141,7 +141,7 @@ onMounted(() => {
     <div v-if="collections.length > 0" sticky left-0 right-0 top-0 z-floating flex py3>
       <div
         flex="~ gap-3 items-center"
-        ma h-3em max-w-100 w-full of-hidden px3 floating-glass
+        z-search ma h-3em max-w-100 w-full of-hidden px3 floating-glass
       >
         <div i-uil-search text-lg op25 />
         <input

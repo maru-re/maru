@@ -8,7 +8,7 @@
 
 ## Credits
 
-感謝 jpmarumaru.com 曾提供的優質日文學習平台，本 App 的開發身受其啟發。
+感謝 jpmarumaru.com 曾提供的優質日文學習平台，本 App 的開發深受其啟發。
 
 ## License
 

@@ -100,14 +100,15 @@
     "displayKanji": "Display Kanji",
     "displayRomaji": "Display Romaji",
     "displayTranslation": "Display Translation",
-    "lyricsSize": "Lyrics Font Size ({fontSize})",
+    "lyricsSize": "Lyrics Font Size",
     "scrollWithLyrics": "Scroll with Lyrics",
     "autoPausePerLyrics": "Auto Pause per Lyrics",
     "convertChineseHansHant": "Automatic Chinese conversion",
     "groupLyricsDisplay": "Lyrics display settings",
     "groupPlay": "Playback settings",
     "loopSong": "Single loop playback",
-    "songActions": "Song operation"
+    "songActions": "Song operation",
+    "groupGeneral": "General"
   },
   "song": {
     "artist": "Artist",
