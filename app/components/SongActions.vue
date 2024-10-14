@@ -75,7 +75,7 @@ function shareWithQifi() {
   <Dropdown v-if="source === 'local'">
     <ActionButton
       :type
-      icon="i-ph-trash-duotone op40 hover:op100 hover:text-red"
+      icon="i-uil-trash-alt op40 hover:op100 hover:text-red"
       :title="$t('lyrics.removeLyrics')"
     />
     <template #popper="{ hide }">
@@ -123,16 +123,15 @@ function shareWithQifi() {
       :title="$t('lyrics.shareLyrics')"
     />
     <template #popper="{ hide }">
-      <div p5 flex="~ col gap-2">
-        <div>
+      <div p3 flex="~ col gap-2">
+        <!-- <div>
           <pre max-h-50 max-w-100 of-auto ws-pre-wrap break-all rounded bg-gray:15 p2>{{ shareUrl }}</pre>
-        </div>
+        </div> -->
         <SimpleButton icon="i-uil-copy" @click="copyShareLink(), hide()">
           {{ $t("copy.link") }}
         </SimpleButton>
-        <div h-1px w-full bg-gray:15 />
         <SimpleButton icon="i-uil-qrcode-scan" @click="shareWithQifi(), hide()">
-          掃碼分享
+          {{ $t('actions.shareViaQR') }}
         </SimpleButton>
       </div>
     </template>

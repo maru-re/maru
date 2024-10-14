@@ -131,7 +131,8 @@
     "clearAllData": "清除所有資料",
     "downloadAllLyrics": "下載所有歌詞檔案",
     "exportSelected": "匯出所選",
-    "removeSelected": "刪除所選"
+    "removeSelected": "刪除所選",
+    "shareViaQR": "QR 分享"
   },
   "appname": "二重丸",
   "errors": {

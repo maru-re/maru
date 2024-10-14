@@ -125,7 +125,8 @@
     "clearAllData": "Clear All Data",
     "downloadAllLyrics": "Download All Lyrics",
     "exportSelected": "Export Selected",
-    "removeSelected": "Remove Selected"
+    "removeSelected": "Remove Selected",
+    "shareViaQR": "Share via QR Code"
   },
   "messages": {
     "wip": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord",

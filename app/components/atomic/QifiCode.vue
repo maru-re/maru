@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { Pausable } from '@vueuse/core'
-import { appendFileHeaderMetaToBuffer, createGeneraterSVG } from '@qifi/generate'
 
 const props = withDefaults(defineProps<{
   prefix?: string
@@ -17,8 +16,12 @@ const emit = defineEmits(['done'])
 
 const colorMode = useColorMode()
 
-let fountain: ReturnType<typeof generater.fountain> | undefined
-function startShare() {
+let generator: Awaited<ReturnType<typeof startShare>> | undefined
+let fountain: ReturnType<(Awaited<ReturnType<typeof startShare>>)['fountain']> | undefined
+const svg = ref('')
+
+async function startShare() {
+  const { appendFileHeaderMetaToBuffer, createGeneraterSVG } = await import('@qifi/generate')
   const data = new TextEncoder().encode(props.shareUrl)
   const merged = appendFileHeaderMetaToBuffer(data, {
     contentType: 'text/plain',
@@ -29,18 +32,27 @@ function startShare() {
     border: 1,
     invert: colorMode.value === 'dark',
   })
-  fountain = undefined
   return generater
 }
-let generater = startShare()
-watch(() => [props.prefix, props.shareUrl, props.sliceSize, colorMode.value], () => generater = startShare())
-const svg = ref('')
+
+watch(
+  () => [props.prefix, props.shareUrl, props.sliceSize, colorMode.value],
+  async () => {
+    fountain = undefined
+    svg.value = ''
+    generator = await startShare()
+  },
+  {
+    immediate: true,
+  }
+)
 
 let interval: Pausable
 onMounted(() => {
   interval = useIntervalFn(() => {
-    fountain ||= generater.fountain()
-    svg.value = fountain.next().value
+    fountain ||= generator?.fountain()
+    if (fountain)
+      svg.value = fountain.next().value
   }, () => 1000 / props.fps)
 })
 

@@ -5,7 +5,8 @@
     "exportSelected": "選択したエクスポート",
     "favorite": "好きな曲",
     "removeSelected": "選択したものを削除",
-    "scrollToCurrent": "現在の歌詞までスクロール"
+    "scrollToCurrent": "現在の歌詞までスクロール",
+    "shareViaQR": "QRシェア"
   },
   "appname": "二重丸",
   "common": {
