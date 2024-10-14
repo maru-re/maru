@@ -15,9 +15,7 @@ const route = useRoute()
         @click="showSettingsDialog = !showSettingsDialog"
       />
       <template #popper>
-        <div>
-          設定
-        </div>
+        {{ $t('common.settings') }}
       </template>
     </Tooltip>
   </div>
