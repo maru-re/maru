@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { LyricLine, MaruSongDataParsed } from '@marure/schema'
-import { Tooltip } from 'floating-vue'
 import type { PlayerControls } from '~/composables/player'
 
 const props = defineProps<{
   controls: PlayerControls
-  data: MaruSongDataParsed
+  song: MaruSongDataParsed
+  source: SongDataSource
 }>()
 
 const {
@@ -16,8 +16,6 @@ const {
 const SCROLL_PERCENTAGE = 0.30
 
 const settings = useSettings()
-
-const showInfoModal = ref(false)
 
 const lyricsOverflow = templateRef<HTMLDivElement>('lyricsOverflow')
 
@@ -156,51 +154,16 @@ onMounted(() => {
 
 <template>
   <div relative h-full w-full of-hidden>
-    <div
-      lg="hidden"
-      absolute left-3 top-3 p1 floating-glass
-      flex="~ gap-2 items-center"
-    >
-      <Tooltip placement="top">
-        <IconButton to="/" icon="i-uil-angle-left-b" />
-        <template #popper>
-          <div>
-            {{ $t("common.backToHome") }}
-          </div>
-        </template>
-      </Tooltip>
-    </div>
-    <div
-      lg="hidden"
-      absolute right-3 top-3 p1 floating-glass
-      flex="~ gap-2 items-center"
-    >
-      <Tooltip placement="top">
-        <IconButton icon="i-uil-info-circle" @click="showInfoModal = true" />
-        <template #popper>
-          <div>
-            {{ $t("common.notes") }}
-          </div>
-        </template>
-      </Tooltip>
-    </div>
+    <slot />
+
+    <!-- Bottom Left -->
     <div
       v-if="activeLineEl && !targetIsVisible"
       absolute bottom-3 right-3 p2 floating-glass
       flex="~ gap-2 items-center"
       @click="() => scrollToActiveLine('smooth')"
     >
-      <Tooltip placement="left" distance="8">
-        <IconButton icon="i-uil-right-indent-alt" />
-        <template #popper>
-          <div>
-            {{ $t("actions.scrollToCurrent") }}
-          </div>
-        </template>
-      </Tooltip>
-    </div>
-    <div pointer-events-auto absolute left-3 right-3 top-3 z-floating flex>
-      <SettingsNav mxa lt-lg="hidden" />
+      <ActionButton icon="i-uil-right-indent-alt" :title="$t('actions.scrollToCurrent')" />
     </div>
 
     <!-- Track -->
@@ -217,13 +180,13 @@ onMounted(() => {
       >
         <div pb10 font-jp-serif>
           <p text-2em>
-            {{ data.title }}
+            {{ song.title }}
           </p>
-          <ArtistsList :artists="data.artists" />
+          <ArtistsList :artists="song.artists" />
         </div>
 
         <LyricsLine
-          v-for="line, index of data.lyrics"
+          v-for="line, index of song.lyrics"
           :key="index"
           :class="getClassLine(index)"
           :index="index"
@@ -233,16 +196,6 @@ onMounted(() => {
         />
       </div>
     </div>
-
-    <ModalPopup v-model="showInfoModal" dialog-class="max-h-90vh! p4">
-      <div pb-1 font-jp-serif>
-        <p text-1.5em>
-          {{ data.title }}
-        </p>
-        <ArtistsList :artists="data.artists" />
-      </div>
-      <SongNotes :notes="data.notes" />
-    </ModalPopup>
   </div>
 </template>
 

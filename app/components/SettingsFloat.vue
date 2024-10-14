@@ -73,13 +73,12 @@ const settings = useSettings()
         @click="settings.fontSize = 1"
       />
       <template #popper>
-        <div px4 py2>
+        <div flex="~ col gap-2" w-50 px4 py3>
           <div>
-            {{ $t("settings.lyricsSize", { fontSize: settings.fontSize }) }}
+            {{ $t("settings.lyricsSize") }}
+            <span op50>{{ `${Math.round(settings.fontSize * 100)}%` }}</span>
           </div>
-          <div>
-            <input v-model="settings.fontSize" type="range" min="0.6" max="2" step="0.2">
-          </div>
+          <OptionSlider v-model="settings.fontSize" :min="0.6" :max="2" :step="0.2" :default="1" />
         </div>
       </template>
     </Menu>
