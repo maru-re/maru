@@ -14,9 +14,7 @@ useHead({
 })
 
 const isAppearanceTransition = typeof document !== 'undefined'
-// eslint-disable-next-line ts/ban-ts-comment
-// @ts-ignore document.startViewTransition can be undefined
-  && document.startViewTransition
+  && !!document.startViewTransition
   && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 function toggle(event: MouseEvent) {
@@ -31,8 +29,6 @@ function toggle(event: MouseEvent) {
     Math.max(x, innerWidth - x),
     Math.max(y, innerHeight - y),
   )
-  // eslint-disable-next-line ts/ban-ts-comment
-  // @ts-ignore document.startViewTransition can be undefined
   const transition = document.startViewTransition(async () => {
     color.preference = color.value === 'dark' ? 'light' : 'dark'
     await nextTick()
