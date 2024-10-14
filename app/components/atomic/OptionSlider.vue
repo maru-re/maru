@@ -45,20 +45,19 @@ const value = defineModel<number>('modelValue', {
 }
 
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
   appearance: none;
   width: 5px;
   height: 22px;
-  background: #fff;
   cursor: pointer;
   z-index: 10;
+  --uno: bg-primary;
 }
 
 .slider::-moz-range-thumb {
   width: 5px;
   height: 22px;
-  background: #fff;
   cursor: pointer;
   z-index: 10;
+  --uno: bg-primary;
 }
 </style>
