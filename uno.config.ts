@@ -14,6 +14,7 @@ export default defineConfig({
   shortcuts: [
     {
       'bg-base': 'bg-white dark:bg-black',
+      'bg-secondary': 'bg-[#8881]',
       'bg-hover': 'bg-[#8882]',
       'color-base': 'text-#222 dark:text-#ddd',
       'border-base': 'border-gray:20',
