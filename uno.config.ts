@@ -30,6 +30,9 @@ export default defineConfig({
       'z-tooltip': 'z-200',
       'z-dialog': 'z-500',
       'z-dropzone': 'z-1000',
+
+      // ref: https://github.com/unocss/unocss/issues/2614
+      'break-anywhere': '[@supports(overflow-wrap:anywhere)]:[overflow-wrap:anywhere] [@supports(overflow-wrap:anywhere)]:[word-break:normal]',
     },
     [/^btn-simple-(.*)$/, ([,color]) => {
       return [
