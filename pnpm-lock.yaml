@@ -42,8 +42,8 @@ importers:
         specifier: ^0.0.3
         version: 0.0.3
       simplecc-wasm:
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^1.1.0
+        version: 1.1.0
       unstorage:
         specifier: ^1.12.0
         version: 1.12.0(idb-keyval@6.2.1)(ioredis@5.4.1)
@@ -4839,8 +4839,8 @@ packages:
   simple-git@3.27.0:
     resolution: {integrity: sha512-ivHoFS9Yi9GY49ogc6/YAi3Fl9ROnF4VyubNylgCkA+RVqLaKWnDSzXOVzya8csELIaWaYNutsEuAhZrtOjozA==}
 
-  simplecc-wasm@1.0.0:
-    resolution: {integrity: sha512-mb9+D3yeGpuXpMiDNVOMtF/ACDGa5to2lE0tgAHvz6XyxWVnTBTYTA+ez2DR/doeDAU56AoWJPA5FdWETClf1Q==}
+  simplecc-wasm@1.1.0:
+    resolution: {integrity: sha512-0nmH9WrzxpI8GOZkltH0NKAlcPe42rXek01noMSdelCmj8RYSL06SDDG/YWhvVTbMcuN1fq5imOeXpUJmhbcPQ==}
 
   sirv@2.0.4:
     resolution: {integrity: sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==}
@@ -11350,7 +11350,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  simplecc-wasm@1.0.0: {}
+  simplecc-wasm@1.1.0: {}
 
   sirv@2.0.4:
     dependencies:

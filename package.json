@@ -25,7 +25,7 @@
     "lz-string": "^1.5.0",
     "plain-shiki": "^0.0.12",
     "shiki-language-lyric": "^0.0.3",
-    "simplecc-wasm": "^1.0.0",
+    "simplecc-wasm": "^1.1.0",
     "unstorage": "^1.12.0",
     "uqr": "^0.1.2",
     "valibot": "^0.42.1",
