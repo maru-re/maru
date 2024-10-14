@@ -44,7 +44,7 @@ watch(
   },
   {
     immediate: true,
-  }
+  },
 )
 
 let interval: Pausable
