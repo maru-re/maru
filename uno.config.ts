@@ -52,8 +52,11 @@ export default defineConfig({
     }),
     presetTypography(),
     presetWebFonts({
-      inlineImports: false,
-      provider: 'google',
+      provider: 'bunny',
+      timeouts: {
+        warning: 7_000,
+        failure: 10_000,
+      },
       fonts: {
         'sans': 'DM Sans',
         'serif': 'DM Serif Display',
