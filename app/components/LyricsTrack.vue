@@ -164,14 +164,7 @@ onMounted(() => {
       flex="~ gap-2 items-center"
       @click="() => scrollToActiveLine('smooth')"
     >
-      <Tooltip placement="left" distance="8">
-        <IconButton icon="i-uil-right-indent-alt" />
-        <template #popper>
-          <div>
-            {{ $t("actions.scrollToCurrent") }}
-          </div>
-        </template>
-      </Tooltip>
+      <ActionButton icon="i-uil-right-indent-alt" :title="$t('actions.scrollToCurrent')" />
     </div>
 
     <!-- Track -->
@@ -204,7 +197,7 @@ onMounted(() => {
         />
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <style>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
-import { Tooltip } from 'floating-vue'
 import type { SongDataSource } from '~/composables/loader'
 
 const props = defineProps<{
