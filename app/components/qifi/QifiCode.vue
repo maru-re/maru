@@ -102,10 +102,10 @@ const { t } = useI18n({
     />
     <div flex="~ gap-2">
       <SimpleButton w-full icon="i-uil-pause-circle" @click="stopSometime(3)">
-        {{ $t('share.qifi.pausePlayback') }}
+        {{ $t('actions.pauseQifi', 3) }}
       </SimpleButton>
       <SimpleButton w-full icon="i-uil-multiply " @click="onDone()">
-        {{ $t('share.qifi.close') }}
+        {{ $t('actions.close') }}
       </SimpleButton>
     </div>
     <component :is="howToScan[t('howToScanComponent')]" />

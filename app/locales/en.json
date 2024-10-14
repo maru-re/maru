@@ -128,7 +128,9 @@
     "downloadAllLyrics": "Download All Lyrics",
     "exportSelected": "Export Selected",
     "removeSelected": "Remove Selected",
-    "shareViaQR": "Share via QR Code"
+    "shareViaQR": "Share via QR Code",
+    "close": "Close",
+    "pauseQifi": "Pause {0}s"
   },
   "messages": {
     "wip": "The website is under development, and many features are not yet complete. Welcome to report issues via Discord",
@@ -167,11 +169,5 @@
     "space": "Space",
     "up": "Up",
     "table": "Shortcut Table"
-  },
-  "share": {
-    "qifi": {
-      "pausePlayback": "Pause 3s",
-      "close": "Close"
-    }
   }
 }
