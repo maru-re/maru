@@ -91,18 +91,7 @@ onMounted(() => {
         />
       </div>
       <!-- <QRCode :data="data" /> -->
-      <div
-        flex="~ col gap-2 justify-end auto"
-        lt-lg="p4 border-b border-base hidden"
-        of-auto p1 text-xs text-hex-888
-      >
-        <div border="t base" my1 h-1px w-30px />
-        <div v-if="song.notes?.length" text-sm>
-          <div v-for="line, idx of song.notes" :key="idx">
-            {{ line }}
-          </div>
-        </div>
-      </div>
+      <SongNotes :notes="song.notes" lt-lg="hidden" p1 />
     </div>
     <LyricsTrack :data="song" :controls="controls" />
   </div>

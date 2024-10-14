@@ -17,6 +17,8 @@ const SCROLL_PERCENTAGE = 0.30
 
 const settings = useSettings()
 
+const showInfoModal = ref(false)
+
 const lyricsOverflow = templateRef<HTMLDivElement>('lyricsOverflow')
 
 let lastClick: {
@@ -169,6 +171,20 @@ onMounted(() => {
       </Tooltip>
     </div>
     <div
+      lg="hidden"
+      absolute right-3 top-3 p1 floating-glass
+      flex="~ gap-2 items-center"
+    >
+      <Tooltip placement="top">
+        <IconButton icon="i-uil-info-circle" @click="showInfoModal = true" />
+        <template #popper>
+          <div>
+            {{ $t("common.notes") }}
+          </div>
+        </template>
+      </Tooltip>
+    </div>
+    <div
       v-if="activeLineEl && !targetIsVisible"
       absolute bottom-3 right-3 p2 floating-glass
       flex="~ gap-2 items-center"
@@ -217,6 +233,16 @@ onMounted(() => {
         />
       </div>
     </div>
+
+    <ModalPopup v-model="showInfoModal" dialog-class="max-h-90vh! p4">
+      <div pb-1 font-jp-serif>
+        <p text-1.5em>
+          {{ data.title }}
+        </p>
+        <ArtistsList :artists="data.artists" />
+      </div>
+      <SongNotes :notes="data.notes" />
+    </ModalPopup>
   </div>
 </template>
 
