@@ -148,5 +148,21 @@
     "copyPrompts": "copy prompt word",
     "gotoChatGptAndPaste": "Go to ChatGPT and paste",
     "noteAboutPrompts": "The following is the prompt word for ChatGPT, please paste it into ChatGPT"
+  },
+  "shortcuts": {
+    "down": "Down",
+    "general": "General",
+    "left": "Left",
+    "nextLine": "Next sentence",
+    "or": "or",
+    "playPause": "Play/Pause",
+    "prevLine": "Previous sentence",
+    "repeatCurrentLine": "Replay current sentence",
+    "right": "right",
+    "showTable": "Show shortcuts table",
+    "songPlay": "Playback",
+    "space": "Space",
+    "up": "Up",
+    "table": "Shortcut Table"
   }
 }

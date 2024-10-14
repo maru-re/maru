@@ -148,5 +148,21 @@
     "prompts": {
       "useLocaleToResponse": "请使用中文来回应我们之后的对话"
     }
+  },
+  "shortcuts": {
+    "down": "下",
+    "general": "通用",
+    "left": "左",
+    "nextLine": "下一句",
+    "or": "或",
+    "playPause": "播放/暂停",
+    "prevLine": "上一句",
+    "repeatCurrentLine": "重播当前句",
+    "right": "右",
+    "showTable": "显示快捷键表",
+    "songPlay": "歌曲播放",
+    "space": "空白键",
+    "up": "上",
+    "table": "快捷键列表"
   }
 }

@@ -105,7 +105,8 @@
     "convertChineseHansHant": "自動簡繁體轉換",
     "groupPlay": "播放設定",
     "groupLyricsDisplay": "歌詞展示設定",
-    "songActions": "歌曲操作"
+    "songActions": "歌曲操作",
+    "groupGeneral": "通用"
   },
   "song": {
     "artist": "歌手",
@@ -148,5 +149,21 @@
     "prompts": {
       "useLocaleToResponse": "請使用中文來回應我們之後的對話"
     }
+  },
+  "shortcuts": {
+    "or": "或",
+    "general": "通用",
+    "showTable": "顯示快捷鍵表",
+    "songPlay": "歌曲播放",
+    "playPause": "播放/暂停",
+    "space": "空白鍵",
+    "prevLine": "上一句",
+    "nextLine": "下一句",
+    "repeatCurrentLine": "重播當前句",
+    "left": "左",
+    "up": "上",
+    "right": "右",
+    "down": "下",
+    "table": "快捷鍵列表"
   }
 }

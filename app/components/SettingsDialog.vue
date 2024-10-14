@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
 import { isMobileScreen } from '~/state/breakpoints'
-import { showSettingsDialog } from '~/state/models'
+import { showSettingsDialog, showShortcutDialog } from '~/state/models'
 
 defineProps<{
   song?: MaruSongDataParsed
@@ -56,7 +56,6 @@ const { t, locale } = useI18n()
             :title="t('settings.convertChineseHansHant')"
           />
         </SettingsDialogGroup>
-
         <SettingsDialogGroup
           :title="$t('settings.groupPlay')"
         >
@@ -69,6 +68,16 @@ const { t, locale } = useI18n()
             v-model="settings.loopSong"
             icon="i-uil-redo"
             :title="t('settings.loopSong')"
+          />
+        </SettingsDialogGroup>
+        <SettingsDialogGroup
+          :title="$t('settings.groupGeneral')"
+        >
+          <ActionButton
+            icon="i-uil-keyboard-alt"
+            type="button"
+            :title="$t('shortcuts.showTable')"
+            @click="showShortcutDialog = !showShortcutDialog"
           />
         </SettingsDialogGroup>
       </div>
