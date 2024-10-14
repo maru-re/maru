@@ -14,8 +14,12 @@ const { t, locale, locales, setLocale } = useI18n()
 </script>
 
 <template>
-  <ModalPopup v-model="showSettingsDialog" :direction="isMobileScreen ? 'bottom' : 'top'">
-    <div flex p6>
+  <ModalPopup
+    v-model="showSettingsDialog"
+    :direction="isMobileScreen ? 'bottom' : 'top'"
+    dialog-class="max-h-90vh! of-auto"
+  >
+    <div flex p6 lt-lg="px2">
       <div mxa max-w-150 w-full flex="~ col gap-5 items-center">
         <SettingsDialogGroup
           v-if="song && source"
@@ -60,13 +64,11 @@ const { t, locale, locales, setLocale } = useI18n()
         <SettingsDialogGroup
           :title="$t('settings.lyricsSize')"
         >
-          <div flex="~ col gap-1" w-40>
-            <div flex="~ gap-1 items-center">
-              <div i-uil-text-size />
-              {{ $t("settings.lyricsSize") }}
-              <span op50>{{ `${Math.round(settings.fontSize * 100)}%` }}</span>
-            </div>
-            <OptionSlider v-model="settings.fontSize" :min="0.6" :max="2" :step="0.2" />
+          <div flex="~ gap-2 items-center">
+            <div i-uil-text-size />
+            {{ $t("settings.lyricsSize") }}
+            <OptionSlider v-model="settings.fontSize" :min="0.6" :max="2" :step="0.2" class="w-40!" />
+            <span op50>{{ `${Math.round(settings.fontSize * 100)}%` }}</span>
           </div>
         </SettingsDialogGroup>
         <SettingsDialogGroup
