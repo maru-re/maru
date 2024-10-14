@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import type { Pausable } from '@vueuse/core'
-import type { Component } from 'vue'
-import QifiHowToScanZhHans from '~/components/qifi/QifiHowToScan.zh-Hans.md'
-import QifiHowToScanEn from './QifiHowToScan.en.md'
-import QifiHowToScanZhHant from './QifiHowToScan.zh-Hant.md'
+import QifiHowToScan from './QifiHowToScan'
 
 const props = withDefaults(defineProps<{
   prefix?: string
@@ -70,23 +67,6 @@ function stopSometime(seconds: number) {
 function onDone() {
   emit('done')
 }
-
-const howToScan = {
-  'zh-Hans': QifiHowToScanZhHans,
-  'zh-Hant': QifiHowToScanZhHant,
-  'en': QifiHowToScanEn,
-  // TODO QifiHowToScanJp
-} as Record<string, Component | undefined>
-
-// Configure this to support language fallback.
-const { t } = useI18n({
-  useScope: 'local',
-  messages: Object.keys(howToScan).reduce((acc, key) => {
-    acc[key] = { howToScanComponent: key }
-    return acc
-  }, {} as Record<string, Record<string, string>>),
-
-})
 </script>
 
 <template>
@@ -102,12 +82,14 @@ const { t } = useI18n({
     />
     <div flex="~ gap-2">
       <SimpleButton w-full icon="i-uil-pause-circle" @click="stopSometime(3)">
-        {{ $t('actions.pauseQifi', 3) }}
+        {{ $t('actions.pauseQifi', [3]) }}
       </SimpleButton>
       <SimpleButton w-full icon="i-uil-multiply " @click="onDone()">
         {{ $t('actions.close') }}
       </SimpleButton>
     </div>
-    <component :is="howToScan[t('howToScanComponent')]" />
+    <div mt2 class="markdown-content">
+      <QifiHowToScan />
+    </div>
   </div>
 </template>
