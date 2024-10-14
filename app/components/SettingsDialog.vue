@@ -71,6 +71,7 @@ const { t, locale } = useI18n()
           />
         </SettingsDialogGroup>
         <SettingsDialogGroup
+          v-if="!isMobileScreen"
           :title="$t('settings.groupGeneral')"
         >
           <ActionButton
