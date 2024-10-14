@@ -138,7 +138,7 @@ onMounted(() => {
       <div i-uil-flask flex-none text-base />
       {{ $t("messages.wip") }}
     </div>
-    <div v-if="collections.length > 0" sticky left-0 right-0 top-0 z-floating flex py3>
+    <div v-if="collections.length > 0" sticky left-0 right-0 top-0 z-search flex py3>
       <div
         flex="~ gap-3 items-center"
         z-search ma h-3em max-w-100 w-full of-hidden px3 floating-glass
