@@ -70,7 +70,7 @@ onMounted(() => {
   >
     <div
       ref="dragHandle"
-      hover="op100 bg-gray/10"
+      class="@hover:(bg-gray/10 op100)"
       flex="~ items-center justify-center"
       draggable pointer-events-auto mxa w-20 cursor-move rounded-full op25
     >

@@ -133,7 +133,7 @@ function goNextLineTimestamp() {
       <div absolute right--10 top-2>
         <IconButton
           icon="i-uil:trash-alt"
-          op10 hover="op100 text-red"
+          class="@hover:(text-red op100)"
           :title="$t('editor.deleteRow')"
           @click="emit('delete')"
         />

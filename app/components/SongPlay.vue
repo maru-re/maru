@@ -78,7 +78,7 @@ onMounted(() => {
         lt-sm="hidden"
         lt-lg=""
       >
-        <NuxtLink to="/" hover="bg-hover op100" ml--0.5 rounded-full op50 transition>
+        <NuxtLink to="/" class="@hover:(bg-gray/10 op100)" ml--0.5 rounded-full op50 transition>
           <div i-mdi-circle-double text-2xl />
         </NuxtLink>
         <div flex="~ col" lt-lg="flex-row items-end" font-jp-serif>

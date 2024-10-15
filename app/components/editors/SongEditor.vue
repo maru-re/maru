@@ -427,7 +427,7 @@ onMounted(() => {
         <div flex="~ justify-center">
           <IconButton
             icon="i-uil:plus" my--2 op10 transition-all
-            hover="op100 my-0 text-primary"
+            class="@hover:(my-0 text-primary op100)"
             :title="$t('editor.insertRow')"
             @click="insertLineAfter(idx)"
           />
