@@ -54,7 +54,7 @@ html.dark {
 .v-popper--theme-tooltip .v-popper__arrow-inner,
 .v-popper--theme-dropdown .v-popper__arrow-inner {
   visibility: visible;
-  --at-apply: 'border-white dark:border-neutral-900';
+  --at-apply: 'border-white dark:border-black';
 }
 
 .v-popper--theme-tooltip .v-popper__arrow-outer,
