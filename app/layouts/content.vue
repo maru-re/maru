@@ -11,7 +11,7 @@ const isMatchedLocale = computed(() => locale.value === route.meta.locale)
     mxa max-w-175 p15 lt-lg="p6 mt-20" line-height-1.7em
   >
     <BasicNav />
-    <div v-if="!isMatchedLocale" mb5 rounded bg-purple:15 px3 py1 text-purple>
+    <div v-if="!isMatchedLocale && route.name !== 'about'" mb5 rounded bg-purple:15 px3 py1 text-purple>
       {{ t('messages.contentMissingTranslations') }}
     </div>
     <slot />
