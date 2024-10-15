@@ -30,6 +30,7 @@
     "prepublishOnly": "nr build"
   },
   "dependencies": {
-    "@marure/schema": "workspace:*"
+    "@marure/schema": "workspace:*",
+    "nanoid": "^5.0.7"
   }
 }

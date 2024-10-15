@@ -1,4 +1,5 @@
 import type { LyricLine, LyricWord } from '@marure/schema'
+import { customAlphabet } from 'nanoid'
 import { secondsToTimestamp, timestampToSeconds } from './timestamp'
 
 const reTimeStamp = /<([\d:.]+)>\s*/g
@@ -90,10 +91,10 @@ export function parseLrc(lrc: string = ''): ParsedLrc {
         text = ''
       else
         i += 1
-      lines.push({
+      lines.push(createLyricLine({
         t: timestampToSeconds(time),
         words: parseLrcLineContent(text),
-      })
+      }))
     }
     // Custom tags
     else if (key === 'trans') {
@@ -156,4 +157,19 @@ export function serializeToLrc(lrc: ParsedLrc): string {
   }
 
   return lines.join('\n')
+}
+
+export function createLyricLine(options: Partial<LyricLine> = {}): LyricLine {
+  return {
+    id: generateLyricLineId(),
+    t: 0,
+    words: [],
+    trans: {},
+    ...options,
+  }
+}
+
+const nanoid = customAlphabet('0123456789abcdef', 16)
+function generateLyricLineId() {
+  return nanoid()
 }

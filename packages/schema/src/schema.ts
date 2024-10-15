@@ -32,6 +32,7 @@ export const LyricTranslationSchema = pipe(
 )
 
 export const LyricLineSchema = object({
+  id: string(),
   t: pipe(
     number(),
     description('Start time in seconds'),

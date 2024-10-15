@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
-import { parseLrc, secondsToTimestamp, serializeToLrc } from '@marure/parser'
+import { createLyricLine, parseLrc, secondsToTimestamp, serializeToLrc } from '@marure/parser'
 import { inferSongInfoFromVideoTitle } from '@marure/utils'
 import { useDebouncedRefHistory } from '@vueuse/core'
 import YAML from 'js-yaml'
@@ -120,11 +120,10 @@ function insertMultiline(lyrics: string) {
       continue
 
     const words = line.split('').map(word => ({ w: word }))
-    stateRef.value.lyrics.push({
+    stateRef.value.lyrics.push(createLyricLine({
       t,
       words,
-      trans: {},
-    })
+    }))
   }
 }
 
@@ -134,11 +133,9 @@ function insertLineAfter(index: number) {
   if (controls.active.value?.index === index) {
     t = controls.current.value
   }
-  stateRef.value.lyrics.splice(index + 1, 0, {
+  stateRef.value.lyrics.splice(index + 1, 0, createLyricLine({
     t,
-    words: [],
-    trans: {},
-  })
+  }))
 }
 
 function insertAtCurrentTime() {
@@ -148,19 +145,15 @@ function insertAtCurrentTime() {
       return
     }
     if (stateRef.value.lyrics[i]!.t > controls.current.value) {
-      stateRef.value.lyrics.splice(i, 0, {
+      stateRef.value.lyrics.splice(i, 0, createLyricLine({
         t: controls.current.value,
-        words: [],
-        trans: {},
-      })
+      }))
       return
     }
   }
-  stateRef.value.lyrics.push({
+  stateRef.value.lyrics.push(createLyricLine({
     t: controls.current.value,
-    words: [],
-    trans: {},
-  })
+  }))
 }
 
 function gotoSong() {
@@ -327,10 +320,7 @@ useEventListener('keydown', (e) => {
 
 onMounted(() => {
   if (stateRef.value.lyrics.length === 0) {
-    stateRef.value.lyrics.push({
-      t: 0,
-      words: [],
-    })
+    stateRef.value.lyrics.push(createLyricLine())
   }
 })
 </script>
@@ -413,7 +403,7 @@ onMounted(() => {
       </div>
       <template
         v-for="line, idx of stateRef.lyrics"
-        :key="idx"
+        :key="line.id"
       >
         <LyricsLineEditor
           v-model:line="stateRef.lyrics[idx]!"
