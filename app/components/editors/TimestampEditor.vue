@@ -97,7 +97,8 @@ function onKeydown(e: KeyboardEvent) {
   >
     <IconButton
       icon="i-uil:play"
-      tabindex="-1" h-max op50 hover="op100"
+      tabindex="-1" h-max
+      op="50 hover:100"
       @click="emit('go', true)"
     />
     <input

@@ -21,7 +21,7 @@ const value = defineModel('modelValue', { default: true })
 
 <style>
 .icon-toggle {
-  --uno: 'op40 hover:op100 hover:color-inherit';
+  --uno: 'op40 @hover:op100 @hover:color-inherit';
 }
 .icon-toggle.active {
   --uno: 'color-primary op100';

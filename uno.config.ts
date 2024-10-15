@@ -38,13 +38,14 @@ export default defineConfig({
     },
     [/^btn-simple-(.*)$/, ([,color]) => {
       return [
-        `hover:border-${color}/50 hover:color-${color} hover:opacity-100`,
+        `@hover:border-${color}/50 @hover:color-${color} @hover:opacity-100`,
         `active:bg-${color}/10`,
         'disabled:opacity-50 disabled:pointer-events-none',
         `border border-base border-rounded-lg`,
         `flex gap-1 items-center justify-center`,
       ].join(' ')
     }],
+    [/^media-group-hover[:-](\S+)$/, ([,r]) => `group-hover:media-mouse:${r} group-active:${r}`],
   ],
   theme: {
     colors: {

@@ -111,7 +111,7 @@ onMounted(() => {
           border="~ dashed #888 rounded-2"
           flex="~ gap-2 items-center"
           relative px4 py2 op50
-          hover="border-primary text-primary bg-primary/5 op100"
+          class="@hover:(border-primary bg-primary/5 text-primary op100)"
         >
           <div i-uil-file-plus-alt />
           <span>{{ $t("import.importFile") }}</span>
@@ -124,11 +124,11 @@ onMounted(() => {
           >
         </div>
         <div flex="~ justify-center wrap">
-          <NuxtLink to="/play#demo=1" op50 hover="op100 underline color-primary">
+          <NuxtLink to="/play#demo=1" op50 class="@hover:(color-primary underline op100)">
             {{ $t("demo.title") }}
           </NuxtLink>
           <span mx2 op50 lt-md="hidden"> · </span>
-          <NuxtLink to="/create" op50 hover="op100 underline color-primary" lt-md="hidden">
+          <NuxtLink to="/create" op50 class="@hover:(color-primary underline op100)" lt-md="hidden">
             {{ $t("lyrics.createLyrics") }}
           </NuxtLink>
         </div>
@@ -162,19 +162,19 @@ onMounted(() => {
       </div>
     </div>
     <div flex="~ justify-center wrap">
-      <NuxtLink to="/format" op50 hover="op100 underline color-primary">
+      <NuxtLink to="/format" op50 class="@hover:(color-primary underline op100)">
         {{ $t("footer.fileFormat") }}
       </NuxtLink>
       <span mx2 op50> · </span>
-      <NuxtLink to="/about" op50 hover="op100 underline color-primary">
+      <NuxtLink to="/about" op50 class="@hover:(color-primary underline op100)">
         {{ $t("footer.about") }}
       </NuxtLink>
       <span mx2 op50> · </span>
-      <a href="https://chat.maru.re" target="_blank" op50 hover="op100 underline color-primary">
+      <a href="https://chat.maru.re" target="_blank" op50 class="@hover:(color-primary underline op100)">
         {{ $t("footer.contact.discord") }}
       </a>
       <span mx2 op50> · </span>
-      <a href="https://github.com/maru-re/maru" target="_blank" op50 hover="op100 underline color-primary">
+      <a href="https://github.com/maru-re/maru" target="_blank" op50 class="@hover:(color-primary underline op100)">
         {{ $t("footer.contact.github") }}
       </a>
     </div>

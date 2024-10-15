@@ -68,7 +68,7 @@ const settings = useSettings()
     </Tooltip>
     <Menu placement="top">
       <IconButton
-        :class="settings.fontSize.toString() === '1' ? 'op40 hover:color-base! hover:op100' : 'color-primary'"
+        :class="settings.fontSize.toString() === '1' ? 'op40 @hover:color-base! @hover:op100' : 'color-primary'"
         icon="i-uil-text-size"
         @click="settings.fontSize = 1"
       />
