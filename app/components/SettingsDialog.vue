@@ -68,7 +68,7 @@ const { t, locale, locales, setLocale } = useI18n()
             <div i-uil-text-size />
             {{ $t("settings.lyricsSize") }}
             <OptionSlider v-model="settings.fontSize" :min="0.6" :max="2" :step="0.2" class="w-40!" />
-            <span op50>{{ `${Math.round(settings.fontSize * 100)}%` }}</span>
+            <span w4ch op50>{{ `${Math.round(settings.fontSize * 100)}%` }}</span>
           </div>
         </SettingsDialogGroup>
         <SettingsDialogGroup
