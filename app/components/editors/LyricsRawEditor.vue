@@ -8,8 +8,9 @@ const props = defineProps<{
 const modelValue = defineModel<string>('modelValue')
 
 const sharedClass = 'box-input font-mono'
-const editor = useTemplateRef<HTMLDivElement>('editor')
 const container = useTemplateRef<HTMLLabelElement>('container')
+const editor = useTemplateRef<HTMLDivElement>('editor')
+const { focused } = useFocus(editor)
 const text = ref(modelValue.value)
 const revision = ref(0)
 
@@ -26,10 +27,14 @@ watch(
 )
 
 const isSupported = getSupported()
-const { update: updateHighlight } = usePlainShiki(
+const {
+  trigger: triggerHighlight,
+  update: updateHighlight,
+} = usePlainShiki(
   editor,
   {
     enabled: isSupported,
+    immediate: false,
     lang: props.lang ?? 'lyric',
     themes: {
       light: 'vitesse-light',
@@ -38,7 +43,15 @@ const { update: updateHighlight } = usePlainShiki(
   },
 )
 
-const { focused } = useFocus(editor)
+const { stop } = useIntersectionObserver(
+  container,
+  (entries) => {
+    if (entries[0]?.isIntersecting) {
+      triggerHighlight()
+      stop()
+    }
+  },
+)
 
 function insertRuby() {
   const selection = document.getSelection()
