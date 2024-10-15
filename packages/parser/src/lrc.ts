@@ -5,7 +5,7 @@ import { secondsToTimestamp, timestampToSeconds } from './timestamp'
 const reTimeStamp = /<([\d:.]+)>\s*/g
 const reRuby = /\{((?:\\\}|[^}])+)\}\(((?:\\\)|[^)])+)\)/g
 
-const generateLyricLineId = customAlphabet('0123456789abcdef', 16)
+export const generateLyricLineId = customAlphabet('0123456789abcdef', 16)
 
 export function parseLrcLineContent(line: string): LyricWord[] {
   const items: LyricWord[] = []

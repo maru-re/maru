@@ -1,6 +1,6 @@
 import type { LyricLine, LyricWord, MaruSongData } from '@marure/schema'
 import * as cheerio from 'cheerio'
-import { serializeToLrc } from '../../packages/parser/src'
+import { generateLyricLineId, serializeToLrc } from '../../packages/parser/src'
 import { splitArtistNames } from '../../packages/utils/src'
 
 export function parse(html: string, sourceUrl: string) {
@@ -45,6 +45,7 @@ export function parse(html: string, sourceUrl: string) {
       return
     }
 
+    const id = generateLyricLineId()
     const time = st2sec(st)
 
     el.contents().each((_, _word) => {
@@ -60,7 +61,7 @@ export function parse(html: string, sourceUrl: string) {
 
     const translations: Record<string, string> = {}
 
-    lyrics.push({ t: time, pk, words, trans: translations })
+    lyrics.push({ id, t: time, pk, words, trans: translations })
   })
 
   $list.find('.Translate_zh').each((_, _el) => {
