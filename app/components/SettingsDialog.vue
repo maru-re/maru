@@ -62,7 +62,7 @@ const { t, locale, locales, setLocale } = useI18n()
           />
         </SettingsDialogGroup>
         <SettingsDialogGroup
-          :title="$t('settings.lyricsSize')"
+          :title="$t('settings.lyricsFont')"
         >
           <div flex="~ gap-2 items-center">
             <div i-uil-text-size />
