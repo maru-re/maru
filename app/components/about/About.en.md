@@ -1,9 +1,3 @@
----
-meta:
-  locale: en
-  layout: content
----
-
 # About maru.re
 
 <ruby font-jp-serif><rb>二重丸</rb><rt>にじゅうまる</rt></ruby> (maru.re) was established to continue the high-quality Japanese learning platform provided by jpmarumaru.com.

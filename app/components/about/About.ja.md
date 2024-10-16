@@ -1,9 +1,3 @@
----
-meta:
-  locale: ja
-  layout: content
----
-
 # maru.reについて
 
 <ruby font-jp-serif><rb>二重丸</rb><rt>にじゅうまる</rt></ruby> (maru.re) の設立の目的は、jpmarumaru.com が提供していた高品質な日本語学習プラットフォームを継続することです。
