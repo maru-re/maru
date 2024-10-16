@@ -1,8 +1,18 @@
 <script setup lang="ts">
+import type { MaruSongDataParsed } from '@marure/schema'
 import { Menu, Tooltip } from 'floating-vue'
-import { useSettings } from '~/composables/settings'
+import { useSettings, useTranslationSettings } from '~/composables/settings'
 
+const props = defineProps<{
+  song: MaruSongDataParsed
+}>()
 const settings = useSettings()
+const { locales } = useI18n()
+
+const translationOptions = computed(() => {
+  return locales.value.filter(v => props.song.lyricLocales.includes(v.code))
+})
+const { translationBoolean, translationValue, setDisplayTranslation } = useTranslationSettings(translationOptions)
 </script>
 
 <template>
@@ -58,14 +68,22 @@ const settings = useSettings()
         </div>
       </template>
     </Tooltip>
-    <Tooltip placement="top">
-      <IconToggle v-model="settings.translation" icon="i-uil-english-to-chinese" />
+    <Menu placement="top">
+      <IconToggle v-model="translationBoolean" icon="i-uil-english-to-chinese" />
       <template #popper>
-        <div>
-          {{ $t("settings.displayTranslation") }}
+        <div px4 py3 flex="~ col gap-2">
+          <div>
+            {{ $t("settings.displayTranslation") }}
+          </div>
+          <SimpleButton
+            v-for="_locale in translationOptions" :key="_locale.code"
+            :class="_locale.code !== translationValue && 'op50'"
+            :title="_locale.name"
+            @click="setDisplayTranslation(_locale.code)"
+          />
         </div>
       </template>
-    </Tooltip>
+    </Menu>
     <Menu placement="top">
       <IconButton
         :class="settings.fontSize.toString() === '1' ? 'op40 @hover:color-base! @hover:op100' : 'color-primary'"

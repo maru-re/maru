@@ -97,4 +97,5 @@ export type MaruSongGist = InferInput<typeof MaruSongGistSchema>
 
 export type MaruSongDataParsed = MaruSongData & {
   lyrics: LyricLine[]
+  lyricLocales: string[]
 }

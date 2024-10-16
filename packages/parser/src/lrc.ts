@@ -62,6 +62,7 @@ export function parseLrcLineContent(line: string): LyricWord[] {
 export interface ParsedLrc {
   meta: Record<string, string>
   lyrics: LyricLine[]
+  locales: string[]
 }
 
 const reLrcTag = /(\[[^:]+:.+\])/g
@@ -74,6 +75,7 @@ export function parseLrc(lrc: string = ''): ParsedLrc {
 
   const lines: LyricLine[] = []
   const meta: Record<string, string> = {}
+  const locales: string[] = []
 
   for (let i = 0; i < parts.length; i += 1) {
     const part = parts[i]!
@@ -106,6 +108,9 @@ export function parseLrc(lrc: string = ''): ParsedLrc {
       if (lastLine) {
         lastLine.trans ||= {}
         lastLine.trans[value] = text
+        if (!locales.includes(value)) {
+          locales.push(value)
+        }
       }
     }
     else {
@@ -116,6 +121,7 @@ export function parseLrc(lrc: string = ''): ParsedLrc {
   return {
     meta,
     lyrics: lines,
+    locales,
   }
 }
 
