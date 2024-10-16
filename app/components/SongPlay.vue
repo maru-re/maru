@@ -151,7 +151,7 @@ onMounted(() => {
       </div>
 
       <div pointer-events-auto absolute left-3 right-3 top-3 z-floating flex>
-        <SettingsFloat mxa lt-lg="hidden" />
+        <SettingsFloat mxa lt-lg="hidden" :song="song" />
       </div>
     </LyricsTrack>
     <ModalPopup v-model="showInfoModal" dialog-class="max-h-90vh! p4">

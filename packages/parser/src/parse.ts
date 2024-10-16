@@ -2,8 +2,11 @@ import type { MaruSongData, MaruSongDataParsed } from '@marure/schema'
 import { parseLrc } from './lrc'
 
 export function parseSongData(song: MaruSongData): MaruSongDataParsed {
+  const parsed = parseLrc(song.lrc)
+
   return {
     ...song,
-    lyrics: parseLrc(song.lrc).lyrics,
+    lyrics: parsed.lyrics,
+    lyricLocales: parsed.locales,
   }
 }
