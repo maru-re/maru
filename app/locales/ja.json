@@ -126,7 +126,8 @@
     "groupLyricsDisplay": "歌詞表示設定",
     "groupPlay": "再生設定",
     "loopSong": "シングルループ再生",
-    "lyricsSize": "歌詞のフォントサイズ",
+    "lyricsFont": "歌詞のフォント",
+    "lyricsSize": "サイズ",
     "scrollWithLyrics": "スクロールして歌詞をたどってください",
     "songActions": "ソングの操作",
     "groupGeneral": "ユニバーサル"
