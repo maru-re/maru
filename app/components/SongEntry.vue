@@ -35,13 +35,13 @@ const favorited = computed({
       :to="`/play#id=${song.youtube}`"
       border="transparent rounded-xl"
       absolute inset-0 block of-hidden transition-all duration-500 bg-base
-      media-group="@hover:(aspect-16/9 translate-y--16.25% shadow-2xl scale-115)"
+      media-group-hover="aspect-16/9 translate-y--16.25% shadow-2xl scale-115"
     >
       <img
         :src="song.cover || `https://img.youtube.com/vi/${song.youtube}/mqdefault.jpg`"
         alt="Song Thumbnail"
         loading="lazy"
-        h-full w-full object-cover
+        h-full w-full bg-hex-8885 object-cover
       >
       <div absolute bottom-0 left-0 right-0 from-black:80 to-black:0 bg-gradient-to-t px3 py2 pt10 text-white>
         <h2 line-clamp-2 font-jp-serif>
@@ -54,7 +54,7 @@ const favorited = computed({
       <div
         v-if="showFavorite"
         absolute right-1 top-1 rounded-full transition-all duration-250
-        media-group="@hover:(bg-black:50 op100)"
+        media-group-hover="bg-black:50 op100"
         flex="~ items-center justify-center"
         :class="(showFavorite === 'hover' || !favorited) && 'op0'"
       >

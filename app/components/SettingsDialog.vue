@@ -17,7 +17,7 @@ const { t, locale, locales, setLocale } = useI18n()
   <ModalPopup
     v-model="showSettingsDialog"
     :direction="isMobileScreen ? 'bottom' : 'top'"
-    dialog-class="max-h-90vh! of-auto"
+    dialog-class="max-h-80vh! of-auto"
   >
     <div flex p6 lt-lg="px2">
       <div mxa max-w-150 w-full flex="~ col gap-5 items-center">
@@ -62,7 +62,7 @@ const { t, locale, locales, setLocale } = useI18n()
           />
         </SettingsDialogGroup>
         <SettingsDialogGroup
-          :title="$t('settings.lyricsSize')"
+          :title="$t('settings.lyricsFont')"
         >
           <div flex="~ gap-2 items-center">
             <div i-uil-text-size />

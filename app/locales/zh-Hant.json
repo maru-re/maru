@@ -100,7 +100,8 @@
     "displayKanji": "顯示漢字",
     "displayRomaji": "顯示羅馬字",
     "displayTranslation": "顯示翻譯",
-    "lyricsSize": "歌詞字號",
+    "lyricsFont": "歌詞字體",
+    "lyricsSize": "大小",
     "scrollWithLyrics": "跟隨歌詞滾動",
     "autoPausePerLyrics": "每句歌詞自動暫停",
     "loopSong": "單曲循環播放",
@@ -125,7 +126,7 @@
   "messages": {
     "fromShare": "來自分享連結",
     "wip": "網站開發中、許多功能尚未完善。歡迎透過 Discord 回報問題",
-    "contentMissingTranslations": "這個頁面暫時沒有對應的翻譯，請考慮使用機器翻譯。"
+    "contentMissingTranslations": "這個文檔暫時沒有對應的翻譯，請考慮使用機器翻譯。"
   },
   "actions": {
     "favorite": "收藏歌曲",

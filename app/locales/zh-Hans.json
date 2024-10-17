@@ -100,7 +100,8 @@
     "displayKanji": "显示汉字",
     "displayRomaji": "显示罗马字",
     "displayTranslation": "显示翻译",
-    "lyricsSize": "歌词字号",
+    "lyricsFont": "歌词字体",
+    "lyricsSize": "大小",
     "scrollWithLyrics": "跟随歌词滚动",
     "autoPausePerLyrics": "每句歌词自动暂停",
     "convertChineseHansHant": "自动简繁体转换",
@@ -137,7 +138,7 @@
   "messages": {
     "wip": "网站开发中、许多功能尚未完善。欢迎通过 Discord 回报问题",
     "fromShare": "来自分享连结",
-    "contentMissingTranslations": "这个页面暂时没有对应的翻译，请考虑使用机器翻译。"
+    "contentMissingTranslations": "这个文档暂时没有对应的翻译，请考虑使用机器翻译。"
   },
   "appname": "二重丸",
   "errors": {

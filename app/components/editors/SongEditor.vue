@@ -79,6 +79,7 @@ watch(
 
 const dirtyLyrics = ref<'none' | 'lrc' | 'lyrics'>('none')
 const showTab = ref<'lrc' | 'lyrics' | 'yaml'>('lyrics')
+const { weakid } = useWeakId()
 
 function syncLrc() {
   pause()
@@ -413,7 +414,7 @@ onMounted(() => {
       </div>
       <template
         v-for="line, idx of stateRef.lyrics"
-        :key="idx"
+        :key="weakid(line)"
       >
         <LyricsLineEditor
           v-model:line="stateRef.lyrics[idx]!"
