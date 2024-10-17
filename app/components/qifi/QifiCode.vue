@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Pausable } from '@vueuse/core'
-import QifiHowToScan from './QifiHowToScan'
+import QifiHowToScan from '../../markdown/qifi-instructions'
 
 const props = withDefaults(defineProps<{
   prefix?: string

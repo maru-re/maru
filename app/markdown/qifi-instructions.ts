@@ -2,7 +2,7 @@ export default defineComponent({
   setup() {
     const { locale } = useI18n()
     const components = Object.fromEntries(
-      Array.from(Object.entries(import.meta.glob('./QifiHowToScan.*.md'))
+      Array.from(Object.entries(import.meta.glob('./qifi-instructions.*.md'))
         .map(([key, value]) => [key.match(/\.([\w\-]+)\.\w+$/)![1], value]),
       ),
     )
