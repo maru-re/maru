@@ -43,8 +43,14 @@ const shareUrl = computed(() => {
   }
 })
 
-function copyShareLink() {
-  navigator.clipboard.writeText(shareUrl.value)
+const shareStatus = ref(false)
+async function copyShareLink() {
+  await navigator.clipboard.writeText(shareUrl.value)
+
+  shareStatus.value = true
+  setTimeout(() => {
+    shareStatus.value = false
+  }, 2000)
 }
 
 async function exportCurrent() {
@@ -153,4 +159,8 @@ function shareWithQifi() {
       @done="showShareQifiCode = false"
     />
   </ModalPopup>
+  <Notification :value="shareStatus">
+    <span i-uil-check class="font-xl mr-2 inline-block align-middle" />
+    <span class="align-middle">Copied</span>
+  </Notification>
 </template>
