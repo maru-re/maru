@@ -41,7 +41,7 @@ const favorited = computed({
         :src="song.cover || `https://img.youtube.com/vi/${song.youtube}/mqdefault.jpg`"
         alt="Song Thumbnail"
         loading="lazy"
-        h-full w-full object-cover
+        h-full w-full bg-hex-8885 object-cover
       >
       <div absolute bottom-0 left-0 right-0 from-black:80 to-black:0 bg-gradient-to-t px3 py2 pt10 text-white>
         <h2 line-clamp-2 font-jp-serif>
