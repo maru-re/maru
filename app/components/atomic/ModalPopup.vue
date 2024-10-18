@@ -90,7 +90,11 @@ watch(() => modelValue.value, async (value) => {
   <div
     v-if="!useVIf || enable"
     fixed z-dialog
-    :class="[containerPositionClass, show ? '' : 'pointer-events-none']"
+    class="transition-opacity duration-100 ease-out"
+    :class="[containerPositionClass,
+             show ? '' : 'pointer-events-none',
+             show ? 'opacity-100' : 'opacity-0',
+    ]"
   >
     <div
       v-if="mask"
