@@ -1,9 +1,3 @@
----
-meta:
-  locale: zh-Hant
-  layout: content
----
-
 # 關於 maru.re
 
 <ruby font-jp-serif><rb>二重丸</rb><rt>にじゅうまる</rt></ruby> (maru.re) 建立的初衷是為了延續 jpmarumaru.com 所提供的優質的日語學習平台。
