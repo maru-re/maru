@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
 import { Menu } from 'floating-vue'
+import { useTranslationSettings } from '~/composables/settings'
 import { isMobileScreen } from '~/state/breakpoints'
 import { showSettingsDialog, showShortcutDialog } from '~/state/models'
 
@@ -11,13 +12,9 @@ const props = defineProps<{
 
 const settings = useSettings()
 const { t, locale, locales, setLocale } = useI18n()
-const translationOptions = computed(() => {
-  const song = props.song
-  if (!song)
-    return []
-  return locales.value.filter(v => song.lyricLocales.includes(v.code))
-})
-const { translationBoolean, translationValue, setDisplayTranslation } = useTranslationSettings(translationOptions)
+const { getTranslationOptions, setTranslationLocale } = useTranslationSettings()
+
+const translationOptions = computed(() => getTranslationOptions(locales.value, props.song))
 </script>
 
 <template>
@@ -54,7 +51,7 @@ const { translationBoolean, translationValue, setDisplayTranslation } = useTrans
           />
           <Menu placement="bottom">
             <ToggleButton
-              v-model="translationBoolean"
+              v-model="settings.translation"
               icon="i-uil-english-to-chinese"
               :title="t('settings.displayTranslation')"
             />
@@ -65,9 +62,9 @@ const { translationBoolean, translationValue, setDisplayTranslation } = useTrans
                 </div>
                 <SimpleButton
                   v-for="_locale in translationOptions" :key="_locale.code"
-                  :class="_locale.code !== translationValue && 'op50'"
+                  :class="(!settings.translation || _locale.code !== settings.translationLocale) && 'op50'"
                   :title="_locale.name"
-                  @click="setDisplayTranslation(_locale.code)"
+                  @click="setTranslationLocale(_locale.code)"
                 />
               </div>
             </template>

@@ -1,3 +1,4 @@
+import type { MaruSongDataParsed } from '@marure/schema'
 import type { LocaleObject } from '@nuxtjs/i18n'
 import { _settings } from '~/state/local-storage'
 
@@ -5,38 +6,49 @@ export function useSettings() {
   return _settings
 }
 
-export function useTranslationSettings(translations: Ref<LocaleObject[]>) {
+export function useTranslationSettings() {
   const settings = useSettings()
-  const { locale } = useI18n()
 
-  const translationBoolean = computed({
-    get: () => {
-      return settings.value.translation !== false
-    },
-    set(value: boolean) {
-      // When there is only one translation, true means that it is the translation
-      settings.value.translation = value && translations.value.length === 1
-        ? translations.value[0]!.code
-        : value
-    },
-  })
+  function getTranslationOptions(locales: LocaleObject[], song?: MaruSongDataParsed) {
+    if (!song)
+      return []
 
-  const translationValue = computed(() => {
-    const v = settings.value.translation
-    return v === true
-      ? locale.value
-      : v
-  })
+    const localeObjectMap = locales.reduce((acc, locale) => {
+      acc[locale.code] = locale
+      return acc
+    }, {} as Record<string, LocaleObject>)
 
-  function setDisplayTranslation(localeCode: string) {
-    settings.value.translation = translationValue.value === localeCode
-      ? false
-      : localeCode
+    const translationLocaleCodes = song.lyrics.reduce((acc, item) => {
+      const codes = Object.keys(item.trans ?? {})
+      for (const code of codes) {
+        if (acc.includes(code)) {
+          continue
+        }
+        acc.push(code)
+      }
+      return acc
+    }, [] as string[])
+
+    return translationLocaleCodes.map(v => localeObjectMap[v])
+  }
+
+  function setTranslationLocale(localeCode: string): void {
+    const isTransaltionEnabled = settings.value.translation
+
+    if (settings.value.translationLocale === localeCode && isTransaltionEnabled) {
+      settings.value.translation = false
+      return
+    }
+
+    settings.value.translationLocale = localeCode
+
+    if (!isTransaltionEnabled) {
+      settings.value.translation = true
+    }
   }
 
   return {
-    translationBoolean,
-    translationValue,
-    setDisplayTranslation,
+    getTranslationOptions,
+    setTranslationLocale,
   }
 }

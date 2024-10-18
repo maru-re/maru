@@ -26,10 +26,7 @@ watchEffect(async () => {
     translation.value = ''
     return
   }
-  const settingsTranslationValue = settings.value.translation === true
-    ? locale.value
-    : settings.value.translation
-  const matched = props.line.trans?.[settingsTranslationValue]
+  const matched = props.line.trans?.[settings.value.translationLocale || locale.value]
   if (matched) {
     translation.value = matched
     return
