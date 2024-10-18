@@ -8,6 +8,7 @@ export const _settings = useLocalStorage<UiSettings>(
     kanji: true,
     furigana: true,
     translation: true,
+    translationLocale: '',
     follow: true,
     autoPause: false,
     speed: 1,

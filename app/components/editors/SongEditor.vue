@@ -84,12 +84,11 @@ const { weakid } = useWeakId()
 function syncLrc() {
   pause()
   if (dirtyLyrics.value === 'lrc') {
-    stateRef.value.lrc = serializeToLrc({ lyrics: stateRef.value.lyrics, meta: {}, locales: stateRef.value.lyricLocales })
+    stateRef.value.lrc = serializeToLrc({ lyrics: stateRef.value.lyrics, meta: {} })
   }
   else if (dirtyLyrics.value === 'lyrics') {
     const parsed = parseLrc(stateRef.value.lrc)
     stateRef.value.lyrics = parsed.lyrics
-    stateRef.value.lyricLocales = parsed.locales
   }
   dirtyLyrics.value = 'none'
   nextTick(() => resume())

@@ -22,7 +22,6 @@ export function parse(html: string, sourceUrl: string) {
   }
 
   const lyrics: (LyricLine & { pk?: string })[] = []
-  const lyricLocales: string[] = []
 
   const credits = $([...$('[lang="ja"]')].find(i => $(i).attr('style')?.includes('#333'))).find('br').replaceWith('\n').end().text()
   if (credits)
@@ -70,16 +69,12 @@ export function parse(html: string, sourceUrl: string) {
     const translation = el.text().trim()
     const line = lyrics.find(line => line.pk === pk)
     if (line) {
-      const localeCode = 'zh-Hant'
       line.trans ||= {}
-      line.trans[localeCode] = translation
-      if (!lyricLocales.includes(localeCode)) {
-        lyricLocales.push(localeCode)
-      }
+      line.trans['zh-Hant'] = translation
     }
   })
 
-  site.lrc = serializeToLrc({ meta: {}, lyrics, locales: lyricLocales })
+  site.lrc = serializeToLrc({ meta: {}, lyrics })
 
   return site
 }

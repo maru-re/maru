@@ -9,6 +9,5 @@ export function createEmptySongData(id = ''): MaruSongDataParsed {
     tags: [],
     lrc: '',
     lyrics: [],
-    lyricLocales: [],
   }
 }

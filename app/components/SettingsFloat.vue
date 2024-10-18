@@ -8,11 +8,9 @@ const props = defineProps<{
 }>()
 const settings = useSettings()
 const { locales } = useI18n()
+const { getTranslationOptions, setTranslationLocale } = useTranslationSettings()
 
-const translationOptions = computed(() => {
-  return locales.value.filter(v => props.song.lyricLocales.includes(v.code))
-})
-const { translationBoolean, translationValue, setDisplayTranslation } = useTranslationSettings(translationOptions)
+const translationOptions = computed(() => getTranslationOptions(locales.value, props.song))
 </script>
 
 <template>
@@ -69,7 +67,7 @@ const { translationBoolean, translationValue, setDisplayTranslation } = useTrans
       </template>
     </Tooltip>
     <Menu placement="top">
-      <IconToggle v-model="translationBoolean" icon="i-uil-english-to-chinese" />
+      <IconToggle v-model="settings.translation" icon="i-uil-english-to-chinese" />
       <template #popper>
         <div px4 py3 flex="~ col gap-2">
           <div>
@@ -77,9 +75,9 @@ const { translationBoolean, translationValue, setDisplayTranslation } = useTrans
           </div>
           <SimpleButton
             v-for="_locale in translationOptions" :key="_locale.code"
-            :class="_locale.code !== translationValue && 'op50'"
+            :class="(!settings.translation || _locale.code !== settings.translationLocale) && 'op50'"
             :title="_locale.name"
-            @click="setDisplayTranslation(_locale.code)"
+            @click="setTranslationLocale(_locale.code)"
           />
         </div>
       </template>

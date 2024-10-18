@@ -2,7 +2,8 @@ export interface UiSettings {
   romaji: boolean
   kanji: boolean
   furigana: boolean
-  translation: boolean | string
+  translation: boolean
+  translationLocale: string
   follow: boolean
   autoPause: boolean
   speed: number
