@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import About from '~/markdown/about'
+import Format from '~/markdown/format'
 
 definePageMeta({
   layout: 'content',
@@ -7,5 +7,5 @@ definePageMeta({
 </script>
 
 <template>
-  <About />
+  <Format />
 </template>
