@@ -33,11 +33,12 @@ watch(
 watch(
   search,
   () => {
-    history.replaceState({}, '', search.value ? `#s=${search.value}` : '')
+    const { pathname, search: query } = window.location
+    const searchText = search.value ? `#s=${search.value}` : `${pathname}${query}`
+    history.replaceState({}, '', `${searchText}`)
   },
   { immediate: true },
 )
-
 // const tagsSum = computed(() => {
 //   const tags = collections.value.flatMap(s => s.tags)
 //   return tags.reduce((acc, tag) => {
@@ -72,12 +73,10 @@ async function onFileChange(e: Event) {
   await importFromFiles(files)
 }
 
-function scrollToSearchResult() {
-  searchAnchorEl.value?.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start',
-  })
-}
+const scrollToSearchResult = useDebounceFn(() => searchAnchorEl.value?.scrollIntoView({
+  behavior: 'smooth',
+  block: 'start',
+}), 300)
 
 onMounted(() => {
   if (search.value)
