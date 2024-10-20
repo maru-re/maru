@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MaruSongDataParsed } from '@marure/schema'
+import type { LyricLine, MaruSongDataParsed } from '@marure/schema'
 import { parseLrc, secondsToTimestamp, serializeToLrc } from '@marure/parser'
 import { inferSongInfoFromVideoTitle } from '@marure/utils'
 import { useDebouncedRefHistory } from '@vueuse/core'
@@ -301,6 +301,11 @@ function makeupChatGPT() {
   copy(gptText.value)
 }
 
+async function makeupYoutubeLyrics() {
+  const lyrics: LyricLine[] = await $fetch(`/api/generateLyrics?id=${stateRef.value.youtube}&translations=${translations.join(',')}`).catch(() => [])
+  stateRef.value.lyrics = lyrics
+}
+
 useEventListener('keydown', (e) => {
   // Skip if the user is typing in an input
   if (e.target instanceof HTMLInputElement || (e.target as HTMLElement).role === 'input') {
@@ -399,6 +404,9 @@ onMounted(() => {
         @click="changeTab('yaml')"
       >
         YAML
+      </SimpleButton>
+      <SimpleButton @click="makeupYoutubeLyrics">
+        {{ $t('editor.generateLyrics') }}
       </SimpleButton>
     </div>
     <div v-show="showTab === 'lyrics'" flex="~ col gap-1" ml--5>

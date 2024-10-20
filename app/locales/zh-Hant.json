@@ -48,7 +48,8 @@
       "setCurrentTime": "設為當前播放時間後跳行",
       "setCurrentTimeOnly": "設為當前播放時間"
     },
-    "visualization": "可視化"
+    "visualization": "可視化",
+    "generateLyrics": "生成歌詞（測試）"
   },
   "footer": {
     "fileFormat": "檔案格式",

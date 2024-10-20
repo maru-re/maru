@@ -61,6 +61,7 @@
       "stepBackward": "時間を前に調整"
     },
     "visualization": "視覚化",
+    "generateLyrics": "歌詞生成（テスト）",
     "yamlNotSupportYet": "YAML編集機能はまだ実装されていません"
   },
   "errors": {
