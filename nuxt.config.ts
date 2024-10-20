@@ -7,6 +7,10 @@ import { dependencies } from './package.json'
 const gitSha = execaSync('git', ['rev-parse', 'HEAD']).stdout.trim()
 
 export default defineNuxtConfig({
+  build: {
+    transpile: ['@distube/ytdl-core'],
+  },
+
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
