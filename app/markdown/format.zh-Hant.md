@@ -19,21 +19,21 @@ meta:
 歌詞檔案使用 YAML 格式，以下是一個範例：
 
 ```yaml
-# Schema version, currently has to be v1
+# Schema 版本，目前必須為 v1
 schema: v1
-# The YouTube video ID of the song, also used as the song ID in the app
+# 歌曲的 YouTube 影片 ID，同時也作為 App 中的歌曲 ID
 youtube: SX_ViT4Ra7k
-# The title of the song
+# 歌曲標題
 title: Lemon
-# The artists of the song, a string list
+# 歌曲藝術家，字符串列表
 artists:
   - 米津玄師
-# The tags for categorizing the song, a string list
+# 用於分類歌曲的標籤，字符串列表
 tags:
   - J-POP
-# Date when the lyrics was last updated
+# 歌詞最後更新日期
 dateLyricsUpdated: 2024-06-12
-# The lyrics of the song, in LRC format. A multi-line string
+# 歌曲歌詞，LRC 格式。多行字符串
 lrc: |-
   [00:00.00] < 展示用歌詞樣本 >
   [00:02.40] {夢}(ゆめ)ならばどれほどよかったでしょう
@@ -48,7 +48,7 @@ lrc: |-
   [trans:zh-Hant] 有些幸福一去不復返
   [00:32.40] {最後}(さいご)にあなたが{教}(おし)えてくれた
   [trans:zh-Hant] 這是最後你教會我的
-# Extra notes to be displayed in the app, a string list
+# 在 App 中顯示的額外注釋，字符串列表
 notes:
   - 本歌詞樣本僅用於展示 App 之功能，版權歸發行公司所有。
 ```
