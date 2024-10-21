@@ -1,27 +1,14 @@
 {
-  "actions": {
-    "clearAllData": "すべてのデータをクリア",
-    "downloadAllLyrics": "すべての歌詞ファイルをダウンロード",
-    "exportSelected": "選択したエクスポート",
-    "favorite": "好きな曲",
-    "removeSelected": "選択したものを削除",
-    "scrollToCurrent": "現在の歌詞までスクロール",
-    "shareViaQR": "QRシェア",
-    "close": "閉鎖",
-    "languages": "言語 / Languages",
-    "pauseQifi": "{0} 秒間一時停止します"
-  },
-  "appname": "二重丸",
   "common": {
-    "backToHome": "ホームページに戻る",
+    "backToHome": "ホームに戻る",
     "cancel": "キャンセル",
     "create": "作成",
     "deselect": "選択解除",
-    "done": "完成",
-    "error": "間違い",
+    "done": "完了",
+    "error": "エラー",
     "loading": "読み込み中...",
-    "notes": "ノート",
-    "remove": "消去",
+    "notes": "メモ",
+    "remove": "削除",
     "save": "保存",
     "select": "選択",
     "selectAll": "すべて選択",
@@ -32,145 +19,158 @@
     "link": "リンクをコピー"
   },
   "demo": {
-    "sampleReminder": "このサンプル歌詞はアプリの機能説明のためのみ使用されており、著作権は出版社に帰属します。",
-    "sampleTextEnd": "説明用のサンプル歌詞はここまで、一切の著作権は出版社に帰属します。",
-    "sampleTitle": "説明用のサンプル歌詞",
-    "title": "Demo"
+    "title": "デモ",
+    "sampleTitle": "デモ用歌詞サンプル",
+    "sampleTextEnd": "デモ用歌詞サンプルはここまでです。著作権は発行会社に帰属します",
+    "sampleReminder": "この歌詞サンプルはアプリの機能デモンストレーション用です。著作権は発行会社に帰属します。"
   },
   "displayMode": {
-    "dark": "ダーク",
+    "toggleMode": "{mode}モードに切り替え",
     "light": "ライト",
-    "toggleMode": "{mode} モードに切り替え"
+    "dark": "ダーク"
   },
-  "dragFileToHere": "ファイルをここにドラッグしてください",
+  "dragFileToHere": "ファイルをここにドラッグ",
   "editor": {
     "copyTimestamp": "タイムスタンプをコピー",
-    "deleteRow": "行の削除",
-    "gotoSong": "歌に行く",
+    "deleteRow": "行を削除",
+    "gotoSong": "曲へ移動",
     "insert": "挿入",
     "redo": "やり直し",
     "undo": "元に戻す",
-    "insertAtCurrentTime": "現在のタイムスタンプで挿入",
-    "insertMultiline": "複数行の歌詞を挿入",
-    "insertRow": "行を挿入",
     "lyricsPlaceholder": "歌詞",
+    "insertAtCurrentTime": "現在の時間に挿入",
+    "insertRow": "行を挿入",
+    "insertMultiline": "複数行の歌詞を挿入",
+    "yamlNotSupportYet": "YAML編集機能はまだ実装されていません",
     "timestamp": {
-      "setCurrentTime": "現在の時間に設定して改行",
-      "setCurrentTimeOnly": "現在の時間に設定",
-      "skipForward": "時間を後ろに調整",
-      "stepBackward": "時間を前に調整"
+      "stepBackward": "前に戻す",
+      "skipForward": "先に進む",
+      "setCurrentTime": "現在の再生時間に設定して次の行へ",
+      "setCurrentTimeOnly": "現在の再生時間に設定"
     },
-    "visualization": "視覚化",
-    "yamlNotSupportYet": "YAML編集機能はまだ実装されていません"
-  },
-  "errors": {
-    "songNotFound": "曲が見つかりませんでした"
+    "visualization": "可視化"
   },
   "footer": {
-    "about": "About",
+    "fileFormat": "ファイル形式",
+    "about": "私たちについて",
     "contact": {
       "discord": "Discord",
       "github": "GitHub"
-    },
-    "fileFormat": "ファイル形式"
+    }
   },
   "import": {
-    "anotherImporting": "まだ他のファイルがインポート中なので、完了してから再試行してください。",
-    "importComplete": "インポート完了！",
-    "importFail": "インポート失敗!",
+    "anotherImporting": "別のインポート処理が進行中です。完了後にもう一度お試しください。",
     "importFile": "歌詞ファイルをインポート",
-    "importSuccess": "インポートが成功",
-    "importSuccessPartly": "一部インポート成功",
-    "importing": "ファイルをインポート中..."
+    "importing": "ファイルをインポート中...",
+    "importComplete": "インポート完了！",
+    "importFail": "インポート失敗！",
+    "importSuccess": "インポート成功！",
+    "importSuccessPartly": "一部インポート成功！"
   },
   "intro": {
-    "description": "YouTubeを基にした歌詞リーダー",
-    "title": "「歌いながら日本語を学ぶ」"
+    "title": "「歌いながら日本語を学ぶ」",
+    "description": "YouTubeベースの歌詞リーダー"
   },
   "lyrics": {
-    "batchRemoveLyricsConfirm": "選択した {0} 曲を削除してもよろしいですか?",
-    "createLyrics": "歌詞を作成する",
-    "editLyrics": "歌詞を編集する",
-    "exportLyrics": "歌詞をエクスポートする",
-    "removeLyrics": "歌詞を削除する",
-    "removeLyricsConfirm": "この曲を削除してもよろしいですか?",
-    "saveLyrics": "歌詞の保存",
-    "shareLyrics": "歌詞を共有する"
+    "batchRemoveLyricsConfirm": "選択した{0}曲の歌詞を削除してもよろしいですか？",
+    "createLyrics": "歌詞を作成",
+    "editLyrics": "歌詞を編集",
+    "exportLyrics": "歌詞をエクスポート",
+    "removeLyrics": "歌詞を削除",
+    "removeLyricsConfirm": "この曲を削除してもよろしいですか？",
+    "saveLyrics": "歌詞を保存",
+    "shareLyrics": "歌詞を共有"
   },
-  "messages": {
-    "contentMissingTranslations": "現在、このページに対応する翻訳はありません。機械翻訳の使用を検討してください。",
-    "fromShare": "共有リンクから",
-    "wip": "ウェブサイトは開発中であり、多くの機能がまだ完成していません。 \nDiscordで気軽に問題を報告してください"
-  },
-  "pasteYoutubeLink": "YouTube MV 曲のリンクを貼り付けます",
+  "pasteYoutubeLink": "YouTubeのリンクを貼り付け",
   "search": {
-    "noResult": "一致する曲が見つかりませんでした。",
-    "searchImportedSong": "インポートされた曲を検索 ({0})",
+    "noResult": "一致する曲が見つかりません。",
+    "searchImportedSong": "インポートした曲を検索（{0}）",
     "searchResult": "検索結果",
-    "searchResultCount": "{resultLength} から {collectionsLength}"
+    "searchResultCount": "{collectionsLength}中{resultLength}"
   },
   "seo": {
     "title": {
-      "edit": "歌詞を編集 {title} - {artists} の歌詞を歌って学習 | {appName}",
-      "new": "歌詞を作成 | 歌って日本語を学ぶ | {appName}",
-      "play": "{title} - {artists} の歌詞 | {appName}"
+      "edit": "歌詞編集 {title} - {artists} 歌詞 | 歌いながら日本語を学ぶ | {appName}",
+      "new": "歌詞作成 | 歌いながら日本語を学ぶ | {appName}",
+      "play": "{title} - {artists} 歌詞 | 歌いながら日本語を学ぶ | {appName}"
     }
   },
   "settings": {
-    "autoPausePerLyrics": "すべての歌詞を自動的に一時停止します",
-    "convertChineseHansHant": "簡体字中国語と繁体字中国語の自動変換",
-    "displayFurigana": "エイリアスを表示",
-    "displayKanji": "漢字を表示する",
-    "displayRomaji": "ローマ字を表示",
-    "displayTranslation": "翻訳を表示",
-    "groupLyricsDisplay": "歌詞表示設定",
-    "groupPlay": "再生設定",
-    "loopSong": "シングルループ再生",
-    "lyricsFont": "歌詞のフォント",
+    "displayFurigana": "ふりがな表示",
+    "displayKanji": "漢字表示",
+    "displayRomaji": "ローマ字表示",
+    "displayTranslation": "翻訳表示",
+    "lyricsFont": "フォント",
     "lyricsSize": "サイズ",
-    "scrollWithLyrics": "スクロールして歌詞をたどってください",
-    "songActions": "ソングの操作",
-    "groupGeneral": "ユニバーサル"
+    "scrollWithLyrics": "歌詞と一緒にスクロール",
+    "autoPausePerLyrics": "各フレーズで自動一時停止",
+    "loopSong": "ループ再生",
+    "convertChineseHansHant": "中国語の簡体字・繁体字を自動変換",
+    "groupPlay": "再生設定",
+    "groupLyricsDisplay": "歌詞表示設定",
+    "songActions": "曲の操作",
+    "groupGeneral": "一般"
   },
   "song": {
-    "artist": "歌手",
-    "offset": "オフセット",
-    "tags": "ラベル",
-    "title": "曲名"
-  },
-  "titles": {
-    "allSong": "すべての曲",
-    "recentSongs": "最近見た"
+    "artist": "アーティスト",
+    "title": "曲のタイトル",
+    "tags": "タグ",
+    "offset": "オフセット"
   },
   "tryRefreshPage": "ページを更新してみてください",
   "youtube": {
-    "connecting": "YouTube に接続しています...",
-    "connectionFail": "YouTube 接続に失敗しました",
-    "requireId": "YouTube ID を空白のままにすることはできません"
+    "connecting": "YouTubeに接続中...",
+    "connectionFail": "YouTube接続失敗",
+    "requireId": "YouTube IDは空白にできません"
+  },
+  "messages": {
+    "fromShare": "共有リンクから",
+    "wip": "ウェブサイトは開発中で、多くの機能がまだ完成していません。問題があったらDiscordで報告してください",
+    "contentMissingTranslations": "このドキュメントにはまだ対応する翻訳がありません。機械翻訳の使用をご検討ください。"
+  },
+  "actions": {
+    "favorite": "お気に入りに追加",
+    "scrollToCurrent": "現在の歌詞までスクロール",
+    "clearAllData": "すべてのデータをクリア",
+    "downloadAllLyrics": "すべての歌詞ファイルをダウンロード",
+    "exportSelected": "選択したものをエクスポート",
+    "removeSelected": "選択したものを削除",
+    "shareViaQR": "QRコードで共有",
+    "close": "閉じる",
+    "pauseQifi": "{0}秒間一時停止",
+    "languages": "言語 / Languages"
+  },
+  "appname": "二重丸",
+  "errors": {
+    "songNotFound": "曲が見つかりません。"
+  },
+  "titles": {
+    "recentSongs": "最近見た曲",
+    "allSong": "すべての曲"
   },
   "gpt": {
-    "addTranslationsFurigana": "ChatGPT は翻訳とエイリアスを追加します (テスト)",
-    "copyPrompts": "プロンプトの単語をコピーする",
-    "gotoChatGptAndPaste": "ChatGPT に移動して貼り付けます",
+    "addTranslationsFurigana": "ChatGPTで翻訳とふりがなを追加（テスト）",
+    "copyPrompts": "プロンプトをコピー",
+    "gotoChatGptAndPaste": "ChatGPTに移動して貼り付け",
+    "noteAboutPrompts": "以下はChatGPTのプロンプトです。ChatGPTに貼り付けてください",
     "prompts": {
-      "useLocaleToResponse": "その後の会話には日本語で応答してください"
-    },
-    "noteAboutPrompts": "以下は ChatGPT のプロンプトワードです。ChatGPT に貼り付けてください。"
+      "useLocaleToResponse": "これ以降の会話は日本語で応答してください"
+    }
   },
   "shortcuts": {
-    "down": "下",
-    "general": "ユニバーサル",
-    "left": "左",
-    "nextLine": "次の文",
     "or": "または",
-    "playPause": "再生/一時停止",
-    "prevLine": "前の文",
-    "repeatCurrentLine": "現在の文を再生する",
-    "right": "右",
-    "showTable": "ショートカットキーテーブルを表示",
+    "general": "一般",
+    "showTable": "ショートカット一覧を表示",
     "songPlay": "曲の再生",
-    "space": "スペースキー",
+    "playPause": "再生/一時停止",
+    "space": "スペース",
+    "prevLine": "前のフレーズ",
+    "nextLine": "次のフレーズ",
+    "repeatCurrentLine": "現在のフレーズをリピート",
+    "left": "左",
     "up": "上",
-    "table": "ショートカットリスト"
+    "right": "右",
+    "down": "下",
+    "table": "ショートカット一覧"
   }
 }
