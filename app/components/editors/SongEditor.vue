@@ -87,7 +87,8 @@ function syncLrc() {
     stateRef.value.lrc = serializeToLrc({ lyrics: stateRef.value.lyrics, meta: {} })
   }
   else if (dirtyLyrics.value === 'lyrics') {
-    stateRef.value.lyrics = parseLrc(stateRef.value.lrc).lyrics
+    const parsed = parseLrc(stateRef.value.lrc)
+    stateRef.value.lyrics = parsed.lyrics
   }
   dirtyLyrics.value = 'none'
   nextTick(() => resume())
