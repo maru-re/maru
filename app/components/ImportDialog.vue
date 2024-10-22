@@ -20,7 +20,7 @@ function onClickOutside() {
 <template>
   <ModalPopup
     :model-value="state.isImporting"
-    dialog-class="max-h-80vh! min-h-50vh grid grid-rows-[max-content_1fr_max-content] p0!"
+    dialog-class="max-h-80%! min-h-50% grid grid-rows-[max-content_1fr_max-content] p0!"
     @click-outside="onClickOutside"
   >
     <div p2 text-xl flex="~ gap-2 items-center justify-center" border="b base">

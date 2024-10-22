@@ -16,7 +16,7 @@ function importLyrics() {
 <template>
   <ModalPopup
     v-model="visible"
-    dialog-class="h-60vh! p0! flex justify-center"
+    dialog-class="h-60%! p0! flex justify-center"
     @click-outside="visible = false"
   >
     <div flex="~ col gap-4" h-full max-w-700px w-full p6>

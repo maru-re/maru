@@ -429,7 +429,7 @@ onMounted(() => {
         input-class="min-h-400"
       />
 
-      <ModalPopup v-model="showGPTDialog" use-v-if direction="bottom" dialog-class="max-h-80vh">
+      <ModalPopup v-model="showGPTDialog" use-v-if direction="bottom" dialog-class="max-h-80%">
         <GPTDialog :lrc="stateRef.lrc" />
       </ModalPopup>
     </div>

@@ -180,7 +180,7 @@ onMounted(() => {
 
     <div ref="searchAnchorEl" mb8 />
 
-    <div flex="~ col gap-8" min-h-100vh p10>
+    <div flex="~ col gap-8" min-h-full p10>
       <SongsGrid v-if="!search.trimEnd() && favorited.length" :link="true" :songs="favorited" show-favorite="hover">
         <template #title>
           <div>{{ $t("actions.favorite") }}</div>
