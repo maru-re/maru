@@ -154,7 +154,7 @@ onMounted(() => {
         <SettingsFloat mxa lt-lg="hidden" />
       </div>
     </LyricsTrack>
-    <ModalPopup v-model="showInfoModal" dialog-class="max-h-90%! p4">
+    <ModalPopup v-model="showInfoModal" dialog-class="max-h-90dvh! p4">
       <div pb-1 font-jp-serif>
         <p text-1.5em>
           {{ song.title }}

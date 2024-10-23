@@ -17,7 +17,7 @@ const { t, locale, locales, setLocale } = useI18n()
   <ModalPopup
     v-model="showSettingsDialog"
     :direction="isMobileScreen ? 'bottom' : 'top'"
-    dialog-class="max-h-80%! of-auto"
+    dialog-class="max-h-80dvh! of-auto"
   >
     <div flex p6 lt-lg="px2">
       <div mxa max-w-150 w-full flex="~ col gap-5 items-center">
