@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { Menu } from 'floating-vue'
+import { Dropdown, Menu } from 'floating-vue'
+import { isMobileScreen } from '~/state/breakpoints'
 
 const { locale, locales, setLocale } = useI18n()
 </script>
 
 <template>
-  <Menu placement="top">
+  <component
+    :is="isMobileScreen ? Dropdown : Menu"
+    placement="top"
+  >
     <IconButton icon="i-uil-english-to-chinese" />
     <template #popper>
       <div p2 flex="~ col gap-1">
@@ -17,5 +21,5 @@ const { locale, locales, setLocale } = useI18n()
         />
       </div>
     </template>
-  </Menu>
+  </component>
 </template>
