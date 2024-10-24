@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
-import { Menu } from 'floating-vue'
+import { Dropdown, Menu } from 'floating-vue'
 import { isMobileScreen } from '~/state/breakpoints'
 import { showSettingsDialog, showShortcutDialog } from '~/state/models'
 
@@ -91,7 +91,9 @@ const { t, locale, locales, setLocale } = useI18n()
           <DarkToggle
             type="button"
           />
-          <Menu>
+          <component
+            :is="isMobileScreen ? Dropdown : Menu"
+          >
             <SimpleButton icon="i-uil-english-to-chinese" :title="t('actions.languages')" />
             <template #popper>
               <div p2 flex="~ col gap-1">
@@ -103,7 +105,7 @@ const { t, locale, locales, setLocale } = useI18n()
                 />
               </div>
             </template>
-          </Menu>
+          </component>
           <ActionButton
             icon="i-uil-keyboard-alt"
             type="button"
