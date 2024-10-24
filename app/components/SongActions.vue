@@ -152,7 +152,7 @@ function shareWithQifi() {
     v-model="showShareQifiCode"
     :direction="isMobileScreen ? 'top' : 'right'"
     :use-v-if="true"
-    :dialog-class="isMobileScreen ? 'max-h-85vh! of-auto' : 'max-w-150!'"
+    :dialog-class="isMobileScreen ? 'max-h-85dvh! of-auto' : 'max-w-150!'"
   >
     <QifiCode
       :share-url="shareUrl"
