@@ -69,7 +69,8 @@
   },
   "intro": {
     "title": "Sing and Learn Japanese",
-    "description": "A song lyrics reader based on YouTube"
+    "description": "A song lyrics reader based on YouTube",
+    "start-using": "Start"
   },
   "lyrics": {
     "batchRemoveLyricsConfirm": "Are you sure you want to delete the selected {0} songs?",

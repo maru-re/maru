@@ -23,7 +23,7 @@ onMounted(() => {
       <div flex p5>
         <SimpleButton
           icon="i-uil-play"
-          title="開始使用"
+          :title="$t('intro.start-using')"
           ma
           @click="open = false"
         />

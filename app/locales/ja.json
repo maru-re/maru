@@ -69,7 +69,8 @@
   },
   "intro": {
     "title": "「歌いながら日本語を学ぶ」",
-    "description": "YouTubeベースの歌詞リーダー"
+    "description": "YouTubeベースの歌詞リーダー",
+    "start-using": "始めましょう"
   },
   "lyrics": {
     "batchRemoveLyricsConfirm": "選択した{0}曲の歌詞を削除してもよろしいですか？",

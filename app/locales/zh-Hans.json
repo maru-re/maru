@@ -69,7 +69,8 @@
   },
   "intro": {
     "title": "「唱歌学日文」",
-    "description": "基于 YouTube 的歌曲歌词阅读器"
+    "description": "基于 YouTube 的歌曲歌词阅读器",
+    "start-using": "开始使用"
   },
   "lyrics": {
     "batchRemoveLyricsConfirm": "确认要删除选中的 {0} 首歌曲？",
