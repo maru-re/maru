@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import type { MaruSongDataParsed } from '@marure/schema'
 import { Menu, Tooltip } from 'floating-vue'
 import { useSettings } from '~/composables/settings'
 
+defineProps<{
+  song: MaruSongDataParsed
+}>()
 const settings = useSettings()
 </script>
 
@@ -58,14 +62,10 @@ const settings = useSettings()
         </div>
       </template>
     </Tooltip>
-    <Tooltip placement="top">
-      <IconToggle v-model="settings.translation" icon="i-uil-english-to-chinese" />
-      <template #popper>
-        <div>
-          {{ $t("settings.displayTranslation") }}
-        </div>
-      </template>
-    </Tooltip>
+    <TranslationSelector
+      type="toggle"
+      :song
+    />
     <Menu placement="top">
       <IconButton
         :class="settings.fontSize.toString() === '1' ? 'op40 @hover:color-base! @hover:op100' : 'color-primary'"

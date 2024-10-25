@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    type?: 'icon' | 'button' | 'toggle'
+    type?: 'icon' | 'button' | 'toggle' | 'toggle-button'
     title?: string
     icon: string
   }>(),
@@ -24,6 +24,11 @@ const toggleActive = defineModel<boolean>('active')
   />
   <IconToggle
     v-else-if="props.type === 'toggle'"
+    v-bind="props"
+    v-model="toggleActive"
+  />
+  <ToggleButton
+    v-else-if="props.type === 'toggle-button'"
     v-bind="props"
     v-model="toggleActive"
   />

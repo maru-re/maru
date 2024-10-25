@@ -127,7 +127,8 @@
   "messages": {
     "fromShare": "共有リンクから",
     "wip": "ウェブサイトは開発中で、多くの機能がまだ完成していません。問題があったらDiscordで報告してください",
-    "contentMissingTranslations": "このドキュメントにはまだ対応する翻訳がありません。機械翻訳の使用をご検討ください。"
+    "contentMissingTranslations": "このドキュメントにはまだ対応する翻訳がありません。機械翻訳の使用をご検討ください。",
+    "noTranslations": "歌詞はまだ翻訳されていません"
   },
   "actions": {
     "favorite": "お気に入りに追加",

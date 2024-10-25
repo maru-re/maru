@@ -45,10 +45,9 @@ const { t, locale, locales, setLocale } = useI18n()
             icon="i-uil-letter-english-a"
             :title="t('settings.displayRomaji')"
           />
-          <ToggleButton
-            v-model="settings.translation"
-            icon="i-uil-english-to-chinese"
-            :title="t('settings.displayTranslation')"
+          <TranslationSelector
+            type="toggle-button"
+            :song
           />
           <ToggleButton
             v-model="settings.follow"
