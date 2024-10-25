@@ -126,7 +126,8 @@
   "messages": {
     "fromShare": "來自分享連結",
     "wip": "網站開發中、許多功能尚未完善。歡迎透過 Discord 回報問題",
-    "contentMissingTranslations": "這個文檔暫時沒有對應的翻譯，請考慮使用機器翻譯。"
+    "contentMissingTranslations": "這個文檔暫時沒有對應的翻譯，請考慮使用機器翻譯。",
+    "noTranslations": "歌詞暫無翻譯"
   },
   "actions": {
     "favorite": "收藏歌曲",

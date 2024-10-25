@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
 import { Menu } from 'floating-vue'
-import { useTranslationSettings } from '~/composables/settings'
 import { isMobileScreen } from '~/state/breakpoints'
 import { showSettingsDialog, showShortcutDialog } from '~/state/models'
 
-const props = defineProps<{
+defineProps<{
   song?: MaruSongDataParsed
   source?: SongDataSource
 }>()
 
 const settings = useSettings()
 const { t, locale, locales, setLocale } = useI18n()
-const { getTranslationOptions, setTranslationLocale } = useTranslationSettings()
-
-const translationOptions = computed(() => getTranslationOptions(locales.value, props.song))
 </script>
 
 <template>
@@ -49,26 +45,10 @@ const translationOptions = computed(() => getTranslationOptions(locales.value, p
             icon="i-uil-letter-english-a"
             :title="t('settings.displayRomaji')"
           />
-          <Menu placement="bottom">
-            <ToggleButton
-              v-model="settings.translation"
-              icon="i-uil-english-to-chinese"
-              :title="t('settings.displayTranslation')"
-            />
-            <template #popper>
-              <div px4 py3 flex="~ col gap-2">
-                <div>
-                  {{ $t("settings.displayTranslation") }}
-                </div>
-                <SimpleButton
-                  v-for="_locale in translationOptions" :key="_locale.code"
-                  :class="(!settings.translation || _locale.code !== settings.translationLocale) && 'op50'"
-                  :title="_locale.name"
-                  @click="setTranslationLocale(_locale.code)"
-                />
-              </div>
-            </template>
-          </Menu>
+          <TranslationSelector
+            type="toggle-button"
+            :song
+          />
           <ToggleButton
             v-model="settings.follow"
             icon="i-uil-right-indent-alt"

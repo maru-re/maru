@@ -1,54 +1,49 @@
 import type { MaruSongDataParsed } from '@marure/schema'
-import type { LocaleObject } from '@nuxtjs/i18n'
 import { _settings } from '~/state/local-storage'
 
 export function useSettings() {
   return _settings
 }
 
-export function useTranslationSettings() {
+export function useTranslationSettings(song: MaybeRefOrGetter<MaruSongDataParsed | undefined>) {
   const settings = useSettings()
 
-  function getTranslationOptions(locales: LocaleObject[], song?: MaruSongDataParsed) {
-    if (!song)
+  const translations = computed(() => {
+    const _song = toValue(song)
+    if (!_song)
       return []
 
-    const localeObjectMap = locales.reduce((acc, locale) => {
-      acc[locale.code] = locale
-      return acc
-    }, {} as Record<string, LocaleObject>)
-
-    const translationLocaleCodes = song.lyrics.reduce((acc, item) => {
-      const codes = Object.keys(item.trans ?? {})
-      for (const code of codes) {
-        if (acc.includes(code)) {
-          continue
-        }
-        acc.push(code)
+    const locales = new Set<string>()
+    for (const line of _song.lyrics) {
+      for (const [key, value] of Object.entries(line.trans ?? {})) {
+        if (value?.trim())
+          locales.add(key)
       }
-      return acc
-    }, [] as string[])
-
-    return translationLocaleCodes.map(v => localeObjectMap[v])
-  }
-
-  function setTranslationLocale(localeCode: string): void {
-    const isTransaltionEnabled = settings.value.translation
-
-    if (settings.value.translationLocale === localeCode && isTransaltionEnabled) {
-      settings.value.translation = false
-      return
     }
 
-    settings.value.translationLocale = localeCode
+    return Array.from(locales)
+  })
 
-    if (!isTransaltionEnabled) {
+  const translationsEnabled = computed(() => settings.value.translation && translations.value.includes(settings.value.translationLocale))
+
+  function toggleTranslation() {
+    settings.value.translation = !settings.value.translation
+  }
+
+  function setTranslationLocale(localeCode: string) {
+    if (settings.value.translationLocale === localeCode && settings.value.translation) {
+      settings.value.translation = false
+    }
+    else {
+      settings.value.translationLocale = localeCode
       settings.value.translation = true
     }
   }
 
   return {
-    getTranslationOptions,
+    translations,
+    translationsEnabled,
+    toggleTranslation,
     setTranslationLocale,
   }
 }
