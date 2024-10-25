@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
 import { Menu, Tooltip } from 'floating-vue'
-import { useSettings, useTranslationSettings } from '~/composables/settings'
+import { useSettings } from '~/composables/settings'
 
 defineProps<{
   song: MaruSongDataParsed
