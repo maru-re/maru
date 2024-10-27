@@ -48,7 +48,13 @@
       "setCurrentTime": "設為當前播放時間後跳行",
       "setCurrentTimeOnly": "設為當前播放時間"
     },
-    "visualization": "可視化"
+    "visualization": "可視化",
+    "validator": {
+      "youtube": "YouTube ID 是必填的。",
+      "title": "標題是必填的。",
+      "artists": "至少需要一個歌手。",
+      "tags": "至少需要一個標籤。"
+    }
   },
   "footer": {
     "fileFormat": "檔案格式",

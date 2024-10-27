@@ -48,7 +48,13 @@
       "setCurrentTime": "Apply current playback time and go next",
       "setCurrentTimeOnly": "Apply current playback time"
     },
-    "visualization": "Visualization"
+    "visualization": "Visualization",
+    "validator": {
+      "youtube": "YouTube ID is required.",
+      "title": "Title is required.",
+      "artists": "At least one artist is required.",
+      "tags": "At least one tag is required."
+    }
   },
   "footer": {
     "fileFormat": "File Format",
