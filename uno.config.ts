@@ -52,6 +52,16 @@ export default defineConfig({
       primary: '#0a9cae',
     },
   },
+  rules: [
+    [/^h-(\d+)dvh$/, ([_, d]) => [
+      ['height', `${d}vh`],
+      ['height', `${d}dvh`],
+    ]],
+    [/^max-h-(\d+)dvh$/, ([_, d]) => [
+      ['max-height', `${d}vh`],
+      ['max-height', `${d}dvh`],
+    ]],
+  ],
   presets: [
     presetUno(),
     presetAttributify(),
