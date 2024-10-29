@@ -17,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <ModalPopup v-model="open" direction="top" dialog-class="max-h-80dvh">
+  <ModalPopup v-model="open" direction="top" dialog-class="max-h-80dvh!">
     <div class="markdown-content mxa max-w-150 p6">
       <Welcome />
       <div flex p5>
