@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Moveable from 'vue3-moveable'
+import Moveable, { type OnDragEnd, type OnDragStart } from 'vue3-moveable'
 
 interface Props {
   x?: number
@@ -15,72 +15,64 @@ const props = withDefaults(defineProps<Props>(), {
   resizable: false,
 })
 
-// let stickRight = false
-// let stickBottom = false
+const posX = ref(props.x)
+const posY = ref(props.y)
 
 const dragWindow = ref<HTMLElement | null>(null)
 const dragHandle = ref<HTMLElement | null>(null)
-const dragContent = ref<HTMLElement | null>(null)
 const isDragging = ref(false)
 
-// const { x: dragX, y: dragY, style, isDragging } = useDraggable(dragWindow, {
-//   initialValue: { x: props.x, y: props.y },
-//   handle: dragHandle,
-//   preventDefault: true,
-//   onEnd() {
-//     stickRight = false
-//     stickBottom = false
-//     limitPosition()
-//   },
-// })
-// #endregion
-
 // #region : Avoid the window stayed outside
-// const { width: windowWidth, height: windowHeight } = useWindowSize()
-// const dragWindowBounding = useElementBounding(dragWindow)
-
-// function limitPosition() {
-//   if (dragWindowBounding.left.value < props.maxInset) {
-//     dragX.value = props.maxInset
-//   }
-//   else if (stickRight || dragWindowBounding.right.value > windowWidth.value - props.maxInset) {
-//     dragX.value = windowWidth.value - props.maxInset - dragWindowBounding.width.value
-//     stickRight = true
-//   }
-
-//   if (dragWindowBounding.top.value < props.maxInset) {
-//     dragY.value = props.maxInset
-//   }
-//   else if (stickBottom || dragWindowBounding.bottom.value > windowHeight.value - props.maxInset) {
-//     dragY.value = windowHeight.value - props.maxInset - dragWindowBounding.height.value
-//     stickBottom = true
-//   }
-// }
-
-// onMounted(() => {
-//   const limitPositionDebounced = useDebounceFn(limitPosition, 250)
-//   useEventListener('resize', limitPositionDebounced, { passive: true })
-// })
-// #endregion
-
 const moveableRef = useTemplateRef<InstanceType<typeof Moveable>>('moveableRef')
+
+const { width: windowWidth, height: windowHeight } = useWindowSize()
+const dragWindowBounding = useElementBounding(dragWindow)
+
+function limitPosition() {
+  let x = dragWindowBounding.left.value
+  let y = dragWindowBounding.top.value
+  if (dragWindowBounding.left.value < props.maxInset) {
+    x = props.maxInset
+  }
+  else if (dragWindowBounding.right.value > windowWidth.value - props.maxInset) {
+    x = Math.max(windowWidth.value - props.maxInset - dragWindowBounding.width.value, 0)
+  }
+
+  if (dragWindowBounding.top.value < props.maxInset) {
+    y = props.maxInset
+  }
+  else if (dragWindowBounding.bottom.value > windowHeight.value - props.maxInset) {
+    y = Math.max(windowHeight.value - props.maxInset - dragWindowBounding.height.value, 0)
+  }
+  moveableRef.value?.request('draggable', { x, y }, true)
+}
+
+function handleDragStart() {
+  isDragging.value = true
+}
+function handleDragEnd() {
+  isDragging.value = false
+}
+
+onMounted(() => {
+  const limitPositionDebounced = useDebounceFn(limitPosition, 250)
+  useEventListener('resize', limitPositionDebounced, { passive: true })
+})
+// #endregion
 </script>
 
 <template>
-  <div
-    ref="dragWindow"
-    class="draggable-window"
-    :class="{
-      'pointer-events-none': isDragging,
-    }"
-    fixed left-0 top-0 z-floating
-  >
+  <Teleport to="body">
     <div
-      ref="dragContent"
-      class="drag-content"
+      ref="dragWindow"
+      class="drag-window"
+      :class="{
+        'pointer-events-none': isDragging,
+        'pointer-events-auto': !isDragging,
+      }"
       :style="{
-        left: `${x}px`,
-        top: `${y}px`,
+        left: `${posX}px`,
+        top: `${posY}px`,
       }"
       absolute
     >
@@ -88,7 +80,7 @@ const moveableRef = useTemplateRef<InstanceType<typeof Moveable>>('moveableRef')
         ref="dragHandle"
         class="drag-handle @hover:(bg-gray/10 op100)"
         flex="~ items-center justify-center"
-        draggable pointer-events-auto mxa w-20 cursor-move rounded-full op25
+        draggable mxa w-20 cursor-move rounded-full op25
       >
         <div i-mdi-drag-horizontal ma text-size-xl />
       </div>
@@ -97,12 +89,21 @@ const moveableRef = useTemplateRef<InstanceType<typeof Moveable>>('moveableRef')
     <Moveable
       ref="moveableRef"
       :draggable="true"
-      :target="dragContent"
+      :snappable="true"
+      :target="dragWindow"
       :drag-target="dragHandle"
+      :throttle-drag="3"
       :origin="false"
+      :bounds="{
+        left: 1,
+        right: 1,
+        top: 1,
+        bottom: 1,
+        position: 'css',
+      }"
       @drag="e => e.target.style.transform = e.transform"
-      @drag-start="isDragging = true"
-      @drag-end="isDragging = false"
+      @drag-start="handleDragStart"
+      @drag-end="handleDragEnd"
     />
-  </div>
+  </Teleport>
 </template>
