@@ -32,6 +32,7 @@
     "uqr": "^0.1.2",
     "valibot": "^0.42.1",
     "vue-virtual-scroller": "2.0.0-beta.8",
+    "vue3-moveable": "^0.28.0",
     "weq8": "^0.2.2"
   },
   "devDependencies": {

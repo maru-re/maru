@@ -307,7 +307,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <DraggableWindow :x="windowWidth - 32 - 480" :y="60">
+  <DraggableWindow
+    id="yt-video"
+    :x="windowWidth - 32 - 480"
+    :y="60"
+  >
     <div flex="~ col">
       <YouTubePlayer w-120 rounded-lg border="~ base" />
       <div flex="~ gap-2 items-center" mt--2 w-max self-end p1 px2 text-sm floating-glass>
