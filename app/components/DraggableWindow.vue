@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Moveable, { type OnDragEnd, type OnDragStart, type OnResize, type OnResizeEnd, type OnResizeStart } from 'vue3-moveable'
+import Moveable, { type OnDrag, type OnDragEnd, type OnDragStart, type OnResize, type OnResizeEnd, type OnResizeStart } from 'vue3-moveable'
 
 interface Props {
   x?: number
@@ -27,7 +27,14 @@ const pos = readonly({
 
 const dragWindow = useTemplateRef<HTMLElement>('dragWindow')
 const dragHandle = useTemplateRef<HTMLElement>('dragHandle')
+
+// #region : Draggable
 const isDragging = ref(false)
+function handleDrag(e: OnDrag) {
+  isDragging.value = true
+  e.target.style.transform = e.transform
+}
+// #endregion
 
 // #region : Avoid the window stayed outside
 const moveableRef = useTemplateRef<InstanceType<typeof Moveable>>('moveableRef')
@@ -70,6 +77,19 @@ function handleResizeStart(e: OnResizeStart) {
   e.setMin([240, 160])
 }
 // #endregion
+
+// #region : Reset
+function reset() {
+  if (!dragWindow.value || !moveableRef.value)
+    return
+  dragWindow.value.style.top = ''
+  dragWindow.value.style.left = ''
+  dragWindow.value.style.width = ''
+  dragWindow.value.style.height = ''
+  dragWindow.value.style.transform = ''
+  moveableRef.value.updateRect()
+}
+// #endregion
 </script>
 
 <template>
@@ -96,6 +116,7 @@ function handleResizeStart(e: OnResizeStart) {
         flex="~ items-center justify-center"
 
         draggable absolute mxa h-6 w-20 cursor-move rounded-full op25
+        @dblclick.left="reset"
       >
         <div i-mdi-drag-horizontal ma text-size-xl />
       </div>
@@ -126,8 +147,7 @@ function handleResizeStart(e: OnResizeStart) {
       }"
       @resize="handleResize"
       @resize-start="handleResizeStart"
-      @drag="e => e.target.style.transform = e.transform"
-      @drag-start="isDragging = true"
+      @drag="handleDrag"
       @drag-end="isDragging = false"
     />
   </Teleport>
