@@ -160,7 +160,9 @@ function reset() {
   width: var(--moveable-width);
   height: var(--moveable-height);
 }
-.drag-window:hover + .moveable-control-box,
+.drag-window:hover + .moveable-control-box {
+  --moveable-control-opacity: 0.2;
+}
 .moveable-control-box:hover {
   --moveable-control-opacity: 1;
 }
