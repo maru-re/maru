@@ -1,25 +1,32 @@
 <script setup lang="ts">
-import Moveable, { type OnDragEnd, type OnDragStart } from 'vue3-moveable'
+import Moveable, { type OnDragEnd, type OnDragStart, type OnResize, type OnResizeEnd, type OnResizeStart } from 'vue3-moveable'
 
 interface Props {
   x?: number
   y?: number
+  initialWidth?: number
+  initialHeight?: number
+  minWidth?: number
+  minHeight?: number
   maxInset?: number
   resizable?: boolean
-  id: string
 }
 const props = withDefaults(defineProps<Props>(), {
   x: 0,
   y: 0,
-  maxInset: 0,
+  initialWidth: 240,
+  initialHeight: 240,
+  maxInset: 7,
   resizable: false,
 })
 
-const posX = ref(props.x)
-const posY = ref(props.y)
+const pos = readonly({
+  x: props.x,
+  y: props.y,
+})
 
-const dragWindow = ref<HTMLElement | null>(null)
-const dragHandle = ref<HTMLElement | null>(null)
+const dragWindow = useTemplateRef<HTMLElement>('dragWindow')
+const dragHandle = useTemplateRef<HTMLElement>('dragHandle')
 const isDragging = ref(false)
 
 // #region : Avoid the window stayed outside
@@ -47,17 +54,21 @@ function limitPosition() {
   moveableRef.value?.request('draggable', { x, y }, true)
 }
 
-function handleDragStart() {
-  isDragging.value = true
-}
-function handleDragEnd() {
-  isDragging.value = false
-}
-
 onMounted(() => {
   const limitPositionDebounced = useDebounceFn(limitPosition, 250)
   useEventListener('resize', limitPositionDebounced, { passive: true })
 })
+// #endregion
+
+// #region : Resizable
+function handleResize(e: OnResize) {
+  e.target.style.width = `${e.width}px`
+  e.target.style.height = `${e.height}px`
+  e.target.style.transform = e.drag.transform
+}
+function handleResizeStart(e: OnResizeStart) {
+  e.setMin([240, 160])
+}
 // #endregion
 </script>
 
@@ -71,16 +82,20 @@ onMounted(() => {
         'pointer-events-auto': !isDragging,
       }"
       :style="{
-        left: `${posX}px`,
-        top: `${posY}px`,
+        '--moveable-left': `${pos.x}px`,
+        '--moveable-top': `${pos.y}px`,
+        '--moveable-width': resizable ? `${props.initialWidth}px` : undefined,
+        '--moveable-height': resizable ? `${props.initialHeight}px` : undefined,
       }"
-      absolute
+      absolute h-full w-full
+      v-bind="$attrs"
     >
       <div
         ref="dragHandle"
-        class="drag-handle @hover:(bg-gray/10 op100)"
+        class="drag-handle left-50% top-0 transform-translate-x--50% transform-translate-y--100% @hover:(bg-gray/10 op100)"
         flex="~ items-center justify-center"
-        draggable mxa w-20 cursor-move rounded-full op25
+
+        draggable absolute mxa h-6 w-20 cursor-move rounded-full op25
       >
         <div i-mdi-drag-horizontal ma text-size-xl />
       </div>
@@ -88,22 +103,48 @@ onMounted(() => {
     </div>
     <Moveable
       ref="moveableRef"
-      :draggable="true"
-      :snappable="true"
       :target="dragWindow"
+      :origin="false"
+      :draggable="true"
       :drag-target="dragHandle"
       :throttle-drag="3"
-      :origin="false"
+      :resizable="true"
+      :throttle-resize="3"
+      :snappable="true"
       :bounds="{
-        left: 1,
-        right: 1,
-        top: 1,
-        bottom: 1,
+        left: 7,
+        right: 7,
+        top: 31,
+        bottom: 7,
         position: 'css',
       }"
+      :style="{
+        '--bounds-color': 'transparent',
+        '--moveable-color': 'transparent',
+        'opacity': 'var(--moveable-control-opacity, 0)',
+        'transition': 'opacity .15s ease',
+      }"
+      @resize="handleResize"
+      @resize-start="handleResizeStart"
       @drag="e => e.target.style.transform = e.transform"
-      @drag-start="handleDragStart"
-      @drag-end="handleDragEnd"
+      @drag-start="isDragging = true"
+      @drag-end="isDragging = false"
     />
   </Teleport>
 </template>
+
+<style>
+.drag-window {
+  left: var(--moveable-left);
+  top: var(--moveable-top);
+  width: var(--moveable-width);
+  height: var(--moveable-height);
+}
+.drag-window:hover + .moveable-control-box,
+.moveable-control-box:hover {
+  --moveable-control-opacity: 1;
+}
+.moveable-control-box .moveable-control {
+  background: rgba(0 0 0 / 0.5) !important;
+}
+</style>
