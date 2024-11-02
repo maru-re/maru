@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Moveable, { type OnDrag, type OnDragEnd, type OnDragStart, type OnResize, type OnResizeEnd, type OnResizeStart } from 'vue3-moveable'
+import Moveable, { type OnDrag, type OnResize, type OnResizeStart } from 'vue3-moveable'
 
 interface Props {
   x?: number
