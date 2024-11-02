@@ -104,8 +104,8 @@ function reset() {
       :style="{
         '--moveable-left': `${pos.x}px`,
         '--moveable-top': `${pos.y}px`,
-        '--moveable-width': resizable ? `${props.initialWidth}px` : undefined,
-        '--moveable-height': resizable ? `${props.initialHeight}px` : undefined,
+        '--moveable-width': `${props.initialWidth}px`,
+        '--moveable-height': `${props.initialHeight}px`,
       }"
       absolute h-full w-full
       v-bind="$attrs"
@@ -114,7 +114,6 @@ function reset() {
         ref="dragHandle"
         class="drag-handle left-50% top-0 transform-translate-x--50% transform-translate-y--100% @hover:(bg-gray/10 op100)"
         flex="~ items-center justify-center"
-
         draggable absolute mxa h-6 w-20 cursor-move rounded-full op25
         @dblclick.left="reset"
       >
@@ -129,7 +128,7 @@ function reset() {
       :draggable="true"
       :drag-target="dragHandle"
       :throttle-drag="3"
-      :resizable="true"
+      :resizable="resizable"
       :throttle-resize="3"
       :snappable="true"
       :bounds="{
