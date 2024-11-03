@@ -141,8 +141,6 @@ function reset() {
       :style="{
         '--bounds-color': 'transparent',
         '--moveable-color': 'transparent',
-        'opacity': 'var(--moveable-control-opacity, 0)',
-        'transition': 'opacity .15s ease',
       }"
       @resize="handleResize"
       @resize-start="handleResizeStart"
@@ -159,13 +157,16 @@ function reset() {
   width: var(--moveable-width);
   height: var(--moveable-height);
 }
-.drag-window:hover + .moveable-control-box {
+.drag-window:hover + .moveable-control-box,
+.moveable-control-box:hover {
   --moveable-control-opacity: 0.2;
 }
-.moveable-control-box:hover {
-  --moveable-control-opacity: 1;
-}
 .moveable-control-box .moveable-control {
+  opacity: var(--moveable-control-opacity, 0);
   background: rgba(0 0 0 / 0.5) !important;
+  transition: opacity 150ms ease;
+}
+.moveable-control-box .moveable-control:hover {
+  --moveable-control-opacity: 1;
 }
 </style>
