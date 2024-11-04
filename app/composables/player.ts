@@ -155,7 +155,7 @@ export function usePlayer(data: MaruSongDataParsed, autoplay = true) {
       current.value = active.value.end
       player.value.seekTo(current.value)
       player.value.pauseVideo()
-      pausedAt = active.value.index
+      pausedAt = active.value.index + 1
     }
     else {
       if (status.value === 'playing') {
