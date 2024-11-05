@@ -156,6 +156,9 @@ function reset() {
   top: var(--moveable-top);
   width: var(--moveable-width);
   height: var(--moveable-height);
+  max-width: calc(100vw - 14px);
+  max-height: calc(100vh - 38px);
+  max-height: calc(100dvh - 38px);
 }
 .drag-window:hover + .moveable-control-box,
 .moveable-control-box:hover {
