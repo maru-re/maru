@@ -87,6 +87,7 @@ function reset() {
   dragWindow.value.style.width = ''
   dragWindow.value.style.height = ''
   dragWindow.value.style.transform = ''
+  limitPosition()
   moveableRef.value.updateRect()
 }
 // #endregion
