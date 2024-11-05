@@ -107,7 +107,7 @@ function reset() {
         '--moveable-width': `${props.initialWidth}px`,
         '--moveable-height': `${props.initialHeight}px`,
       }"
-      absolute h-full w-full
+      fixed h-full w-full
       v-bind="$attrs"
     >
       <div
