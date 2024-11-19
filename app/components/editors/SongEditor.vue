@@ -307,10 +307,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <DraggableWindow :x="windowWidth - 32 - 480" :y="60">
-    <div flex="~ col">
-      <YouTubePlayer w-120 rounded-lg border="~ base" />
-      <div flex="~ gap-2 items-center" mt--2 w-max self-end p1 px2 text-sm floating-glass>
+  <DraggableWindow
+    id="editor-video"
+    :x="windowWidth - 32 - 480"
+    :y="84"
+    :initial-width="480"
+    :initial-height="300"
+    resizable
+  >
+    <div flex="~ col" relative h-full w-full pb-6.5>
+      <YouTubePlayer h-full w-full rounded-lg border="~ base" />
+      <div flex="~ gap-2 items-center" absolute bottom-0 mt--2 self-end p1 px2 text-sm floating-glass>
         <!-- <IconButton
           :icon="controls.status.value === 'playing' ? 'i-uil-pause' : 'i-uil-play'"
           @click="controls.toggle()"
@@ -489,3 +496,10 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style>
+#editor-video iframe {
+  width: 100% !important;
+  height: 100% !important;
+}
+</style>
