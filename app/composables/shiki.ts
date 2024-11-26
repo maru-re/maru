@@ -1,12 +1,12 @@
 import type { CreatePlainShikiReturns, MountPlainShikiOptions } from 'plain-shiki'
 import type { HighlighterCore, LanguageRegistration } from 'shiki/core'
 import { createPlainShiki } from 'plain-shiki'
+import grammarLyric from 'shiki-language-lyric'
 import { createHighlighterCore } from 'shiki/core'
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 import grammarYaml from 'shiki/langs/yaml.mjs'
 import vitesseDark from 'shiki/themes/vitesse-dark.mjs'
 import vitesseLight from 'shiki/themes/vitesse-light.mjs'
-import grammarLyric from 'shiki-language-lyric'
 
 const grammarLyricInline: LanguageRegistration = {
   ...grammarLyric,

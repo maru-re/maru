@@ -51,6 +51,6 @@ onMounted(() => {
     <div text-center op50>
       {{ $t('gpt.noteAboutPrompts') }}
     </div>
-    <pre mxa max-h-50dvh max-w-200 of-auto rounded-xl bg-hex-888:15 px3 py2 text-sm v-text="gptText" />
+    <pre mxa max-w-200 of-auto rounded-xl bg-hex-888:15 px3 py2 text-sm max-h-50dvh v-text="gptText" />
   </div>
 </template>
