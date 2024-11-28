@@ -66,7 +66,7 @@
     "nuxt-compile-markdown": "^0.1.1",
     "shiki": "^1.23.1",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2",
+    "typescript": "~5.6.3",
     "unbuild": "^2.0.0",
     "vitest": "^2.1.5",
     "vue-tsc": "^2.1.10"
