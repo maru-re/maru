@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@qifi/generate": "^0.1.0",
-    "@vueuse/core": "^11.3.0",
+    "@vueuse/core": "^12.0.0",
     "floating-vue": "^5.2.2",
     "fuse.js": "^7.0.0",
     "idb-keyval": "^6.2.1",
@@ -36,7 +36,7 @@
     "weq8": "^0.2.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.10.0",
+    "@antfu/eslint-config": "^3.11.1",
     "@antfu/ni": "^0.23.1",
     "@iconify-json/carbon": "^1.2.4",
     "@iconify-json/mdi": "^1.2.1",
@@ -54,7 +54,7 @@
     "@types/sanitize-html": "^2.13.0",
     "@unocss/eslint-config": "^0.64.1",
     "@unocss/nuxt": "^0.64.1",
-    "@vueuse/nuxt": "^11.3.0",
+    "@vueuse/nuxt": "^12.0.0",
     "cheerio": "^1.0.0",
     "eslint": "^9.15.0",
     "eslint-plugin-format": "^0.1.2",
@@ -68,7 +68,7 @@
     "tsx": "^4.19.2",
     "typescript": "~5.6.3",
     "unbuild": "^2.0.0",
-    "vitest": "^2.1.5",
+    "vitest": "^2.1.6",
     "vue-tsc": "^2.1.10"
   },
   "resolutions": {
