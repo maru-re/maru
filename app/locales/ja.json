@@ -48,7 +48,13 @@
       "setCurrentTime": "現在の再生時間に設定して次の行へ",
       "setCurrentTimeOnly": "現在の再生時間に設定"
     },
-    "visualization": "可視化"
+    "visualization": "可視化",
+    "validator": {
+      "youtube": "YouTube IDは必須です。",
+      "title": "タイトルは必須です。",
+      "artists": "少なくとも1人のアーティストが必要です。",
+      "tags": "少なくとも1つのタグが必要です。"
+    }
   },
   "footer": {
     "fileFormat": "ファイル形式",

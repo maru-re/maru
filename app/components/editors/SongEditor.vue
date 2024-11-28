@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { MaruSongDataParsed } from '@marure/schema'
+import { useValidation } from '@/composables/validator'
 import { parseLrc, secondsToTimestamp, serializeToLrc } from '@marure/parser'
 import { inferSongInfoFromVideoTitle } from '@marure/utils'
 import { useDebouncedRefHistory } from '@vueuse/core'
@@ -37,6 +38,8 @@ const {
 const router = useRouter()
 const route = useRoute()
 
+const { validate, errors } = useValidation(stateRef.value)
+
 const dirty = ref(false)
 
 watch(
@@ -62,6 +65,9 @@ async function save() {
   if (!stateRef.value.youtube) {
     // eslint-disable-next-line no-alert
     alert(t('youtube.requireId'))
+    return
+  }
+  if (!validate()) {
     return
   }
   syncLrc()
@@ -228,34 +234,6 @@ function toggleTranslations(lang: string) {
   }
 }
 
-const artistsString = computed({
-  get: () => (stateRef.value.artists || []).join(', '),
-  set: (value: string) => {
-    stateRef.value.artists = value.split(',').map(v => v.trim())
-  },
-})
-
-const tagsString = computed({
-  get: () => (stateRef.value.tags || []).join(', '),
-  set: (value: string) => {
-    stateRef.value.tags = value.split(',').map(v => v.trim())
-  },
-})
-
-const offsetString = computed({
-  get: () => String(stateRef.value.offset || ''),
-  set: (value: string) => {
-    stateRef.value.offset = Number(value)
-  },
-})
-
-const notesString = computed({
-  get: () => (stateRef.value.notes || []).join('\n'),
-  set: (value: string) => {
-    stateRef.value.notes = value.split('\n')
-  },
-})
-
 const { copied, copy } = useClipboard({ read: false })
 
 const currentTimestamp = computed(() => secondsToTimestamp(controls.current.value - (stateRef.value.offset ?? 0)))
@@ -341,23 +319,7 @@ onMounted(() => {
   </DraggableWindow>
   <div mxa max-w-300 flex="~ col gap-3">
     <BasicNav />
-    <div flex="~ col gap-2" max-w-150>
-      <h1 my4 text-2xl>
-        {{ $t("lyrics.editLyrics") }}
-      </h1>
-      <TextInput :model-value="stateRef.youtube" label="YouTube ID" input-class="font-mono" disabled />
-      <TextInput v-model="stateRef.title" :label="$t('song.title')" />
-      <TextInput v-model="artistsString" :label="$t('song.artist')" />
-      <TextInput v-model="tagsString" :label="$t('song.tags')" />
-      <TextInput v-model="offsetString" :label="$t('song.offset')" />
-      <TextInput
-        v-model="notesString"
-        :label="$t('common.notes')"
-        type="textarea"
-        input-class="h-30"
-      />
-    </div>
-
+    <SongForm :state-ref="state" :errors="errors" />
     <div flex="~ gap-2 items-center" mt5>
       <SimpleButton
         :class="showTab === 'lyrics' ? '' : 'op50'"
