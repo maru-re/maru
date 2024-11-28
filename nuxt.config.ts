@@ -68,6 +68,7 @@ export default defineNuxtConfig({
         target: 'esnext',
       },
     },
+    preset: 'netlify-static',
   },
 
   app: {
