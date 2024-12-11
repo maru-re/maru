@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { LyricLine } from '@marure/schema'
+import type { UiSettings } from '~/types/settings'
 import { hiraganaToRomaji } from '@marure/romaji'
 import { convertCC } from '~/addons/simplecc'
-import type { UiSettings } from '~/types/settings'
 
 const props = defineProps<{
   line: LyricLine

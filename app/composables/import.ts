@@ -1,7 +1,7 @@
+import type { FailedResult, SucceededResult } from '~/state/import'
 import { validate } from '@marure/schema'
 import YAML from 'js-yaml'
 import { parseSongData } from '~~/packages/parser/src'
-import type { FailedResult, SucceededResult } from '~/state/import'
 import { _importingState } from '~/state/import'
 
 export const SUPPORTED_IMPORT_EXT = ['json', 'yml', 'yaml', 'maru', 'zip']
