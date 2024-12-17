@@ -1,9 +1,3 @@
----
-meta:
-  locale: en
-  layout: content
----
-
 # Import Data Format Description
 
 ## For Users

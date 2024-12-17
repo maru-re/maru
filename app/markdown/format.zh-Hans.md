@@ -1,9 +1,3 @@
----
-meta:
-  locale: zh-Hans
-  layout: content
----
-
 # 导入数据格式说明
 
 ## 面向用户
