@@ -7,28 +7,25 @@ const { lrc, autoCopy = true } = defineProps<{
 const { t, locale } = useI18n()
 
 /**
- * 使用正则将歌词中的汉字格式化为 {漢字}() 的形式，防止 GPT 偷懒，gpt-4o 正确率较高，4o-mini 比较快
- * 可以处理已经有部分格式化的歌词，会将其去除
- * 若 () 不匹配将是未定义的行为
- * 翻译行不会被处理
- * @param {string} lrcContent - 输入的LRC歌词字符串
- * @returns {string} - 处理后的LRC歌词字符串
+ * Use regex to format Kanji in the lyrics as `{漢字}()` to prevent GPT miss the insertion
+ * Can handle lyrics that are already partially formatted and will remove the existing formatting.
+ * If () does not match, the behavior is undefined.
+ * Translation lines will not be processed.
+ * @param {string} lrcContent - Input LRC lyrics string
+ * @returns {string} - Processed LRC lyrics string
  */
 function annotateKanjiInLRC(lrcContent: string): string {
-  // 正则表达式逻辑：
-  // 1. \{?([\u4E00-\u9FFF々]+)}? 匹配可能带 { 的连续汉字（包括 々）和可能的 }。
-  // 2. (\([^\)]*\))? 匹配可能的括号和括号内内容。
-  const regex = /\{?([\u4E00-\u9FFF々]+)}?(\([^)]*\))?/g
+  // Regex logic:
+  // 1. \{?([\u4E00-\u9FFF々]+)}? matches consecutive Kanji (including 々) that may be enclosed in {}.
+  // 2. (\([^)]*\))? matches possible parentheses and their contents.
+  const regex = /\{?([\u4E00-\u9FFF々]+)\}?(\([^)]*\))?/g
 
-  // 按行处理LRC内容
   return lrcContent
     .split('\n')
     .map((line) => {
-      // 如果行以 [trans: 开头，直接返回原行
       if (line.trim().startsWith('[trans:')) {
         return line
       }
-      // 否则替换汉字格式
       return line.replace(regex, (match, p1) => `{${p1}}()`)
     })
     .join('\n')
