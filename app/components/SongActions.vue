@@ -39,8 +39,7 @@ const shareUrl = computed(() => {
       ...props.song,
       lyrics: undefined,
     }, null, 0)
-    const lzStringCompressed = compressToEncodedURIComponent(minified)
-    return `https://maru.re/play#share=${lzStringCompressed}`
+    return `https://maru.re/play#share=${compressToEncodedURIComponent(minified)}`
   }
   catch (e) {
     console.error(e)
