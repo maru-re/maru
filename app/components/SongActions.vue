@@ -35,7 +35,11 @@ const favorited = computed({
 
 const shareUrl = computed(() => {
   try {
-    return `https://maru.re/play#share=${compressToEncodedURIComponent(JSON.stringify(props.song))}`
+    const minified = JSON.stringify({
+      ...props.song,
+      lyrics: undefined,
+    }, null, 0)
+    return `https://maru.re/play#share=${compressToEncodedURIComponent(minified)}`
   }
   catch (e) {
     console.error(e)
