@@ -50,7 +50,6 @@ export default defineNuxtConfig({
     payloadExtraction: false,
     renderJsonPayloads: true,
     typedPages: true,
-    scanPageMeta: false,
   },
 
   css: [
@@ -68,6 +67,7 @@ export default defineNuxtConfig({
         target: 'esnext',
       },
     },
+    preset: 'netlify-static',
   },
 
   app: {
@@ -160,7 +160,7 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    langDir: './locales',
+    langDir: '../app/locales',
     locales: [
       { code: 'zh-Hant', language: 'zh-Hant', name: '繁體中文', file: 'zh-Hant.json' },
       { code: 'zh-Hans', language: 'zh-Hans', name: '简体中文', file: 'zh-Hans.json' },

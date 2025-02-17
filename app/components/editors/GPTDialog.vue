@@ -6,6 +6,31 @@ const { lrc, autoCopy = true } = defineProps<{
 
 const { t, locale } = useI18n()
 
+/**
+ * Use regex to format Kanji in the lyrics as `{漢字}()` to prevent GPT miss the insertion
+ * Can handle lyrics that are already partially formatted and will remove the existing formatting.
+ * If () does not match, the behavior is undefined.
+ * Translation lines will not be processed.
+ * @param {string} lrcContent - Input LRC lyrics string
+ * @returns {string} - Processed LRC lyrics string
+ */
+function annotateKanjiInLRC(lrcContent: string): string {
+  // Regex logic:
+  // 1. \{?([\u4E00-\u9FFF々]+)}? matches consecutive Kanji (including 々) that may be enclosed in {}.
+  // 2. (\([^)]*\))? matches possible parentheses and their contents.
+  const regex = /\{?([\u4E00-\u9FFF々]+)\}?(\([^)]*\))?/g
+
+  return lrcContent
+    .split('\n')
+    .map((line) => {
+      if (line.trim().startsWith('[trans:')) {
+        return line
+      }
+      return line.replace(regex, (match, p1) => `{${p1}}()`)
+    })
+    .join('\n')
+}
+
 const gptText = computed(() => {
   return [
     `We use an extended LRC format:`,
@@ -23,7 +48,7 @@ const gptText = computed(() => {
     `Please annotate the Kanji in the following lyrics, add translation for \`${locale.value}\`, and keeping the rest unchanged.`,
     '',
     '```lrc',
-    lrc,
+    annotateKanjiInLRC(lrc),
     '```',
     ``,
     t('gpt.prompts.useLocaleToResponse'),
@@ -51,6 +76,6 @@ onMounted(() => {
     <div text-center op50>
       {{ $t('gpt.noteAboutPrompts') }}
     </div>
-    <pre mxa max-h-50vh max-w-200 of-auto rounded-xl bg-hex-888:15 px3 py2 text-sm v-text="gptText" />
+    <pre mxa max-w-200 of-auto rounded-xl bg-hex-888:15 px3 py2 text-sm max-h-50dvh v-text="gptText" />
   </div>
 </template>

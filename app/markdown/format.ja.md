@@ -1,9 +1,3 @@
----
-meta:
-  locale: ja
-  layout: content
----
-
 # インポートデータフォーマットの説明
 
 ## ユーザー向け

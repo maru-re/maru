@@ -28,12 +28,12 @@ export function createMarkdownComponent(
       return () => component.value
         ? usingFallback.value
           ? h(Fragment, [
-            // @unocss-include
-            h('div', { class: 'mb5 rounded bg-purple:15 px3 py1 text-purple' }, [
-              t('messages.contentMissingTranslations'),
-            ]),
-            h(component.value, attrs),
-          ])
+              // @unocss-include
+              h('div', { class: 'mb5 rounded bg-purple:15 px3 py1 text-purple' }, [
+                t('messages.contentMissingTranslations'),
+              ]),
+              h(component.value, attrs),
+            ])
           : h(component.value, attrs)
         : null
     },

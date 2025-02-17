@@ -1,9 +1,3 @@
----
-meta:
-  locale: zh-Hant
-  layout: content
----
-
 # 匯入資料格式說明
 
 ## 面向使用者
